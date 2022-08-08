@@ -27,7 +27,7 @@ struct WritingMainView: View {
     var body: some View {
         NavigationView {
             ZStack{
-                Image("paperBackground")
+                Image("PaperBackground")
                     .resizable()
                     .ignoresSafeArea(.all, edges: [.bottom,.top])
                     .opacity(0.4)
