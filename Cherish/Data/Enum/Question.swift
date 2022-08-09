@@ -12,7 +12,7 @@ enum Question: CaseIterable {
     case person
     case love
     
-    func questionText() -> String {
+    var string: String {
         switch self {
             case .life:
                 return "삶"

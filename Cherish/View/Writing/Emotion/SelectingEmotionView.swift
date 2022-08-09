@@ -32,7 +32,7 @@ struct SelectingEmotionView: View {
                         SearchEmtionGroups()
                     }
                 }
-                .navigationBarTitle(Record.emotion.writingMainText(), displayMode: .inline)
+                .navigationBarTitle(Record.emotion.writingMainText, displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: {
@@ -111,29 +111,31 @@ extension SelectingEmotionView {
         ForEach(emotionList.indices, id: \.self) { index in
             let emotion = emotionList[index]
             VStack(alignment: .leading, spacing: 0) {
-                Text(emotion.emotionText())
+                Text(emotion.string)
                     .font(.semiText)
                     .padding(.horizontal, 18)
                     .padding(.vertical, 8)
-                    .background(emotion.emotionColor())
+                    .background(emotion.color)
                     .cornerRadius(15)
                     .padding(.vertical, 20)
                 LazyVGrid(columns: columns, spacing: 0) {
-                    let detailEmotionList = EmotionData.list[emotion]!
-                    ForEach(detailEmotionList.indices, id: \.self) { index in
-                        let detailEmotion = detailEmotionList[index]
-                        HStack {
-                            let isSelected = selectedEmotion.contains(detailEmotion)
-                            Text(detailEmotion)
-                                .font(isSelected ? .semiText : .mainText)
-                                .padding(.horizontal, 3)
-                                .background(isSelected ? emotion.emotionColor().opacity(0.4) : .white)
-                                .padding(.bottom, 15)
-                                .padding(.leading, 20)
-                                .onTapGesture {
-                                    tabEmotion(emotion: detailEmotion)
-                                }
-                            Spacer()
+                    if let emotionString = EmotionData.list[emotion] {
+                        let detailEmotionList = emotionString
+                        ForEach(detailEmotionList.indices, id: \.self) { index in
+                            let detailEmotion = detailEmotionList[index]
+                            HStack {
+                                let isSelected = selectedEmotion.contains(detailEmotion)
+                                Text(detailEmotion)
+                                    .font(isSelected ? .semiText : .mainText)
+                                    .padding(.horizontal, 3)
+                                    .background(isSelected ? emotion.color.opacity(0.4) : .white)
+                                    .padding(.bottom, 15)
+                                    .padding(.leading, 20)
+                                    .onTapGesture {
+                                        tabEmotion(emotion: detailEmotion)
+                                    }
+                                Spacer()
+                            }
                         }
                     }
                 }
@@ -151,7 +153,7 @@ extension SelectingEmotionView {
                     Text(emotion)
                         .font(isSelected ? .semiText : .mainText)
                         .padding(.horizontal, 4)
-                        .background(isSelected ? emotionCatagory.emotionColor().opacity(0.4) : .white)
+                        .background(isSelected ? emotionCatagory.color.opacity(0.4) : .white)
                         .padding(.horizontal, 3)
                         .padding(.bottom, 15)
                         .padding(.leading, 20)

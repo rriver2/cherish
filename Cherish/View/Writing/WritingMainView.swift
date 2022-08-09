@@ -111,13 +111,13 @@ extension WritingMainView {
                     let record = records[index]
                     GeometryReader { geomitry in
                         ZStack  {
-                            Image(record.imageName())
+                            Image(record.imageName)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: width, height: width*1.5)
                             VStack(alignment: .leading, spacing: 0) {
                                 HStack(spacing: 0) {
-                                    Text("  \(Int(index)). \(record.writingMainText())  ")
+                                    Text("  \(Int(index)). \(record.writingMainText)  ")
                                         .font(.bigTitle)
                                         .background(.white.opacity(0.5))
                                     Spacer()

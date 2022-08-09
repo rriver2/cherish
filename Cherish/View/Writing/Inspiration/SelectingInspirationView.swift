@@ -17,7 +17,7 @@ struct SelectingInspirationView: View {
                 Text("Chapter1.")
                     .font(.semiboldTitle)
             }
-            .navigationBarTitle(Record.inspiration.writingMainText(), displayMode: .inline)
+            .navigationBarTitle(Record.inspiration.writingMainText, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {

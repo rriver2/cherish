@@ -25,7 +25,7 @@ struct FreeView: View {
                     .padding(.horizontal, 20)
                 Spacer()
             }
-            .navigationBarTitle(Record.free.writingMainText(), displayMode: .inline)
+            .navigationBarTitle(Record.free.writingMainText, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {

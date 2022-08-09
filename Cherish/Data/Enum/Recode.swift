@@ -13,7 +13,7 @@ enum Record: CaseIterable {
     case question
     case inspiration
     
-    func writingMainText() -> String {
+    var writingMainText: String {
         switch self {
             case .free:
                 return "머릿속 이야기 적기"
@@ -26,7 +26,7 @@ enum Record: CaseIterable {
         }
     }
     
-    func imageName() -> String {
+    var imageName: String {
         switch self {
             case .free:
                 return "Ocean"

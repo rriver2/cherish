@@ -22,7 +22,7 @@ struct SelectQuestionView: View {
                 }
                 Spacer()
             }
-            .navigationBarTitle(Record.question.writingMainText(), displayMode: .inline)
+            .navigationBarTitle(Record.question.writingMainText, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
@@ -51,11 +51,11 @@ extension SelectQuestionView {
                         questionType = type
                     }) {
                         if(questionType != type){
-                            Text(type.questionText())
+                            Text(type.string)
                                 .frame(width: UIScreen.main.bounds.width / CGFloat(questionTypes.count) - 20)
                         }else{
                             VStack{
-                                Text(type.questionText())
+                                Text(type.string)
                                     .fontWeight(.bold)
                                 Rectangle().frame(height: 2.5)
                                     .foregroundColor(Color.darkGreen)

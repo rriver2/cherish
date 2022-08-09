@@ -5,7 +5,6 @@
 //  Created by 이가은 on 2022/08/07.
 //
 
-import Foundation
 import SwiftUI
 
 enum EmotionCategory: CaseIterable {
@@ -18,7 +17,7 @@ enum EmotionCategory: CaseIterable {
     case boredom
     case comfort
     
-    func emotionText() -> String {
+    var string: String {
         switch self {
             case .angry:
                 return "분노"
@@ -39,24 +38,24 @@ enum EmotionCategory: CaseIterable {
         }
     }
     
-    func emotionColor() -> Color {
+    var color: Color {
         switch self {
             case .angry:
-                return Color(hex: "F1B4B4")!
+                return Color(hex: "F1B4B4") ?? .clear
             case .anxiety:
-                return Color(hex: "FAD6F6")!
+                return Color(hex: "FAD6F6") ?? .clear
             case .depression:
-                return Color(hex: "CDEDFF")!
+                return Color(hex: "CDEDFF") ?? .clear
             case .panic:
-                return Color(hex: "A9CEB4")!
+                return Color(hex: "A9CEB4") ?? .clear
             case .joy:
-                return Color(hex: "F1EBB4")!
+                return Color(hex: "F1EBB4") ?? .clear
             case .pleasure:
-                return Color(hex: "F1D5B4")!
+                return Color(hex: "F1D5B4") ?? .clear
             case .boredom:
-                return Color(hex: "D5D0F2")!
+                return Color(hex: "D5D0F2") ?? .clear
             case .comfort:
-                return Color(hex: "ADACB5")!
+                return Color(hex: "ADACB5") ?? .clear
         }
     }
 }

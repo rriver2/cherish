@@ -21,19 +21,23 @@ struct EmotionData {
     
     static func findEmotionCategory(emotion: String) -> EmotionCategory {
         // TODO: error 처리 해야함
-        for detailEmotionList in list {
-            if detailEmotionList.value.contains(emotion) { return detailEmotionList.key }
+        let filteredList = list.filter { key, value in
+            value.contains(emotion)
         }
-        return .angry
+        
+        return filteredList.first?.key ?? .angry
     }
     
     static var allList: [String] = {
         var detailAllEmotionList: [String] = []
         let emotionList = EmotionCategory.allCases
-        for index in emotionList.indices {
-            let emotion = emotionList[index]
-            detailAllEmotionList += EmotionData.list[emotion]!
+        
+        emotionList.forEach { emotion in
+            if let emotionString = EmotionData.list[emotion] {
+                detailAllEmotionList += emotionString
+            }
         }
+        
         return detailAllEmotionList
     }()
     
