@@ -33,7 +33,7 @@ struct OneSentenceView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     // TODO: make isMusicOn as Environment object
-                    MusicView(isMusicOn: .constant(false))
+                    SoundView()
                     Spacer()
                     Button {
                         // TODO: 저장 로직 추가

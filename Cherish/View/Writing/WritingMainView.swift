@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct WritingMainView: View {
-    private let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 16, alignment: nil),
-        GridItem(.flexible(), spacing: 16, alignment: nil)
-    ]
-    @State private var isMusicOn = true
+    @EnvironmentObject var soundViewModel: SoundViewModel
     @State private var showOneSentence = false
     @State private var oneSentence = "그냥 꾸준히 뭔가를 해보자"
     
     @State var ispresent = false
     @State var recordType = Record.free
+    
+    private let columns: [GridItem] = [
+        GridItem(.flexible(), spacing: 16, alignment: nil),
+        GridItem(.flexible(), spacing: 16, alignment: nil)
+    ]
     
     var body: some View {
         NavigationView {
@@ -73,7 +74,7 @@ extension WritingMainView {
         HStack(spacing: 0) {
             Text("ㅇㅏㄲㅣㄷㅏ")
             Spacer()
-            MusicView(isMusicOn: $isMusicOn)
+            SoundView()
         }
         .font(.bigTitle)
         .padding(.bottom, 30)
