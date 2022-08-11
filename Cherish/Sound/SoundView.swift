@@ -33,6 +33,7 @@ struct SoundView: View {
     
     private func playSound() {
         if soundViewModel.isMusicOn {
+            self.audio?.prepareToPlay()
             self.audio?.play()
         } else {
             self.audio?.pause()
