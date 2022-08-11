@@ -29,7 +29,7 @@ struct WritingMainView: View {
                     .opacity(0.4)
                 VStack(spacing: 0) {
                     VStack(spacing: 0) {
-                        Title()
+                        TitleView(title: "ㅇㅏㄲㅣㄷㅏ")
                         OneSentence()
                     }
                     .padding(.horizontal, 20)
@@ -69,17 +69,6 @@ struct WritingMainView: View {
 }
 
 extension WritingMainView {
-    @ViewBuilder
-    private func Title() -> some View {
-        HStack(spacing: 0) {
-            Text("ㅇㅏㄲㅣㄷㅏ")
-            Spacer()
-            SoundView()
-        }
-        .font(.bigTitle)
-        .padding(.bottom, 30)
-        .padding(.top, 20)
-    }
     @ViewBuilder
     private func OneSentence() -> some View {
         Text(oneSentence)

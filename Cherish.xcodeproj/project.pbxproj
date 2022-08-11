@@ -36,6 +36,7 @@
 		CC95F335289A8A1E008C3EEF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F334289A8A1E008C3EEF /* Question.swift */; };
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
 		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
+		CCD0F41D28A52319003774F0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41C28A52319003774F0 /* TitleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		CC95F334289A8A1E008C3EEF /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
+		CCD0F41C28A52319003774F0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			children = (
 				CC95F3062899F5DE008C3EEF /* WritingMainView.swift */,
 				CC95F3182899F734008C3EEF /* WritingView.swift */,
+				CCD0F41C28A52319003774F0 /* TitleView.swift */,
 				CC95F3122899F681008C3EEF /* Free */,
 				CC95F3132899F68A008C3EEF /* Question */,
 				CC95F3142899F690008C3EEF /* Emotion */,
@@ -311,6 +314,7 @@
 				CC95F3092899F600008C3EEF /* RecordBoxView.swift in Sources */,
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
+				CCD0F41D28A52319003774F0 /* TitleView.swift in Sources */,
 				CC95F3212899F7F8008C3EEF /* Recode.swift in Sources */,
 				CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */,
 				CC95F31D2899F758008C3EEF /* SelectingInspirationView.swift in Sources */,
