@@ -67,5 +67,6 @@ extension EmotionView {
 struct EmotionView_Previews: PreviewProvider {
     static var previews: some View {
         EmotionView(emotionList: ["재미있다", "상쾌하다", "신나다", "활기가 넘치다", "희망을 느끼다", "기대되다", "흥미롭다", "생기가 돌다", "다정하다", "반갑다", "끌리다", "짜릿하다", "개운하다", "좋아하다", "자신있다"], isModalShow: .constant(false))
+            .environmentObject(TimeLineViewModel())
     }
 }

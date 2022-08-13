@@ -57,5 +57,6 @@ struct FreeView: View {
 struct FreeView_Previews: PreviewProvider {
     static var previews: some View {
         FreeView()
+            .environmentObject(TimeLineViewModel())
     }
 }

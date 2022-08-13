@@ -11,7 +11,7 @@ struct WritingMainView: View {
     @EnvironmentObject var soundViewModel: SoundViewModel
     
     @State private var showOneSentence = false
-    @State private var oneSentence = "그냥 꾸준히 뭔가를 해보자"
+    @State private var oneSentence = "나의 한 마디"
     
     @State var ispresent = false
     @State var recordType = Record.free
@@ -24,7 +24,7 @@ struct WritingMainView: View {
     @State private var showQuestionView = false
     @State private var showEmotionView = false
     @State private var showInspirationView = false
-//    @State private var showOneSentence = false
+    //    @State private var showOneSentence = false
     
     var body: some View {
         NavigationView {
@@ -75,9 +75,9 @@ struct WritingMainView: View {
             .fullScreenCover(isPresented: $showEmotionView) {
                 SelectingEmotionView(isModalShow: $showEmotionView)
             }
-            .fullScreenCover(isPresented: $showInspirationView) {
-                SelectingInspirationView(isModalShow: $showInspirationView)
-            }
+//            .fullScreenCover(isPresented: $showInspirationView) {
+//                SelectingInspirationView(isModalShow: $showInspirationView)
+//            }
             .navigationViewStyle(StackNavigationViewStyle())
         }
         .accentColor(Color.defaultText)
@@ -115,8 +115,9 @@ extension WritingMainView {
                                 .frame(width: width, height: width*1.5)
                             VStack(alignment: .leading, spacing: 0) {
                                 HStack(spacing: 0) {
-                                    Text("  \(Int(index)). \(record.writingMainText)  ")
+                                    Text("\(record.writingMainText)")
                                         .font(.bigTitle)
+                                        .padding(.horizontal, 10)
                                         .background(.white.opacity(0.5))
                                     Spacer()
                                 }
@@ -141,13 +142,11 @@ extension WritingMainView {
                                     showQuestionView = true
                                 case .emotion:
                                     showEmotionView = true
-                                case .inspiration:
-                                    showInspirationView = true
                             }
                         }
-                        .frame(width: width * 1.2)
-                        .shadow(color: .gray.opacity(0.4), radius: 4, x: 15, y:15)
                     }
+                    .frame(width: width/1.5)
+                    .shadow(color: .gray.opacity(0.4), radius: 4, x: 15, y:15)
                 }
                 .padding(.leading, 60)
                 .padding(.trailing, 150)
@@ -155,9 +154,10 @@ extension WritingMainView {
         }
     }
 }
-    
-    struct WritingMainView_Previews: PreviewProvider {
-        static var previews: some View {
-            WritingMainView()
-        }
+
+struct WritingMainView_Previews: PreviewProvider {
+    static var previews: some View {
+        WritingMainView()
+            .environmentObject(SoundViewModel())
     }
+}

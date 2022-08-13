@@ -45,5 +45,6 @@ struct QuestionView: View {
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
         QuestionView(title: "질문입니다", isModalShow: .constant(false))
+            .environmentObject(TimeLineViewModel())
     }
 }

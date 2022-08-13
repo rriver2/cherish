@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WritingView: View {
     @Binding var context : String
-    let date = Date().dateToString()
+    let date = Date().dateToString_MDY()
     
     var body: some View {
         ScrollView {
