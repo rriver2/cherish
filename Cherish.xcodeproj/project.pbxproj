@@ -36,6 +36,8 @@
 		CC95F335289A8A1E008C3EEF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F334289A8A1E008C3EEF /* Question.swift */; };
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
 		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
+		CCDE477728A7AEEC00BADBE3 /* WritingModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* WritingModel.xcdatamodeld */; };
+		CCDE477928A7AF1C00BADBE3 /* PersistenceCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477828A7AF1C00BADBE3 /* PersistenceCoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		CC95F334289A8A1E008C3EEF /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
+		CCDE477628A7AEEC00BADBE3 /* WritingModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WritingModel.xcdatamodel; sourceTree = "<group>"; };
+		CCDE477828A7AF1C00BADBE3 /* PersistenceCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +195,9 @@
 		CC95F31F2899F7D6008C3EEF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCDE477528A7AEEC00BADBE3 /* WritingModel.xcdatamodeld */,
 				CC95F3222899F8FD008C3EEF /* Recordable.swift */,
+				CCDE477828A7AF1C00BADBE3 /* PersistenceCoreData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +328,8 @@
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
 				CC95F3112899F66E008C3EEF /* InspirationView.swift in Sources */,
 				CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */,
+				CCDE477728A7AEEC00BADBE3 /* WritingModel.xcdatamodeld in Sources */,
+				CCDE477928A7AF1C00BADBE3 /* PersistenceCoreData.swift in Sources */,
 				CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */,
 				CC95F331289A7B36008C3EEF /* Date.swift in Sources */,
 				CC95F3282899FCEC008C3EEF /* extention.swift in Sources */,
@@ -537,6 +545,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CCDE477528A7AEEC00BADBE3 /* WritingModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CCDE477628A7AEEC00BADBE3 /* WritingModel.xcdatamodel */,
+			);
+			currentVersion = CCDE477628A7AEEC00BADBE3 /* WritingModel.xcdatamodel */;
+			path = WritingModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CC818CCE2899ED8B003B8753 /* Project object */;
 }
