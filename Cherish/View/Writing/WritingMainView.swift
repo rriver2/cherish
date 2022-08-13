@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WritingMainView: View {
     @EnvironmentObject var soundViewModel: SoundViewModel
+    
     @State private var showOneSentence = false
     @State private var oneSentence = "그냥 꾸준히 뭔가를 해보자"
     
@@ -19,6 +20,11 @@ struct WritingMainView: View {
         GridItem(.flexible(), spacing: 16, alignment: nil),
         GridItem(.flexible(), spacing: 16, alignment: nil)
     ]
+    @State private var showFreeView = false
+    @State private var showQuestionView = false
+    @State private var showEmotionView = false
+    @State private var showInspirationView = false
+//    @State private var showOneSentence = false
     
     var body: some View {
         NavigationView {
@@ -39,26 +45,38 @@ struct WritingMainView: View {
             }
             .navigationBarTitle("", displayMode: .automatic)
             .navigationBarHidden(true)
-            .fullScreenCover(isPresented: $ispresent) {
-                switch recordType {
-                    case .free:
-                        VStack(spacing: 0) {
-                            FreeView()
-                        }
-                    case .question:
-                        VStack(spacing: 0) {
-                            SelectQuestionView(isModalShow: $ispresent)
-                        }
-                    case .emotion:
-                        VStack(spacing: 0) {
-                            SelectingEmotionView(isModalShow: $ispresent)
-                        }
-                    case .inspiration:
-                        VStack(spacing: 0) {
-                            SelectingInspirationView(isModalShow: $ispresent)
-                        }
-                }
-                
+            //            .fullScreenCover(isPresented: $ispresent) {
+            //                switch recordType {
+            //                    case .free:
+            //                        VStack(spacing: 0) {
+            //                            FreeView()
+            //                        }
+            //                    case .question:
+            //                        VStack(spacing: 0) {
+            //                            SelectQuestionView(isModalShow: $ispresent)
+            //                        }
+            //                    case .emotion:
+            //                        VStack(spacing: 0) {
+            //                            SelectingEmotionView(isModalShow: $ispresent)
+            //                        }
+            //                    case .inspiration:
+            //                        VStack(spacing: 0) {
+            //                            SelectingInspirationView(isModalShow: $ispresent)
+            //                        }
+            //                }
+            //
+            //            }
+            .fullScreenCover(isPresented: $showFreeView) {
+                FreeView()
+            }
+            .fullScreenCover(isPresented: $showQuestionView) {
+                SelectQuestionView(isModalShow: $showQuestionView)
+            }
+            .fullScreenCover(isPresented: $showEmotionView) {
+                SelectingEmotionView(isModalShow: $showEmotionView)
+            }
+            .fullScreenCover(isPresented: $showInspirationView) {
+                SelectingInspirationView(isModalShow: $showInspirationView)
             }
             .navigationViewStyle(StackNavigationViewStyle())
         }
@@ -111,23 +129,35 @@ extension WritingMainView {
                         .cornerRadius(10)
                         .rotation3DEffect(.degrees(Double(geomitry.frame(in: .global).minX / -8)), axis: (x: 0.0, y: 0.0, z: 2.0))
                         .offset(x: 0, y: 50)
+                        //                        .onTapGesture {
+                        //                            recordType = record
+                        //                            ispresent = true
+                        //                        }
                         .onTapGesture {
-                            recordType = record
-                            ispresent = true
+                            switch record {
+                                case .free:
+                                    showFreeView = true
+                                case .question:
+                                    showQuestionView = true
+                                case .emotion:
+                                    showEmotionView = true
+                                case .inspiration:
+                                    showInspirationView = true
+                            }
                         }
+                        .frame(width: width * 1.2)
+                        .shadow(color: .gray.opacity(0.4), radius: 4, x: 15, y:15)
                     }
-                    .frame(width: width * 1.2)
-                    .shadow(color: .gray.opacity(0.4), radius: 4, x: 15, y:15)
                 }
+                .padding(.leading, 60)
+                .padding(.trailing, 150)
             }
-            .padding(.leading, 60)
-            .padding(.trailing, 150)
         }
     }
 }
-
-struct WritingMainView_Previews: PreviewProvider {
-    static var previews: some View {
-        WritingMainView()
+    
+    struct WritingMainView_Previews: PreviewProvider {
+        static var previews: some View {
+            WritingMainView()
+        }
     }
-}

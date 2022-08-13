@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection = 0
-    let persistenceController = PersistenceController.shared
     
     var body: some View {
         TabView(selection: $selection) {
@@ -23,9 +22,9 @@ struct ContentView: View {
                     Image(systemName: "books.vertical")
                     Text("timeline")
                 }.tag(1)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .accentColor(.black)
+        .environmentObject(TimeLineViewModel())
         .environmentObject(SoundViewModel())
     }
 }

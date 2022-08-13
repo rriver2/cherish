@@ -11,20 +11,23 @@ struct EmotionView: View {
     let emotionList: [String]
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
+    @State var context = "내용"
+    @EnvironmentObject var timeLineViewModel: TimeLineViewModel
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             EmotionGroups()
-            WritingView()
+            WritingView(context: $context)
         }
         .padding(.horizontal, 20)
         .navigationBarTitle(Text(""), displayMode: .inline)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
-                // TODO: make isMusicOn as Environment object
                 SoundView()
                 Spacer()
                 Button {
-                    // TODO: 저장 로직 추가
+                    let emotionListString = emotionList.joined(separator: ", ")
+                    timeLineViewModel.addRecord(date: Date(), title: emotionListString, context: context, kind: Record.emotion)
                     dismiss()
                     isModalShow = false
                 } label: {

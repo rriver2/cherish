@@ -16,7 +16,6 @@
 		CC818CE12899ED8C003B8753 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC818CE02899ED8C003B8753 /* Preview Assets.xcassets */; };
 		CC95F3052899F5D6008C3EEF /* SoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3042899F5D6008C3EEF /* SoundView.swift */; };
 		CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3062899F5DE008C3EEF /* WritingMainView.swift */; };
-		CC95F3092899F600008C3EEF /* RecordBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3082899F600008C3EEF /* RecordBoxView.swift */; };
 		CC95F30B2899F657008C3EEF /* FreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30A2899F657008C3EEF /* FreeView.swift */; };
 		CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30C2899F65F008C3EEF /* QuestionView.swift */; };
 		CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30E2899F667008C3EEF /* EmotionView.swift */; };
@@ -37,8 +36,8 @@
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
 		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
 		CCD0F41D28A52319003774F0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41C28A52319003774F0 /* TitleView.swift */; };
-		CCDE477728A7AEEC00BADBE3 /* WritingModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* WritingModel.xcdatamodeld */; };
-		CCDE477928A7AF1C00BADBE3 /* PersistenceCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477828A7AF1C00BADBE3 /* PersistenceCoreData.swift */; };
+		CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */; };
+		CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +51,6 @@
 		CC818CE02899ED8C003B8753 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CC95F3042899F5D6008C3EEF /* SoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundView.swift; sourceTree = "<group>"; };
 		CC95F3062899F5DE008C3EEF /* WritingMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingMainView.swift; sourceTree = "<group>"; };
-		CC95F3082899F600008C3EEF /* RecordBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordBoxView.swift; sourceTree = "<group>"; };
 		CC95F30A2899F657008C3EEF /* FreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeView.swift; sourceTree = "<group>"; };
 		CC95F30C2899F65F008C3EEF /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		CC95F30E2899F667008C3EEF /* EmotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionView.swift; sourceTree = "<group>"; };
@@ -73,8 +71,8 @@
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
 		CCD0F41C28A52319003774F0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		CCDE477628A7AEEC00BADBE3 /* WritingModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WritingModel.xcdatamodel; sourceTree = "<group>"; };
-		CCDE477828A7AF1C00BADBE3 /* PersistenceCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceCoreData.swift; sourceTree = "<group>"; };
+		CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimelineContainer.xcdatamodel; sourceTree = "<group>"; };
+		CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +143,8 @@
 		CC95F2FE2899F56A008C3EEF /* TimeLine */ = {
 			isa = PBXGroup;
 			children = (
-				CC95F3082899F600008C3EEF /* RecordBoxView.swift */,
 				CC95F32D289A78B3008C3EEF /* TimelineView.swift */,
+				CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */,
 			);
 			path = TimeLine;
 			sourceTree = "<group>";
@@ -198,9 +196,7 @@
 		CC95F31F2899F7D6008C3EEF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CCDE477528A7AEEC00BADBE3 /* WritingModel.xcdatamodeld */,
 				CC95F3222899F8FD008C3EEF /* Recordable.swift */,
-				CCDE477828A7AF1C00BADBE3 /* PersistenceCoreData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,6 +236,7 @@
 		CC95F339289AB183008C3EEF /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */,
 				CC95F336289A8A27008C3EEF /* Enum */,
 				CC95F337289AB179008C3EEF /* QuestionData.swift */,
 				CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */,
@@ -317,7 +314,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC95F3092899F600008C3EEF /* RecordBoxView.swift in Sources */,
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
 				CCD0F41D28A52319003774F0 /* TitleView.swift in Sources */,
@@ -332,11 +328,11 @@
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
 				CC95F3112899F66E008C3EEF /* InspirationView.swift in Sources */,
 				CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */,
-				CCDE477728A7AEEC00BADBE3 /* WritingModel.xcdatamodeld in Sources */,
-				CCDE477928A7AF1C00BADBE3 /* PersistenceCoreData.swift in Sources */,
+				CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */,
 				CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */,
 				CC95F331289A7B36008C3EEF /* Date.swift in Sources */,
 				CC95F3282899FCEC008C3EEF /* extention.swift in Sources */,
+				CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */,
 				CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */,
 				CC95F32A289A03A4008C3EEF /* Font.swift in Sources */,
 				CC95F32E289A78B3008C3EEF /* TimelineView.swift in Sources */,
@@ -551,13 +547,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		CCDE477528A7AEEC00BADBE3 /* WritingModel.xcdatamodeld */ = {
+		CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				CCDE477628A7AEEC00BADBE3 /* WritingModel.xcdatamodel */,
+				CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */,
 			);
-			currentVersion = CCDE477628A7AEEC00BADBE3 /* WritingModel.xcdatamodel */;
-			path = WritingModel.xcdatamodeld;
+			currentVersion = CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */;
+			path = TimelineContainer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

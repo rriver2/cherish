@@ -32,7 +32,6 @@ struct OneSentenceView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
-                    // TODO: make isMusicOn as Environment object
                     SoundView()
                     Spacer()
                     Button {

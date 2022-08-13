@@ -11,6 +11,9 @@ struct QuestionView: View {
     let title: String
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
+    @State var context = "내용"
+    @EnvironmentObject var timeLineViewModel: TimeLineViewModel
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title)
@@ -18,17 +21,16 @@ struct QuestionView: View {
                 .padding(.bottom, 10)
                 .padding(.top, 20)
                 .padding(.leading, 10)
-            WritingView()
+            WritingView(context: $context)
         }
         .padding(.horizontal, 20)
         .navigationBarTitle(Text(""), displayMode: .inline)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
-                // TODO: make isMusicOn as Environment object
                 SoundView()
                 Spacer()
                 Button {
-                    // TODO: 저장 로직 추가
+                    timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.question)
                     dismiss()
                     isModalShow = false
                 } label: {
@@ -40,8 +42,8 @@ struct QuestionView: View {
     }
 }
 
-//struct QuestionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        QuestionView(title: "질문입니다")
-//    }
-//}
+struct QuestionView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuestionView(title: "질문입니다", isModalShow: .constant(false))
+    }
+}

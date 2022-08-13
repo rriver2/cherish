@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WritingView: View {
-    @State private var context : String = "내용"
+    @Binding var context : String
     let date = Date().dateToString()
     
     var body: some View {
@@ -40,6 +40,6 @@ struct WritingView: View {
 
 struct WritingView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingView()
+        WritingView(context: .constant("내용"))
     }
 }
