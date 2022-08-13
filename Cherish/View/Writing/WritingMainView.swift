@@ -10,21 +10,30 @@ import SwiftUI
 struct WritingMainView: View {
     @EnvironmentObject var soundViewModel: SoundViewModel
     
-    @State private var showOneSentence = false
-    @State private var oneSentence = "나의 한 마디"
-    
     @State var ispresent = false
     @State var recordType = Record.free
+    
+    @State private var showFreeView = false
+    @State private var showQuestionView = false
+    @State private var showEmotionView = false
+    @State private var showInspirationView = false
+    @State private var showCards = true
+    
+    @State private var oneSentence: String
     
     private let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16, alignment: nil),
         GridItem(.flexible(), spacing: 16, alignment: nil)
     ]
-    @State private var showFreeView = false
-    @State private var showQuestionView = false
-    @State private var showEmotionView = false
-    @State private var showInspirationView = false
-    //    @State private var showOneSentence = false
+    
+    init() {
+        let key = UserDefaultKey.oneSentence.string
+        if let oneSentence = UserDefaults.standard.object(forKey: key) as? String {
+            self.oneSentence = oneSentence
+        } else {
+            oneSentence = ""
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -39,9 +48,12 @@ struct WritingMainView: View {
                         OneSentence()
                     }
                     .padding(.horizontal, 20)
-                    WritingBoxes()
+                    if showCards {
+                        WritingBoxes()
+                    }
                     Spacer()
                 }
+                .animation(Animation.easeOut, value: showCards)
             }
             .navigationBarTitle("", displayMode: .automatic)
             .navigationBarHidden(true)
@@ -75,9 +87,9 @@ struct WritingMainView: View {
             .fullScreenCover(isPresented: $showEmotionView) {
                 SelectingEmotionView(isModalShow: $showEmotionView)
             }
-//            .fullScreenCover(isPresented: $showInspirationView) {
-//                SelectingInspirationView(isModalShow: $showInspirationView)
-//            }
+            //            .fullScreenCover(isPresented: $showInspirationView) {
+            //                SelectingInspirationView(isModalShow: $showInspirationView)
+            //            }
             .navigationViewStyle(StackNavigationViewStyle())
         }
         .accentColor(Color.defaultText)
@@ -89,15 +101,23 @@ struct WritingMainView: View {
 extension WritingMainView {
     @ViewBuilder
     private func OneSentence() -> some View {
-        Text(oneSentence)
+        TextField("나의 한마디", text: $oneSentence)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(25)
             .background(.white)
             .cornerRadius(10)
             .padding(.bottom, 20)
-            .onTapGesture {
-                showOneSentence = true
+            .onChange(of: oneSentence) { newValue in
+                let key = UserDefaultKey.oneSentence.string
+                UserDefaults.standard.set(newValue, forKey: key)
             }
+            .onTapGesture {
+                showCards = false
+            }
+            .onSubmit {
+                showCards = true
+            }
+            .submitLabel(.done)
     }
     @ViewBuilder
     private func WritingBoxes() -> some View {

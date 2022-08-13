@@ -11,19 +11,21 @@ import AVFoundation
 class SoundViewModel: ObservableObject {
     @Published var isMusicOn: Bool {
         didSet {
+            let key = UserDefaultKey.isMusicOn.string
             if isMusicOn {
-                UserDefaults.standard.set(true, forKey: "isMusicOn")
+                UserDefaults.standard.set(true, forKey: key)
             } else {
-                UserDefaults.standard.set(false, forKey: "isMusicOn")
+                UserDefaults.standard.set(false, forKey: key)
             }
         }
     }
     
     init() {
-        if let isMusicOn = UserDefaults.standard.object(forKey: "isMusicOn") as? Bool {
+        let key = UserDefaultKey.isMusicOn.string
+        if let isMusicOn = UserDefaults.standard.object(forKey: key) as? Bool {
             self.isMusicOn = isMusicOn
         } else {
-            UserDefaults.standard.set(true, forKey: "isMusicOn")
+            UserDefaults.standard.set(true, forKey: key)
             self.isMusicOn = true
         }
         
