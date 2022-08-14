@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct WritingMainView: View {
+    @EnvironmentObject var soundViewModel: SoundViewModel
+    @State private var showOneSentence = false
+    @State private var oneSentence = "그냥 꾸준히 뭔가를 해보자"
+    
+    @State var ispresent = false
+    @State var recordType = Record.free
+    
     private let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16, alignment: nil),
         GridItem(.flexible(), spacing: 16, alignment: nil)
     ]
-    @State private var isMusicOn = true
-    @State private var showFreeView = false
-    @State private var showQuestionView = false
-    @State private var showEmotionView = false
-    @State private var showInspirationView = false
-    @State private var showOneSentence = false
-    @State private var oneSentence = "그냥 꾸준히 뭔가를 해보자"
-    
-    // Help ! 1) switch 안 먹음
-    //    @State var ispresent = false
-    //    @State var recordType: Record?
     
     var body: some View {
         NavigationView {
@@ -43,31 +39,26 @@ struct WritingMainView: View {
             }
             .navigationBarTitle("", displayMode: .automatic)
             .navigationBarHidden(true)
-            .fullScreenCover(isPresented: $showFreeView) {
-//                VStack(spacing: 0) {
-                    // Help ! 2) 이 부분 .free 접근 방법
-                    FreeView()
-//                }
-            }
-            .fullScreenCover(isPresented: $showQuestionView) {
-//                VStack(spacing: 0) {
-                    SelectQuestionView(isModalShow: $showQuestionView)
-//                }
-            }
-            .fullScreenCover(isPresented: $showEmotionView) {
-//                VStack(spacing: 0) {
-                    SelectingEmotionView(isModalShow: $showEmotionView)
-//                }
-            }
-            .fullScreenCover(isPresented: $showInspirationView) {
-//                VStack(spacing: 0) {
-                    SelectingInspirationView(isModalShow: $showInspirationView)
+            .fullScreenCover(isPresented: $ispresent) {
+                switch recordType {
+                    case .free:
+                        VStack(spacing: 0) {
+                            FreeView()
+                        }
+                    case .question:
+                        VStack(spacing: 0) {
+                            SelectQuestionView(isModalShow: $ispresent)
+                        }
+                    case .emotion:
+                        VStack(spacing: 0) {
+                            SelectingEmotionView(isModalShow: $ispresent)
+                        }
+                    case .inspiration:
+                        VStack(spacing: 0) {
+                            SelectingInspirationView(isModalShow: $ispresent)
+                        }
+                }
                 
-            }
-            .fullScreenCover(isPresented: $showOneSentence) {
-//                VStack(spacing: 0) {
-                    OneSentenceView(oneSentence: $oneSentence)
-//                }
             }
             .navigationViewStyle(StackNavigationViewStyle())
         }
@@ -83,7 +74,7 @@ extension WritingMainView {
         HStack(spacing: 0) {
             Text("ㅇㅏㄲㅣㄷㅏ")
             Spacer()
-            MusicView(isMusicOn: $isMusicOn)
+            SoundView()
         }
         .font(.bigTitle)
         .padding(.bottom, 30)
@@ -132,16 +123,8 @@ extension WritingMainView {
                         .rotation3DEffect(.degrees(Double(geomitry.frame(in: .global).minX / -8)), axis: (x: 0.0, y: 0.0, z: 2.0))
                         .offset(x: 0, y: 50)
                         .onTapGesture {
-                            switch record {
-                                case .free:
-                                    showFreeView = true
-                                case .question:
-                                    showQuestionView = true
-                                case .emotion:
-                                    showEmotionView = true
-                                case .inspiration:
-                                    showInspirationView = true
-                            }
+                            recordType = record
+                            ispresent = true
                         }
                     }
                     .frame(width: width * 1.2)

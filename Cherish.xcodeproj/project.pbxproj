@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CC0C8D59289ABF5D00AE9FEE /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C8D58289ABF5D00AE9FEE /* MusicView.swift */; };
 		CC0C8D5B289AC08200AE9FEE /* viewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C8D5A289AC08200AE9FEE /* viewModifier.swift */; };
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
@@ -36,10 +35,10 @@
 		CC95F331289A7B36008C3EEF /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F330289A7B36008C3EEF /* Date.swift */; };
 		CC95F335289A8A1E008C3EEF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F334289A8A1E008C3EEF /* Question.swift */; };
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
+		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CC0C8D58289ABF5D00AE9FEE /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		CC0C8D5A289AC08200AE9FEE /* viewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewModifier.swift; sourceTree = "<group>"; };
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
@@ -69,6 +68,7 @@
 		CC95F330289A7B36008C3EEF /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		CC95F334289A8A1E008C3EEF /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
+		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +147,7 @@
 		CC95F3012899F5B0008C3EEF /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */,
 				CC95F3042899F5D6008C3EEF /* SoundView.swift */,
 			);
 			path = Sound;
@@ -210,7 +211,6 @@
 		CC95F32F289A7972008C3EEF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CC0C8D58289ABF5D00AE9FEE /* MusicView.swift */,
 				CC1FBB7328A08AAB006085D7 /* OneSentenceView.swift */,
 				CC95F2FD2899F562008C3EEF /* Writing */,
 				CC95F2FE2899F56A008C3EEF /* TimeLine */,
@@ -308,7 +308,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC0C8D59289ABF5D00AE9FEE /* MusicView.swift in Sources */,
 				CC95F3092899F600008C3EEF /* RecordBoxView.swift in Sources */,
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
@@ -332,6 +331,7 @@
 				CC95F31B2899F743008C3EEF /* SelectingEmotionView.swift in Sources */,
 				CC95F32C289A77F9008C3EEF /* ContentView.swift in Sources */,
 				CC95F30B2899F657008C3EEF /* FreeView.swift in Sources */,
+				CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */,
 				CC95F3232899F8FD008C3EEF /* Recordable.swift in Sources */,
 				CC95F3052899F5D6008C3EEF /* SoundView.swift in Sources */,
 				CC0C8D5B289AC08200AE9FEE /* viewModifier.swift in Sources */,
