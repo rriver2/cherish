@@ -16,7 +16,7 @@ enum Record: String, CaseIterable {
     var writingMainText: String {
         switch self {
             case .free:
-                return "머릿속 이야기 적기"
+                return "머릿속 이야기"
             case .question:
                 return "질문에 답하기"
             case .emotion:

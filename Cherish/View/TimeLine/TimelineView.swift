@@ -14,42 +14,48 @@ struct TimelineView: View {
         VStack(spacing: 0) {
             TitleView(title: "나의 끄적임들")
                 .padding(.horizontal, 20)
+            
             ScrollView {
-                let recordsEntity = timeLineViewModel.recordsEntity.sorted(by: {
-                    if $0.date == nil || $1.date == nil {
-                        return false
-                    } else {
-                        return $0.date! > $1.date!
-                    }
-                })
-                ForEach(recordsEntity.indices, id: \.self) { index in
-                    let record = recordsEntity[index]
-                    VStack(alignment: .leading, spacing: 0) {
-                        if index == 0, let date = record.date?.dateToString_MY() {
-                            HStack(spacing: 0) {
-                                Text(date)
-                                    .padding(.vertical, 15)
-                                Spacer()
-                            }
-                            .padding(.bottom, 10)
-                        } else if let date = record.date?.dateToString_MY(),
-                            let preDate = recordsEntity[index - 1].date?.dateToString_MY(),
-                           date != preDate
-                        {
-                            HStack(spacing: 0) {
-                                Text(date)
-                                    .padding(.vertical, 15)
-                                Spacer()
-                            }
-                            .padding(.bottom, 10)
+                if timeLineViewModel.recordsEntity.isEmpty {
+                    
+                } else {
+                    let recordsEntity = timeLineViewModel.recordsEntity.sorted(by: {
+                        if $0.date == nil || $1.date == nil {
+                            return false
+                        } else {
+                            return $0.date! > $1.date!
                         }
-                        RecordBoxesView(record: record)
+                    })
+                    ForEach(recordsEntity.indices, id: \.self) { index in
+                        let record = recordsEntity[index]
+                        
+                        VStack(alignment: .leading, spacing: 0) {
+                            if index == 0, let date = record.date?.dateToString_MY() {
+                                HStack(spacing: 0) {
+                                    Text(date)
+                                        .padding(.vertical, 15)
+                                    Spacer()
+                                }
+                                .padding(.bottom, 10)
+                            } else if let date = record.date?.dateToString_MY(),
+                                      let preDate = recordsEntity[index - 1].date?.dateToString_MY(),
+                                      date != preDate
+                            {
+                                HStack(spacing: 0) {
+                                    Text(date)
+                                        .padding(.vertical, 15)
+                                    Spacer()
+                                }
+                                .padding(.bottom, 10)
+                            }
+                            RecordBoxesView(record: record)
+                        }
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.horizontal, 20)
                 }
             }
+            .background(Color.backgroundGreen)
         }
-        .background(Color.backgroundGreen)
     }
 }
 
