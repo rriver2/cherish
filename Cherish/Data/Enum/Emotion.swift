@@ -38,6 +38,7 @@ enum EmotionCategory: CaseIterable {
         }
     }
     
+    // TODO: 삭제해야 할지도 ?
     var color: Color {
         switch self {
             case .angry:

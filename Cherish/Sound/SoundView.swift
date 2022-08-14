@@ -18,26 +18,6 @@ struct SoundView: View {
         } label: {
             Image(systemName: soundViewModel.isMusicOn ? "speaker.wave.2.fill" : "speaker.wave.2")
         }
-        .onAppear {
-            let song = NSDataAsset (name: "AfterTheRain")
-            if let data = song?.data {
-                self.audio = try? AVAudioPlayer(data: data, fileTypeHint: "mp3")
-                self.audio?.numberOfLoops = -1
-                playSound()
-            }
-        }
-        .onChange(of: soundViewModel.isMusicOn, perform: { newValue in
-            playSound()
-        })
-    }
-    
-    private func playSound() {
-        if soundViewModel.isMusicOn {
-            self.audio?.prepareToPlay()
-            self.audio?.play()
-        } else {
-            self.audio?.pause()
-        }
     }
 }
 

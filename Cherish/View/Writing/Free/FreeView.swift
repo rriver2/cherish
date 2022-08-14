@@ -13,6 +13,10 @@ struct FreeView: View {
     @State private var title = ""
     @State private var context = "내용"
     
+    init() {
+        UIToolbar.appearance().barTintColor = UIColor.systemGray5 
+    }
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -57,6 +61,7 @@ struct FreeView: View {
 struct FreeView_Previews: PreviewProvider {
     static var previews: some View {
         FreeView()
+            .environmentObject(SoundViewModel())
             .environmentObject(TimeLineViewModel())
     }
 }

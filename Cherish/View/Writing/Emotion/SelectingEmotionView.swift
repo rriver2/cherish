@@ -116,7 +116,8 @@ extension SelectingEmotionView {
                     .font(.semiText)
                     .padding(.horizontal, 18)
                     .padding(.vertical, 8)
-                    .background(emotion.color)
+                    // TODO: 이후 색 Color enum 처리 다시 해야 함
+                    .background(Color(hex: "E3ECDC"))
                     .cornerRadius(15)
                     .padding(.vertical, 20)
                 LazyVGrid(columns: columns, spacing: 0) {

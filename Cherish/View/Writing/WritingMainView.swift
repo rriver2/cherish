@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WritingMainView: View {
-    @EnvironmentObject var soundViewModel: SoundViewModel
     
     @State var ispresent = false
     @State var recordType = Record.free

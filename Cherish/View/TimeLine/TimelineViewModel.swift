@@ -40,6 +40,7 @@ class TimeLineViewModel: ObservableObject {
         newRecord.context = context
         newRecord.kind = kind.rawValue
         saveData()
+//        removeAll()
     }
     
     func saveData() {
@@ -48,6 +49,25 @@ class TimeLineViewModel: ObservableObject {
             fetchTimeline()
         } catch let error {
             print("ERROR Saving", error)
+        }
+    }
+    
+    func clearData() {
+        do {
+            try container.viewContext.save()
+            fetchTimeline()
+        } catch let error {
+            print("ERROR Saving", error)
+        }
+    }
+    func removeAll() {
+        for record in recordsEntity {
+            container.viewContext.delete(record)
+        }
+        do {
+            try container.viewContext.save()
+        } catch {
+            print("ERROR removeAll", error)
         }
     }
 }
