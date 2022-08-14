@@ -9,7 +9,9 @@ import SwiftUI
 
 struct FreeView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     @State private var title = ""
+    @State private var context = "내용"
     
     var body: some View {
         NavigationView {
@@ -20,7 +22,7 @@ struct FreeView: View {
                     .padding(.top, 20)
                     .padding(.leading, 10)
                     .padding(.horizontal, 20)
-                WritingView()
+                WritingView(context: $context)
                     .padding(.top, 20)
                     .padding(.horizontal, 20)
                 Spacer()
@@ -37,11 +39,10 @@ struct FreeView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
-                    // TODO: make isMusicOn as Environment object
                     SoundView()
                     Spacer()
                     Button {
-                        // TODO: 저장 로직 추가
+                        timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)
                         dismiss()
                     } label: {
                         Image(systemName: "checkmark")
@@ -56,5 +57,6 @@ struct FreeView: View {
 struct FreeView_Previews: PreviewProvider {
     static var previews: some View {
         FreeView()
+            .environmentObject(TimeLineViewModel())
     }
 }

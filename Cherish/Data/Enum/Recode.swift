@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum Record: CaseIterable {
-    case free
-    case emotion
-    case question
-    case inspiration
+enum Record: String, CaseIterable {
+    case free = "자유형식"
+    case emotion = "감정형식"
+    case question = "질문형식"
+//    case inspiration = "영감형식"
     
     var writingMainText: String {
         switch self {
@@ -20,9 +20,9 @@ enum Record: CaseIterable {
             case .question:
                 return "질문에 답하기"
             case .emotion:
-                return "감정에 충실하기"
-            case .inspiration:
-                return "영감 찾기"
+                return "나의 감정"
+//            case .inspiration:
+//                return "영감 찾기"
         }
     }
     
@@ -34,8 +34,23 @@ enum Record: CaseIterable {
                 return "Village"
             case .emotion:
                 return "River"
-            case .inspiration:
-                return "Sky"
+//            case .inspiration:
+//                return "Sky"
+        }
+    }
+    
+    static func getCatagory(record: String) -> Record {
+        switch record {
+            case Record.free.rawValue:
+                return .free
+            case Record.question.rawValue:
+                return .question
+            case Record.emotion.rawValue:
+                return .emotion
+//            case Record.inspiration.rawValue:
+//                return .inspiration
+            default:
+                return .free
         }
     }
 }

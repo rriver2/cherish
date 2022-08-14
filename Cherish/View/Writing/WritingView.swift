@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct WritingView: View {
-    @State private var context : String = "내용"
-    let date = Date().dateToString()
+    @Binding var context : String
+    let date = Date().dateToString_MDY()
     
     var body: some View {
         ScrollView {
@@ -40,6 +40,6 @@ struct WritingView: View {
 
 struct WritingView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingView()
+        WritingView(context: .constant("내용"))
     }
 }

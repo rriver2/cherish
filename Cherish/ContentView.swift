@@ -24,6 +24,7 @@ struct ContentView: View {
                 }.tag(1)
         }
         .accentColor(.black)
+        .environmentObject(TimeLineViewModel())
         .environmentObject(SoundViewModel())
     }
 }

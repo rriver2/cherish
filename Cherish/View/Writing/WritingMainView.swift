@@ -9,16 +9,31 @@ import SwiftUI
 
 struct WritingMainView: View {
     @EnvironmentObject var soundViewModel: SoundViewModel
-    @State private var showOneSentence = false
-    @State private var oneSentence = "그냥 꾸준히 뭔가를 해보자"
     
     @State var ispresent = false
     @State var recordType = Record.free
+    
+    @State private var showFreeView = false
+    @State private var showQuestionView = false
+    @State private var showEmotionView = false
+    @State private var showInspirationView = false
+    @State private var showCards = true
+    
+    @State private var oneSentence: String
     
     private let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16, alignment: nil),
         GridItem(.flexible(), spacing: 16, alignment: nil)
     ]
+    
+    init() {
+        let key = UserDefaultKey.oneSentence.string
+        if let oneSentence = UserDefaults.standard.object(forKey: key) as? String {
+            self.oneSentence = oneSentence
+        } else {
+            oneSentence = ""
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -29,37 +44,52 @@ struct WritingMainView: View {
                     .opacity(0.4)
                 VStack(spacing: 0) {
                     VStack(spacing: 0) {
-                        Title()
+                        TitleView(title: "ㅇㅏㄲㅣㄷㅏ")
                         OneSentence()
                     }
                     .padding(.horizontal, 20)
-                    WritingBoxes()
+                    if showCards {
+                        WritingBoxes()
+                    }
                     Spacer()
                 }
+                .animation(Animation.easeOut, value: showCards)
             }
             .navigationBarTitle("", displayMode: .automatic)
             .navigationBarHidden(true)
-            .fullScreenCover(isPresented: $ispresent) {
-                switch recordType {
-                    case .free:
-                        VStack(spacing: 0) {
-                            FreeView()
-                        }
-                    case .question:
-                        VStack(spacing: 0) {
-                            SelectQuestionView(isModalShow: $ispresent)
-                        }
-                    case .emotion:
-                        VStack(spacing: 0) {
-                            SelectingEmotionView(isModalShow: $ispresent)
-                        }
-                    case .inspiration:
-                        VStack(spacing: 0) {
-                            SelectingInspirationView(isModalShow: $ispresent)
-                        }
-                }
-                
+            //            .fullScreenCover(isPresented: $ispresent) {
+            //                switch recordType {
+            //                    case .free:
+            //                        VStack(spacing: 0) {
+            //                            FreeView()
+            //                        }
+            //                    case .question:
+            //                        VStack(spacing: 0) {
+            //                            SelectQuestionView(isModalShow: $ispresent)
+            //                        }
+            //                    case .emotion:
+            //                        VStack(spacing: 0) {
+            //                            SelectingEmotionView(isModalShow: $ispresent)
+            //                        }
+            //                    case .inspiration:
+            //                        VStack(spacing: 0) {
+            //                            SelectingInspirationView(isModalShow: $ispresent)
+            //                        }
+            //                }
+            //
+            //            }
+            .fullScreenCover(isPresented: $showFreeView) {
+                FreeView()
             }
+            .fullScreenCover(isPresented: $showQuestionView) {
+                SelectQuestionView(isModalShow: $showQuestionView)
+            }
+            .fullScreenCover(isPresented: $showEmotionView) {
+                SelectingEmotionView(isModalShow: $showEmotionView)
+            }
+            //            .fullScreenCover(isPresented: $showInspirationView) {
+            //                SelectingInspirationView(isModalShow: $showInspirationView)
+            //            }
             .navigationViewStyle(StackNavigationViewStyle())
         }
         .accentColor(Color.defaultText)
@@ -70,27 +100,24 @@ struct WritingMainView: View {
 
 extension WritingMainView {
     @ViewBuilder
-    private func Title() -> some View {
-        HStack(spacing: 0) {
-            Text("ㅇㅏㄲㅣㄷㅏ")
-            Spacer()
-            SoundView()
-        }
-        .font(.bigTitle)
-        .padding(.bottom, 30)
-        .padding(.top, 20)
-    }
-    @ViewBuilder
     private func OneSentence() -> some View {
-        Text(oneSentence)
+        TextField("나의 한마디", text: $oneSentence)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(25)
             .background(.white)
             .cornerRadius(10)
             .padding(.bottom, 20)
-            .onTapGesture {
-                showOneSentence = true
+            .onChange(of: oneSentence) { newValue in
+                let key = UserDefaultKey.oneSentence.string
+                UserDefaults.standard.set(newValue, forKey: key)
             }
+            .onTapGesture {
+                showCards = false
+            }
+            .onSubmit {
+                showCards = true
+            }
+            .submitLabel(.done)
     }
     @ViewBuilder
     private func WritingBoxes() -> some View {
@@ -108,8 +135,9 @@ extension WritingMainView {
                                 .frame(width: width, height: width*1.5)
                             VStack(alignment: .leading, spacing: 0) {
                                 HStack(spacing: 0) {
-                                    Text("  \(Int(index)). \(record.writingMainText)  ")
+                                    Text("\(record.writingMainText)")
                                         .font(.bigTitle)
+                                        .padding(.horizontal, 10)
                                         .background(.white.opacity(0.5))
                                     Spacer()
                                 }
@@ -122,17 +150,27 @@ extension WritingMainView {
                         .cornerRadius(10)
                         .rotation3DEffect(.degrees(Double(geomitry.frame(in: .global).minX / -8)), axis: (x: 0.0, y: 0.0, z: 2.0))
                         .offset(x: 0, y: 50)
+                        //                        .onTapGesture {
+                        //                            recordType = record
+                        //                            ispresent = true
+                        //                        }
                         .onTapGesture {
-                            recordType = record
-                            ispresent = true
+                            switch record {
+                                case .free:
+                                    showFreeView = true
+                                case .question:
+                                    showQuestionView = true
+                                case .emotion:
+                                    showEmotionView = true
+                            }
                         }
                     }
-                    .frame(width: width * 1.2)
+                    .frame(width: width/1.5)
                     .shadow(color: .gray.opacity(0.4), radius: 4, x: 15, y:15)
                 }
+                .padding(.leading, 60)
+                .padding(.trailing, 150)
             }
-            .padding(.leading, 60)
-            .padding(.trailing, 150)
         }
     }
 }
@@ -140,5 +178,6 @@ extension WritingMainView {
 struct WritingMainView_Previews: PreviewProvider {
     static var previews: some View {
         WritingMainView()
+            .environmentObject(SoundViewModel())
     }
 }

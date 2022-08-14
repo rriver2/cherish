@@ -10,13 +10,11 @@
 		CC0C8D5B289AC08200AE9FEE /* viewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C8D5A289AC08200AE9FEE /* viewModifier.swift */; };
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
-		CC1FBB7428A08AAB006085D7 /* OneSentenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7328A08AAB006085D7 /* OneSentenceView.swift */; };
 		CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC818CD92899ED8C003B8753 /* SaveOnApp.swift */; };
 		CC818CDE2899ED8C003B8753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC818CDD2899ED8C003B8753 /* Assets.xcassets */; };
 		CC818CE12899ED8C003B8753 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC818CE02899ED8C003B8753 /* Preview Assets.xcassets */; };
 		CC95F3052899F5D6008C3EEF /* SoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3042899F5D6008C3EEF /* SoundView.swift */; };
 		CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3062899F5DE008C3EEF /* WritingMainView.swift */; };
-		CC95F3092899F600008C3EEF /* RecordBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3082899F600008C3EEF /* RecordBoxView.swift */; };
 		CC95F30B2899F657008C3EEF /* FreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30A2899F657008C3EEF /* FreeView.swift */; };
 		CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30C2899F65F008C3EEF /* QuestionView.swift */; };
 		CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30E2899F667008C3EEF /* EmotionView.swift */; };
@@ -36,20 +34,22 @@
 		CC95F335289A8A1E008C3EEF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F334289A8A1E008C3EEF /* Question.swift */; };
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
 		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
+		CCD0F41D28A52319003774F0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41C28A52319003774F0 /* TitleView.swift */; };
+		CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */; };
+		CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */; };
+		CCF3931D28A7FDF2008F506C /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3931C28A7FDF2008F506C /* UserDefaultKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CC0C8D5A289AC08200AE9FEE /* viewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewModifier.swift; sourceTree = "<group>"; };
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
-		CC1FBB7328A08AAB006085D7 /* OneSentenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSentenceView.swift; sourceTree = "<group>"; };
 		CC818CD62899ED8C003B8753 /* Cherish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cherish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC818CD92899ED8C003B8753 /* SaveOnApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOnApp.swift; sourceTree = "<group>"; };
 		CC818CDD2899ED8C003B8753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC818CE02899ED8C003B8753 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CC95F3042899F5D6008C3EEF /* SoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundView.swift; sourceTree = "<group>"; };
 		CC95F3062899F5DE008C3EEF /* WritingMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingMainView.swift; sourceTree = "<group>"; };
-		CC95F3082899F600008C3EEF /* RecordBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordBoxView.swift; sourceTree = "<group>"; };
 		CC95F30A2899F657008C3EEF /* FreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeView.swift; sourceTree = "<group>"; };
 		CC95F30C2899F65F008C3EEF /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		CC95F30E2899F667008C3EEF /* EmotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionView.swift; sourceTree = "<group>"; };
@@ -69,6 +69,10 @@
 		CC95F334289A8A1E008C3EEF /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
+		CCD0F41C28A52319003774F0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimelineContainer.xcdatamodel; sourceTree = "<group>"; };
+		CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
+		CCF3931C28A7FDF2008F506C /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 			children = (
 				CC95F3062899F5DE008C3EEF /* WritingMainView.swift */,
 				CC95F3182899F734008C3EEF /* WritingView.swift */,
+				CCD0F41C28A52319003774F0 /* TitleView.swift */,
 				CC95F3122899F681008C3EEF /* Free */,
 				CC95F3132899F68A008C3EEF /* Question */,
 				CC95F3142899F690008C3EEF /* Emotion */,
@@ -138,8 +143,8 @@
 		CC95F2FE2899F56A008C3EEF /* TimeLine */ = {
 			isa = PBXGroup;
 			children = (
-				CC95F3082899F600008C3EEF /* RecordBoxView.swift */,
 				CC95F32D289A78B3008C3EEF /* TimelineView.swift */,
+				CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */,
 			);
 			path = TimeLine;
 			sourceTree = "<group>";
@@ -211,7 +216,6 @@
 		CC95F32F289A7972008C3EEF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CC1FBB7328A08AAB006085D7 /* OneSentenceView.swift */,
 				CC95F2FD2899F562008C3EEF /* Writing */,
 				CC95F2FE2899F56A008C3EEF /* TimeLine */,
 			);
@@ -224,6 +228,7 @@
 				CC95F334289A8A1E008C3EEF /* Question.swift */,
 				CC95F3202899F7F8008C3EEF /* Recode.swift */,
 				CC1FBB7128A0024D006085D7 /* Emotion.swift */,
+				CCF3931C28A7FDF2008F506C /* UserDefaultKey.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 		CC95F339289AB183008C3EEF /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */,
 				CC95F336289A8A27008C3EEF /* Enum */,
 				CC95F337289AB179008C3EEF /* QuestionData.swift */,
 				CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */,
@@ -308,23 +314,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC95F3092899F600008C3EEF /* RecordBoxView.swift in Sources */,
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
+				CCD0F41D28A52319003774F0 /* TitleView.swift in Sources */,
 				CC95F3212899F7F8008C3EEF /* Recode.swift in Sources */,
 				CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */,
 				CC95F31D2899F758008C3EEF /* SelectingInspirationView.swift in Sources */,
 				CC95F3172899F6C8008C3EEF /* SelectQuestionView.swift in Sources */,
-				CC1FBB7428A08AAB006085D7 /* OneSentenceView.swift in Sources */,
 				CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */,
 				CC95F3262899FA3E008C3EEF /* Color.swift in Sources */,
 				CC95F335289A8A1E008C3EEF /* Question.swift in Sources */,
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
+				CCF3931D28A7FDF2008F506C /* UserDefaultKey.swift in Sources */,
 				CC95F3112899F66E008C3EEF /* InspirationView.swift in Sources */,
 				CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */,
+				CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */,
 				CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */,
 				CC95F331289A7B36008C3EEF /* Date.swift in Sources */,
 				CC95F3282899FCEC008C3EEF /* extention.swift in Sources */,
+				CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */,
 				CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */,
 				CC95F32A289A03A4008C3EEF /* Font.swift in Sources */,
 				CC95F32E289A78B3008C3EEF /* TimelineView.swift in Sources */,
@@ -537,6 +545,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */,
+			);
+			currentVersion = CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */;
+			path = TimelineContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CC818CCE2899ED8B003B8753 /* Project object */;
 }

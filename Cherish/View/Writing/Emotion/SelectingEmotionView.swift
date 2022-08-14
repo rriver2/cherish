@@ -14,6 +14,7 @@ struct SelectingEmotionView: View {
     @State private var searchText = ""
     @State private var searchedEmotion: [String] = []
     @State private var isShowAlert = false
+    @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     
     @FocusState private var isKeyboardOpen: Bool
     private let columns: [GridItem] = [
