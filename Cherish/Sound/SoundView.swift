@@ -17,6 +17,7 @@ struct SoundView: View {
             soundViewModel.isMusicOn.toggle()
         } label: {
             Image(systemName: soundViewModel.isMusicOn ? "speaker.wave.2.fill" : "speaker.wave.2")
+                .foregroundColor(Color.gray23)
         }
     }
 }

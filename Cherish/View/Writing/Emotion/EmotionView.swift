@@ -11,12 +11,12 @@ struct EmotionView: View {
     @Binding var emotionList: [String]
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
-    @State var context = "내용"
+    @Binding var context: String
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     private let columns = [
         GridItem(.flexible(), spacing: nil, alignment: .leading),
         GridItem(.flexible(), spacing: nil, alignment: .leading)
-   ]
+    ]
     
     var body: some View {
         ScrollView {
@@ -30,7 +30,7 @@ struct EmotionView: View {
                 SoundView()
                 Spacer()
                 Button {
-                    let emotionListString = emotionList.joined(separator: ", ")
+                    let emotionListString = emotionList.joined(separator: "    ")
                     timeLineViewModel.addRecord(date: Date(), title: emotionListString, context: context, kind: Record.emotion)
                     dismiss()
                     isModalShow = false
@@ -41,6 +41,7 @@ struct EmotionView: View {
         }
         .textInputAutocapitalization(.never)
         .animation(Animation.easeInOut(duration: 0.2), value: emotionList)
+        .tint(Color.gray23)
     }
     private func tabEmotion(emotion: String) {
         if let index = emotionList.firstIndex(of: emotion) {
@@ -54,41 +55,39 @@ struct EmotionView: View {
 extension EmotionView {
     @ViewBuilder
     private func EmotionGroups() -> some View {
-//        ScrollView(.horizontal, showsIndicators: false) {
-            VStack {
-                    LazyVGrid(columns: columns, spacing: 14) {
+        VStack {
+            LazyVGrid(columns: columns, spacing: 14) {
                 ForEach(emotionList, id: \.self) { detailEmotion in
+                    HStack {
+                        let isSelected = emotionList.contains(detailEmotion)
                         HStack {
-                            let isSelected = emotionList.contains(detailEmotion)
-                            HStack {
-                                Text(detailEmotion)
-                                    .frame(alignment: .leading)
-                                    .font(.mainText)
-                                if isSelected {
-                                    Image(systemName: "xmark")
-                                        .foregroundColor(Color(hex: "71766E"))
-                                }
+                            Text(detailEmotion)
+                                .frame(alignment: .leading)
+                                .font(.mainText)
+                            if isSelected {
+                                Image(systemName: "xmark")
+                                    .foregroundColor(Color(hex: "747474"))
                             }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 4)
-                            .background(isSelected ? Color(hex: "E3ECDC") : .clear)
-                            .cornerRadius(15)
-                            Spacer()
                         }
-                        .background(.white)
-                        .onTapGesture {
-                            tabEmotion(emotion: detailEmotion)
-                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 4)
+                        .background(isSelected ? Color.grayE8 : .clear)
+                        .cornerRadius(15)
+                        Spacer()
                     }
+                    .background(.white)
+                    .onTapGesture {
+                        tabEmotion(emotion: detailEmotion)
                     }
-                    .padding(.bottom, 25)
                 }
+            }
+        }
     }
 }
 
 struct EmotionView_Previews: PreviewProvider {
     static var previews: some View {
-        EmotionView(emotionList: .constant(["재미있다", "상쾌하다", "신나다", "활기가 넘치다", "희망을 느끼다", "기대되다"]), isModalShow: .constant(false))
+        EmotionView(emotionList: .constant(["재미있다", "상쾌하다", "신나다", "활기가 넘치다", "희망을 느끼다", "기대되다"]), isModalShow: .constant(false), context: .constant("내용"))
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
     }

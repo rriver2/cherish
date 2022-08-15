@@ -32,6 +32,7 @@ struct TimelineView: View {
                             if index == 0, let date = record.date?.dateToString_MY() {
                                 HStack(spacing: 0) {
                                     Text(date)
+                                        .foregroundColor(Color.gray23)
                                         .padding(.vertical, 15)
                                     Spacer()
                                 }
@@ -53,7 +54,6 @@ struct TimelineView: View {
                     }
                 }
             }
-            .background(Color.backgroundGreen)
         }
     }
 }
@@ -65,35 +65,31 @@ extension TimelineView {
         HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 5) {
                 let recordKind = Record.getCatagory(record: record.kind ?? "")
-                Image(recordKind.imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 30, height: 40)
-                    .cornerRadius(5)
+                Circle()
+                    .foregroundColor(recordKind.color)
+                    .frame(width: 32, height: 32)
                 Text(record.date?.dateToString_DW() ?? "")
                     .font(.miniText)
-                    .foregroundColor(.dateText)
+                    .foregroundColor(Color.grayA7)
             }
             VStack(alignment: .leading, spacing: 0) {
                 if record.title != "" {
                     Text(record.title ?? "")
                         .font(.semiText)
+                        .foregroundColor(.gray23)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Rectangle()
-                        .frame(height: 1)
-                        .foregroundColor(.lightGreen)
-                        .padding(.top, 10)
-                        .padding(.bottom, 7)
+                        .padding(.bottom, 10)
                 }
                 Text(record.context ?? "")
                     .font(.mainText)
+                    .foregroundColor(.gray23)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.leading, 20)
             .padding(.trailing, 10)
         }
         .padding(15)
-        .background(.white)
+        .background(Color.grayF5)
         .cornerRadius(10)
         .padding(.bottom, 10)
     }

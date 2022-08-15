@@ -32,13 +32,9 @@ struct WritingMainView: View {
     var body: some View {
         NavigationView {
             ZStack{
-//                Image("PaperBackground")
-//                    .resizable()
-//                    .ignoresSafeArea(.all, edges: [.bottom,.top])
-//                    .opacity(0.4)
                 VStack(spacing: 0) {
                     VStack(spacing: 0) {
-                        TitleView(title: "ㅇㅏㄲㅣㄷㅏ")
+                        TitleView(title: "ㅇㅏㄲㅣㄷㅏ", isShowSoundView: showCards)
                         OneSentence()
                     }
                     .padding(.horizontal, 20)
@@ -76,7 +72,7 @@ struct WritingMainView: View {
                 FreeView()
             }
             .fullScreenCover(isPresented: $showQuestionView) {
-                SelectQuestionView(isModalShow: $showQuestionView)
+                RecommandedQuestionView(isModalShow: $showQuestionView)
             }
             .fullScreenCover(isPresented: $showEmotionView) {
                 SelectingEmotionView(isModalShow: $showEmotionView)
@@ -86,8 +82,8 @@ struct WritingMainView: View {
             //            }
             .navigationViewStyle(StackNavigationViewStyle())
         }
-        .accentColor(Color.defaultText)
-        .foregroundColor(Color.defaultText)
+//        .accentColor(Color.defaultText)
+//        .foregroundColor(Color.defaultText)
         .ignoresSafeArea(.keyboard)
     }
 }
@@ -98,7 +94,8 @@ extension WritingMainView {
         TextField("나의 한마디", text: $oneSentence)
             .frame(maxWidth: .infinity)
             .padding(25)
-            .background(Color.backgroundGreen)
+            .background(Color.grayF5)
+            .foregroundColor(Color.gray23)
             .cornerRadius(10)
             .padding(.bottom, 20)
             .onChange(of: oneSentence) { newValue in
@@ -126,6 +123,7 @@ extension WritingMainView {
                             Image(record.imageName)
                                 .resizable()
                                 .scaledToFill()
+                                .foregroundColor(Color.gray23)
                                 .frame(width: width, height: width*1.5)
                             Text("\(record.writingMainText)")
                                 .font(.bigTitle)

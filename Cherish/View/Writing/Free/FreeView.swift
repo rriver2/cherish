@@ -43,28 +43,29 @@ struct FreeView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
-                    SoundView()
-                    Spacer()
-                    
-                    #warning("삭제하기")
-                    Button {
-                        timeLineViewModel.removeAll()
-                        dismiss()
+                        SoundView()
+                        Spacer()
                         
-                    } label: {
-                        Text("삭제")
-                    }
-                    
-                    Button {
-                        timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)
-                        dismiss()
-                    } label: {
-                        Image(systemName: "checkmark")
-                    }
+                        #warning("삭제하기")
+                        Button {
+                            timeLineViewModel.removeAll()
+                            dismiss()
+                            
+                        } label: {
+                            Text("삭제")
+                        }
+                        
+                        Button {
+                            timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)
+                            dismiss()
+                        } label: {
+                            Image(systemName: "checkmark")
+                        }
                 }
             }
             .textInputAutocapitalization(.never)
         }
+        .tint(Color.gray23)
     }
 }
 

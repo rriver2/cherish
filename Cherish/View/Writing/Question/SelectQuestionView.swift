@@ -13,7 +13,6 @@ struct SelectQuestionView: View {
     @Binding var isModalShow: Bool
     
     var body: some View {
-        NavigationView {
             VStack(spacing: 0) {
                 SelectQuestionType()
                     .padding(.top, 20)
@@ -22,19 +21,6 @@ struct SelectQuestionView: View {
                 }
                 Spacer()
             }
-            .navigationBarTitle(Record.question.writingMainText, displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                    }
-                }
-            }
-        }
-        .accentColor(.defaultText)
-        .tint(.defaultText)
         .animation(Animation.easeInOut(duration: 0.4), value: questionType)
     }
 }
@@ -57,15 +43,14 @@ extension SelectQuestionView {
                             VStack{
                                 Text(type.string)
                                     .fontWeight(.bold)
-                                Rectangle().frame(height: 2.5)
-                                    .foregroundColor(Color.darkGreen)
+                                dividerThickGray8A
                             }
                             .frame(width: UIScreen.main.bounds.width / CGFloat(questionTypes.count) - 20)
                         }
                     }
                 }
             }
-            Divider()
+            dividerGray8A
         }
         .padding(.horizontal, 20)
     }
@@ -82,7 +67,7 @@ extension SelectQuestionView {
                             .padding()
                             .multilineTextAlignment(.leading)
                             .padding(.vertical)
-                        Divider()
+                       dividerGrayE8
                     }
                 }
             }
