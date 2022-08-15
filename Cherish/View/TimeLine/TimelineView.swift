@@ -12,7 +12,16 @@ struct TimelineView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            TitleView(title: "나의 끄적임들")
+            HStack(spacing: 0) {
+                Text("나의 기록")
+                    .font(.bigTitle)
+                Spacer()
+                SoundView()
+            }
+            .foregroundColor(Color.gray23)
+            .font(.bigTitle)
+            .padding(.bottom, 30)
+            .padding(.top, 20)
                 .padding(.horizontal, 20)
             ScrollView {
                 if timeLineViewModel.recordsEntity.isEmpty {
@@ -32,7 +41,8 @@ struct TimelineView: View {
                             if index == 0, let date = record.date?.dateToString_MY() {
                                 HStack(spacing: 0) {
                                     Text(date)
-                                        .foregroundColor(Color.gray23)
+                                        .font(.bodySemibold)
+                                        .foregroundColor(Color.grayA7)
                                         .padding(.vertical, 15)
                                     Spacer()
                                 }
@@ -69,19 +79,19 @@ extension TimelineView {
                     .foregroundColor(recordKind.color)
                     .frame(width: 32, height: 32)
                 Text(record.date?.dateToString_DW() ?? "")
-                    .font(.miniText)
+                    .font(.timelineDate)
                     .foregroundColor(Color.grayA7)
             }
             VStack(alignment: .leading, spacing: 0) {
                 if record.title != "" {
                     Text(record.title ?? "")
-                        .font(.semiText)
+                        .font(.miniSemibold)
                         .foregroundColor(.gray23)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, 10)
                 }
                 Text(record.context ?? "")
-                    .font(.mainText)
+                    .font(.miniRegular)
                     .foregroundColor(.gray23)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }

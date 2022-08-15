@@ -18,7 +18,8 @@ struct QuestionView: View {
         ScrollView {
             Text(title)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.miniTitle)
+                .font(.bodyRegular)
+                .foregroundColor(Color.gray23)
                 .padding(.bottom, 10)
                 .padding(.top, 20)
                 .padding(.leading, 10)
@@ -46,7 +47,7 @@ struct QuestionView: View {
 
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionView(title: "질문입니다", isModalShow: .constant(false))
+        QuestionView(title: "질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다", isModalShow: .constant(false))
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
     }

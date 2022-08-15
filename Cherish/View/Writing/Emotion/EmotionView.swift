@@ -63,7 +63,8 @@ extension EmotionView {
                         HStack {
                             Text(detailEmotion)
                                 .frame(alignment: .leading)
-                                .font(.mainText)
+                                .font(.bodyRegular)
+                                .foregroundColor(Color.gray23)
                             if isSelected {
                                 Image(systemName: "xmark")
                                     .foregroundColor(Color(hex: "747474"))

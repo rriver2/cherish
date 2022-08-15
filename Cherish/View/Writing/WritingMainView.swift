@@ -8,16 +8,13 @@
 import SwiftUI
 
 struct WritingMainView: View {
-    
-    @State var ispresent = false
-    @State var recordType = Record.free
-    
     @State private var showFreeView = false
     @State private var showQuestionView = false
     @State private var showEmotionView = false
     @State private var showInspirationView = false
     @State private var showCards = true
     
+    @State var recordType = Record.free
     @State private var oneSentence: String
     
     init() {
@@ -34,7 +31,18 @@ struct WritingMainView: View {
             ZStack{
                 VStack(spacing: 0) {
                     VStack(spacing: 0) {
-                        TitleView(title: "ㅇㅏㄲㅣㄷㅏ", isShowSoundView: showCards)
+                        HStack(spacing: 0) {
+                            Image("Logo")
+                                .padding(.leading, 10)
+                            Spacer()
+                            if showCards {
+                                SoundView()
+                            }
+                        }
+                        .foregroundColor(Color.gray23)
+                        .font(.bigTitle)
+                        .padding(.bottom, 30)
+                        .padding(.top, 20)
                         OneSentence()
                     }
                     .padding(.horizontal, 20)
@@ -47,27 +55,6 @@ struct WritingMainView: View {
             }
             .navigationBarTitle("", displayMode: .automatic)
             .navigationBarHidden(true)
-            //            .fullScreenCover(isPresented: $ispresent) {
-            //                switch recordType {
-            //                    case .free:
-            //                        VStack(spacing: 0) {
-            //                            FreeView()
-            //                        }
-            //                    case .question:
-            //                        VStack(spacing: 0) {
-            //                            SelectQuestionView(isModalShow: $ispresent)
-            //                        }
-            //                    case .emotion:
-            //                        VStack(spacing: 0) {
-            //                            SelectingEmotionView(isModalShow: $ispresent)
-            //                        }
-            //                    case .inspiration:
-            //                        VStack(spacing: 0) {
-            //                            SelectingInspirationView(isModalShow: $ispresent)
-            //                        }
-            //                }
-            //
-            //            }
             .fullScreenCover(isPresented: $showFreeView) {
                 FreeView()
             }
@@ -77,13 +64,8 @@ struct WritingMainView: View {
             .fullScreenCover(isPresented: $showEmotionView) {
                 SelectingEmotionView(isModalShow: $showEmotionView)
             }
-            //            .fullScreenCover(isPresented: $showInspirationView) {
-            //                SelectingInspirationView(isModalShow: $showInspirationView)
-            //            }
             .navigationViewStyle(StackNavigationViewStyle())
         }
-//        .accentColor(Color.defaultText)
-//        .foregroundColor(Color.defaultText)
         .ignoresSafeArea(.keyboard)
     }
 }
@@ -91,10 +73,12 @@ struct WritingMainView: View {
 extension WritingMainView {
     @ViewBuilder
     private func OneSentence() -> some View {
-        TextField("나의 한마디", text: $oneSentence)
+        TextField("나의 한 마디", text: $oneSentence)
             .frame(maxWidth: .infinity)
+            .multilineTextAlignment(.center)
             .padding(25)
             .background(Color.grayF5)
+            .font(.bodyRegular)
             .foregroundColor(Color.gray23)
             .cornerRadius(10)
             .padding(.bottom, 20)
@@ -126,7 +110,7 @@ extension WritingMainView {
                                 .foregroundColor(Color.gray23)
                                 .frame(width: width, height: width*1.5)
                             Text("\(record.writingMainText)")
-                                .font(.bigTitle)
+                                .font(.bodySemibold)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 10)
                                 .background(.white.opacity(0.7))
@@ -137,10 +121,6 @@ extension WritingMainView {
                         .cornerRadius(10)
                         .rotation3DEffect(.degrees(Double(geomitry.frame(in: .global).minX / -8)), axis: (x: 0.0, y: 0.0, z: 2.0))
                         .offset(x: 0, y: 50)
-                        //                        .onTapGesture {
-                        //                            recordType = record
-                        //                            ispresent = true
-                        //                        }
                         .onTapGesture {
                             switch record {
                                 case .free:
@@ -152,8 +132,8 @@ extension WritingMainView {
                             }
                         }
                     }
-                    .frame(width: width/1.5)
-                    .shadow(color: .gray.opacity(0.4), radius: 4, x: 15, y:15)
+                    .frame(width: width/2.2)
+                    .shadow(color: .gray.opacity(0.5), radius: 7, x: 10, y:10)
                 }
                 .padding(.leading, 60)
                 .padding(.trailing, 150)

@@ -38,11 +38,14 @@ extension SelectQuestionView {
                     }) {
                         if(questionType != type){
                             Text(type.string)
+                                .font(.bodyRegular)
+                                .foregroundColor(Color.grayA7)
                                 .frame(width: UIScreen.main.bounds.width / CGFloat(questionTypes.count) - 20)
                         }else{
                             VStack{
                                 Text(type.string)
-                                    .fontWeight(.bold)
+                                    .font(.bodySemibold)
+                                    .foregroundColor(Color.gray23)
                                 dividerThickGray8A
                             }
                             .frame(width: UIScreen.main.bounds.width / CGFloat(questionTypes.count) - 20)
@@ -64,6 +67,8 @@ extension SelectQuestionView {
                 } label: {
                     VStack(alignment: .leading){
                         Text(question)
+                            .font(.bodyRegular)
+                            .foregroundColor(Color.gray23)
                             .padding()
                             .multilineTextAlignment(.leading)
                             .padding(.vertical)

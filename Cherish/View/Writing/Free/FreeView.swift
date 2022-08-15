@@ -10,7 +10,7 @@ import SwiftUI
 struct FreeView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
-    @State private var title = ""
+    @State private var title = "제목"
     @State private var context = "내용"
     
     init() {
@@ -20,14 +20,20 @@ struct FreeView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                TextField("제목", text: $title)
-                    .font(.miniTitle)
-                    .padding(.bottom, 10)
-                    .padding(.top, 20)
-                    .padding(.leading, 10)
+                TextEditor(text: $title)
+                    .onTapGesture {
+                        if self.title == "제목"{
+                            self.title = ""
+                        }
+                    }
+                    .frame(minHeight: 20)
+                    .font(.bodyRegular)
                     .padding(.horizontal, 20)
+                    .padding(.top, 10)
+                    .foregroundColor(self.title == "제목" ? Color.grayA7 : Color.gray23)
+                
                 WritingView(context: $context)
-                    .padding(.top, 20)
+                    .padding(.top, 5)
                     .padding(.horizontal, 20)
                 Spacer()
             }

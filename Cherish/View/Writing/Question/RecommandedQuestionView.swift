@@ -27,6 +27,8 @@ struct RecommandedQuestionView: View {
                                 .padding()
                                 .multilineTextAlignment(.leading)
                                 .padding(.vertical)
+                                .font(.bodyRegular)
+                                .foregroundColor(.gray23)
                             dividerGrayE8
                         }
                     }
@@ -35,7 +37,7 @@ struct RecommandedQuestionView: View {
                     SelectQuestionView(isModalShow: $isModalShow)
                 } label: {
                     Text("다른 질문 더보기")
-                        .font(.miniText)
+                        .font(.miniRegular)
                         .foregroundColor(Color.grayA7)
                         .padding(.top, 20)
                         .padding(.leading, 20)

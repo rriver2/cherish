@@ -94,14 +94,17 @@ extension SelectingEmotionView {
                     }) {
                         if(emotionType != emotion){
                             Text(emotion.string)
-                                .frame(width: UIScreen.main.bounds.width / 4 - 20)
+                                .font(.bodyRegular)
+                                .foregroundColor(Color.grayA7)
+                                .frame(width: UIScreen.main.bounds.width / 4.2 - 20)
                         } else {
                             VStack{
                                 Text(emotion.string)
-                                    .fontWeight(.bold)
+                                    .font(.bodySemibold)
+                                    .foregroundColor(Color.gray23)
                                 dividerThickGray8A
                             }
-                            .frame(width: UIScreen.main.bounds.width / 4 - 20)
+                            .frame(width: UIScreen.main.bounds.width / 4.2 - 20)
                         }
                     }
                 }
@@ -119,7 +122,8 @@ extension SelectingEmotionView {
                     HStack {
                         Text(detailEmotion)
                             .frame(alignment: .leading)
-                            .font(.mainText)
+                            .font(.bodyRegular)
+                            .foregroundColor(Color.gray23)
                         if isSelected {
                             Image(systemName: "xmark")
                                 .foregroundColor(Color(hex: "747474"))

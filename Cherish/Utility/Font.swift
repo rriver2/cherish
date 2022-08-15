@@ -8,16 +8,16 @@
 import SwiftUI
 
 extension Font {
-    static let bigTitle = Font.title3.weight(.bold)
+    #warning("bigTitle 변경해야함") // bodyRegular의 경우 .lineSpacing(10) 넣어주기
+    static let bigTitle = Font.title.weight(.bold)
     
-    static let miniTitle = Font.title3.weight(.regular)
-    static let semiboldTitle = Font.title3.weight(.semibold)
-    
-    static let mainText = Font.body.weight(.regular)
-    static let semiText = Font.body.weight(.semibold)
-    
-    static let miniText = Font.caption2.weight(.regular)
-    static let miniSemiText = Font.caption2.weight(.semibold)
+    static let miniRegular = Font.footnote.weight(.regular)
+    static let bodyRegular = Font.body.weight(.regular)
+    static let bodyRegularSmall = Font.callout.weight(.regular)
+    static let bodySemibold = Font.body.weight(.semibold)
+    static let titleSemibold = Font.title2.weight(.semibold)
+    static let timelineDate = Font.caption2.weight(.regular)
+    static let miniSemibold = Font.footnote.weight(.semibold)
     
 //    bigTitle
 //    body_regular_default

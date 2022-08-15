@@ -73,7 +73,9 @@ extension SearchEmotionView {
                         searchedEmotion = detailAllEmotionList.filter {$0.contains(searchText)}
                         print(searchText, "searchText")
                     }
+                    .font(.bodyRegularSmall)
                     .focused($isKeyboardOpen)
+                    .foregroundColor(.gray23)
                 if searchText != "" {
                     Button(action: {
                         searchText = ""
@@ -103,7 +105,8 @@ extension SearchEmotionView {
                     HStack {
                         Text(emotion)
                             .frame(alignment: .leading)
-                            .font(.mainText)
+                            .font(.bodyRegularSmall)
+                            .foregroundColor(.gray23)
                         if isSelected {
                             Image(systemName: "xmark")
                                 .foregroundColor(Color(hex: "747474"))
