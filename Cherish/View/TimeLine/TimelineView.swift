@@ -15,10 +15,10 @@ struct TimelineView: View {
             HStack(spacing: 0) {
                 Text("나의 기록")
                     .font(.bigTitle)
+                    .foregroundColor(Color.gray23)
                 Spacer()
                 SoundView()
             }
-            .foregroundColor(Color.gray23)
             .font(.bigTitle)
             .padding(.bottom, 30)
             .padding(.top, 20)
@@ -26,6 +26,8 @@ struct TimelineView: View {
             ScrollView {
                 if timeLineViewModel.recordsEntity.isEmpty {
                     Text("아직 기록한 내용이 없습니다")
+                        .font(.bigTitle)
+                        .foregroundColor(Color.gray23)
                 } else {
                     let recordsEntity = timeLineViewModel.recordsEntity.sorted(by: {
                         if $0.date == nil || $1.date == nil {
@@ -53,6 +55,8 @@ struct TimelineView: View {
                             {
                                 HStack(spacing: 0) {
                                     Text(date)
+                                        .font(.bodySemibold)
+                                        .foregroundColor(Color.grayA7)
                                         .padding(.vertical, 15)
                                     Spacer()
                                 }

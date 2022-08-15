@@ -111,6 +111,7 @@ extension WritingMainView {
                                 .frame(width: width, height: width*1.5)
                             Text("\(record.writingMainText)")
                                 .font(.bodySemibold)
+                                .foregroundColor(.gray23)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 10)
                                 .background(.white.opacity(0.7))

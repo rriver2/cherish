@@ -71,7 +71,6 @@ extension SearchEmotionView {
                     .onChange(of: searchText) { newValue in
                         let detailAllEmotionList = EmotionData.allList
                         searchedEmotion = detailAllEmotionList.filter {$0.contains(searchText)}
-                        print(searchText, "searchText")
                     }
                     .font(.bodyRegularSmall)
                     .focused($isKeyboardOpen)

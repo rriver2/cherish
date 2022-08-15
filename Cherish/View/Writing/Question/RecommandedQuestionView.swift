@@ -40,8 +40,8 @@ struct RecommandedQuestionView: View {
                         .font(.miniRegular)
                         .foregroundColor(Color.grayA7)
                         .padding(.top, 20)
-                        .padding(.leading, 20)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 20)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 Spacer()
             }
