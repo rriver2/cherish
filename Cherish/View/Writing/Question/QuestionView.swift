@@ -7,18 +7,6 @@
 
 import SwiftUI
 
-extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate {
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-        navigationBar.isHidden = true
-        interactivePopGestureRecognizer?.delegate = self
-    }
-    
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
-    }
-}
-
 struct QuestionView: View {
     let title: String
     @Environment(\.dismiss) private var dismiss

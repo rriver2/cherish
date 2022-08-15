@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct EmotionView: View {
-    @Binding var emotionList: [String]
+//    @Binding var emotionList: [String]
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
-    @Binding var context: String
+    @ObservedObject var emotionViewModel: EmotionViewModel
+//    @Binding var context: String
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     private let columns = [
         GridItem(.flexible(), spacing: nil, alignment: .leading),
@@ -25,7 +26,7 @@ struct EmotionView: View {
             ScrollView (showsIndicators : false) {
                 EmotionGroups()
                     .padding(.top, 30)
-                WritingView(context: $context)
+                WritingView(context: $emotionViewModel.context)
                     .padding(.top, 25)
             }
             .padding(.horizontal, 27)
@@ -36,8 +37,8 @@ struct EmotionView: View {
                     .font(.bodyRegular)
                 Spacer()
                 Button {
-                    let emotionListString = emotionList.joined(separator: "    ")
-                    timeLineViewModel.addRecord(date: Date(), title: emotionListString, context: context, kind: Record.emotion)
+                    let emotionListString = emotionViewModel.selectedEmotionList.joined(separator: "    ")
+                    timeLineViewModel.addRecord(date: Date(), title: emotionListString, context: emotionViewModel.context, kind: Record.emotion)
                     dismiss()
                     isModalShow = false
                 } label: {
@@ -48,20 +49,13 @@ struct EmotionView: View {
             }
         }
         .textInputAutocapitalization(.never)
-        .animation(Animation.easeInOut(duration: 0.2), value: emotionList)
+        .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
         .tint(Color.gray23)
         .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
             if (value.startLocation.x < 30 && value.translation.width > 100) {
                 dismiss()
             }
         })
-    }
-    private func tabEmotion(emotion: String) {
-        if let index = emotionList.firstIndex(of: emotion) {
-            emotionList.remove(at: index)
-        } else {
-            emotionList.append(emotion)
-        }
     }
 }
 
@@ -70,9 +64,9 @@ extension EmotionView {
     private func EmotionGroups() -> some View {
         VStack(spacing: 0) {
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(emotionList, id: \.self) { detailEmotion in
+                ForEach(emotionViewModel.selectedEmotionList, id: \.self) { detailEmotion in
                     HStack(spacing: 0) {
-                        let isSelected = emotionList.contains(detailEmotion)
+                        let isSelected = emotionViewModel.selectedEmotionList.contains(detailEmotion)
                         HStack(spacing: 0) {
                             Text(detailEmotion)
                                 .frame(alignment: .leading)
@@ -91,7 +85,7 @@ extension EmotionView {
                     }
                     .background(.white)
                     .onTapGesture {
-                        tabEmotion(emotion: detailEmotion)
+                        emotionViewModel.tabEmotion(emotion: detailEmotion)
                     }
                 }
             }
@@ -116,7 +110,7 @@ extension EmotionView {
 
 struct EmotionView_Previews: PreviewProvider {
     static var previews: some View {
-        EmotionView(emotionList: .constant(["재미있다", "상쾌하다", "신나다", "활기가 넘치다", "희망을 느끼다", "기대되다"]), isModalShow: .constant(false), context: .constant("내용"))
+        EmotionView(isModalShow: .constant(false), emotionViewModel: EmotionViewModel())
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
     }

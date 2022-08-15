@@ -10,14 +10,11 @@ import SwiftUI
 struct SearchEmotionView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
-    @Binding var selectedEmotion: [String]
-    @State private var searchText = ""
-    @State private var searchedEmotion: [String] = []
+    @ObservedObject var emotionViewModel: EmotionViewModel
     @State private var isShowAlert = false
-    @Binding var context: String
     @GestureState private var dragOffset = CGSize.zero
-    
     @FocusState private var isKeyboardOpen: Bool
+    @State private var searchText: String = ""
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -37,15 +34,10 @@ struct SearchEmotionView: View {
                 dismiss()
             }
         })
-        .animation(Animation.easeInOut(duration: 0.2), value: selectedEmotion)
-    }
-    
-    func tabEmotion(emotion: String) {
-        if let index = selectedEmotion.firstIndex(of: emotion) {
-            selectedEmotion.remove(at: index)
-        } else {
-            selectedEmotion.append(emotion)
+        .onAppear {
+            emotionViewModel.searchedEmotionList = emotionViewModel.userDefaultEmotionList
         }
+        .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
     }
 }
 
@@ -59,8 +51,12 @@ extension SearchEmotionView {
                     .foregroundColor(Color.gray23)
                 TextField("감정 검색", text: $searchText)
                     .onChange(of: searchText) { newValue in
-                        let detailAllEmotionList = EmotionData.allList
-                        searchedEmotion = detailAllEmotionList.filter {$0.contains(searchText)}
+                        if newValue == "" {
+                            emotionViewModel.searchedEmotionList = emotionViewModel.userDefaultEmotionList
+                        } else {
+                            let detailAllEmotionList = EmotionData.allList
+                            emotionViewModel.searchedEmotionList = detailAllEmotionList.filter { $0.contains(searchText) }
+                        }
                     }
                     .font(.bodyRegularSmall)
                     .focused($isKeyboardOpen)
@@ -88,11 +84,11 @@ extension SearchEmotionView {
     }
     @ViewBuilder
     private func SearchEmtionGroups() -> some View {
-        ForEach(searchedEmotion.indices, id: \.self) { index in
-            let emotion = searchedEmotion[index]
+        ForEach(emotionViewModel.searchedEmotionList.indices, id: \.self) { index in
+            let emotion = emotionViewModel.searchedEmotionList[index]
             VStack(alignment: .leading, spacing: 0) {
                 HStack(spacing: 0) {
-                    let isSelected = selectedEmotion.contains(emotion)
+                    let isSelected = emotionViewModel.selectedEmotionList.contains(emotion)
                     HStack(spacing: 0) {
                         Text(emotion)
                             .frame(alignment: .leading)
@@ -113,7 +109,7 @@ extension SearchEmotionView {
                 }
                 .background(.white)
                 .onTapGesture {
-                    tabEmotion(emotion: emotion)
+                    emotionViewModel.tabEmotion(emotion: emotion)
                 }
             }
         }
@@ -132,14 +128,14 @@ extension SearchEmotionView {
                 .font(.bodySemibold)
                 .foregroundColor(Color.gray23)
             Spacer()
-            if selectedEmotion == [] {
+            if emotionViewModel.selectedEmotionList == [] {
                 Image(systemName: "checkmark")
                     .onTapGesture {
                         isShowAlert = true
                     }
             } else {
                 NavigationLink {
-                    EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow, context: $context)
+                    EmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel)
                 } label: {
                     Image(systemName: "checkmark")
                         .font(.bodyRegular)
@@ -154,6 +150,6 @@ extension SearchEmotionView {
 
 struct SearchEmotionView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchEmotionView(isModalShow: .constant(false), selectedEmotion: .constant([]), context: .constant("내용"))
+        SearchEmotionView(isModalShow: .constant(false), emotionViewModel: EmotionViewModel())
     }
 }

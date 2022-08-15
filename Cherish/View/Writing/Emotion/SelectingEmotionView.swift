@@ -9,13 +9,10 @@ import SwiftUI
 
 struct SelectingEmotionView: View {
     @Environment(\.dismiss) private var dismiss
+    @StateObject var emotionViewModel = EmotionViewModel()
     @Binding var isModalShow: Bool
-    @State var selectedEmotion: [String] = []
-    @State private var isShowAlert = false
-    @State private var emotionType: EmotionCategory = EmotionCategory.allCases[0]
     @State private var isShowNextView = false
     @State private var isShowAlertDelete = false
-    @State var context = "내용"
     @GestureState private var dragOffset = CGSize.zero
     
     @FocusState private var isKeyboardOpen: Bool
@@ -34,12 +31,12 @@ struct SelectingEmotionView: View {
                 .padding(.top, 25)
             }
         }
-        .alert(isPresented: $isShowAlert) {
+        .alert(isPresented: $emotionViewModel.isShowAlert) {
             Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
                 dismiss()
             }), secondaryButton: .cancel(Text("취소")))
         }
-        .alert(selectedEmotion == [] ? "감정을 한 개 이상 선택해주세요" : "6개 이하로 선택해주세요", isPresented: $isShowAlert) {
+        .alert(emotionViewModel.selectedEmotionList == [] ? "감정을 한 개 이상 선택해주세요" : "6개 이하로 선택해주세요", isPresented: $emotionViewModel.isShowAlert) {
             Button("OK", role: .cancel) { }
         }
         .accentColor(Color.gray23)
@@ -47,11 +44,11 @@ struct SelectingEmotionView: View {
         .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
             if (value.translation.height > 100) {
                 #warning("수정해야 함..")
-//                if selectedEmotion.isEmpty {
-                    dismiss()
-//                } else {
-//                    isShowAlertDelete = true
-//                }
+                //                if selectedEmotion.isEmpty {
+                dismiss()
+                //                } else {
+                //                    isShowAlertDelete = true
+                //                }
             }
         })
         .alert(isPresented: $isShowAlertDelete) {
@@ -59,16 +56,8 @@ struct SelectingEmotionView: View {
                 dismiss()
             }), secondaryButton: .cancel(Text("취소")))
         }
-        .animation(Animation.easeInOut(duration: 0.4), value: emotionType)
-        .animation(Animation.easeInOut(duration: 0.2), value: selectedEmotion)
-    }
-    
-    private func tabEmotion(emotion: String) {
-        if let index = selectedEmotion.firstIndex(of: emotion) {
-            selectedEmotion.remove(at: index)
-        } else {
-            selectedEmotion.append(emotion)
-        }
+        .animation(Animation.easeInOut(duration: 0.4), value: emotionViewModel.emotionType)
+        .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
     }
 }
 
@@ -81,9 +70,9 @@ extension SelectingEmotionView {
                 ForEach(emotionList.indices, id: \.self) { index in
                     let emotion = emotionList[index]
                     Button(action: {
-                        emotionType = emotion
+                        emotionViewModel.emotionType = emotion
                     }) {
-                        if(emotionType != emotion){
+                        if(emotionViewModel.emotionType != emotion){
                             Text(emotion.string)
                                 .font(.bodyRegular)
                                 .foregroundColor(Color.grayA7)
@@ -105,11 +94,11 @@ extension SelectingEmotionView {
     }
     @ViewBuilder
     private func EmotionList() -> some View {
-        if let emotionList = EmotionData.list[emotionType] {
+        if let emotionList = EmotionData.list[emotionViewModel.emotionType] {
             ForEach(emotionList.indices, id : \.self){ index in
                 let detailEmotion = emotionList[index]
                 HStack(spacing: 0) {
-                    let isSelected = selectedEmotion.contains(detailEmotion)
+                    let isSelected = emotionViewModel.selectedEmotionList.contains(detailEmotion)
                     HStack(spacing: 0) {
                         Text(detailEmotion)
                             .frame(alignment: .leading)
@@ -130,7 +119,7 @@ extension SelectingEmotionView {
                 }
                 .background(.white)
                 .onTapGesture {
-                    tabEmotion(emotion: detailEmotion)
+                    emotionViewModel.tabEmotion(emotion: detailEmotion)
                 }
             }
         }
@@ -139,7 +128,7 @@ extension SelectingEmotionView {
     private func NavigationBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
-                if selectedEmotion.isEmpty {
+                if emotionViewModel.selectedEmotionList.isEmpty {
                     dismiss()
                 } else {
                     isShowAlertDelete = true
@@ -158,7 +147,7 @@ extension SelectingEmotionView {
             Spacer()
             HStack(spacing: 0) {
                 NavigationLink {
-                    SearchEmotionView(isModalShow: $isModalShow, selectedEmotion: $selectedEmotion, context: $context)
+                    SearchEmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel)
                 } label: {
                     Image(systemName: "magnifyingglass")
                         .font(.bodyRegular)
@@ -167,14 +156,14 @@ extension SelectingEmotionView {
                 Image(systemName: "checkmark")
                     .font(.bodyRegular)
                     .onTapGesture {
-                        if selectedEmotion == [] || selectedEmotion.count >= 6 {
-                            isShowAlert = true
+                        if emotionViewModel.selectedEmotionList == [] || emotionViewModel.selectedEmotionList.count >= 6 {
+                            emotionViewModel.isShowAlert = true
                         } else {
                             isShowNextView = true
                         }
                     }
                 NavigationLink("", isActive: $isShowNextView) {
-                    EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow, context: $context)
+                    EmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel)
                 }
             }
         }

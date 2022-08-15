@@ -17,6 +17,7 @@ struct WritingView: View {
                 .font(.miniRegular)
                 .foregroundColor(Color.gray8A)
                 .padding(.bottom, 8)
+                .padding(.leading, 5)
             TextEditor(text: $context)
                 .padding(.vertical, 23)
                 .padding(.horizontal, 20)

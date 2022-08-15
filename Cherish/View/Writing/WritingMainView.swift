@@ -73,12 +73,12 @@ extension WritingMainView {
         .padding(.horizontal, 27)
         .padding(.bottom, 49)
         .foregroundColor(Color.gray23)
-        .font(.bigTitle)
+        .font(.timeLineTitle)
         .padding(.top, 26)
     }
     @ViewBuilder
     private func OneSentence() -> some View {
-        TextField("나의 한 마디", text: $oneSentence)
+        TextField("오늘의 한 줄", text: $oneSentence)
             .frame(maxWidth: .infinity)
             .multilineTextAlignment(.center)
             .padding(17)
@@ -90,6 +90,10 @@ extension WritingMainView {
             .onChange(of: oneSentence) { newValue in
                 let key = UserDefaultKey.oneSentence.string
                 UserDefaults.standard.set(newValue, forKey: key)
+                let maxCharacterLength = 20
+                if maxCharacterLength < newValue.count {
+                    oneSentence = String(oneSentence.prefix(maxCharacterLength))
+                }
             }
             .onTapGesture {
                 showCards = false
