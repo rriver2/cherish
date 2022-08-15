@@ -36,6 +36,7 @@ extension SelectQuestionView {
     @ViewBuilder
     private func SelectQuestionType() -> some View {
         ZStack(alignment: .bottom){
+            dividerThickGrayE8
             HStack(alignment: .top, spacing: 0) {
                 let questionTypes = Question.allCases
                 ForEach(questionTypes.indices, id: \.self) { index in
@@ -60,7 +61,6 @@ extension SelectQuestionView {
                     }
                 }
             }
-            dividerThickGrayE8
         }
     }
     @ViewBuilder

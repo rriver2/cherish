@@ -32,23 +32,30 @@ class EmotionViewModel: ObservableObject {
     }
     
     func tabEmotion(emotion: String) {
-        // 삭제하고 싶을 때
-        // UserDefaults.standard.set([], forKey: UserDefaultKey.selectedEmotion.string)
         if let index = selectedEmotionList.firstIndex(of: emotion) {
             selectedEmotionList.remove(at: index)
         } else if selectedEmotionList.count >= 6 {
             isShowAlert = true
         } else {
             selectedEmotionList.append(emotion)
+        }
+    }
+    
+    func deleteEmotionsOnDevice() {
+        let key = UserDefaultKey.selectedEmotion.string
+        UserDefaults.standard.set([], forKey: key)
+        userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
+    }
+    
+    func addEmotionToDevice(emotion: String) {
+        if !userDefaultEmotionList.contains(emotion){
             let key = UserDefaultKey.selectedEmotion.string
-            if !userDefaultEmotionList.contains(emotion) {
-                if userDefaultEmotionList.count > 10 {
-                    userDefaultEmotionList.removeLast()
-                }
-                userDefaultEmotionList.insert(emotion, at: 0)
-                UserDefaults.standard.set(userDefaultEmotionList, forKey: key)
-                userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
+            if userDefaultEmotionList.count > 10 {
+                userDefaultEmotionList.removeLast()
             }
+            userDefaultEmotionList.insert(emotion, at: 0)
+            UserDefaults.standard.set(userDefaultEmotionList, forKey: key)
+            userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
         }
     }
 }

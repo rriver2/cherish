@@ -65,6 +65,7 @@ extension SelectingEmotionView {
     @ViewBuilder
     private func SelectEmotionType() -> some View {
         ZStack(alignment: .bottom){
+            dividerGray8A
             HStack(alignment: .top, spacing: 0) {
                 let emotionList = EmotionCategory.allCases
                 ForEach(emotionList.indices, id: \.self) { index in
@@ -89,7 +90,6 @@ extension SelectingEmotionView {
                     }
                 }
             }
-            dividerGray8A
         }
     }
     @ViewBuilder
@@ -106,6 +106,7 @@ extension SelectingEmotionView {
                             .foregroundColor(Color.gray23)
                         if isSelected {
                             Image(systemName: "xmark")
+                                .padding(.leading, 7)
                                 .foregroundColor(Color(hex: "747474"))
                         }
                     }

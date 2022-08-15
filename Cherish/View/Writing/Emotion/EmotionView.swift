@@ -74,6 +74,7 @@ extension EmotionView {
                                 .foregroundColor(Color.gray23)
                             if isSelected {
                                 Image(systemName: "xmark")
+                                    .padding(.leading, 7)
                                     .foregroundColor(Color(hex: "747474"))
                             }
                         }
@@ -102,6 +103,13 @@ extension EmotionView {
                     .font(.bodyRegular)
             }
             Spacer()
+            Text(Record.emotion.writingMainText)
+                .font(.bodySemibold)
+                .foregroundColor(Color.gray23)
+            Spacer()
+            Image(systemName: "chevron.left")
+                .foregroundColor(.clear)
+                .font(.bodyRegular)
         }
         .padding(.top, 25)
         .padding(.horizontal, 27)

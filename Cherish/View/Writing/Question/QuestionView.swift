@@ -83,6 +83,13 @@ extension QuestionView {
                     .padding(.top, 25)
             }
             Spacer()
+            Text(Record.question.writingMainText)
+                .font(.bodySemibold)
+                .foregroundColor(Color.gray23)
+            Spacer()
+            Image(systemName: "chevron.left")
+                .foregroundColor(.clear)
+                .font(.bodyRegular)
         }
         .padding(.horizontal, 27)
     }

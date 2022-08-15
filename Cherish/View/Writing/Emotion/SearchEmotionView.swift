@@ -20,9 +20,19 @@ struct SearchEmotionView: View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
             SearchBar()
-            ScrollView(showsIndicators : false) {
-                SearchEmtionGroups()
-                    .padding(.top, 36)
+            
+            if searchText == "" {
+                SearchingEmtionGroups()
+            } else {
+                SearchedEmtionGroups()
+            }
+        }
+        .onChange(of: searchText) { newValue in
+            if newValue == "" {
+                emotionViewModel.searchedEmotionList = emotionViewModel.userDefaultEmotionList
+            } else {
+                let detailAllEmotionList = EmotionData.allList
+                emotionViewModel.searchedEmotionList = detailAllEmotionList.filter { $0.contains(searchText) }
             }
         }
         .alert("감정을 한 개 이상 선택해주세요", isPresented: $isShowAlert) {
@@ -37,6 +47,7 @@ struct SearchEmotionView: View {
         .onAppear {
             emotionViewModel.searchedEmotionList = emotionViewModel.userDefaultEmotionList
         }
+        .animation(Animation.easeInOut(duration: 0.2), value: searchText)
         .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
     }
 }
@@ -49,15 +60,12 @@ extension SearchEmotionView {
                 Image(systemName: "magnifyingglass")
                     .font(.bodyRegular)
                     .foregroundColor(Color.gray23)
+                    .padding(.trailing, 7)
                 TextField("감정 검색", text: $searchText)
-                    .onChange(of: searchText) { newValue in
-                        if newValue == "" {
-                            emotionViewModel.searchedEmotionList = emotionViewModel.userDefaultEmotionList
-                        } else {
-                            let detailAllEmotionList = EmotionData.allList
-                            emotionViewModel.searchedEmotionList = detailAllEmotionList.filter { $0.contains(searchText) }
-                        }
+                    .onSubmit {
+                        emotionViewModel.addEmotionToDevice(emotion: searchText)
                     }
+                    .submitLabel(.done)
                     .font(.bodyRegularSmall)
                     .focused($isKeyboardOpen)
                     .foregroundColor(.gray23)
@@ -83,34 +91,86 @@ extension SearchEmotionView {
         .padding(.horizontal, 27)
     }
     @ViewBuilder
-    private func SearchEmtionGroups() -> some View {
-        ForEach(emotionViewModel.searchedEmotionList.indices, id: \.self) { index in
-            let emotion = emotionViewModel.searchedEmotionList[index]
-            VStack(alignment: .leading, spacing: 0) {
-                HStack(spacing: 0) {
-                    let isSelected = emotionViewModel.selectedEmotionList.contains(emotion)
+    private func SearchedEmtionGroups() -> some View {
+        ScrollView(showsIndicators : false) {
+            ForEach(emotionViewModel.searchedEmotionList.indices, id: \.self) { index in
+                let emotion = emotionViewModel.searchedEmotionList[index]
+                VStack(alignment: .leading, spacing: 0) {
                     HStack(spacing: 0) {
-                        Text(emotion)
-                            .frame(alignment: .leading)
-                            .font(.bodyRegular)
-                            .foregroundColor(Color.gray23)
-                        if isSelected {
-                            Image(systemName: "xmark")
-                                .foregroundColor(Color(hex: "747474"))
+                        let isSelected = emotionViewModel.selectedEmotionList.contains(emotion)
+                        HStack(spacing: 0) {
+                            Text(emotion)
+                                .frame(alignment: .leading)
+                                .font(.bodyRegular)
+                                .foregroundColor(Color.gray23)
+                            if isSelected {
+                                Image(systemName: "xmark")
+                                    .padding(.leading, 7)
+                                    .foregroundColor(Color(hex: "747474"))
+                            }
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(isSelected ? Color.grayE8 : .clear)
+                        .cornerRadius(15)
+                        .padding(.bottom, 24)
+                        .padding(.leading, 27)
+                        Spacer()
+                    }
+                    .background(.white)
+                    .onTapGesture {
+                        emotionViewModel.tabEmotion(emotion: emotion)
+                        emotionViewModel.addEmotionToDevice(emotion: searchText)
+                    }
+                }
+            }
+        }
+        .padding(.top, 36)
+    }
+    @ViewBuilder
+    private func SearchingEmtionGroups() -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 0) {
+                Text("최근 검색어")
+                    .font(.miniSemibold)
+                    .foregroundColor(.gray8A)
+                Spacer()
+                if !emotionViewModel.userDefaultEmotionList.isEmpty {
+                    Text("비우기")
+                        .font(.miniRegular)
+                        .foregroundColor(.gray8A)
+                        .onTapGesture {
+                            emotionViewModel.deleteEmotionsOnDevice()
+                        }
+                }
+            }
+            .padding(.horizontal, 27)
+            .padding(.top, 20)
+            ScrollView(showsIndicators : false) {
+                ForEach(emotionViewModel.userDefaultEmotionList.indices, id: \.self) { index in
+                    let emotion = emotionViewModel.userDefaultEmotionList[index]
+                    VStack(alignment: .leading, spacing: 0) {
+                        HStack(spacing: 0) {
+                            HStack(spacing: 0) {
+                                Text(emotion)
+                                    .frame(alignment: .leading)
+                                    .font(.bodyRegular)
+                                    .foregroundColor(Color.gray23)
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .cornerRadius(15)
+                            .padding(.bottom, 24)
+                            .padding(.leading, 27)
+                            Spacer()
+                        }
+                        .background(.white)
+                        .onTapGesture {
+                            searchText = emotion
                         }
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(isSelected ? Color.grayE8 : .clear)
-                    .cornerRadius(15)
-                    .padding(.bottom, 24)
-                    .padding(.leading, 27)
-                    Spacer()
                 }
-                .background(.white)
-                .onTapGesture {
-                    emotionViewModel.tabEmotion(emotion: emotion)
-                }
+                .padding(.top, 30)
             }
         }
     }
