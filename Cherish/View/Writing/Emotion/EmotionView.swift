@@ -17,19 +17,23 @@ struct EmotionView: View {
         GridItem(.flexible(), spacing: nil, alignment: .leading),
         GridItem(.flexible(), spacing: nil, alignment: .leading)
     ]
+    @GestureState private var dragOffset = CGSize.zero
     
     var body: some View {
-        ScrollView {
-            EmotionGroups()
-                .padding(.top, 30)
-            WritingView(context: $context)
-                .padding(.top, 25)
+        VStack(alignment: .leading, spacing: 0) {
+            NavigationBar()
+            ScrollView (showsIndicators : false) {
+                EmotionGroups()
+                    .padding(.top, 30)
+                WritingView(context: $context)
+                    .padding(.top, 25)
+            }
+            .padding(.horizontal, 27)
         }
-        .padding(.horizontal, 27)
-        .navigationBarTitle(Text(""), displayMode: .inline)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 SoundView()
+                    .font(.bodyRegular)
                 Spacer()
                 Button {
                     let emotionListString = emotionList.joined(separator: "    ")
@@ -38,12 +42,19 @@ struct EmotionView: View {
                     isModalShow = false
                 } label: {
                     Image(systemName: "checkmark")
+                        .foregroundColor(.gray23)
+                        .font(.bodyRegular)
                 }
             }
         }
         .textInputAutocapitalization(.never)
         .animation(Animation.easeInOut(duration: 0.2), value: emotionList)
         .tint(Color.gray23)
+        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
+            if (value.startLocation.x < 30 && value.translation.width > 100) {
+                dismiss()
+            }
+        })
     }
     private func tabEmotion(emotion: String) {
         if let index = emotionList.firstIndex(of: emotion) {
@@ -57,12 +68,12 @@ struct EmotionView: View {
 extension EmotionView {
     @ViewBuilder
     private func EmotionGroups() -> some View {
-        VStack {
+        VStack(spacing: 0) {
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(emotionList, id: \.self) { detailEmotion in
-                    HStack {
+                    HStack(spacing: 0) {
                         let isSelected = emotionList.contains(detailEmotion)
-                        HStack {
+                        HStack(spacing: 0) {
                             Text(detailEmotion)
                                 .frame(alignment: .leading)
                                 .font(.bodyRegular)
@@ -85,6 +96,21 @@ extension EmotionView {
                 }
             }
         }
+    }
+    @ViewBuilder
+    private func NavigationBar() -> some View {
+        HStack(alignment: .center, spacing: 0) {
+            Button(action: {
+                dismiss()
+            }) {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.gray23)
+                    .font(.bodyRegular)
+            }
+            Spacer()
+        }
+        .padding(.top, 25)
+        .padding(.horizontal, 27)
     }
 }
 

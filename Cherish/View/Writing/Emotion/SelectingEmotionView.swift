@@ -14,13 +14,16 @@ struct SelectingEmotionView: View {
     @State private var isShowAlert = false
     @State private var emotionType: EmotionCategory = EmotionCategory.allCases[0]
     @State private var isShowNextView = false
+    @State private var isShowAlertDelete = false
     @State var context = "내용"
+    @GestureState private var dragOffset = CGSize.zero
     
     @FocusState private var isKeyboardOpen: Bool
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
+                NavigationBar()
                 ScrollView(.horizontal, showsIndicators: false) {
                     SelectEmotionType()
                         .padding(.top, 50)
@@ -29,44 +32,33 @@ struct SelectingEmotionView: View {
                     EmotionList()
                 }
                 .padding(.top, 25)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(action: {
-                            dismiss()
-                        }) {
-                            Image(systemName: "xmark")
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack(spacing: 0) {
-                            NavigationLink {
-                                SearchEmotionView(isModalShow: $isModalShow, selectedEmotion: $selectedEmotion, context: $context)
-                                
-                            } label: {
-                                Image(systemName: "magnifyingglass")
-                                    .padding(.trailing, 18)
-                            }
-                            Image(systemName: "checkmark")
-                                .onTapGesture {
-                                    if selectedEmotion == [] || selectedEmotion.count >= 6 {
-                                        isShowAlert = true
-                                    } else {
-                                        isShowNextView = true
-                                    }
-                                }
-                            NavigationLink("", isActive: $isShowNextView) {          EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow, context: $context)
-                            }
-                        }
-                    }
-                }
             }
-            .navigationBarTitle(Record.emotion.writingMainText, displayMode: .inline)
+        }
+        .alert(isPresented: $isShowAlert) {
+            Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                dismiss()
+            }), secondaryButton: .cancel(Text("취소")))
         }
         .alert(selectedEmotion == [] ? "감정을 한 개 이상 선택해주세요" : "6개 이하로 선택해주세요", isPresented: $isShowAlert) {
             Button("OK", role: .cancel) { }
         }
         .accentColor(Color.gray23)
         .tint(Color.gray23)
+        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
+            if (value.translation.height > 100) {
+                #warning("수정해야 함..")
+//                if selectedEmotion.isEmpty {
+                    dismiss()
+//                } else {
+//                    isShowAlertDelete = true
+//                }
+            }
+        })
+        .alert(isPresented: $isShowAlertDelete) {
+            Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                dismiss()
+            }), secondaryButton: .cancel(Text("취소")))
+        }
         .animation(Animation.easeInOut(duration: 0.4), value: emotionType)
         .animation(Animation.easeInOut(duration: 0.2), value: selectedEmotion)
     }
@@ -84,7 +76,7 @@ extension SelectingEmotionView {
     @ViewBuilder
     private func SelectEmotionType() -> some View {
         ZStack(alignment: .bottom){
-            HStack(alignment: .top){
+            HStack(alignment: .top, spacing: 0) {
                 let emotionList = EmotionCategory.allCases
                 ForEach(emotionList.indices, id: \.self) { index in
                     let emotion = emotionList[index]
@@ -116,9 +108,9 @@ extension SelectingEmotionView {
         if let emotionList = EmotionData.list[emotionType] {
             ForEach(emotionList.indices, id : \.self){ index in
                 let detailEmotion = emotionList[index]
-                HStack {
+                HStack(spacing: 0) {
                     let isSelected = selectedEmotion.contains(detailEmotion)
-                    HStack {
+                    HStack(spacing: 0) {
                         Text(detailEmotion)
                             .frame(alignment: .leading)
                             .font(.bodyRegular)
@@ -142,6 +134,53 @@ extension SelectingEmotionView {
                 }
             }
         }
+    }
+    @ViewBuilder
+    private func NavigationBar() -> some View {
+        HStack(alignment: .center, spacing: 0) {
+            Button(action: {
+                if selectedEmotion.isEmpty {
+                    dismiss()
+                } else {
+                    isShowAlertDelete = true
+                }
+            }) {
+                Image(systemName: "xmark")
+                    .font(.bodyRegular)
+            }
+            Image(systemName: "xmark")
+                .font(.bodyRegular)
+                .foregroundColor(.clear)
+                .padding(.trailing, 18)
+            Spacer()
+            Text(Record.emotion.writingMainText)
+                .font(.bodySemibold)
+            Spacer()
+            HStack(spacing: 0) {
+                NavigationLink {
+                    SearchEmotionView(isModalShow: $isModalShow, selectedEmotion: $selectedEmotion, context: $context)
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                        .font(.bodyRegular)
+                        .padding(.trailing, 18)
+                }
+                Image(systemName: "checkmark")
+                    .font(.bodyRegular)
+                    .onTapGesture {
+                        if selectedEmotion == [] || selectedEmotion.count >= 6 {
+                            isShowAlert = true
+                        } else {
+                            isShowNextView = true
+                        }
+                    }
+                NavigationLink("", isActive: $isShowNextView) {
+                    EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow, context: $context)
+                }
+            }
+        }
+        .foregroundColor(Color.gray23)
+        .padding(.top, 25)
+        .padding(.horizontal, 27)
     }
 }
 

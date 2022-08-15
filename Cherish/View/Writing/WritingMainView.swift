@@ -67,6 +67,7 @@ extension WritingMainView {
             Spacer()
             if showCards {
                 SoundView()
+                    .font(.titleSemibold)
             }
         }
         .padding(.horizontal, 27)
@@ -101,7 +102,7 @@ extension WritingMainView {
     @ViewBuilder
     private func WritingBoxes() -> some View {
         ScrollView(.horizontal, showsIndicators : false){
-            HStack{
+            HStack(spacing: 0) {
                 let records = Record.allCases
                 let width = UIScreen.main.bounds.width/1.5
                 ForEach(records.indices, id: \.self){ index in

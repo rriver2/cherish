@@ -18,17 +18,5 @@ extension Font {
     static let titleSemibold = Font.title2.weight(.bold)
     static let timelineDate = Font.caption2.weight(.regular)
     static let miniSemibold = Font.footnote.weight(.bold)
-    
-//    bigTitle
-//    body_regular_default
-//    title1_bold
-//    callout_regular
-//    headline_regular_xmark
-//    headline_semibold
-//    caption2_regular
-//    body_semibold
-//    caption2_semibold
-//    body_min2lines
-//    body_regular_smaller
 }
 

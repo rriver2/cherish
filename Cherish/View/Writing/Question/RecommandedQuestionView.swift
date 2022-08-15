@@ -12,10 +12,12 @@ struct RecommandedQuestionView: View {
     @State private var questionType: Question = .life
     @Binding var isModalShow: Bool
     let randomQuestion = QuestionData.randomQuestion(amount: 3)
+    @GestureState private var dragOffset = CGSize.zero
     
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
+                NavigationBar()
                 dividerThickGrayE8
                     .padding(.top, 40)
                 ForEach(randomQuestion, id: \.self) { question in
@@ -46,20 +48,40 @@ struct RecommandedQuestionView: View {
                 }
                 Spacer()
             }
-            .navigationBarTitle("오늘의 추천 질문", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                    }
-                }
-            }
         }
         .accentColor(Color.gray23)
         .tint(Color.gray23)
+        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
+            if (value.translation.height > 100) {
+                dismiss()
+            }
+        })
         .animation(Animation.easeInOut(duration: 0.4), value: questionType)
+    }
+}
+
+extension RecommandedQuestionView {
+    @ViewBuilder
+    private func NavigationBar() -> some View {
+        HStack(alignment: .center, spacing: 0) {
+            Button(action: {
+                dismiss()
+            }) {
+                Image(systemName: "xmark")
+                    .foregroundColor(.gray23)
+                    .font(.bodyRegular)
+            }
+            Spacer()
+            Text("오늘의 추천 질문")
+                .font(.bodySemibold)
+                .foregroundColor(Color.gray23)
+            Spacer()
+            Image(systemName: "xmark")
+                .font(.bodyRegular)
+                .foregroundColor(.clear)
+        }
+        .padding(.top, 25)
+        .padding(.horizontal, 27)
     }
 }
 
