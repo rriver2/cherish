@@ -14,6 +14,7 @@ struct SelectingEmotionView: View {
     @State private var isShowAlert = false
     @State private var emotionType: EmotionCategory = .angry
     @State private var isShowNextView = false
+    @State var context = "내용"
     
     @FocusState private var isKeyboardOpen: Bool
     
@@ -39,7 +40,7 @@ struct SelectingEmotionView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack(spacing: 0) {
                             NavigationLink {
-                                SearchEmotionView(isModalShow: $isModalShow, selectedEmotion: $selectedEmotion)
+                                SearchEmotionView(isModalShow: $isModalShow, selectedEmotion: $selectedEmotion, context: $context)
                             } label: {
                                 Image(systemName: "magnifyingglass")
                                     .padding(.trailing, 15)
@@ -53,7 +54,7 @@ struct SelectingEmotionView: View {
                                     }
                                 }
                             NavigationLink("", isActive: $isShowNextView) {
-                                EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow)
+                                EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow, context: $context)
                             }
                         }
                     }
@@ -65,8 +66,8 @@ struct SelectingEmotionView: View {
         .alert(selectedEmotion == [] ? "감정을 한 개 이상 선택해주세요" : "6개 이하로 선택해주세요", isPresented: $isShowAlert) {
             Button("OK", role: .cancel) { }
         }
-        .accentColor(.defaultText)
-        .tint(.defaultText)
+        .accentColor(Color.gray23)
+        .tint(Color.gray23)
         .animation(Animation.easeInOut(duration: 0.4), value: emotionType)
         .animation(Animation.easeInOut(duration: 0.2), value: selectedEmotion)
     }
@@ -98,18 +99,14 @@ extension SelectingEmotionView {
                             VStack{
                                 Text(emotion.string)
                                     .fontWeight(.bold)
-                                Rectangle()
-                                    .frame(height: 2.5)
-                                    .foregroundColor(Color.darkGreen)
+                                dividerThickGray8A
                             }
                             .frame(width: UIScreen.main.bounds.width / 4 - 20)
                         }
                     }
                 }
             }
-            Rectangle()
-                .frame(height: 1)
-                .foregroundColor(Color.lightGreen)
+            dividerGray8A
         }
     }
     @ViewBuilder
@@ -125,12 +122,12 @@ extension SelectingEmotionView {
                             .font(.mainText)
                         if isSelected {
                             Image(systemName: "xmark")
-                                .foregroundColor(Color(hex: "71766E"))
+                                .foregroundColor(Color(hex: "747474"))
                         }
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 4)
-                    .background(isSelected ? Color(hex: "E3ECDC") : .clear)
+                    .background(isSelected ? Color.grayE8 : .clear)
                     .cornerRadius(15)
                     .padding(.bottom, 25)
                     .padding(.leading, 20)

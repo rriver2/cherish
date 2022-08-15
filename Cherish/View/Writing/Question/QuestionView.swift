@@ -40,6 +40,7 @@ struct QuestionView: View {
             }
         }
         .textInputAutocapitalization(.never)
+        .tint(Color.gray23)
     }
 }
 

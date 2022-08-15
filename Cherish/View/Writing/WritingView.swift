@@ -15,13 +15,13 @@ struct WritingView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text(date)
                     .font(.miniText)
-                    .foregroundColor(.dateText)
+                    .foregroundColor(Color.gray8A)
                     .padding(.leading, 10)
                 TextEditor(text: $context)
                     .padding(.vertical, 20)
                     .padding(.horizontal, 15)
-                    .colorMultiply(Color.backgroundGreen)
-                    .foregroundColor(self.context == "내용" ? .gray : .defaultText)
+                    .colorMultiply(Color.grayF5)
+                    .foregroundColor(self.context == "내용" ? .gray : Color.gray23)
                     .onTapGesture {
                         if self.context == "내용"{
                             self.context = ""
@@ -29,7 +29,7 @@ struct WritingView: View {
                     }
                     .lineSpacing(10)
                     .frame(height:500)
-                    .background(Color.backgroundGreen)
+                    .background(Color.grayF5)
                     .cornerRadius(10)
                     .font(.mainText)
             }

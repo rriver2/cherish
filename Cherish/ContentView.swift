@@ -23,7 +23,7 @@ struct ContentView: View {
                     Text("timeline")
                 }.tag(1)
         }
-        .accentColor(.black)
+        .accentColor(Color.gray23)
         .environmentObject(TimeLineViewModel())
         .environmentObject(SoundViewModel())
     }

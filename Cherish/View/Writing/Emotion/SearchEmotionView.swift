@@ -14,6 +14,7 @@ struct SearchEmotionView: View {
     @State private var searchText = ""
     @State private var searchedEmotion: [String] = []
     @State private var isShowAlert = false
+    @Binding var context: String
     
     @FocusState private var isKeyboardOpen: Bool
     
@@ -36,7 +37,7 @@ struct SearchEmotionView: View {
                         }
                 } else {
                     NavigationLink {
-                        EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow)
+                        EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow, context: $context)
                     } label: {
                         Image(systemName: "checkmark")
                     }
@@ -46,8 +47,7 @@ struct SearchEmotionView: View {
         .alert("감정을 한 개 이상 선택해주세요", isPresented: $isShowAlert) {
             Button("OK", role: .cancel) { }
         }
-        .accentColor(.defaultText)
-        .tint(.defaultText)
+        .tint(Color.gray23)
         .animation(Animation.easeInOut(duration: 0.2), value: selectedEmotion)
     }
     
@@ -66,6 +66,7 @@ extension SearchEmotionView {
         VStack(spacing: 0) {
             HStack {
                 Image(systemName: "magnifyingglass")
+                    .foregroundColor(Color.gray23)
                 TextField("감정 검색", text: $searchText)
                     .onChange(of: searchText) { newValue in
                         let detailAllEmotionList = EmotionData.allList
@@ -79,14 +80,14 @@ extension SearchEmotionView {
                         isKeyboardOpen = false
                     }) {
                         Image(systemName: "multiply.circle.fill")
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color.gray23.opacity(0.5))
                             .padding(.trailing, 8)
-                            .background(Color(hex: "F5F5F5"))
+                            .background(Color.grayF5)
                     }
                 }
             }
             .padding(10)
-            .background(Color(hex: "F5F5F5"))
+            .background(Color.grayF5)
             .cornerRadius(5)
             .padding(.bottom, 25)
             .padding(.top, 10)
@@ -105,12 +106,12 @@ extension SearchEmotionView {
                             .font(.mainText)
                         if isSelected {
                             Image(systemName: "xmark")
-                                .foregroundColor(Color(hex: "71766E"))
+                                .foregroundColor(Color(hex: "747474"))
                         }
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 4)
-                    .background(isSelected ? Color(hex: "E3ECDC") : .clear)
+                    .background(isSelected ? Color.grayE8 : .clear)
                     .cornerRadius(15)
                     .padding(.bottom, 25)
                     .padding(.leading, 20)
@@ -127,6 +128,6 @@ extension SearchEmotionView {
 
 struct SearchEmotionView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchEmotionView(isModalShow: .constant(false), selectedEmotion: .constant([]))
+        SearchEmotionView(isModalShow: .constant(false), selectedEmotion: .constant([]), context: .constant("내용"))
     }
 }

@@ -9,16 +9,25 @@ import SwiftUI
 
 struct TitleView: View {
     let title: String
+    let isShowSoundView: Bool
+    
+    init(title: String, isShowSoundView: Bool = true) {
+        self.title = title
+        self.isShowSoundView = isShowSoundView
+    }
+    
     var body: some View {
         HStack(spacing: 0) {
             Text(title)
             Spacer()
-            SoundView()
+            if isShowSoundView {
+                SoundView()
+            }
         }
+        .foregroundColor(Color.gray23)
         .font(.bigTitle)
         .padding(.bottom, 30)
         .padding(.top, 20)
-        .tint(.defaultText)
     }
 }
 

@@ -9,12 +9,16 @@ import SwiftUI
 
 extension Color {
     // Main
-    static let darkGreen = Color("darkGreen")
-    static let lightGreen = Color("lightGreen")
-    static let backgroundGreen = Color("backgroundGreen")
-    // Text
-    static let dateText = Color("dateText")
-    static let defaultText = Color("defaultText")
+    static let cardPurple = Color("cardPurple")
+    static let cardGreen = Color("cardGreen")
+    static let cardBlue = Color("cardBlue")
+    // Gray
+    static let grayF5 = Color("grayF5")
+    static let grayEE = Color("grayEE")
+    static let grayE8 = Color("grayE8")
+    static let grayA7 = Color("grayA7")
+    static let gray23 = Color("gray23")
+    static let gray8A = Color("gray8A")
 }
 
 extension Color {

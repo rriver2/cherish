@@ -30,11 +30,11 @@ enum Record: String, CaseIterable {
     var color: Color {
         switch self {
             case .free:
-                return Color(hex: "A2C691") ?? .clear
+                return Color.cardGreen
             case .emotion:
-                return Color(hex: "ADD3E4") ?? .clear
+                return Color.cardBlue
             case .question:
-                return Color(hex: "CEC8ED") ?? .clear
+                return Color.cardPurple
         }
     }
     
