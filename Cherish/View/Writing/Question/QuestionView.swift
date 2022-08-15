@@ -15,8 +15,9 @@ struct QuestionView: View {
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        ScrollView {
             Text(title)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.miniTitle)
                 .padding(.bottom, 10)
                 .padding(.top, 20)

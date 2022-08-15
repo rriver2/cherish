@@ -18,11 +18,9 @@
 		CC95F30B2899F657008C3EEF /* FreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30A2899F657008C3EEF /* FreeView.swift */; };
 		CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30C2899F65F008C3EEF /* QuestionView.swift */; };
 		CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30E2899F667008C3EEF /* EmotionView.swift */; };
-		CC95F3112899F66E008C3EEF /* InspirationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3102899F66E008C3EEF /* InspirationView.swift */; };
 		CC95F3172899F6C8008C3EEF /* SelectQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3162899F6C8008C3EEF /* SelectQuestionView.swift */; };
 		CC95F3192899F734008C3EEF /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3182899F734008C3EEF /* WritingView.swift */; };
 		CC95F31B2899F743008C3EEF /* SelectingEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F31A2899F743008C3EEF /* SelectingEmotionView.swift */; };
-		CC95F31D2899F758008C3EEF /* SelectingInspirationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F31C2899F758008C3EEF /* SelectingInspirationView.swift */; };
 		CC95F3212899F7F8008C3EEF /* Recode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3202899F7F8008C3EEF /* Recode.swift */; };
 		CC95F3232899F8FD008C3EEF /* Recordable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3222899F8FD008C3EEF /* Recordable.swift */; };
 		CC95F3262899FA3E008C3EEF /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3252899FA3E008C3EEF /* Color.swift */; };
@@ -38,6 +36,7 @@
 		CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */; };
 		CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */; };
 		CCF3931D28A7FDF2008F506C /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3931C28A7FDF2008F506C /* UserDefaultKey.swift */; };
+		CCF3931F28A881F0008F506C /* SearchEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3931E28A881F0008F506C /* SearchEmotionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,11 +52,9 @@
 		CC95F30A2899F657008C3EEF /* FreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeView.swift; sourceTree = "<group>"; };
 		CC95F30C2899F65F008C3EEF /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		CC95F30E2899F667008C3EEF /* EmotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionView.swift; sourceTree = "<group>"; };
-		CC95F3102899F66E008C3EEF /* InspirationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationView.swift; sourceTree = "<group>"; };
 		CC95F3162899F6C8008C3EEF /* SelectQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectQuestionView.swift; sourceTree = "<group>"; };
 		CC95F3182899F734008C3EEF /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		CC95F31A2899F743008C3EEF /* SelectingEmotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingEmotionView.swift; sourceTree = "<group>"; };
-		CC95F31C2899F758008C3EEF /* SelectingInspirationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingInspirationView.swift; sourceTree = "<group>"; };
 		CC95F3202899F7F8008C3EEF /* Recode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recode.swift; sourceTree = "<group>"; };
 		CC95F3222899F8FD008C3EEF /* Recordable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recordable.swift; sourceTree = "<group>"; };
 		CC95F3252899FA3E008C3EEF /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -73,6 +70,7 @@
 		CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimelineContainer.xcdatamodel; sourceTree = "<group>"; };
 		CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
 		CCF3931C28A7FDF2008F506C /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
+		CCF3931E28A881F0008F506C /* SearchEmotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEmotionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +133,6 @@
 				CC95F3122899F681008C3EEF /* Free */,
 				CC95F3132899F68A008C3EEF /* Question */,
 				CC95F3142899F690008C3EEF /* Emotion */,
-				CC95F3152899F693008C3EEF /* Inspiration */,
 			);
 			path = Writing;
 			sourceTree = "<group>";
@@ -179,18 +176,10 @@
 			isa = PBXGroup;
 			children = (
 				CC95F31A2899F743008C3EEF /* SelectingEmotionView.swift */,
+				CCF3931E28A881F0008F506C /* SearchEmotionView.swift */,
 				CC95F30E2899F667008C3EEF /* EmotionView.swift */,
 			);
 			path = Emotion;
-			sourceTree = "<group>";
-		};
-		CC95F3152899F693008C3EEF /* Inspiration */ = {
-			isa = PBXGroup;
-			children = (
-				CC95F31C2899F758008C3EEF /* SelectingInspirationView.swift */,
-				CC95F3102899F66E008C3EEF /* InspirationView.swift */,
-			);
-			path = Inspiration;
 			sourceTree = "<group>";
 		};
 		CC95F31F2899F7D6008C3EEF /* Model */ = {
@@ -319,14 +308,12 @@
 				CCD0F41D28A52319003774F0 /* TitleView.swift in Sources */,
 				CC95F3212899F7F8008C3EEF /* Recode.swift in Sources */,
 				CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */,
-				CC95F31D2899F758008C3EEF /* SelectingInspirationView.swift in Sources */,
 				CC95F3172899F6C8008C3EEF /* SelectQuestionView.swift in Sources */,
 				CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */,
 				CC95F3262899FA3E008C3EEF /* Color.swift in Sources */,
 				CC95F335289A8A1E008C3EEF /* Question.swift in Sources */,
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
 				CCF3931D28A7FDF2008F506C /* UserDefaultKey.swift in Sources */,
-				CC95F3112899F66E008C3EEF /* InspirationView.swift in Sources */,
 				CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */,
 				CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */,
 				CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */,
@@ -338,6 +325,7 @@
 				CC95F32E289A78B3008C3EEF /* TimelineView.swift in Sources */,
 				CC95F31B2899F743008C3EEF /* SelectingEmotionView.swift in Sources */,
 				CC95F32C289A77F9008C3EEF /* ContentView.swift in Sources */,
+				CCF3931F28A881F0008F506C /* SearchEmotionView.swift in Sources */,
 				CC95F30B2899F657008C3EEF /* FreeView.swift in Sources */,
 				CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */,
 				CC95F3232899F8FD008C3EEF /* Recordable.swift in Sources */,
