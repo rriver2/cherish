@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum Record: String, CaseIterable {
     case free = "자유형식"
@@ -26,14 +27,25 @@ enum Record: String, CaseIterable {
         }
     }
     
+    var color: Color {
+        switch self {
+            case .free:
+                return Color(hex: "A2C691") ?? .clear
+            case .emotion:
+                return Color(hex: "ADD3E4") ?? .clear
+            case .question:
+                return Color(hex: "CEC8ED") ?? .clear
+        }
+    }
+    
     var imageName: String {
         switch self {
             case .free:
-                return "Ocean"
+                return "Free"
             case .question:
-                return "Village"
+                return "Question"
             case .emotion:
-                return "River"
+                return "Emotion"
 //            case .inspiration:
 //                return "Sky"
         }

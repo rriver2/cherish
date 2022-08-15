@@ -14,12 +14,12 @@ struct FreeView: View {
     @State private var context = "내용"
     
     init() {
-        UIToolbar.appearance().barTintColor = UIColor.systemGray5 
+        UIToolbar.appearance().barTintColor = UIColor.systemGray5
     }
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
+            ScrollView {
                 TextField("제목", text: $title)
                     .font(.miniTitle)
                     .padding(.bottom, 10)
@@ -45,6 +45,16 @@ struct FreeView: View {
                 ToolbarItemGroup(placement: .keyboard) {
                     SoundView()
                     Spacer()
+                    
+                    #warning("삭제하기")
+                    Button {
+                        timeLineViewModel.removeAll()
+                        dismiss()
+                        
+                    } label: {
+                        Text("삭제")
+                    }
+                    
                     Button {
                         timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)
                         dismiss()

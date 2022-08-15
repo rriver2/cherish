@@ -20,11 +20,6 @@ struct WritingMainView: View {
     
     @State private var oneSentence: String
     
-    private let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 16, alignment: nil),
-        GridItem(.flexible(), spacing: 16, alignment: nil)
-    ]
-    
     init() {
         let key = UserDefaultKey.oneSentence.string
         if let oneSentence = UserDefaults.standard.object(forKey: key) as? String {
@@ -37,10 +32,10 @@ struct WritingMainView: View {
     var body: some View {
         NavigationView {
             ZStack{
-                Image("PaperBackground")
-                    .resizable()
-                    .ignoresSafeArea(.all, edges: [.bottom,.top])
-                    .opacity(0.4)
+//                Image("PaperBackground")
+//                    .resizable()
+//                    .ignoresSafeArea(.all, edges: [.bottom,.top])
+//                    .opacity(0.4)
                 VStack(spacing: 0) {
                     VStack(spacing: 0) {
                         TitleView(title: "ㅇㅏㄲㅣㄷㅏ")
@@ -101,9 +96,9 @@ extension WritingMainView {
     @ViewBuilder
     private func OneSentence() -> some View {
         TextField("나의 한마디", text: $oneSentence)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity)
             .padding(25)
-            .background(.white)
+            .background(Color.backgroundGreen)
             .cornerRadius(10)
             .padding(.bottom, 20)
             .onChange(of: oneSentence) { newValue in
@@ -127,23 +122,18 @@ extension WritingMainView {
                 ForEach(records.indices, id: \.self){ index in
                     let record = records[index]
                     GeometryReader { geomitry in
-                        ZStack  {
+                        ZStack(alignment: .center) {
                             Image(record.imageName)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: width, height: width*1.5)
-                            VStack(alignment: .leading, spacing: 0) {
-                                HStack(spacing: 0) {
-                                    Text("\(record.writingMainText)")
-                                        .font(.bigTitle)
-                                        .padding(.horizontal, 10)
-                                        .background(.white.opacity(0.5))
-                                    Spacer()
-                                }
-                                .padding(.top, 20)
-                                Spacer()
-                            }
-                            .padding(.leading, 20)
+                            Text("\(record.writingMainText)")
+                                .font(.bigTitle)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 10)
+                                .background(.white.opacity(0.7))
+                                .cornerRadius(10)
+                                .padding(.horizontal, 25)
                         }
                         .frame(width: width, height: width*1.5)
                         .cornerRadius(10)

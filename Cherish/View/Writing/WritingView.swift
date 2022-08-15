@@ -12,7 +12,6 @@ struct WritingView: View {
     let date = Date().dateToString_MDY()
     
     var body: some View {
-        ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 Text(date)
                     .font(.miniText)
@@ -34,7 +33,6 @@ struct WritingView: View {
                     .cornerRadius(10)
                     .font(.mainText)
             }
-        }
     }
 }
 

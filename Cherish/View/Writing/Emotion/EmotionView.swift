@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct EmotionView: View {
-    let emotionList: [String]
+    @Binding var emotionList: [String]
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
     @State var context = "내용"
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
+    private let columns = [
+        GridItem(.flexible(), spacing: nil, alignment: .leading),
+        GridItem(.flexible(), spacing: nil, alignment: .leading)
+   ]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        ScrollView {
             EmotionGroups()
             WritingView(context: $context)
         }
@@ -36,37 +40,55 @@ struct EmotionView: View {
             }
         }
         .textInputAutocapitalization(.never)
+        .animation(Animation.easeInOut(duration: 0.2), value: emotionList)
+    }
+    private func tabEmotion(emotion: String) {
+        if let index = emotionList.firstIndex(of: emotion) {
+            emotionList.remove(at: index)
+        } else {
+            emotionList.append(emotion)
+        }
     }
 }
 
 extension EmotionView {
     @ViewBuilder
     private func EmotionGroups() -> some View {
-        ScrollView(.horizontal, showsIndicators: false){
-            HStack {
-                ForEach(emotionList, id: \.self) { emotion in
-                    if emotion == emotionList.last {
-                        Text(emotion)
-                            .padding(.vertical, 10)
-                            .font(.mainText)
-                    } else {
-                        Text("\(emotion), ")
-                            .padding(.vertical, 10)
-                            .font(.mainText)
+//        ScrollView(.horizontal, showsIndicators: false) {
+            VStack {
+                    LazyVGrid(columns: columns, spacing: 14) {
+                ForEach(emotionList, id: \.self) { detailEmotion in
+                        HStack {
+                            let isSelected = emotionList.contains(detailEmotion)
+                            HStack {
+                                Text(detailEmotion)
+                                    .frame(alignment: .leading)
+                                    .font(.mainText)
+                                if isSelected {
+                                    Image(systemName: "xmark")
+                                        .foregroundColor(Color(hex: "71766E"))
+                                }
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 4)
+                            .background(isSelected ? Color(hex: "E3ECDC") : .clear)
+                            .cornerRadius(15)
+                            Spacer()
+                        }
+                        .background(.white)
+                        .onTapGesture {
+                            tabEmotion(emotion: detailEmotion)
+                        }
                     }
+                    }
+                    .padding(.bottom, 25)
                 }
-            }
-            .padding(.horizontal, 20)
-            .frame(maxHeight: 50)
-        }
-        .padding(.top, 10)
-        .padding(.bottom, 20)
     }
 }
 
 struct EmotionView_Previews: PreviewProvider {
     static var previews: some View {
-        EmotionView(emotionList: ["재미있다", "상쾌하다", "신나다", "활기가 넘치다", "희망을 느끼다", "기대되다", "흥미롭다", "생기가 돌다", "다정하다", "반갑다", "끌리다", "짜릿하다", "개운하다", "좋아하다", "자신있다"], isModalShow: .constant(false))
+        EmotionView(emotionList: .constant(["재미있다", "상쾌하다", "신나다", "활기가 넘치다", "희망을 느끼다", "기대되다"]), isModalShow: .constant(false))
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
     }

@@ -10,30 +10,24 @@ import SwiftUI
 struct SelectingEmotionView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
-    @State private var selectedEmotion: [String] = []
-    @State private var searchText = ""
-    @State private var searchedEmotion: [String] = []
+    @State var selectedEmotion: [String] = []
     @State private var isShowAlert = false
-    @EnvironmentObject var timeLineViewModel: TimeLineViewModel
+    @State private var emotionType: EmotionCategory = .angry
+    @State private var isShowNextView = false
     
     @FocusState private var isKeyboardOpen: Bool
-    private let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 16, alignment: nil),
-        GridItem(.flexible(), spacing: 16, alignment: nil)
-    ]
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
-                SearchBar()
-                ScrollView {
-                    if searchText == "" {
-                        EmotionGroups()
-                    } else {
-                        SearchEmtionGroups()
-                    }
+                ScrollView(.horizontal, showsIndicators: false) {
+                    SelectEmotionType()
+                        .padding(.top, 20)
                 }
-                .navigationBarTitle(Record.emotion.writingMainText, displayMode: .inline)
+                ScrollView(showsIndicators: false){
+                    EmotionList()
+                }
+                .padding(.top, 25)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: {
@@ -43,32 +37,41 @@ struct SelectingEmotionView: View {
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        if selectedEmotion == [] {
+                        HStack(spacing: 0) {
+                            NavigationLink {
+                                SearchEmotionView(isModalShow: $isModalShow, selectedEmotion: $selectedEmotion)
+                            } label: {
+                                Image(systemName: "magnifyingglass")
+                                    .padding(.trailing, 15)
+                            }
                             Image(systemName: "checkmark")
                                 .onTapGesture {
-                                    isShowAlert = true
+                                    if selectedEmotion == [] || selectedEmotion.count >= 6 {
+                                        isShowAlert = true
+                                    } else {
+                                        isShowNextView = true
+                                    }
                                 }
-                        } else {
-                            NavigationLink {
-                                
-                                EmotionView(emotionList: selectedEmotion, isModalShow: $isModalShow)
-                            } label: {
-                                Image(systemName: "checkmark")
+                            NavigationLink("", isActive: $isShowNextView) {
+                                EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow)
                             }
                         }
                     }
                 }
             }
+            .navigationBarTitle(Record.emotion.writingMainText, displayMode: .inline)
             .padding(.horizontal, 20)
         }
-        .alert("감정을 한 개 이상 선택해주세요", isPresented: $isShowAlert) {
+        .alert(selectedEmotion == [] ? "감정을 한 개 이상 선택해주세요" : "6개 이하로 선택해주세요", isPresented: $isShowAlert) {
             Button("OK", role: .cancel) { }
         }
         .accentColor(.defaultText)
         .tint(.defaultText)
+        .animation(Animation.easeInOut(duration: 0.4), value: emotionType)
+        .animation(Animation.easeInOut(duration: 0.2), value: selectedEmotion)
     }
     
-    func tabEmotion(emotion: String) {
+    private func tabEmotion(emotion: String) {
         if let index = selectedEmotion.firstIndex(of: emotion) {
             selectedEmotion.remove(at: index)
         } else {
@@ -79,91 +82,63 @@ struct SelectingEmotionView: View {
 
 extension SelectingEmotionView {
     @ViewBuilder
-    private func SearchBar() -> some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-            TextField("감정 검색", text: $searchText)
-                .onChange(of: searchText) { newValue in
-                    let detailAllEmotionList = EmotionData.allList
-                    searchedEmotion = detailAllEmotionList.filter {$0.contains(searchText)}
-                    print(searchText, "searchText")
-                }
-                .focused($isKeyboardOpen)
-            if searchText != "" {
-                Button(action: {
-                    searchText = ""
-                    isKeyboardOpen = false
-                }) {
-                    Image(systemName: "multiply.circle.fill")
-                        .foregroundColor(.gray)
-                        .padding(.trailing, 8)
-                        .background(Color(hex: "F5F5F5"))
-                }
-            }
-        }
-        .padding(10)
-        .background(Color(hex: "F5F5F5"))
-        .cornerRadius(5)
-        .padding(.vertical, 25)
-    }
-    @ViewBuilder
-    private func EmotionGroups() -> some View {
-        let emotionList = EmotionCategory.allCases
-        ForEach(emotionList.indices, id: \.self) { index in
-            let emotion = emotionList[index]
-            VStack(alignment: .leading, spacing: 0) {
-                Text(emotion.string)
-                    .font(.semiText)
-                    .padding(.horizontal, 18)
-                    .padding(.vertical, 8)
-                    // TODO: 이후 색 Color enum 처리 다시 해야 함
-                    .background(Color(hex: "E3ECDC"))
-                    .cornerRadius(15)
-                    .padding(.vertical, 20)
-                LazyVGrid(columns: columns, spacing: 0) {
-                    if let emotionString = EmotionData.list[emotion] {
-                        let detailEmotionList = emotionString
-                        ForEach(detailEmotionList.indices, id: \.self) { index in
-                            let detailEmotion = detailEmotionList[index]
-                            HStack {
-                                let isSelected = selectedEmotion.contains(detailEmotion)
-                                Text(detailEmotion)
-                                    .font(isSelected ? .semiText : .mainText)
-                                    .padding(.horizontal, 3)
-                                    .background(isSelected ? emotion.color.opacity(0.4) : .white)
-                                    .padding(.bottom, 15)
-                                    .padding(.leading, 20)
-                                    .onTapGesture {
-                                        tabEmotion(emotion: detailEmotion)
-                                    }
-                                Spacer()
+    private func SelectEmotionType() -> some View {
+        ZStack(alignment: .bottom){
+            HStack(alignment: .top){
+                let emotionList = EmotionCategory.allCases
+                ForEach(emotionList.indices, id: \.self) { index in
+                    let emotion = emotionList[index]
+                    Button(action: {
+                        emotionType = emotion
+                    }) {
+                        if(emotionType != emotion){
+                            Text(emotion.string)
+                                .frame(width: UIScreen.main.bounds.width / 4 - 20)
+                        } else {
+                            VStack{
+                                Text(emotion.string)
+                                    .fontWeight(.bold)
+                                Rectangle()
+                                    .frame(height: 2.5)
+                                    .foregroundColor(Color.darkGreen)
                             }
+                            .frame(width: UIScreen.main.bounds.width / 4 - 20)
                         }
                     }
                 }
             }
+            Rectangle()
+                .frame(height: 1)
+                .foregroundColor(Color.lightGreen)
         }
     }
     @ViewBuilder
-    private func SearchEmtionGroups() -> some View {
-        LazyVGrid(columns: columns, spacing: 0) {
-            ForEach(searchedEmotion.indices, id: \.self) { index in
-                let emotion = searchedEmotion[index]
+    private func EmotionList() -> some View {
+        if let emotionList = EmotionData.list[emotionType] {
+            ForEach(emotionList.indices, id : \.self){ index in
+                let detailEmotion = emotionList[index]
                 HStack {
-                    let isSelected = selectedEmotion.contains(emotion)
-                    let emotionCatagory = EmotionData.findEmotionCategory(emotion: emotion)
-                    Text(emotion)
-                        .font(isSelected ? .semiText : .mainText)
-                        .padding(.horizontal, 4)
-                        .background(isSelected ? emotionCatagory.color.opacity(0.4) : .white)
-                        .padding(.horizontal, 3)
-                        .padding(.bottom, 15)
-                        .padding(.leading, 20)
-                        .onTapGesture {
-                            print(emotion)
-                            tabEmotion(emotion: emotion)
+                    let isSelected = selectedEmotion.contains(detailEmotion)
+                    HStack {
+                        Text(detailEmotion)
+                            .frame(alignment: .leading)
+                            .font(.mainText)
+                        if isSelected {
+                            Image(systemName: "xmark")
+                                .foregroundColor(Color(hex: "71766E"))
                         }
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(isSelected ? Color(hex: "E3ECDC") : .clear)
+                    .cornerRadius(15)
+                    .padding(.bottom, 25)
+                    .padding(.leading, 20)
                     Spacer()
+                }
+                .background(.white)
+                .onTapGesture {
+                    tabEmotion(emotion: detailEmotion)
                 }
             }
         }

@@ -1,0 +1,132 @@
+//
+//  SearchEmotionView.swift
+//  Cherish
+//
+//  Created by 이가은 on 2022/08/14.
+//
+
+import SwiftUI
+
+struct SearchEmotionView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Binding var isModalShow: Bool
+    @Binding var selectedEmotion: [String]
+    @State private var searchText = ""
+    @State private var searchedEmotion: [String] = []
+    @State private var isShowAlert = false
+    
+    @FocusState private var isKeyboardOpen: Bool
+    
+    var body: some View {
+            VStack(alignment: .leading, spacing: 0) {
+                SearchBar()
+                ScrollView {
+                    SearchEmtionGroups()
+                }
+            }
+            .padding(.horizontal, 20)
+        
+        .navigationBarTitle(Record.emotion.writingMainText, displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if selectedEmotion == [] {
+                    Image(systemName: "checkmark")
+                        .onTapGesture {
+                            isShowAlert = true
+                        }
+                } else {
+                    NavigationLink {
+                        EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow)
+                    } label: {
+                        Image(systemName: "checkmark")
+                    }
+                }
+            }
+        }
+        .alert("감정을 한 개 이상 선택해주세요", isPresented: $isShowAlert) {
+            Button("OK", role: .cancel) { }
+        }
+        .accentColor(.defaultText)
+        .tint(.defaultText)
+        .animation(Animation.easeInOut(duration: 0.2), value: selectedEmotion)
+    }
+    
+    func tabEmotion(emotion: String) {
+        if let index = selectedEmotion.firstIndex(of: emotion) {
+            selectedEmotion.remove(at: index)
+        } else {
+            selectedEmotion.append(emotion)
+        }
+    }
+}
+
+extension SearchEmotionView {
+    @ViewBuilder
+    private func SearchBar() -> some View {
+        VStack(spacing: 0) {
+            HStack {
+                Image(systemName: "magnifyingglass")
+                TextField("감정 검색", text: $searchText)
+                    .onChange(of: searchText) { newValue in
+                        let detailAllEmotionList = EmotionData.allList
+                        searchedEmotion = detailAllEmotionList.filter {$0.contains(searchText)}
+                        print(searchText, "searchText")
+                    }
+                    .focused($isKeyboardOpen)
+                if searchText != "" {
+                    Button(action: {
+                        searchText = ""
+                        isKeyboardOpen = false
+                    }) {
+                        Image(systemName: "multiply.circle.fill")
+                            .foregroundColor(.gray)
+                            .padding(.trailing, 8)
+                            .background(Color(hex: "F5F5F5"))
+                    }
+                }
+            }
+            .padding(10)
+            .background(Color(hex: "F5F5F5"))
+            .cornerRadius(5)
+            .padding(.bottom, 25)
+            .padding(.top, 10)
+        }
+    }
+    @ViewBuilder
+    private func SearchEmtionGroups() -> some View {
+        ForEach(searchedEmotion.indices, id: \.self) { index in
+            let emotion = searchedEmotion[index]
+            VStack(alignment: .leading) {
+                HStack {
+                    let isSelected = selectedEmotion.contains(emotion)
+                    HStack {
+                        Text(emotion)
+                            .frame(alignment: .leading)
+                            .font(.mainText)
+                        if isSelected {
+                            Image(systemName: "xmark")
+                                .foregroundColor(Color(hex: "71766E"))
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(isSelected ? Color(hex: "E3ECDC") : .clear)
+                    .cornerRadius(15)
+                    .padding(.bottom, 25)
+                    .padding(.leading, 20)
+                    Spacer()
+                }
+                .background(.white)
+                .onTapGesture {
+                    tabEmotion(emotion: emotion)
+                }
+            }
+        }
+    }
+}
+
+struct SearchEmotionView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchEmotionView(isModalShow: .constant(false), selectedEmotion: .constant([]))
+    }
+}

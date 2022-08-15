@@ -40,7 +40,6 @@ class TimeLineViewModel: ObservableObject {
         newRecord.context = context
         newRecord.kind = kind.rawValue
         saveData()
-//        removeAll()
     }
     
     func saveData() {
@@ -60,6 +59,7 @@ class TimeLineViewModel: ObservableObject {
             print("ERROR Saving", error)
         }
     }
+    
     func removeAll() {
         for record in recordsEntity {
             container.viewContext.delete(record)
@@ -69,5 +69,6 @@ class TimeLineViewModel: ObservableObject {
         } catch {
             print("ERROR removeAll", error)
         }
+        saveData()
     }
 }

@@ -14,10 +14,9 @@ struct TimelineView: View {
         VStack(spacing: 0) {
             TitleView(title: "나의 끄적임들")
                 .padding(.horizontal, 20)
-            
             ScrollView {
                 if timeLineViewModel.recordsEntity.isEmpty {
-                    
+                    Text("아직 기록한 내용이 없습니다")
                 } else {
                     let recordsEntity = timeLineViewModel.recordsEntity.sorted(by: {
                         if $0.date == nil || $1.date == nil {
@@ -63,7 +62,6 @@ struct TimelineView: View {
 extension TimelineView {
     @ViewBuilder
     private func RecordBoxesView(record: RecordEntity) -> some View {
-        
         HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 5) {
                 let recordKind = Record.getCatagory(record: record.kind ?? "")
@@ -98,7 +96,6 @@ extension TimelineView {
         .background(.white)
         .cornerRadius(10)
         .padding(.bottom, 10)
-        
     }
 }
 
