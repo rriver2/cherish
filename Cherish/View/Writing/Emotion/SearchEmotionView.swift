@@ -19,13 +19,13 @@ struct SearchEmotionView: View {
     @FocusState private var isKeyboardOpen: Bool
     
     var body: some View {
-            VStack(alignment: .leading, spacing: 0) {
-                SearchBar()
-                ScrollView {
-                    SearchEmtionGroups()
-                }
+        VStack(alignment: .leading, spacing: 0) {
+            SearchBar()
+            ScrollView {
+                SearchEmtionGroups()
+                    .padding(.top, 36)
             }
-            .padding(.horizontal, 20)
+        }
         
         .navigationBarTitle(Record.emotion.writingMainText, displayMode: .inline)
         .toolbar {
@@ -82,17 +82,18 @@ extension SearchEmotionView {
                     }) {
                         Image(systemName: "multiply.circle.fill")
                             .foregroundColor(Color.gray23.opacity(0.5))
-                            .padding(.trailing, 8)
+                            .padding(.trailing, 15)
+                            .frame(width: 18, height: 18)
                             .background(Color.grayF5)
                     }
                 }
             }
-            .padding(10)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 9)
             .background(Color.grayF5)
             .cornerRadius(5)
-            .padding(.bottom, 25)
-            .padding(.top, 10)
         }
+        .padding(.horizontal, 27)
     }
     @ViewBuilder
     private func SearchEmtionGroups() -> some View {
@@ -104,19 +105,19 @@ extension SearchEmotionView {
                     HStack {
                         Text(emotion)
                             .frame(alignment: .leading)
-                            .font(.bodyRegularSmall)
-                            .foregroundColor(.gray23)
+                            .font(.bodyRegular)
+                            .foregroundColor(Color.gray23)
                         if isSelected {
                             Image(systemName: "xmark")
                                 .foregroundColor(Color(hex: "747474"))
                         }
                     }
                     .padding(.horizontal, 12)
-                    .padding(.vertical, 4)
+                    .padding(.vertical, 6)
                     .background(isSelected ? Color.grayE8 : .clear)
                     .cornerRadius(15)
-                    .padding(.bottom, 25)
-                    .padding(.leading, 20)
+                    .padding(.bottom, 24)
+                    .padding(.leading, 27)
                     Spacer()
                 }
                 .background(.white)

@@ -19,13 +19,13 @@ struct QuestionView: View {
             Text(title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.bodyRegular)
+                .lineSpacing()
                 .foregroundColor(Color.gray23)
-                .padding(.bottom, 10)
-                .padding(.top, 20)
-                .padding(.leading, 10)
+                .padding(.top, 30)
             WritingView(context: $context)
+                .padding(.top, 25)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 27)
         .navigationBarTitle(Text(""), displayMode: .inline)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -42,7 +42,7 @@ struct QuestionView: View {
         }
         .textInputAutocapitalization(.never)
         .tint(Color.gray23)
-    }
+}
 }
 
 struct QuestionView_Previews: PreviewProvider {

@@ -28,13 +28,13 @@ struct FreeView: View {
                     }
                     .frame(minHeight: 20)
                     .font(.bodyRegular)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 10)
+                    .padding(.horizontal, 27)
+                    .padding(.top, 30)
                     .foregroundColor(self.title == "제목" ? Color.grayA7 : Color.gray23)
                 
                 WritingView(context: $context)
-                    .padding(.top, 5)
-                    .padding(.horizontal, 20)
+                    .padding(.top, 25)
+                    .padding(.horizontal, 27)
                 Spacer()
             }
             .navigationBarTitle(Record.free.writingMainText, displayMode: .inline)
@@ -49,24 +49,24 @@ struct FreeView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
-                        SoundView()
-                        Spacer()
+                    SoundView()
+                    Spacer()
+                    
+                    #warning("삭제하기")
+                    Button {
+                        timeLineViewModel.removeAll()
+                        dismiss()
                         
-                        #warning("삭제하기")
-                        Button {
-                            timeLineViewModel.removeAll()
-                            dismiss()
-                            
-                        } label: {
-                            Text("삭제")
-                        }
-                        
-                        Button {
-                            timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)
-                            dismiss()
-                        } label: {
-                            Image(systemName: "checkmark")
-                        }
+                    } label: {
+                        Text("삭제")
+                    }
+                    
+                    Button {
+                        timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)
+                        dismiss()
+                    } label: {
+                        Image(systemName: "checkmark")
+                    }
                 }
             }
             .textInputAutocapitalization(.never)

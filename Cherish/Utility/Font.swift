@@ -14,10 +14,10 @@ extension Font {
     static let miniRegular = Font.footnote.weight(.regular)
     static let bodyRegular = Font.body.weight(.regular)
     static let bodyRegularSmall = Font.callout.weight(.regular)
-    static let bodySemibold = Font.body.weight(.semibold)
-    static let titleSemibold = Font.title2.weight(.semibold)
+    static let bodySemibold = Font.body.weight(.bold)
+    static let titleSemibold = Font.title2.weight(.bold)
     static let timelineDate = Font.caption2.weight(.regular)
-    static let miniSemibold = Font.footnote.weight(.semibold)
+    static let miniSemibold = Font.footnote.weight(.bold)
     
 //    bigTitle
 //    body_regular_default

@@ -15,7 +15,7 @@ struct SelectQuestionView: View {
     var body: some View {
             VStack(spacing: 0) {
                 SelectQuestionType()
-                    .padding(.top, 20)
+                     .padding(.top, 40)
                 ScrollView(showsIndicators: true){
                     QuestionList()
                 }
@@ -53,9 +53,8 @@ extension SelectQuestionView {
                     }
                 }
             }
-            dividerGray8A
+            dividerThickGrayE8
         }
-        .padding(.horizontal, 20)
     }
     @ViewBuilder
     private func QuestionList() -> some View {
@@ -65,13 +64,14 @@ extension SelectQuestionView {
                 NavigationLink {
                     QuestionView(title: question, isModalShow: $isModalShow )
                 } label: {
-                    VStack(alignment: .leading){
+                    VStack(alignment: .leading, spacing: 0){
                         Text(question)
                             .font(.bodyRegular)
                             .foregroundColor(Color.gray23)
-                            .padding()
                             .multilineTextAlignment(.leading)
-                            .padding(.vertical)
+                            .lineSpacing()
+                            .padding(.vertical, 25)
+                            .padding(.horizontal, 27)
                        dividerGrayE8
                     }
                 }

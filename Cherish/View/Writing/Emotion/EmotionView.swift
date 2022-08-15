@@ -21,9 +21,11 @@ struct EmotionView: View {
     var body: some View {
         ScrollView {
             EmotionGroups()
+                .padding(.top, 30)
             WritingView(context: $context)
+                .padding(.top, 25)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 27)
         .navigationBarTitle(Text(""), displayMode: .inline)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -56,7 +58,7 @@ extension EmotionView {
     @ViewBuilder
     private func EmotionGroups() -> some View {
         VStack {
-            LazyVGrid(columns: columns, spacing: 14) {
+            LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(emotionList, id: \.self) { detailEmotion in
                     HStack {
                         let isSelected = emotionList.contains(detailEmotion)
@@ -71,7 +73,7 @@ extension EmotionView {
                             }
                         }
                         .padding(.horizontal, 12)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 6)
                         .background(isSelected ? Color.grayE8 : .clear)
                         .cornerRadius(15)
                         Spacer()

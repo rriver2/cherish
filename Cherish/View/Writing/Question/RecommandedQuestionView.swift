@@ -16,17 +16,18 @@ struct RecommandedQuestionView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                dividerGray8A
+                dividerThickGrayE8
                     .padding(.top, 40)
                 ForEach(randomQuestion, id: \.self) { question in
                     NavigationLink {
                         QuestionView(title: question, isModalShow: $isModalShow )
                     } label: {
-                        VStack(alignment: .leading){
+                        VStack(alignment: .leading, spacing: 0){
                             Text(question)
-                                .padding()
+                                .padding(.vertical, 25)
+                                .padding(.horizontal, 27)
                                 .multilineTextAlignment(.leading)
-                                .padding(.vertical)
+                                .lineSpacing()
                                 .font(.bodyRegular)
                                 .foregroundColor(.gray23)
                             dividerGrayE8
@@ -39,8 +40,8 @@ struct RecommandedQuestionView: View {
                     Text("다른 질문 더보기")
                         .font(.miniRegular)
                         .foregroundColor(Color.grayA7)
-                        .padding(.top, 20)
-                        .padding(.trailing, 20)
+                        .padding(.top, 33)
+                        .padding(.trailing, 27)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 Spacer()

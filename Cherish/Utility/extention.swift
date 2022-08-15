@@ -26,19 +26,28 @@ extension Array {
 }
 
 extension View {
-    var dividerGrayE8 : some View{
+    var dividerGrayE8 : some View {
         Rectangle()
             .frame(height: 1)
             .foregroundColor(Color.grayE8)
     }
-    var dividerGray8A : some View{
+    var dividerThickGrayE8 : some View {
+        Rectangle()
+            .frame(height: 2)
+            .foregroundColor(Color.grayE8)
+    }
+    var dividerGray8A : some View {
         Rectangle()
             .frame(height: 1)
             .foregroundColor(Color.gray8A)
     }
-    var dividerThickGray8A : some View{
+    var dividerThickGray8A : some View {
         Rectangle()
-            .frame(height: 3)
+            .frame(height: 4)
             .foregroundColor(Color.gray8A)
+    }
+    func lineSpacing() -> some View {
+        self
+            .lineSpacing(8.0)
     }
 }

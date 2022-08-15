@@ -31,21 +31,10 @@ struct WritingMainView: View {
             ZStack{
                 VStack(spacing: 0) {
                     VStack(spacing: 0) {
-                        HStack(spacing: 0) {
-                            Image("Logo")
-                                .padding(.leading, 10)
-                            Spacer()
-                            if showCards {
-                                SoundView()
-                            }
-                        }
-                        .foregroundColor(Color.gray23)
-                        .font(.bigTitle)
-                        .padding(.bottom, 30)
-                        .padding(.top, 20)
+                        Title()
                         OneSentence()
+                            .padding(.horizontal, 27)
                     }
-                    .padding(.horizontal, 20)
                     if showCards {
                         WritingBoxes()
                     }
@@ -72,16 +61,31 @@ struct WritingMainView: View {
 
 extension WritingMainView {
     @ViewBuilder
+    private func Title() -> some View {
+        HStack(spacing: 0) {
+            Image("Logo")
+            Spacer()
+            if showCards {
+                SoundView()
+            }
+        }
+        .padding(.horizontal, 27)
+        .padding(.bottom, 49)
+        .foregroundColor(Color.gray23)
+        .font(.bigTitle)
+        .padding(.top, 26)
+    }
+    @ViewBuilder
     private func OneSentence() -> some View {
         TextField("나의 한 마디", text: $oneSentence)
             .frame(maxWidth: .infinity)
             .multilineTextAlignment(.center)
-            .padding(25)
+            .padding(17)
             .background(Color.grayF5)
             .font(.bodyRegular)
             .foregroundColor(Color.gray23)
             .cornerRadius(10)
-            .padding(.bottom, 20)
+            .padding(.bottom, 25)
             .onChange(of: oneSentence) { newValue in
                 let key = UserDefaultKey.oneSentence.string
                 UserDefaults.standard.set(newValue, forKey: key)
@@ -113,7 +117,7 @@ extension WritingMainView {
                                 .font(.bodySemibold)
                                 .foregroundColor(.gray23)
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 10)
+                                .padding(.vertical, 13)
                                 .background(.white.opacity(0.7))
                                 .cornerRadius(10)
                                 .padding(.horizontal, 25)
@@ -136,8 +140,8 @@ extension WritingMainView {
                     .frame(width: width/2.2)
                     .shadow(color: .gray.opacity(0.5), radius: 7, x: 10, y:10)
                 }
-                .padding(.leading, 60)
-                .padding(.trailing, 150)
+                .padding(.leading, 30)
+                .padding(.trailing, 200)
             }
         }
     }

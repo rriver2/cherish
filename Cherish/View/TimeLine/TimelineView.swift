@@ -12,23 +12,23 @@ struct TimelineView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                Text("나의 기록")
-                    .font(.bigTitle)
-                    .foregroundColor(Color.gray23)
-                Spacer()
-                SoundView()
-            }
-            .font(.bigTitle)
-            .padding(.bottom, 30)
-            .padding(.top, 20)
-                .padding(.horizontal, 20)
-            ScrollView {
-                if timeLineViewModel.recordsEntity.isEmpty {
+            Title()
+            if timeLineViewModel.recordsEntity.isEmpty {
+                VStack(spacing: 0) {
+                    Date(date: Foundation.Date().dateToString_MY())
+                        .padding(.top, 50)
                     Text("아직 기록한 내용이 없습니다")
-                        .font(.bigTitle)
-                        .foregroundColor(Color.gray23)
-                } else {
+                        .font(.miniRegular)
+                        .foregroundColor(Color.gray8A)
+                        .padding(.vertical, 15)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .background(Color.grayF5)
+                        .cornerRadius(10)
+                    Spacer()
+                }
+                .padding(.horizontal, 27)
+            } else {
+                ScrollView {
                     let recordsEntity = timeLineViewModel.recordsEntity.sorted(by: {
                         if $0.date == nil || $1.date == nil {
                             return false
@@ -41,32 +41,19 @@ struct TimelineView: View {
                         
                         VStack(alignment: .leading, spacing: 0) {
                             if index == 0, let date = record.date?.dateToString_MY() {
-                                HStack(spacing: 0) {
-                                    Text(date)
-                                        .font(.bodySemibold)
-                                        .foregroundColor(Color.grayA7)
-                                        .padding(.vertical, 15)
-                                    Spacer()
-                                }
-                                .padding(.bottom, 10)
+                                Date(date: date)
                             } else if let date = record.date?.dateToString_MY(),
                                       let preDate = recordsEntity[index - 1].date?.dateToString_MY(),
                                       date != preDate
                             {
-                                HStack(spacing: 0) {
-                                    Text(date)
-                                        .font(.bodySemibold)
-                                        .foregroundColor(Color.grayA7)
-                                        .padding(.vertical, 15)
-                                    Spacer()
-                                }
-                                .padding(.bottom, 10)
+                                Date(date: date)
                             }
                             RecordBoxesView(record: record)
                         }
-                        .padding(.horizontal, 20)
                     }
+                    .padding(.top, 50)
                 }
+                .padding(.horizontal, 27)
             }
         }
     }
@@ -75,9 +62,22 @@ struct TimelineView: View {
 
 extension TimelineView {
     @ViewBuilder
+    private func Title() -> some View {
+        HStack(spacing: 0) {
+            Text("나의 기록")
+                .font(.bigTitle)
+                .foregroundColor(Color.gray23)
+            Spacer()
+            SoundView()
+        }
+        .font(.bigTitle)
+        .padding(.top, 26)
+        .padding(.horizontal, 27)
+    }
+    @ViewBuilder
     private func RecordBoxesView(record: RecordEntity) -> some View {
         HStack(alignment: .top, spacing: 0) {
-            VStack(spacing: 5) {
+            VStack(spacing: 0) {
                 let recordKind = Record.getCatagory(record: record.kind ?? "")
                 Circle()
                     .foregroundColor(recordKind.color)
@@ -86,26 +86,38 @@ extension TimelineView {
                     .font(.timelineDate)
                     .foregroundColor(Color.grayA7)
             }
+            .padding(.trailing, 16)
             VStack(alignment: .leading, spacing: 0) {
                 if record.title != "" {
                     Text(record.title ?? "")
                         .font(.miniSemibold)
                         .foregroundColor(.gray23)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.bottom, 10)
+                        .padding(.bottom, 20)
+                        .lineSpacing()
                 }
                 Text(record.context ?? "")
                     .font(.miniRegular)
                     .foregroundColor(.gray23)
+                    .lineSpacing()
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.leading, 20)
-            .padding(.trailing, 10)
         }
-        .padding(15)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 20)
         .background(Color.grayF5)
         .cornerRadius(10)
-        .padding(.bottom, 10)
+        .padding(.bottom, 26)
+    }
+    @ViewBuilder
+    private func Date(date: String) -> some View {
+        HStack(spacing: 0) {
+            Text(date)
+                .font(.bodySemibold)
+                .foregroundColor(Color.grayA7)
+            Spacer()
+        }
+        .padding(.bottom, 24)
     }
 }
 

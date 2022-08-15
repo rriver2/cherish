@@ -23,7 +23,7 @@ struct SelectingEmotionView: View {
             VStack(alignment: .leading, spacing: 0) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     SelectEmotionType()
-                        .padding(.top, 20)
+                        .padding(.top, 50)
                 }
                 ScrollView(showsIndicators: false){
                     EmotionList()
@@ -41,10 +41,10 @@ struct SelectingEmotionView: View {
                         HStack(spacing: 0) {
                             NavigationLink {
                                 SearchEmotionView(isModalShow: $isModalShow, selectedEmotion: $selectedEmotion, context: $context)
-
+                                
                             } label: {
                                 Image(systemName: "magnifyingglass")
-                                    .padding(.trailing, 15)
+                                    .padding(.trailing, 18)
                             }
                             Image(systemName: "checkmark")
                                 .onTapGesture {
@@ -61,7 +61,6 @@ struct SelectingEmotionView: View {
                 }
             }
             .navigationBarTitle(Record.emotion.writingMainText, displayMode: .inline)
-            .padding(.horizontal, 20)
         }
         .alert(selectedEmotion == [] ? "감정을 한 개 이상 선택해주세요" : "6개 이하로 선택해주세요", isPresented: $isShowAlert) {
             Button("OK", role: .cancel) { }
@@ -130,11 +129,11 @@ extension SelectingEmotionView {
                         }
                     }
                     .padding(.horizontal, 12)
-                    .padding(.vertical, 4)
+                    .padding(.vertical, 6)
                     .background(isSelected ? Color.grayE8 : .clear)
                     .cornerRadius(15)
-                    .padding(.bottom, 25)
-                    .padding(.leading, 20)
+                    .padding(.bottom, 24)
+                    .padding(.leading, 27)
                     Spacer()
                 }
                 .background(.white)

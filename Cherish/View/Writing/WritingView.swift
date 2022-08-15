@@ -12,26 +12,27 @@ struct WritingView: View {
     let date = Date().dateToString_MDY()
     
     var body: some View {
-            VStack(alignment: .leading, spacing: 10) {
-                Text(date)
-                    .font(.miniRegular)
-                    .foregroundColor(Color.gray8A)
-                    .padding(.leading, 10)
-                TextEditor(text: $context)
-                    .padding(.vertical, 20)
-                    .padding(.horizontal, 15)
-                    .colorMultiply(Color.grayF5)
-                    .foregroundColor(self.context == "내용" ? Color.grayA7 : Color.gray23)
-                    .onTapGesture {
-                        if self.context == "내용"{
-                            self.context = ""
-                        }
+        VStack(alignment: .leading, spacing: 0) {
+            Text(date)
+                .font(.miniRegular)
+                .foregroundColor(Color.gray8A)
+                .padding(.bottom, 8)
+            TextEditor(text: $context)
+                .padding(.vertical, 23)
+                .padding(.horizontal, 20)
+                .colorMultiply(Color.grayF5)
+                .foregroundColor(self.context == "내용" ? Color.grayA7 : Color.gray23)
+                .onTapGesture {
+                    if self.context == "내용"{
+                        self.context = ""
                     }
-                    .frame(height:500)
-                    .background(Color.grayF5)
-                    .cornerRadius(10)
-                    .font(.bodyRegular)
-            }
+                }
+                .lineSpacing()
+                .frame(height:500)
+                .background(Color.grayF5)
+                .cornerRadius(10)
+                .font(.bodyRegular)
+        }
     }
 }
 
