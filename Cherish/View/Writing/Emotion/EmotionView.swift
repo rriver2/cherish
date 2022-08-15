@@ -81,7 +81,6 @@ extension EmotionView {
                     }
                 }
             }
-            .padding(.bottom, 25)
         }
     }
 }

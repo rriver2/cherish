@@ -12,7 +12,7 @@ struct SelectingEmotionView: View {
     @Binding var isModalShow: Bool
     @State var selectedEmotion: [String] = []
     @State private var isShowAlert = false
-    @State private var emotionType: EmotionCategory = .angry
+    @State private var emotionType: EmotionCategory = EmotionCategory.allCases[0]
     @State private var isShowNextView = false
     @State var context = "내용"
     
@@ -41,6 +41,7 @@ struct SelectingEmotionView: View {
                         HStack(spacing: 0) {
                             NavigationLink {
                                 SearchEmotionView(isModalShow: $isModalShow, selectedEmotion: $selectedEmotion, context: $context)
+
                             } label: {
                                 Image(systemName: "magnifyingglass")
                                     .padding(.trailing, 15)
@@ -53,8 +54,7 @@ struct SelectingEmotionView: View {
                                         isShowNextView = true
                                     }
                                 }
-                            NavigationLink("", isActive: $isShowNextView) {
-                                EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow, context: $context)
+                            NavigationLink("", isActive: $isShowNextView) {          EmotionView(emotionList: $selectedEmotion, isModalShow: $isModalShow, context: $context)
                             }
                         }
                     }

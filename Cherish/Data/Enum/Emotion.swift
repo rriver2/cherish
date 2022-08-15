@@ -8,14 +8,14 @@
 import SwiftUI
 
 enum EmotionCategory: CaseIterable {
-    case angry
-    case anxiety
-    case depression
-    case panic
     case joy
-    case pleasure
     case boredom
     case comfort
+    case pleasure
+    case depression
+    case panic
+    case anxiety
+    case angry
     
     var string: String {
         switch self {
