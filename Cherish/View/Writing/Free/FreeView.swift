@@ -35,6 +35,7 @@ struct FreeView: View {
                         .padding(.horizontal, 27)
                         .padding(.top, 30)
                         .foregroundColor(self.title == "제목" ? Color.grayA7 : Color.gray23)
+                        .accentColor(Color.gray23)
                     
                     WritingView(context: $context)
                         .padding(.top, 25)

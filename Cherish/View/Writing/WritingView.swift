@@ -34,6 +34,8 @@ struct WritingView: View {
                 .cornerRadius(10)
                 .font(.bodyRegular)
         }
+        .tint(Color.gray23)
+        .accentColor(Color.gray23)
     }
 }
 

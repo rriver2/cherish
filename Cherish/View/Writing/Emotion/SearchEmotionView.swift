@@ -62,9 +62,6 @@ extension SearchEmotionView {
                     .foregroundColor(Color.gray23)
                     .padding(.trailing, 7)
                 TextField("감정 검색", text: $searchText)
-                    .onSubmit {
-                        emotionViewModel.addEmotionToDevice(emotion: searchText)
-                    }
                     .submitLabel(.done)
                     .font(.bodyRegularSmall)
                     .focused($isKeyboardOpen)
@@ -120,7 +117,7 @@ extension SearchEmotionView {
                     .background(.white)
                     .onTapGesture {
                         emotionViewModel.tabEmotion(emotion: emotion)
-                        emotionViewModel.addEmotionToDevice(emotion: searchText)
+                        emotionViewModel.addEmotionToDevice(emotion: emotion)
                     }
                 }
             }

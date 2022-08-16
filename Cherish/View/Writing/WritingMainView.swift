@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WritingMainView: View {
+    @Binding var isShowTabbar: Bool
     @State private var showFreeView = false
     @State private var showQuestionView = false
     @State private var showEmotionView = false
@@ -17,7 +18,8 @@ struct WritingMainView: View {
     @State var recordType = Record.free
     @State private var oneSentence: String
     
-    init() {
+    init(isShowTabbar: Binding<Bool>) {
+        self._isShowTabbar = isShowTabbar
         let key = UserDefaultKey.oneSentence.string
         if let oneSentence = UserDefaults.standard.object(forKey: key) as? String {
             self.oneSentence = oneSentence
@@ -64,10 +66,11 @@ extension WritingMainView {
     private func Title() -> some View {
         HStack(spacing: 0) {
             Image("Logo")
+                .frame(height: 20)
             Spacer()
             if showCards {
                 SoundView()
-                    .font(.titleSemibold)
+                    .font(.timeLineTitle)
             }
         }
         .padding(.horizontal, 27)
@@ -97,9 +100,11 @@ extension WritingMainView {
             }
             .onTapGesture {
                 showCards = false
+                isShowTabbar = false
             }
             .onSubmit {
                 showCards = true
+                isShowTabbar = true
             }
             .submitLabel(.done)
     }
@@ -154,7 +159,7 @@ extension WritingMainView {
 
 struct WritingMainView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingMainView()
+        WritingMainView(isShowTabbar: .constant(false))
             .environmentObject(SoundViewModel())
     }
 }

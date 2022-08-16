@@ -7,25 +7,69 @@
 
 import SwiftUI
 
+enum tabbarCategory: String, CaseIterable{
+    case writing = "writing"
+    case timeLine = "timeLine"
+    
+    var imageName: String {
+        switch self {
+            case .writing:
+                return "square.and.pencil"
+            case .timeLine:
+                return "book"
+        }
+    }
+}
+
 struct ContentView: View {
-    @State private var selection = 0
+    @State private var selectedIndex = 0
+    @State var isShowTabbar = true
     
     var body: some View {
-        TabView(selection: $selection) {
-            WritingMainView()
-                .tabItem {
-                    Image(systemName: "square.and.pencil")
-                    Text("writing")
-                }.tag(0)
-            TimelineView()
-                .tabItem {
-                    Image(systemName: "books.vertical")
-                    Text("timeline")
-                }.tag(1)
+        VStack {
+            ZStack {
+                switch selectedIndex {
+                    case 0:
+                        WritingMainView(isShowTabbar: $isShowTabbar)
+                    default:
+                        TimelineView()
+                }
+            }
+            .accentColor(Color.gray23)
+            .environmentObject(TimeLineViewModel())
+            .environmentObject(SoundViewModel())
+            if isShowTabbar {
+            HStack {
+                Spacer()
+                Spacer()
+                ForEach(tabbarCategory.allCases.indices, id: \.self) { index in
+                    let tabbarItem = tabbarCategory.allCases[index]
+                    if index != 0 {
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                    }
+                    VStack {
+                        Image(systemName: tabbarItem.imageName)
+                            .font(.system(size: 20, weight: .regular))
+                        Text(tabbarItem.rawValue)
+                            .font(.system(size: 10, weight: .regular))
+                    }
+                    .padding(.top, 10)
+                    .padding(.bottom, 15)
+                    .foregroundColor(selectedIndex == index ? Color.gray23 : Color.gray8A)
+                    .gesture(
+                        TapGesture()
+                            .onEnded { _ in
+                                selectedIndex = index
+                            }
+                    )
+                }
+                Spacer()
+                Spacer()
+            }
+            }
         }
-        .accentColor(Color.gray23)
-        .environmentObject(TimeLineViewModel())
-        .environmentObject(SoundViewModel())
     }
 }
 
@@ -34,3 +78,33 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+//struct ContentView: View {
+//    @State private var selection = 0
+//
+//    var body: some View {
+//        TabView(selection: $selection) {
+//            WritingMainView()
+//                .tabItem {
+//                    Image(systemName: "square.and.pencil")
+//                    Text("writing")
+//                }.tag(0)
+//            TimelineView()
+//                .tabItem {
+//                    Image(systemName: "books.vertical")
+//                        .padding(.top, 10)
+//                    Text("timeline")
+//                }.tag(1)
+//        }
+//        .accentColor(Color.gray23)
+//        .environmentObject(TimeLineViewModel())
+//        .environmentObject(SoundViewModel())
+//    }
+//}
+
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}

@@ -13,16 +13,19 @@ struct TimelineView: View {
     var body: some View {
         if timeLineViewModel.recordsEntity.isEmpty {
             VStack(spacing: 0) {
-                Title().background(Color.white)
+                Title()
+                    .background(Color.white)
                 Text("아직 기록한 내용이 없습니다")
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .padding(19)
+                    .background(Color.grayF5)
                     .font(.miniRegular)
                     .foregroundColor(Color.gray8A)
-                    .padding(.vertical, 15)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .background(Color.grayF5)
                     .cornerRadius(10)
-                    .padding(.top, 46)
-                    .padding(.horizontal, 27)
+                    .padding(.bottom, 25)
+                    .cornerRadius(10)
+                .padding(.horizontal, 27)
                 Spacer()
             }
         } else {
@@ -68,16 +71,17 @@ extension TimelineView {
     private func Title() -> some View {
         HStack(spacing: 0) {
             Text("나의 기록")
+                .frame(height: 20)
                 .font(.timeLineTitle)
                 .foregroundColor(Color.gray23)
             Spacer()
             SoundView()
-                .font(.titleSemibold)
+                .font(.timeLineTitle)
         }
-        .font(.timeLineTitle)
-        .padding(.top, 26)
-        .padding(.bottom, 15)
         .padding(.horizontal, 27)
+        .padding(.bottom, 49)
+        .foregroundColor(Color.gray23)
+        .padding(.top, 26)
     }
     @ViewBuilder
     private func Date(date: String) -> some View {
