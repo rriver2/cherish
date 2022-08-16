@@ -67,7 +67,6 @@ struct FreeView: View {
 //                    Button {
 //                        timeLineViewModel.removeAll()
 //                        dismiss()
-//
 //                    } label: {
 //                        Text("삭제")
 //                    }

@@ -131,6 +131,5 @@ extension SearchQuestionView {
 struct SearchQuestionView_Previews: PreviewProvider {
     static var previews: some View {
         SearchQuestionView(isModalShow: .constant(false))
-            .preferredColorScheme(.dark)
     }
 }

@@ -133,7 +133,6 @@ extension EmotionView {
 struct EmotionView_Previews: PreviewProvider {
     static var previews: some View {
         EmotionView(isModalShow: .constant(false), emotionViewModel: EmotionViewModel())
-            .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
     }

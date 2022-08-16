@@ -187,6 +187,5 @@ extension SearchEmotionView {
 struct SearchEmotionView_Previews: PreviewProvider {
     static var previews: some View {
         SearchEmotionView(isModalShow: .constant(false), emotionViewModel: EmotionViewModel())
-            .preferredColorScheme(.dark)
     }
 }
