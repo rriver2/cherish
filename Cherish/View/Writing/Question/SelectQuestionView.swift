@@ -100,9 +100,12 @@ extension SelectQuestionView {
                 .font(.bodySemibold)
                 .foregroundColor(Color.gray23)
             Spacer()
-            Image(systemName: "chevron.left")
-                .font(.bodyRegular)
-                .foregroundColor(.clear)
+            NavigationLink {
+                SearchQuestionView(isModalShow: $isModalShow)
+            } label: {
+                Image(systemName: "magnifyingglass")
+                    .font(.bodyRegular)
+            }
         }
         .padding(.top, 25)
         .padding(.horizontal, 27)

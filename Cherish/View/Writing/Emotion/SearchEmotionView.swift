@@ -164,6 +164,7 @@ extension SearchEmotionView {
             Spacer()
             if emotionViewModel.selectedEmotionList == [] {
                 Image(systemName: "checkmark")
+                    .font(.bodyRegular)
                     .onTapGesture {
                         isShowAlert = true
                     }

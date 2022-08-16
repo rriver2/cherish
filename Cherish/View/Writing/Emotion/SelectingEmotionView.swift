@@ -44,7 +44,7 @@ struct SelectingEmotionView: View {
         .tint(Color.gray23)
         .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
             if (value.translation.height > 100) {
-                #warning("수정해야 함..")
+                #warning("수정해야 함..ㅠㅠ")
                 //                if selectedEmotion.isEmpty {
                 dismiss()
                 //                } else {

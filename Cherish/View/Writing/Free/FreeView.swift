@@ -63,7 +63,7 @@ struct FreeView: View {
                         .font(.bodyRegular)
                     Spacer()
                     
-#warning("삭제하기")
+                    #warning("삭제하기")
                     Button {
                         timeLineViewModel.removeAll()
                         dismiss()
