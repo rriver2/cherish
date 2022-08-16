@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-extension UINavigationController {
-    // Remove back button text 
-    open override func viewWillLayoutSubviews() {
-        navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    }
-}
-
 extension Array {
     /// Picks `n` random elements (partial Fisher-Yates shuffle approach)
     subscript (randomPick n: Int) -> [Element] {

@@ -13,6 +13,7 @@ struct QuestionView: View {
     @GestureState private var dragOffset = CGSize.zero
     @Binding var isModalShow: Bool
     @State var context = "내용"
+    @State private var alertCategory: AlertCategory = .leave
     @State var isShowAlert = false
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     
@@ -31,15 +32,30 @@ struct QuestionView: View {
             }
             .padding(.horizontal, 27)
         }
+        .alert(isPresented: $isShowAlert) {
+            switch alertCategory {
+                case .leave:
+                    return Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                        dismiss()
+                    }), secondaryButton: .cancel(Text("취소")))
+                case .save:
+                    return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
+            }
+        }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 SoundView()
                     .font(.bodyRegular)
                 Spacer()
                 Button {
-                    timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.question)
-                    dismiss()
-                    isModalShow = false
+                    if context == "내용" || context == "" {
+                        alertCategory = .save
+                        isShowAlert = true
+                    } else {
+                        timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.question)
+                        dismiss()
+                        isModalShow = false
+                    }
                 } label: {
                     Image(systemName: "checkmark")
                         .foregroundColor(.gray23)
@@ -49,17 +65,15 @@ struct QuestionView: View {
         }
         .textInputAutocapitalization(.never)
         .tint(Color.gray23)
-        .alert(isPresented: $isShowAlert) {
-            Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
-                dismiss()
-            }), secondaryButton: .cancel(Text("취소")))
-        }
         .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
+            #warning("왜 context가 내용으로 인식되는 거지 ?")
+//            print(context)
             if (value.startLocation.x < 30 && value.translation.width > 100) {
-                if context != "내용" {
-                    isShowAlert = true
-                } else {
+                if context == "내용" || context == "" {
                     dismiss()
+                } else {
+                    alertCategory = .leave
+                    isShowAlert = true
                 }
             }
         })
@@ -71,10 +85,12 @@ extension QuestionView {
     private func NavigationBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
-                if context != "내용" {
-                    isShowAlert = true
-                } else {
+//                print(context)
+                if context == "내용" || context == "" {
                     dismiss()
+                } else {
+                    alertCategory = .leave
+                    isShowAlert = true
                 }
             }) {
                 Image(systemName: "chevron.left")

@@ -18,7 +18,7 @@ class EmotionViewModel: ObservableObject {
     
     init() {
         isShowAlert = false
-        context = ""
+        context = "내용"
         emotionType = EmotionCategory.allCases[0]
         selectedEmotionList = []
         let key = UserDefaultKey.selectedEmotion.string

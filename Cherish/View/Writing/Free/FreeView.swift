@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum AlertCategory {
+    case leave
+    case save
+}
+
 struct FreeView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
@@ -14,6 +19,7 @@ struct FreeView: View {
     @State private var context = "내용"
     @State private var isShowAlert = false
     @GestureState private var dragOffset = CGSize.zero
+    @State private var alertCategory: AlertCategory = .leave
     
     init() {
         UIToolbar.appearance().barTintColor = UIColor.systemGray5
@@ -30,7 +36,6 @@ struct FreeView: View {
                                 self.title = ""
                             }
                         }
-                        .frame(minHeight: 20)
                         .font(.bodyRegular)
                         .padding(.horizontal, 27)
                         .padding(.top, 2)
@@ -47,15 +52,21 @@ struct FreeView: View {
                 if (value.translation.height > 100) {
                     if title != "제목" || context != "내용" {
                         isShowAlert = true
+                        alertCategory = .leave
                     } else {
                         dismiss()
                     }
                 }
             })
             .alert(isPresented: $isShowAlert) {
-                Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
-                    dismiss()
-                }), secondaryButton: .cancel(Text("취소")))
+                switch alertCategory {
+                    case .leave:
+                        return Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                            dismiss()
+                        }), secondaryButton: .cancel(Text("취소")))
+                    case .save:
+                        return Alert(title: Text("제목과 내용을 모두 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
+                }
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
@@ -72,8 +83,13 @@ struct FreeView: View {
 //                    }
                     
                     Button {
-                        timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)
-                        dismiss()
+                        if title == "제목" || context == "내용" || context == "" || title == "" {
+                            isShowAlert = true
+                            alertCategory = .save
+                        } else {
+                            timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)
+                            dismiss()
+                        }
                     } label: {
                         Image(systemName: "checkmark")
                             .foregroundColor(.gray23)
@@ -94,6 +110,7 @@ extension FreeView {
             Button(action: {
                 if title != "제목" || context != "내용" {
                     isShowAlert = true
+                    alertCategory = .leave
                 } else {
                     dismiss()
                 }
@@ -122,7 +139,7 @@ extension FreeView {
 struct FreeView_Previews: PreviewProvider {
     static var previews: some View {
         FreeView()
-            .preferredColorScheme(.dark)
+//            .preferredColorScheme(.dark)
             .environmentObject(SoundViewModel())
             .environmentObject(TimeLineViewModel())
     }
