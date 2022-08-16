@@ -50,7 +50,7 @@ extension SelectQuestionView {
                                 .foregroundColor(Color.grayA7)
                                 .frame(width: UIScreen.main.bounds.width / CGFloat(questionTypes.count) - 20)
                         }else{
-                            VStack(spacing: 0) {
+                            VStack(spacing: 8) {
                                 Text(type.string)
                                     .font(.bodySemibold)
                                     .foregroundColor(Color.gray23)

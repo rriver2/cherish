@@ -33,7 +33,7 @@ struct FreeView: View {
                         .frame(minHeight: 20)
                         .font(.bodyRegular)
                         .padding(.horizontal, 27)
-                        .padding(.top, 30)
+                        .padding(.top, 2)
                         .foregroundColor(self.title == "제목" ? Color.grayA7 : Color.gray23)
                         .accentColor(Color.gray23)
                     
@@ -115,6 +115,7 @@ extension FreeView {
                 .padding(.trailing, 18)
         }
         .padding(.top, 25)
+        .padding(.bottom, 28)
         .padding(.horizontal, 27)
     }
 }

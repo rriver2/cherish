@@ -25,7 +25,7 @@ struct EmotionView: View {
             NavigationBar()
             ScrollView (showsIndicators : false) {
                 EmotionGroups()
-                    .padding(.top, 30)
+                    .padding(.top, 2)
                 WritingView(context: $emotionViewModel.context)
                     .padding(.top, 25)
             }
@@ -111,6 +111,7 @@ extension EmotionView {
                 .foregroundColor(.clear)
                 .font(.bodyRegular)
         }
+        .padding(.bottom, 28)
         .padding(.top, 25)
         .padding(.horizontal, 27)
     }

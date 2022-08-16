@@ -25,10 +25,11 @@ struct SelectingEmotionView: View {
                     SelectEmotionType()
                         .padding(.top, 50)
                 }
-                ScrollView(showsIndicators: false){
+                ScrollView(showsIndicators: false) {
                     EmotionList()
+                        .padding(.bottom, 24)
+                        .padding(.top, 13)
                 }
-                .padding(.top, 25)
             }
         }
         .alert(isPresented: $emotionViewModel.isShowAlert) {
@@ -65,7 +66,7 @@ extension SelectingEmotionView {
     @ViewBuilder
     private func SelectEmotionType() -> some View {
         ZStack(alignment: .bottom){
-            dividerGray8A
+            dividerThickGrayE8
             HStack(alignment: .top, spacing: 0) {
                 let emotionList = EmotionCategory.allCases
                 ForEach(emotionList.indices, id: \.self) { index in
@@ -79,7 +80,7 @@ extension SelectingEmotionView {
                                 .foregroundColor(Color.grayA7)
                                 .frame(width: UIScreen.main.bounds.width / 4.2 - 20)
                         } else {
-                            VStack{
+                            VStack(spacing: 8) {
                                 Text(emotion.string)
                                     .font(.bodySemibold)
                                     .foregroundColor(Color.gray23)
@@ -94,7 +95,7 @@ extension SelectingEmotionView {
     }
     @ViewBuilder
     private func EmotionList() -> some View {
-        if let emotionList = EmotionData.list[emotionViewModel.emotionType] {
+        if let emotionList = EmotionData.list[emotionViewModel.emotionType]?.sorted() {
             ForEach(emotionList.indices, id : \.self){ index in
                 let detailEmotion = emotionList[index]
                 HStack(spacing: 0) {
@@ -114,7 +115,7 @@ extension SelectingEmotionView {
                     .padding(.vertical, 6)
                     .background(isSelected ? Color.grayE8 : .clear)
                     .cornerRadius(15)
-                    .padding(.bottom, 24)
+                    .padding(.top, 18)
                     .padding(.leading, 27)
                     Spacer()
                 }

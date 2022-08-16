@@ -14,6 +14,7 @@ struct WritingMainView: View {
     @State private var showEmotionView = false
     @State private var showInspirationView = false
     @State private var showCards = true
+    @FocusState private var isFocusedKeyboard: Bool
     
     @State var recordType = Record.free
     @State private var oneSentence: String
@@ -32,13 +33,19 @@ struct WritingMainView: View {
         NavigationView {
             ZStack{
                 VStack(spacing: 0) {
-                    VStack(spacing: 0) {
-                        Title()
-                        OneSentence()
-                            .padding(.horizontal, 27)
-                    }
+                    Title()
+                    OneSentence()
+                        .padding(.horizontal, 27)
                     if showCards {
                         WritingBoxes()
+                    } else {
+                        Rectangle()
+                            .foregroundColor(.white)
+                            .onTapGesture {
+                                showCards = true
+                                isShowTabbar = true
+                                isFocusedKeyboard = false
+                            }
                     }
                     Spacer()
                 }
@@ -70,7 +77,7 @@ extension WritingMainView {
             Spacer()
             if showCards {
                 SoundView()
-                    .font(.timeLineTitle)
+                    .frame(height: 20)
             }
         }
         .padding(.horizontal, 27)
@@ -82,25 +89,27 @@ extension WritingMainView {
     @ViewBuilder
     private func OneSentence() -> some View {
         TextField("오늘의 한 줄", text: $oneSentence)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, minHeight: 52)
             .multilineTextAlignment(.center)
-            .padding(17)
+            .padding(.horizontal, 17)
             .background(Color.grayF5)
-            .font(.bodyRegular)
+            .font(oneSentence.count > 20 ? .miniRegular : .bodyRegular)
             .foregroundColor(Color.gray23)
             .cornerRadius(10)
             .padding(.bottom, 25)
             .onChange(of: oneSentence) { newValue in
                 let key = UserDefaultKey.oneSentence.string
                 UserDefaults.standard.set(newValue, forKey: key)
-                let maxCharacterLength = 20
+                let maxCharacterLength = 30
                 if maxCharacterLength < newValue.count {
                     oneSentence = String(oneSentence.prefix(maxCharacterLength))
                 }
             }
+            .focused($isFocusedKeyboard)
             .onTapGesture {
                 showCards = false
                 isShowTabbar = false
+                isFocusedKeyboard = true
             }
             .onSubmit {
                 showCards = true
@@ -113,7 +122,7 @@ extension WritingMainView {
         ScrollView(.horizontal, showsIndicators : false){
             HStack(spacing: 0) {
                 let records = Record.allCases
-                let width = UIScreen.main.bounds.width/1.5
+                let width = (UIScreen.main.bounds.height > 750) ? UIScreen.main.bounds.width/1.5 : UIScreen.main.bounds.width/1.8
                 ForEach(records.indices, id: \.self){ index in
                     let record = records[index]
                     GeometryReader { geomitry in

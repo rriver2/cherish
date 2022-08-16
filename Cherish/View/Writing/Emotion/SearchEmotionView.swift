@@ -22,9 +22,10 @@ struct SearchEmotionView: View {
             SearchBar()
             
             if searchText == "" {
-                SearchingEmtionGroups()
+                SearchingEmtionBar()
+                EmtionGroups(emotionList: emotionViewModel.userDefaultEmotionList, addEmotionToDevice: false)
             } else {
-                SearchedEmtionGroups()
+                EmtionGroups(emotionList: emotionViewModel.searchedEmotionList, addEmotionToDevice: true)
             }
         }
         .onChange(of: searchText) { newValue in
@@ -88,10 +89,10 @@ extension SearchEmotionView {
         .padding(.horizontal, 27)
     }
     @ViewBuilder
-    private func SearchedEmtionGroups() -> some View {
+    private func EmtionGroups(emotionList: [String], addEmotionToDevice: Bool) -> some View {
         ScrollView(showsIndicators : false) {
-            ForEach(emotionViewModel.searchedEmotionList.indices, id: \.self) { index in
-                let emotion = emotionViewModel.searchedEmotionList[index]
+            ForEach(emotionList.indices, id: \.self) { index in
+                let emotion = emotionList[index]
                 VStack(alignment: .leading, spacing: 0) {
                     HStack(spacing: 0) {
                         let isSelected = emotionViewModel.selectedEmotionList.contains(emotion)
@@ -111,13 +112,15 @@ extension SearchEmotionView {
                         .background(isSelected ? Color.grayE8 : .clear)
                         .cornerRadius(15)
                         .padding(.bottom, 24)
-                        .padding(.leading, 27)
+                        .padding(.leading, 26)
                         Spacer()
                     }
                     .background(.white)
                     .onTapGesture {
                         emotionViewModel.tabEmotion(emotion: emotion)
-                        emotionViewModel.addEmotionToDevice(emotion: emotion)
+                        if addEmotionToDevice {
+                            emotionViewModel.addEmotionToDevice(emotion: emotion)
+                        }
                     }
                 }
             }
@@ -125,7 +128,7 @@ extension SearchEmotionView {
         .padding(.top, 36)
     }
     @ViewBuilder
-    private func SearchingEmtionGroups() -> some View {
+    private func SearchingEmtionBar() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 0) {
                 Text("최근 검색어")
@@ -141,34 +144,8 @@ extension SearchEmotionView {
                         }
                 }
             }
-            .padding(.horizontal, 27)
+            .padding(.horizontal, 38)
             .padding(.top, 20)
-            ScrollView(showsIndicators : false) {
-                ForEach(emotionViewModel.userDefaultEmotionList.indices, id: \.self) { index in
-                    let emotion = emotionViewModel.userDefaultEmotionList[index]
-                    VStack(alignment: .leading, spacing: 0) {
-                        HStack(spacing: 0) {
-                            HStack(spacing: 0) {
-                                Text(emotion)
-                                    .frame(alignment: .leading)
-                                    .font(.bodyRegular)
-                                    .foregroundColor(Color.gray23)
-                            }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .cornerRadius(15)
-                            .padding(.bottom, 24)
-                            .padding(.leading, 27)
-                            Spacer()
-                        }
-                        .background(.white)
-                        .onTapGesture {
-                            searchText = emotion
-                        }
-                    }
-                }
-                .padding(.top, 30)
-            }
         }
     }
     @ViewBuilder

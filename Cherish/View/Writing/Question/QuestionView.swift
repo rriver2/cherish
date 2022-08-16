@@ -25,7 +25,7 @@ struct QuestionView: View {
                     .font(.bodyRegular)
                     .lineSpacing()
                     .foregroundColor(Color.gray23)
-                    .padding(.top, 30)
+                    .padding(.top, 2)
                 WritingView(context: $context)
                     .padding(.top, 25)
             }
@@ -80,7 +80,6 @@ extension QuestionView {
                 Image(systemName: "chevron.left")
                     .foregroundColor(.gray23)
                     .font(.bodyRegular)
-                    .padding(.top, 25)
             }
             Spacer()
             Text(Record.question.writingMainText)
@@ -91,6 +90,8 @@ extension QuestionView {
                 .foregroundColor(.clear)
                 .font(.bodyRegular)
         }
+        .padding(.top, 25)
+        .padding(.bottom, 28)
         .padding(.horizontal, 27)
     }
 }

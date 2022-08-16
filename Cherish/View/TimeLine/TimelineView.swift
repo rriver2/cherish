@@ -41,11 +41,10 @@ struct TimelineView: View {
                         })
                         ForEach(recordsEntity.indices, id: \.self) { index in
                             let record = recordsEntity[index]
-                            
                             VStack(alignment: .leading, spacing: 0) {
                                 if index == 0, let date = record.date?.dateToString_MY() {
                                     Date(date: date)
-                                        .padding(.top, 35)
+//                                        .padding(.top, 35)
                                 } else if let date = record.date?.dateToString_MY(),
                                           let preDate = recordsEntity[index - 1].date?.dateToString_MY(),
                                           date != preDate
@@ -76,7 +75,7 @@ extension TimelineView {
                 .foregroundColor(Color.gray23)
             Spacer()
             SoundView()
-                .font(.timeLineTitle)
+                .frame(height: 20)
         }
         .padding(.horizontal, 27)
         .padding(.bottom, 49)
@@ -109,14 +108,14 @@ extension TimelineView {
             VStack(alignment: .leading, spacing: 0) {
                 if record.title != "" {
                     Text(record.title ?? "")
-                        .font(.miniSemibold)
+                        .font(.timelineSemibold)
                         .foregroundColor(.gray23)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, 20)
                         .lineSpacing()
                 }
                 Text(record.context ?? "")
-                    .font(.miniRegular)
+                    .font(.timelineRegular)
                     .foregroundColor(.gray23)
                     .lineSpacing()
                     .frame(maxWidth: .infinity, alignment: .leading)

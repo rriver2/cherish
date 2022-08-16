@@ -48,14 +48,14 @@ class EmotionViewModel: ObservableObject {
     }
     
     func addEmotionToDevice(emotion: String) {
-        if !userDefaultEmotionList.contains(emotion){
-            let key = UserDefaultKey.selectedEmotion.string
-            if userDefaultEmotionList.count > 10 {
-                userDefaultEmotionList.removeLast()
-            }
-            userDefaultEmotionList.insert(emotion, at: 0)
-            UserDefaults.standard.set(userDefaultEmotionList, forKey: key)
-            userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
+        if let index = userDefaultEmotionList.firstIndex(of: emotion) {
+            userDefaultEmotionList.remove(at: index)
+        } else if userDefaultEmotionList.count > 10 {
+            userDefaultEmotionList.removeLast()
         }
+        userDefaultEmotionList.insert(emotion, at: 0)
+        let key = UserDefaultKey.selectedEmotion.string
+        UserDefaults.standard.set(userDefaultEmotionList, forKey: key)
+        userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
     }
 }
