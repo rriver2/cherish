@@ -28,23 +28,7 @@ struct SearchQuestionView: View {
                             .padding(.horizontal, 38)
                             .padding(.top, 20)
                 }
-                ForEach(searchedQuestionList, id: \.self) { question in
-                    NavigationLink {
-                        QuestionView(title: question, isModalShow: $isModalShow )
-                    } label: {
-                        VStack(alignment: .leading, spacing: 0){
-                            Text(question)
-                                .padding(.vertical, 25)
-                                .padding(.horizontal, 27)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .multilineTextAlignment(.leading)
-                                .lineSpacing()
-                                .font(.bodyRegular)
-                                .foregroundColor(.gray23)
-                            dividerGrayE8
-                        }
-                    }
-                }
+                QuestionList()
             }
         }
         .onChange(of: searchText) { newValue in
@@ -76,7 +60,7 @@ extension SearchQuestionView {
                     .font(.bodyRegular)
             }
             Spacer()
-            Text(Record.question.writingMainText)
+            Text("질문 찾아보기")
                 .font(.bodySemibold)
                 .foregroundColor(Color.gray23)
             Spacer()
@@ -121,6 +105,26 @@ extension SearchQuestionView {
         }
         .padding(.top, 34)
         .padding(.horizontal, 27)
+    }
+    @ViewBuilder
+    private func QuestionList() -> some View {
+        ForEach(searchedQuestionList, id: \.self) { question in
+            NavigationLink {
+                QuestionView(title: question, isModalShow: $isModalShow )
+            } label: {
+                VStack(alignment: .leading, spacing: 0){
+                    Text(question)
+                        .padding(.vertical, 25)
+                        .padding(.horizontal, 27)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
+                        .lineSpacing()
+                        .font(.bodyRegular)
+                        .foregroundColor(.gray23)
+                    dividerGrayE8
+                }
+            }
+        }
     }
 }
 

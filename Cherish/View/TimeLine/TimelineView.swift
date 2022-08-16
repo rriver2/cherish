@@ -121,9 +121,7 @@ extension TimelineView {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
-        .padding(.leading, 15)
-        .padding(.trailing, 20)
-        .padding(.vertical, 20)
+        .padding(15)
         .background(Color.grayF5)
         .cornerRadius(10)
         .padding(.bottom, 20)

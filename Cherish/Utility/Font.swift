@@ -16,8 +16,6 @@ extension Font {
     static let timeLineTitle = Font.system(size: 20).weight(.regular)
     static let timelineDate = Font.caption2.weight(.regular)
     static let miniSemibold = Font.footnote.weight(.bold)
-    
-    
     static let timelineRegular = Font.subheadline.weight(.regular)
     static let timelineSemibold = Font.subheadline.weight(.bold)
 }
