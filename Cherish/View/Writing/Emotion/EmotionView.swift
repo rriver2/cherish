@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EmotionView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
     @ObservedObject var emotionViewModel: EmotionViewModel
@@ -79,7 +80,7 @@ extension EmotionView {
                             Text(detailEmotion)
                                 .frame(alignment: .leading)
                                 .font(.bodyRegular)
-                                .foregroundColor(Color.gray23)
+                                .foregroundColor((colorScheme == .dark && isSelected) ? Color.grayF5: Color.gray23)
                             if isSelected {
                                 Image(systemName: "xmark")
                                     .padding(.leading, 7)
@@ -88,11 +89,11 @@ extension EmotionView {
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(isSelected ? Color.grayE8 : .clear)
+                        .background(isSelected ? (colorScheme == .dark ? Color.grayEE : Color.grayE8) : .clear)
                         .cornerRadius(15)
                         Spacer()
                     }
-                    .background(.white)
+                    .background(colorScheme == .light ? .white: .black)
                     .onTapGesture {
                         if emotionViewModel.selectedEmotionList.count == 1 {
                             isShowAlert = true
@@ -132,6 +133,7 @@ extension EmotionView {
 struct EmotionView_Previews: PreviewProvider {
     static var previews: some View {
         EmotionView(isModalShow: .constant(false), emotionViewModel: EmotionViewModel())
+            .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
     }

@@ -115,5 +115,6 @@ extension SelectQuestionView {
 struct SelectQuestionView_Previews: PreviewProvider {
     static var previews: some View {
         SelectQuestionView(isModalShow: .constant(false))
+            .preferredColorScheme(.dark)
     }
 }

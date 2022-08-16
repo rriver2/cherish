@@ -88,5 +88,6 @@ extension RecommandedQuestionView {
 struct RecommandedQuestionView_Previews: PreviewProvider {
     static var previews: some View {
         RecommandedQuestionView(isModalShow: .constant(false))
+            .preferredColorScheme(.dark)
     }
 }

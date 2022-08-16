@@ -99,6 +99,7 @@ extension QuestionView {
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
         QuestionView(title: "질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다", isModalShow: .constant(false))
+            .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
     }

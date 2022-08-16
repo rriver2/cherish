@@ -67,7 +67,7 @@ struct FreeView: View {
 //                    Button {
 //                        timeLineViewModel.removeAll()
 //                        dismiss()
-//                        
+//
 //                    } label: {
 //                        Text("삭제")
 //                    }
@@ -123,6 +123,7 @@ extension FreeView {
 struct FreeView_Previews: PreviewProvider {
     static var previews: some View {
         FreeView()
+            .preferredColorScheme(.dark)
             .environmentObject(SoundViewModel())
             .environmentObject(TimeLineViewModel())
     }
