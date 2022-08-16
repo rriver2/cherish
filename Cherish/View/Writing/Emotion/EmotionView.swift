@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct EmotionView: View {
-//    @Binding var emotionList: [String]
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
     @ObservedObject var emotionViewModel: EmotionViewModel
-//    @Binding var context: String
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
+    @State var isShowAlert = false
     private let columns = [
         GridItem(.flexible(), spacing: nil, alignment: .leading),
         GridItem(.flexible(), spacing: nil, alignment: .leading)
@@ -30,6 +29,15 @@ struct EmotionView: View {
                     .padding(.top, 25)
             }
             .padding(.horizontal, 27)
+        }
+        .alert(isPresented: $isShowAlert) {
+            let firstButton = Alert.Button.cancel(Text("네")){
+                dismiss()
+            }
+            let secondButton = Alert.Button.default(Text("취소").foregroundColor(.red))
+            return Alert(title: Text("감정을 다시 선택하시겠습니까?"),
+                         message: Text("작성한 내용은 사라지지 않습니다."),
+                         primaryButton: firstButton, secondaryButton: secondButton)
         }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -86,7 +94,11 @@ extension EmotionView {
                     }
                     .background(.white)
                     .onTapGesture {
-                        emotionViewModel.tabEmotion(emotion: detailEmotion)
+                        if emotionViewModel.selectedEmotionList.count == 1 {
+                            isShowAlert = true
+                        } else {
+                            emotionViewModel.tabEmotion(emotion: detailEmotion)
+                        }
                     }
                 }
             }
