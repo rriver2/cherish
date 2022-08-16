@@ -22,7 +22,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3lu-ed-Iqy">
-                                <rect key="frame" x="148" y="381.5" width="118" height="133"/>
+                                <rect key="frame" x="148" y="381" width="118" height="134"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="qFA-Ky-UZQ">
                                         <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
@@ -32,9 +32,9 @@
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cherish" translatesAutoresizingMaskIntoConstraints="NO" id="reM-bR-8U5">
-                                        <rect key="frame" x="19" y="118" width="80" height="15"/>
+                                        <rect key="frame" x="19" y="118" width="80" height="16"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="UGd-b7-COz"/>
+                                            <constraint firstAttribute="height" constant="16" id="UGd-b7-COz"/>
                                             <constraint firstAttribute="width" constant="80" id="z44-Ty-1GK"/>
                                         </constraints>
                                     </imageView>
@@ -45,7 +45,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="centerX" secondItem="obG-Y5-kRd" secondAttribute="centerX" id="5cz-MP-9tL"/>
-                            <constraint firstItem="obG-Y5-kRd" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="20" symbolic="YES" id="SfN-ll-jLj"/>
+                            <constraint firstItem="obG-Y5-kRd" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" symbolic="YES" id="SfN-ll-jLj"/>
                             <constraint firstAttribute="bottom" secondItem="obG-Y5-kRd" secondAttribute="bottom" constant="20" id="Y44-ml-fuU"/>
                             <constraint firstItem="3lu-ed-Iqy" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="kdd-xo-1py"/>
                             <constraint firstItem="3lu-ed-Iqy" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qve-jo-0PD"/>
