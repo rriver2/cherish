@@ -11,6 +11,7 @@ import Foundation
 enum UserDefaultKey: CaseIterable {
     case isMusicOn
     case oneSentence
+    case selectedEmotion
     
     var string: String {
         switch self {
@@ -18,6 +19,8 @@ enum UserDefaultKey: CaseIterable {
                 return "isMusicOn"
             case .oneSentence:
                 return "oneSentence"
+            case .selectedEmotion:
+                return "selectedEmotion"
         }
     }
 }

@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct WritingMainView: View {
-    
-    @State var ispresent = false
-    @State var recordType = Record.free
-    
+    @Binding var isShowTabbar: Bool
     @State private var showFreeView = false
     @State private var showQuestionView = false
     @State private var showEmotionView = false
     @State private var showInspirationView = false
     @State private var showCards = true
+    @FocusState private var isFocusedKeyboard: Bool
     
+    @State var recordType = Record.free
     @State private var oneSentence: String
     
-    init() {
+    init(isShowTabbar: Binding<Bool>) {
+        self._isShowTabbar = isShowTabbar
         let key = UserDefaultKey.oneSentence.string
         if let oneSentence = UserDefaults.standard.object(forKey: key) as? String {
             self.oneSentence = oneSentence
@@ -33,13 +33,19 @@ struct WritingMainView: View {
         NavigationView {
             ZStack{
                 VStack(spacing: 0) {
-                    VStack(spacing: 0) {
-                        TitleView(title: "ㅇㅏㄲㅣㄷㅏ", isShowSoundView: showCards)
-                        OneSentence()
-                    }
-                    .padding(.horizontal, 20)
+                    Title()
+                    OneSentence()
+                        .padding(.horizontal, 27)
                     if showCards {
                         WritingBoxes()
+                    } else {
+                        Rectangle()
+                            .foregroundColor(.white)
+                            .onTapGesture {
+                                showCards = true
+                                isShowTabbar = true
+                                isFocusedKeyboard = false
+                            }
                     }
                     Spacer()
                 }
@@ -47,27 +53,6 @@ struct WritingMainView: View {
             }
             .navigationBarTitle("", displayMode: .automatic)
             .navigationBarHidden(true)
-            //            .fullScreenCover(isPresented: $ispresent) {
-            //                switch recordType {
-            //                    case .free:
-            //                        VStack(spacing: 0) {
-            //                            FreeView()
-            //                        }
-            //                    case .question:
-            //                        VStack(spacing: 0) {
-            //                            SelectQuestionView(isModalShow: $ispresent)
-            //                        }
-            //                    case .emotion:
-            //                        VStack(spacing: 0) {
-            //                            SelectingEmotionView(isModalShow: $ispresent)
-            //                        }
-            //                    case .inspiration:
-            //                        VStack(spacing: 0) {
-            //                            SelectingInspirationView(isModalShow: $ispresent)
-            //                        }
-            //                }
-            //
-            //            }
             .fullScreenCover(isPresented: $showFreeView) {
                 FreeView()
             }
@@ -77,45 +62,69 @@ struct WritingMainView: View {
             .fullScreenCover(isPresented: $showEmotionView) {
                 SelectingEmotionView(isModalShow: $showEmotionView)
             }
-            //            .fullScreenCover(isPresented: $showInspirationView) {
-            //                SelectingInspirationView(isModalShow: $showInspirationView)
-            //            }
             .navigationViewStyle(StackNavigationViewStyle())
         }
-//        .accentColor(Color.defaultText)
-//        .foregroundColor(Color.defaultText)
         .ignoresSafeArea(.keyboard)
     }
 }
 
 extension WritingMainView {
     @ViewBuilder
+    private func Title() -> some View {
+        HStack(spacing: 0) {
+            Text("Cherish")
+                .kerning(3)
+                .foregroundColor(Color.gray23)
+                .padding(.leading, 3)
+            Spacer()
+            if showCards {
+                SoundView()
+            }
+        }
+        .frame(height: 20)
+        .padding(.horizontal, 27)
+        .padding(.bottom, 49)
+        .foregroundColor(Color.gray23)
+        .font(.timeLineTitle)
+        .padding(.top, 26)
+    }
+    @ViewBuilder
     private func OneSentence() -> some View {
-        TextField("나의 한마디", text: $oneSentence)
-            .frame(maxWidth: .infinity)
-            .padding(25)
+        TextField("오늘의 한 줄", text: $oneSentence)
+            .frame(maxWidth: .infinity, minHeight: 52)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 17)
             .background(Color.grayF5)
+            .font(oneSentence.count > 20 ? .miniRegular : .bodyRegular)
             .foregroundColor(Color.gray23)
             .cornerRadius(10)
-            .padding(.bottom, 20)
+            .padding(.bottom, 25)
             .onChange(of: oneSentence) { newValue in
                 let key = UserDefaultKey.oneSentence.string
                 UserDefaults.standard.set(newValue, forKey: key)
+                let maxCharacterLength = 30
+                if maxCharacterLength < newValue.count {
+                    oneSentence = String(oneSentence.prefix(maxCharacterLength))
+                }
             }
+            .focused($isFocusedKeyboard)
             .onTapGesture {
                 showCards = false
+                isShowTabbar = false
+                isFocusedKeyboard = true
             }
             .onSubmit {
                 showCards = true
+                isShowTabbar = true
             }
             .submitLabel(.done)
     }
     @ViewBuilder
     private func WritingBoxes() -> some View {
         ScrollView(.horizontal, showsIndicators : false){
-            HStack{
+            HStack(spacing: 0) {
                 let records = Record.allCases
-                let width = UIScreen.main.bounds.width/1.5
+                let width = (UIScreen.main.bounds.height > 750) ? UIScreen.main.bounds.width/1.5 : UIScreen.main.bounds.width/1.8
                 ForEach(records.indices, id: \.self){ index in
                     let record = records[index]
                     GeometryReader { geomitry in
@@ -126,9 +135,10 @@ extension WritingMainView {
                                 .foregroundColor(Color.gray23)
                                 .frame(width: width, height: width*1.5)
                             Text("\(record.writingMainText)")
-                                .font(.bigTitle)
+                                .font(.bodySemibold)
+                                .foregroundColor(.gray23)
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 10)
+                                .padding(.vertical, 13)
                                 .background(.white.opacity(0.7))
                                 .cornerRadius(10)
                                 .padding(.horizontal, 25)
@@ -137,10 +147,6 @@ extension WritingMainView {
                         .cornerRadius(10)
                         .rotation3DEffect(.degrees(Double(geomitry.frame(in: .global).minX / -8)), axis: (x: 0.0, y: 0.0, z: 2.0))
                         .offset(x: 0, y: 50)
-                        //                        .onTapGesture {
-                        //                            recordType = record
-                        //                            ispresent = true
-                        //                        }
                         .onTapGesture {
                             switch record {
                                 case .free:
@@ -152,11 +158,11 @@ extension WritingMainView {
                             }
                         }
                     }
-                    .frame(width: width/1.5)
-                    .shadow(color: .gray.opacity(0.4), radius: 4, x: 15, y:15)
+                    .frame(width: width/2.2)
+                    .shadow(color: .gray.opacity(0.5), radius: 7, x: 10, y:10)
                 }
-                .padding(.leading, 60)
-                .padding(.trailing, 150)
+                .padding(.leading, 30)
+                .padding(.trailing, 200)
             }
         }
     }
@@ -164,7 +170,7 @@ extension WritingMainView {
 
 struct WritingMainView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingMainView()
+        WritingMainView(isShowTabbar: .constant(false))
             .environmentObject(SoundViewModel())
     }
 }

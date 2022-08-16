@@ -12,6 +12,9 @@
 		CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC818CD92899ED8C003B8753 /* SaveOnApp.swift */; };
 		CC818CDE2899ED8C003B8753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC818CDD2899ED8C003B8753 /* Assets.xcassets */; };
 		CC818CE12899ED8C003B8753 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC818CE02899ED8C003B8753 /* Preview Assets.xcassets */; };
+		CC835A7A28AA824A004B987F /* EmotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC835A7928AA824A004B987F /* EmotionViewModel.swift */; };
+		CC835A7E28AB4BF1004B987F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC835A7D28AB4BF1004B987F /* Launch Screen.storyboard */; };
+		CC835A8028AB7966004B987F /* SearchQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC835A7F28AB7966004B987F /* SearchQuestionView.swift */; };
 		CC95F3052899F5D6008C3EEF /* SoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3042899F5D6008C3EEF /* SoundView.swift */; };
 		CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F3062899F5DE008C3EEF /* WritingMainView.swift */; };
 		CC95F30B2899F657008C3EEF /* FreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F30A2899F657008C3EEF /* FreeView.swift */; };
@@ -32,7 +35,6 @@
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
 		CC9B2DB728A9DA0C001BF29B /* RecommandedQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */; };
 		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
-		CCD0F41D28A52319003774F0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41C28A52319003774F0 /* TitleView.swift */; };
 		CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */; };
 		CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */; };
 		CCF3931D28A7FDF2008F506C /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3931C28A7FDF2008F506C /* UserDefaultKey.swift */; };
@@ -46,6 +48,9 @@
 		CC818CD92899ED8C003B8753 /* SaveOnApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOnApp.swift; sourceTree = "<group>"; };
 		CC818CDD2899ED8C003B8753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC818CE02899ED8C003B8753 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CC835A7928AA824A004B987F /* EmotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionViewModel.swift; sourceTree = "<group>"; };
+		CC835A7D28AB4BF1004B987F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		CC835A7F28AB7966004B987F /* SearchQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQuestionView.swift; sourceTree = "<group>"; };
 		CC95F3042899F5D6008C3EEF /* SoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundView.swift; sourceTree = "<group>"; };
 		CC95F3062899F5DE008C3EEF /* WritingMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingMainView.swift; sourceTree = "<group>"; };
 		CC95F30A2899F657008C3EEF /* FreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeView.swift; sourceTree = "<group>"; };
@@ -66,7 +71,6 @@
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandedQuestionView.swift; sourceTree = "<group>"; };
 		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
-		CCD0F41C28A52319003774F0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimelineContainer.xcdatamodel; sourceTree = "<group>"; };
 		CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
 		CCF3931C28A7FDF2008F506C /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
@@ -129,10 +133,9 @@
 			children = (
 				CC95F3062899F5DE008C3EEF /* WritingMainView.swift */,
 				CC95F3182899F734008C3EEF /* WritingView.swift */,
-				CCD0F41C28A52319003774F0 /* TitleView.swift */,
 				CC95F3122899F681008C3EEF /* Free */,
-				CC95F3132899F68A008C3EEF /* Question */,
 				CC95F3142899F690008C3EEF /* Emotion */,
+				CC95F3132899F68A008C3EEF /* Question */,
 			);
 			path = Writing;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			children = (
 				CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */,
 				CC95F3162899F6C8008C3EEF /* SelectQuestionView.swift */,
+				CC835A7F28AB7966004B987F /* SearchQuestionView.swift */,
 				CC95F30C2899F65F008C3EEF /* QuestionView.swift */,
 			);
 			path = Question;
@@ -179,6 +183,7 @@
 				CC95F31A2899F743008C3EEF /* SelectingEmotionView.swift */,
 				CCF3931E28A881F0008F506C /* SearchEmotionView.swift */,
 				CC95F30E2899F667008C3EEF /* EmotionView.swift */,
+				CC835A7928AA824A004B987F /* EmotionViewModel.swift */,
 			);
 			path = Emotion;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 			children = (
 				CC95F2FD2899F562008C3EEF /* Writing */,
 				CC95F2FE2899F56A008C3EEF /* TimeLine */,
+				CC835A7D28AB4BF1004B987F /* Launch Screen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC835A7E28AB4BF1004B987F /* Launch Screen.storyboard in Resources */,
 				CC818CE12899ED8C003B8753 /* Preview Assets.xcassets in Resources */,
 				CC818CDE2899ED8C003B8753 /* Assets.xcassets in Resources */,
 			);
@@ -303,9 +310,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC835A7A28AA824A004B987F /* EmotionViewModel.swift in Sources */,
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
-				CCD0F41D28A52319003774F0 /* TitleView.swift in Sources */,
 				CC95F3212899F7F8008C3EEF /* Recode.swift in Sources */,
 				CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */,
 				CC95F3172899F6C8008C3EEF /* SelectQuestionView.swift in Sources */,
@@ -314,6 +321,7 @@
 				CC95F335289A8A1E008C3EEF /* Question.swift in Sources */,
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
 				CCF3931D28A7FDF2008F506C /* UserDefaultKey.swift in Sources */,
+				CC835A8028AB7966004B987F /* SearchQuestionView.swift in Sources */,
 				CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */,
 				CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */,
 				CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */,
@@ -466,6 +474,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -473,7 +482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Rivery.Cherish;
+				PRODUCT_BUNDLE_IDENTIFIER = Rivery.cherish.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -496,6 +505,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -503,7 +513,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Rivery.Cherish;
+				PRODUCT_BUNDLE_IDENTIFIER = Rivery.cherish.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

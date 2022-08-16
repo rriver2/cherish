@@ -25,20 +25,41 @@ extension Array {
     }
 }
 
+extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        navigationBar.isHidden = true
+        interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
+    }
+}
+
 extension View {
-    var dividerGrayE8 : some View{
+    var dividerGrayE8 : some View {
         Rectangle()
             .frame(height: 1)
             .foregroundColor(Color.grayE8)
     }
-    var dividerGray8A : some View{
+    var dividerThickGrayE8 : some View {
+        Rectangle()
+            .frame(height: 2)
+            .foregroundColor(Color.grayE8)
+    }
+    var dividerGray8A : some View {
         Rectangle()
             .frame(height: 1)
             .foregroundColor(Color.gray8A)
     }
-    var dividerThickGray8A : some View{
+    var dividerThickGray8A : some View {
         Rectangle()
-            .frame(height: 3)
+            .frame(height: 4)
             .foregroundColor(Color.gray8A)
+    }
+    func lineSpacing() -> some View {
+        self
+            .lineSpacing(8.0)
     }
 }

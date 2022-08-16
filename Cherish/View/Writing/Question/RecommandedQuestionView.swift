@@ -12,21 +12,26 @@ struct RecommandedQuestionView: View {
     @State private var questionType: Question = .life
     @Binding var isModalShow: Bool
     let randomQuestion = QuestionData.randomQuestion(amount: 3)
+    @GestureState private var dragOffset = CGSize.zero
     
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                dividerGray8A
+                NavigationBar()
+                dividerThickGrayE8
                     .padding(.top, 40)
                 ForEach(randomQuestion, id: \.self) { question in
                     NavigationLink {
                         QuestionView(title: question, isModalShow: $isModalShow )
                     } label: {
-                        VStack(alignment: .leading){
+                        VStack(alignment: .leading, spacing: 0){
                             Text(question)
-                                .padding()
+                                .padding(.vertical, 25)
+                                .padding(.horizontal, 27)
                                 .multilineTextAlignment(.leading)
-                                .padding(.vertical)
+                                .lineSpacing()
+                                .font(.bodyRegular)
+                                .foregroundColor(.gray23)
                             dividerGrayE8
                         }
                     }
@@ -35,28 +40,48 @@ struct RecommandedQuestionView: View {
                     SelectQuestionView(isModalShow: $isModalShow)
                 } label: {
                     Text("다른 질문 더보기")
-                        .font(.miniText)
+                        .font(.miniRegular)
                         .foregroundColor(Color.grayA7)
-                        .padding(.top, 20)
-                        .padding(.leading, 20)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 33)
+                        .padding(.trailing, 27)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 Spacer()
-            }
-            .navigationBarTitle("오늘의 추천 질문", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                    }
-                }
             }
         }
         .accentColor(Color.gray23)
         .tint(Color.gray23)
+        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
+            if (value.translation.height > 100) {
+                dismiss()
+            }
+        })
         .animation(Animation.easeInOut(duration: 0.4), value: questionType)
+    }
+}
+
+extension RecommandedQuestionView {
+    @ViewBuilder
+    private func NavigationBar() -> some View {
+        HStack(alignment: .center, spacing: 0) {
+            Button(action: {
+                dismiss()
+            }) {
+                Image(systemName: "xmark")
+                    .foregroundColor(.gray23)
+                    .font(.bodyRegular)
+            }
+            Spacer()
+            Text("오늘의 추천 질문")
+                .font(.bodySemibold)
+                .foregroundColor(Color.gray23)
+            Spacer()
+            Image(systemName: "xmark")
+                .font(.bodyRegular)
+                .foregroundColor(.clear)
+        }
+        .padding(.top, 25)
+        .padding(.horizontal, 27)
     }
 }
 
