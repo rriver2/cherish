@@ -63,14 +63,14 @@ struct FreeView: View {
                         .font(.bodyRegular)
                     Spacer()
                     
-                    #warning("삭제하기")
-                    Button {
-                        timeLineViewModel.removeAll()
-                        dismiss()
-                        
-                    } label: {
-                        Text("삭제")
-                    }
+//                    #warning("삭제하기")
+//                    Button {
+//                        timeLineViewModel.removeAll()
+//                        dismiss()
+//                        
+//                    } label: {
+//                        Text("삭제")
+//                    }
                     
                     Button {
                         timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)

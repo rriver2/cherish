@@ -72,14 +72,16 @@ extension WritingMainView {
     @ViewBuilder
     private func Title() -> some View {
         HStack(spacing: 0) {
-            Image("Logo")
-                .frame(height: 20)
+            Text("Cherish")
+                .kerning(3)
+                .foregroundColor(Color.gray23)
+                .padding(.leading, 3)
             Spacer()
             if showCards {
                 SoundView()
-                    .frame(height: 20)
             }
         }
+        .frame(height: 20)
         .padding(.horizontal, 27)
         .padding(.bottom, 49)
         .foregroundColor(Color.gray23)

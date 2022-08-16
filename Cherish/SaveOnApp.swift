@@ -17,12 +17,14 @@ struct CherishApp: App {
                 LaunchScreenView()
                     .ignoresSafeArea()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                             isSplashView = false
                         }
                     }
             } else {
                 ContentView()
+                .environmentObject(TimeLineViewModel())
+                .environmentObject(SoundViewModel())
             }
         }
     }

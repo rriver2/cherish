@@ -70,16 +70,16 @@ extension TimelineView {
     private func Title() -> some View {
         HStack(spacing: 0) {
             Text("나의 기록")
-                .frame(height: 20)
-                .font(.timeLineTitle)
                 .foregroundColor(Color.gray23)
+                .padding(.leading, 3)
             Spacer()
-            SoundView()
-                .frame(height: 20)
+                SoundView()
         }
+        .frame(height: 20)
         .padding(.horizontal, 27)
         .padding(.bottom, 49)
         .foregroundColor(Color.gray23)
+        .font(.timeLineTitle)
         .padding(.top, 26)
     }
     @ViewBuilder
