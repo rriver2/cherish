@@ -40,7 +40,7 @@ struct WritingMainView: View {
                         WritingBoxes()
                     } else {
                         Rectangle()
-                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .light ? .white : .black)
                             .onTapGesture {
                                 showCards = true
                                 isShowTabbar = true
