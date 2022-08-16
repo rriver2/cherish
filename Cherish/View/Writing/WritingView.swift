@@ -11,6 +11,11 @@ struct WritingView: View {
     @Binding var context : String
     let date = Date().dateToString_MDY()
     
+    init(context: Binding<String>) {
+        self._context = context
+        UITextView.appearance().backgroundColor = .clear
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(date)
@@ -21,7 +26,6 @@ struct WritingView: View {
             TextEditor(text: $context)
                 .padding(.vertical, 23)
                 .padding(.horizontal, 20)
-                .colorMultiply(Color.grayF5)
                 .foregroundColor(self.context == "내용" ? Color.grayA7 : Color.gray23)
                 .onTapGesture {
                     if self.context == "내용"{
@@ -42,5 +46,6 @@ struct WritingView: View {
 struct WritingView_Previews: PreviewProvider {
     static var previews: some View {
         WritingView(context: .constant("내용"))
+            .preferredColorScheme(.dark)
     }
 }

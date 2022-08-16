@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchEmotionView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
     @ObservedObject var emotionViewModel: EmotionViewModel
@@ -100,7 +101,7 @@ extension SearchEmotionView {
                             Text(emotion)
                                 .frame(alignment: .leading)
                                 .font(.bodyRegular)
-                                .foregroundColor(Color.gray23)
+                                .foregroundColor((colorScheme == .dark && isSelected) ? Color.grayF5: Color.gray23)
                             if isSelected {
                                 Image(systemName: "xmark")
                                     .padding(.leading, 7)
@@ -109,13 +110,13 @@ extension SearchEmotionView {
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(isSelected ? Color.grayE8 : .clear)
+                        .background(isSelected ? (colorScheme == .dark ? Color.grayEE : Color.grayE8) : .clear)
                         .cornerRadius(15)
                         .padding(.bottom, 24)
                         .padding(.leading, 26)
                         Spacer()
                     }
-                    .background(.white)
+                    .background(colorScheme == .light ? .white: .black)
                     .onTapGesture {
                         emotionViewModel.tabEmotion(emotion: emotion)
                         if addEmotionToDevice {

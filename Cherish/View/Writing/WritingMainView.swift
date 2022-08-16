@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WritingMainView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Binding var isShowTabbar: Bool
     @State private var showFreeView = false
     @State private var showQuestionView = false
@@ -15,9 +16,8 @@ struct WritingMainView: View {
     @State private var showInspirationView = false
     @State private var showCards = true
     @FocusState private var isFocusedKeyboard: Bool
-    
     @State var recordType = Record.free
-    @State private var oneSentence: String
+    @State private var oneSentence: String = ""
     
     init(isShowTabbar: Binding<Bool>) {
         self._isShowTabbar = isShowTabbar
@@ -25,7 +25,7 @@ struct WritingMainView: View {
         if let oneSentence = UserDefaults.standard.object(forKey: key) as? String {
             self.oneSentence = oneSentence
         } else {
-            oneSentence = ""
+            self.oneSentence = ""
         }
     }
     
@@ -40,7 +40,7 @@ struct WritingMainView: View {
                         WritingBoxes()
                     } else {
                         Rectangle()
-                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .light ? .white : .black)
                             .onTapGesture {
                                 showCards = true
                                 isShowTabbar = true
@@ -136,7 +136,7 @@ extension WritingMainView {
                                 .frame(width: width, height: width*1.5)
                             Text("\(record.writingMainText)")
                                 .font(.bodySemibold)
-                                .foregroundColor(.gray23)
+                                .foregroundColor(colorScheme == .light ? .gray23 : .grayF5)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 13)
                                 .background(.white.opacity(0.7))
@@ -159,7 +159,7 @@ extension WritingMainView {
                         }
                     }
                     .frame(width: width/2.2)
-                    .shadow(color: .gray.opacity(0.5), radius: 7, x: 10, y:10)
+                    .shadow(color: (colorScheme == .light ? .gray.opacity(0.5) : .clear ), radius: 7, x: 10, y:10)
                 }
                 .padding(.leading, 30)
                 .padding(.trailing, 200)
@@ -171,6 +171,7 @@ extension WritingMainView {
 struct WritingMainView_Previews: PreviewProvider {
     static var previews: some View {
         WritingMainView(isShowTabbar: .constant(false))
+            .preferredColorScheme(.dark)
             .environmentObject(SoundViewModel())
     }
 }

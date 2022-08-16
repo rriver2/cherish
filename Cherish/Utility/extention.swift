@@ -40,7 +40,7 @@ extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate 
 extension View {
     var dividerGrayE8 : some View {
         Rectangle()
-            .frame(height: 1)
+            .frame(height: 1) 
             .foregroundColor(Color.grayE8)
     }
     var dividerThickGrayE8 : some View {

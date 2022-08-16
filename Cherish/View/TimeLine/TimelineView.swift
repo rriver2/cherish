@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct TimelineView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     
     var body: some View {
         if timeLineViewModel.recordsEntity.isEmpty {
             VStack(spacing: 0) {
                 Title()
-                    .background(Color.white)
                 Text("아직 기록한 내용이 없습니다")
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
@@ -81,6 +81,7 @@ extension TimelineView {
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)
+        .background(colorScheme == .light ? .white: .black)
     }
     @ViewBuilder
     private func Date(date: String) -> some View {
@@ -131,6 +132,7 @@ extension TimelineView {
 struct TimelineView_Previews: PreviewProvider {
     static var previews: some View {
         TimelineView()
+            .preferredColorScheme(.dark)
             .environmentObject(SoundViewModel())
             .environmentObject(TimeLineViewModel())
     }
