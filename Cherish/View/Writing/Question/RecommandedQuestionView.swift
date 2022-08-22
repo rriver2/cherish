@@ -12,7 +12,6 @@ struct RecommandedQuestionView: View {
     @State private var questionType: Question = .life
     @Binding var isModalShow: Bool
     let randomQuestion = QuestionData.randomQuestion(amount: 3)
-    @GestureState private var dragOffset = CGSize.zero
     
     var body: some View {
         NavigationView {
@@ -51,11 +50,6 @@ struct RecommandedQuestionView: View {
         }
         .accentColor(Color.gray23)
         .tint(Color.gray23)
-        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-            if (value.translation.height > 100) {
-                dismiss()
-            }
-        })
         .animation(Animation.easeInOut(duration: 0.4), value: questionType)
     }
 }

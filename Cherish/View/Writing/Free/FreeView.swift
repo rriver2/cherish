@@ -18,7 +18,6 @@ struct FreeView: View {
     @State private var title = "제목"
     @State private var context = "내용"
     @State private var isShowAlert = false
-    @GestureState private var dragOffset = CGSize.zero
     @State private var alertCategory: AlertCategory = .leave
     
     init() {
@@ -48,25 +47,8 @@ struct FreeView: View {
                     Spacer()
                 }
             }
-            .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-                if (value.translation.height > 100) {
-                    if title != "제목" || context != "내용" {
-                        isShowAlert = true
-                        alertCategory = .leave
-                    } else {
-                        dismiss()
-                    }
-                }
-            })
             .alert(isPresented: $isShowAlert) {
-                switch alertCategory {
-                    case .leave:
-                        return Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
-                            dismiss()
-                        }), secondaryButton: .cancel(Text("취소")))
-                    case .save:
-                        return Alert(title: Text("제목과 내용을 모두 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
-                }
+                saveAlert()
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
@@ -109,8 +91,8 @@ extension FreeView {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
                 if title != "제목" || context != "내용" {
-                    isShowAlert = true
                     alertCategory = .leave
+                    isShowAlert = true
                 } else {
                     dismiss()
                 }
@@ -133,6 +115,16 @@ extension FreeView {
         .padding(.top, 25)
         .padding(.bottom, 28)
         .padding(.horizontal, 27)
+    }
+    func saveAlert() -> Alert {
+            switch alertCategory {
+                case .leave:
+                    return Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                        dismiss()
+                    }), secondaryButton: .cancel(Text("취소")))
+                case .save:
+                    return Alert(title: Text("제목과 내용을 모두 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
+            }
     }
 }
 

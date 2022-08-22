@@ -14,7 +14,6 @@ struct EmotionView: View {
     @ObservedObject var emotionViewModel: EmotionViewModel
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     @State var isShowAlert = false
-    @State private var alertCategory: AlertCategory = .leave
     
     private let columns = [
         GridItem(.flexible(), spacing: nil, alignment: .leading),
@@ -35,19 +34,7 @@ struct EmotionView: View {
             .padding(.horizontal, 27)
         }
         .alert(isPresented: $isShowAlert) {
-            switch alertCategory {
-                case .leave:
-                    let firstButton = Alert.Button.cancel(Text("네")) {
-                        emotionViewModel.selectedEmotionList = []
-                        dismiss()
-                    }
-                    let secondButton = Alert.Button.default(Text("취소").foregroundColor(.red))
-                    return Alert(title: Text("감정을 다시 선택하시겠습니까?"),
-                                 message: Text("작성한 내용은 사라지지 않습니다."),
-                                 primaryButton: firstButton, secondaryButton: secondButton)
-                case .save:
-                    return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
-            }
+            emotionViewModel.showEmotionViewAlert(dismiss: dismiss)
         }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -57,7 +44,7 @@ struct EmotionView: View {
                 Button {
                     if emotionViewModel.context == "내용" || emotionViewModel.context == "" {
                         isShowAlert = true
-                        alertCategory = .save
+                        emotionViewModel.alertCategory = .save
                     } else {
                         let emotionListString = emotionViewModel.selectedEmotionList.joined(separator: "    ")
                         timeLineViewModel.addRecord(date: Date(), title: emotionListString, context: emotionViewModel.context, kind: Record.emotion)
@@ -109,9 +96,9 @@ extension EmotionView {
                     }
                     .background(colorScheme == .light ? .white: .black)
                     .onTapGesture {
-                        if emotionViewModel.selectedEmotionList.count == 1 {
+                        if emotionViewModel.selectedEmotionList.count <= 1 {
                             isShowAlert = true
-                            alertCategory = .leave
+                            emotionViewModel.alertCategory = .leave
                         } else {
                             emotionViewModel.tabEmotion(emotion: detailEmotion)
                         }

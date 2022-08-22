@@ -66,8 +66,8 @@ struct QuestionView: View {
         .textInputAutocapitalization(.never)
         .tint(Color.gray23)
         .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-            #warning("왜 context가 내용으로 인식되는 거지 ?")
-//            print(context)
+            #warning("왜 context가 내용으로 인식되는 거지 ? help")
+            print(context)
             if (value.startLocation.x < 30 && value.translation.width > 100) {
                 if context == "내용" || context == "" {
                     dismiss()
@@ -85,7 +85,6 @@ extension QuestionView {
     private func NavigationBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
-//                print(context)
                 if context == "내용" || context == "" {
                     dismiss()
                 } else {

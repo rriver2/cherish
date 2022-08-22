@@ -13,8 +13,6 @@ struct SelectingEmotionView: View {
     @StateObject var emotionViewModel = EmotionViewModel()
     @Binding var isModalShow: Bool
     @State private var isShowNextView = false
-    @GestureState private var dragOffset = CGSize.zero
-    @State private var alertCategory: AlertCategory = .leave
     
     @FocusState private var isKeyboardOpen: Bool
     
@@ -34,29 +32,10 @@ struct SelectingEmotionView: View {
             }
         }
         .alert(isPresented: $emotionViewModel.isShowAlert) {
-            switch alertCategory {
-                case .leave:
-                    return Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
-                        dismiss()
-                    }), secondaryButton: .cancel(Text("취소")))
-                case .save:
-                    return Alert(title: Text(emotionViewModel.selectedEmotionList.isEmpty ? "감정을 한 개 이상 선택해주세요" : "6개 이하로 선택해주세요"), message: nil, dismissButton: .cancel(Text("네")))
-            }
-            
+            emotionViewModel.showSelectingEmotionViewAlert(dismiss: dismiss)
         }
         .accentColor(Color.gray23)
         .tint(Color.gray23)
-        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-            if (value.translation.height > 100) {
-                #warning("수정해야 함..ㅠㅠ")
-                if !emotionViewModel.selectedEmotionList.isEmpty  {
-                    alertCategory = .leave
-                    emotionViewModel.isShowAlert = true
-                } else {
-                    dismiss()
-                }
-            }
-        })
         .animation(Animation.easeInOut(duration: 0.4), value: emotionViewModel.emotionType)
         .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
     }
@@ -133,8 +112,8 @@ extension SelectingEmotionView {
                 if emotionViewModel.selectedEmotionList.isEmpty {
                     dismiss()
                 } else {
+                    emotionViewModel.alertCategory = .leave
                     emotionViewModel.isShowAlert = true
-                    alertCategory = .leave
                 }
             }) {
                 Image(systemName: "xmark")
@@ -159,9 +138,9 @@ extension SelectingEmotionView {
                 Image(systemName: "checkmark")
                     .font(.bodyRegular)
                     .onTapGesture {
-                        if emotionViewModel.selectedEmotionList.isEmpty || emotionViewModel.selectedEmotionList.count > 6 {
+                        if emotionViewModel.selectedEmotionList.isEmpty {
+                            emotionViewModel.alertCategory = .save
                             emotionViewModel.isShowAlert = true
-                            alertCategory = .save
                         } else {
                             isShowNextView = true
                         }
