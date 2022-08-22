@@ -65,11 +65,11 @@ struct FreeView: View {
 //                    }
                     
                     Button {
-                        if title == "제목" || context == "내용" || context == "" || title == "" {
+                        if context == "내용" || context == "" {
                             isShowAlert = true
                             alertCategory = .save
                         } else {
-                            timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.free)
+                            timeLineViewModel.addRecord(date: Date(), title: title == "제목" ? "" : title, context: context, kind: Record.free)
                             dismiss()
                         }
                     } label: {
@@ -90,7 +90,7 @@ extension FreeView {
     private func NavigationBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
-                if title != "제목" || context != "내용" {
+                if context != "내용" {
                     alertCategory = .leave
                     isShowAlert = true
                 } else {
@@ -123,7 +123,7 @@ extension FreeView {
                         dismiss()
                     }), secondaryButton: .cancel(Text("취소")))
                 case .save:
-                    return Alert(title: Text("제목과 내용을 모두 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
+                    return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
             }
     }
 }
