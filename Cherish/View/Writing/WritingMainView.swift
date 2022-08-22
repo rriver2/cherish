@@ -17,16 +17,10 @@ struct WritingMainView: View {
     @State private var showCards = true
     @FocusState private var isFocusedKeyboard: Bool
     @State var recordType = Record.free
-    @State private var oneSentence: String = ""
+    @State private var oneSentence: String = (UserDefaults.standard.object(forKey: UserDefaultKey.oneSentence.string) as? String ?? "")
     
     init(isShowTabbar: Binding<Bool>) {
         self._isShowTabbar = isShowTabbar
-        let key = UserDefaultKey.oneSentence.string
-        if let oneSentence = UserDefaults.standard.object(forKey: key) as? String {
-            self.oneSentence = oneSentence
-        } else {
-            self.oneSentence = ""
-        }
     }
     
     var body: some View {
