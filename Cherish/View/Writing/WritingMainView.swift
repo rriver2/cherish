@@ -90,7 +90,7 @@ extension WritingMainView {
     }
     @ViewBuilder
     private func OneSentence() -> some View {
-        TextField("오늘의 한 줄", text: $oneSentence)
+        TextField("요즘 나의 한마디", text: $oneSentence)
             .frame(maxWidth: .infinity, minHeight: 52)
             .multilineTextAlignment(.center)
             .padding(.horizontal, 17)

@@ -9,13 +9,13 @@ import SwiftUI
 
 enum tabbarCategory: String, CaseIterable{
     case writing = "writing"
-    case timeLine = "timeLine"
+    case timeline = "timeline"
     
     var imageName: String {
         switch self {
             case .writing:
                 return "square.and.pencil"
-            case .timeLine:
+            case .timeline:
                 return "book"
         }
     }
