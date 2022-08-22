@@ -38,8 +38,15 @@ struct WritingView: View {
                 .cornerRadius(10)
                 .font(.bodyRegular)
         }
+        .onTapGesture {
+            endEditing()
+        }
         .tint(Color.gray23)
         .accentColor(Color.gray23)
+    }
+    
+    private func endEditing() {
+        UIApplication.shared.endEditing()
     }
 }
 

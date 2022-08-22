@@ -56,13 +56,13 @@ struct FreeView: View {
                         .font(.bodyRegular)
                     Spacer()
                     
-//                    #warning("삭제하기")
-//                    Button {
-//                        timeLineViewModel.removeAll()
-//                        dismiss()
-//                    } label: {
-//                        Text("삭제")
-//                    }
+                    //                    #warning("삭제하기")
+                    //                    Button {
+                    //                        timeLineViewModel.removeAll()
+                    //                        dismiss()
+                    //                    } label: {
+                    //                        Text("삭제")
+                    //                    }
                     
                     Button {
                         if context == "내용" || context == "" {
@@ -90,7 +90,7 @@ extension FreeView {
     private func NavigationBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
-                if context != "내용" {
+                if checkShouldShowAlert() {
                     alertCategory = .leave
                     isShowAlert = true
                 } else {
@@ -116,22 +116,29 @@ extension FreeView {
         .padding(.bottom, 28)
         .padding(.horizontal, 27)
     }
-    func saveAlert() -> Alert {
-            switch alertCategory {
-                case .leave:
-                    return Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
-                        dismiss()
-                    }), secondaryButton: .cancel(Text("취소")))
-                case .save:
-                    return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
-            }
+    private func saveAlert() -> Alert {
+        switch alertCategory {
+            case .leave:
+                return Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                    dismiss()
+                }), secondaryButton: .cancel(Text("취소")))
+            case .save:
+                return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
+        }
+    }
+    private func checkShouldShowAlert() -> Bool {
+        if ( context == "내용" && title == "제목") { return false }
+        else if  ( context == "내용" && title == "") { return false }
+        else if  ( context == "" && title == "제목") { return false }
+        else if  ( context == "" && title == "") { return false }
+        else { return true }
     }
 }
 
 struct FreeView_Previews: PreviewProvider {
     static var previews: some View {
         FreeView()
-//            .preferredColorScheme(.dark)
+        //            .preferredColorScheme(.dark)
             .environmentObject(SoundViewModel())
             .environmentObject(TimeLineViewModel())
     }
