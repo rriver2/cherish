@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CC0F9CF828ABB545005D94F7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC0F9CF728ABB545005D94F7 /* Launch Screen.storyboard */; };
+		CC0F9CFD28B3AF59005D94F7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */; };
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
 		CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC818CD92899ED8C003B8753 /* SaveOnApp.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		CC0F9CF728ABB545005D94F7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		CC818CD62899ED8C003B8753 /* Cherish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cherish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC0F9CFB28B3AF42005D94F7 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		CC818CCD2899ED8B003B8753 = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +222,7 @@
 			children = (
 				CC95F2FD2899F562008C3EEF /* Writing */,
 				CC95F2FE2899F56A008C3EEF /* TimeLine */,
+				CC0F9CFB28B3AF42005D94F7 /* Setting */,
 				CC0F9CF728ABB545005D94F7 /* Launch Screen.storyboard */,
 			);
 			path = View;
@@ -331,6 +342,7 @@
 				CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */,
 				CC95F32A289A03A4008C3EEF /* Font.swift in Sources */,
 				CC95F32E289A78B3008C3EEF /* TimelineView.swift in Sources */,
+				CC0F9CFD28B3AF59005D94F7 /* SettingView.swift in Sources */,
 				CC95F31B2899F743008C3EEF /* SelectingEmotionView.swift in Sources */,
 				CC95F32C289A77F9008C3EEF /* ContentView.swift in Sources */,
 				CCF3931F28A881F0008F506C /* SearchEmotionView.swift in Sources */,

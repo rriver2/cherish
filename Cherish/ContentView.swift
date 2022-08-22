@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-enum tabbarCategory: String, CaseIterable{
+enum TabbarCategory: String, CaseIterable{
     case writing = "writing"
     case timeline = "timeline"
+    case setting = "setting"
     
     var imageName: String {
         switch self {
@@ -17,22 +18,26 @@ enum tabbarCategory: String, CaseIterable{
                 return "square.and.pencil"
             case .timeline:
                 return "book"
+            case .setting:
+                return "gearshape"
         }
     }
 }
 
 struct ContentView: View {
-    @State private var selectedIndex = 0
+    @State private var tabbarCategory: TabbarCategory = .writing
     @State var isShowTabbar = true
     
     var body: some View {
         VStack {
             ZStack {
-                switch selectedIndex {
-                    case 0:
+                switch tabbarCategory {
+                    case .writing:
                         WritingMainView(isShowTabbar: $isShowTabbar)
-                    default:
+                    case .timeline:
                         TimelineView()
+                    case .setting:
+                        SettingView()
                 }
             }
             .accentColor(Color.gray23)
@@ -40,8 +45,8 @@ struct ContentView: View {
             HStack {
                 Spacer()
                 Spacer()
-                ForEach(tabbarCategory.allCases.indices, id: \.self) { index in
-                    let tabbarItem = tabbarCategory.allCases[index]
+                ForEach(TabbarCategory.allCases.indices, id: \.self) { index in
+                    let tabbarItem = TabbarCategory.allCases[index]
                     if index != 0 {
                         Spacer()
                         Spacer()
@@ -55,11 +60,11 @@ struct ContentView: View {
                     }
                     .padding(.top, 10)
                     .padding(.bottom, 15)
-                    .foregroundColor(selectedIndex == index ? Color.gray23 : Color.gray8A)
+                    .foregroundColor(tabbarCategory == tabbarItem ? Color.gray23 : Color.gray8A)
                     .gesture(
                         TapGesture()
                             .onEnded { _ in
-                                selectedIndex = index
+                                tabbarCategory = tabbarItem
                             }
                     )
                 }
