@@ -20,15 +20,18 @@ struct SearchQuestionView: View {
             NavigationBar()
             SearchBar()
             ScrollView(showsIndicators: false) {
-                if searchText == "" {
-                        Text("오늘의 추천 질문")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.miniSemibold)
-                            .foregroundColor(.gray8A)
-                            .padding(.horizontal, 38)
-                            .padding(.top, 20)
+                VStack(alignment: .leading, spacing: 0) {
+                    if searchText == "" {
+                            Text("오늘의 추천 질문")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.miniSemibold)
+                                .foregroundColor(.gray8A)
+                                .padding(.horizontal, 38)
+                                .padding(.top, 20)
+                    }
+                    QuestionList()
+                        .padding(.top, searchText == "" ? 0 : 11)
                 }
-                QuestionList()
             }
         }
         .onChange(of: searchText) { newValue in

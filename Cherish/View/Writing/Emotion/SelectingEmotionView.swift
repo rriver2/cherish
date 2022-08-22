@@ -25,9 +25,11 @@ struct SelectingEmotionView: View {
                         .padding(.top, 50)
                 }
                 ScrollView(showsIndicators: false) {
-                    EmotionList()
-                        .padding(.bottom, 24)
-                        .padding(.top, 13)
+                    VStack(alignment: .leading, spacing: 0) {
+                        EmotionList()
+                            .padding(.bottom, 24)
+                            .padding(.top, 13)
+                    }
                 }
             }
         }

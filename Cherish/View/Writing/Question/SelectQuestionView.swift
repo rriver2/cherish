@@ -19,7 +19,9 @@ struct SelectQuestionView: View {
             SelectQuestionType()
                 .padding(.top, 40)
             ScrollView(showsIndicators: false) {
-                QuestionList()
+                VStack(alignment: .leading, spacing: 0) {
+                    QuestionList()
+                }
             }
             Spacer()
         }

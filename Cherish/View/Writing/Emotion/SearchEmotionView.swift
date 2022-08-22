@@ -92,9 +92,9 @@ extension SearchEmotionView {
     @ViewBuilder
     private func EmtionGroups(emotionList: [String], addEmotionToDevice: Bool) -> some View {
         ScrollView(showsIndicators : false) {
-            ForEach(emotionList.indices, id: \.self) { index in
-                let emotion = emotionList[index]
-                VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(emotionList.indices, id: \.self) { index in
+                    let emotion = emotionList[index]
                     HStack(spacing: 0) {
                         let isSelected = emotionViewModel.selectedEmotionList.contains(emotion)
                         HStack(spacing: 0) {
