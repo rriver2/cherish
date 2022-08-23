@@ -162,5 +162,8 @@ struct SelectingEmotionView_Previews: PreviewProvider {
     static var previews: some View {
         SelectingEmotionView(isModalShow: .constant(false))
             .preferredColorScheme(.dark)
+            .environmentObject(TimeLineViewModel())
+            .environmentObject(SoundViewModel())
+            .environmentObject(DarkModeViewModel())
     }
 }

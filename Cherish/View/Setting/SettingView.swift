@@ -16,14 +16,14 @@ struct SettingView: View {
         NavigationView {
             VStack(spacing: 48) {
                 Title()
-                HStack(spacing: 0) {
-                    Text("화면 잠금")
-                    Spacer()
-                    Image(isLockScreen ? "ToggleOn" : "ToggleOff")
-                        .onTapGesture {
-                            isLockScreen.toggle()
-                        }
-                }
+                //                HStack(spacing: 0) {
+                //                    Text("화면 잠금")
+                //                    Spacer()
+                //                    Image(isLockScreen ? "ToggleOn" : "ToggleOff")
+                //                        .onTapGesture {
+                //                            isLockScreen.toggle()
+                //                        }
+                //                }
                 
                 NavigationLink {
                     DarkModeView(isShowTabbar: $isShowTabbar)
@@ -35,25 +35,29 @@ struct SettingView: View {
                     }
                 }
                 
-                HStack(spacing: 0) {
-                    Text("의견 남기기")
-                    Spacer()
-                    Image(systemName: "chevron.forward")
-                }
+                //                HStack(spacing: 0) {
+                //                    Text("의견 남기기")
+                //                    Spacer()
+                //                    Image(systemName: "chevron.forward")
+                //                }
                 
-//                HStack(spacing: 0) {
-//                    Text("친구에게 공유하기")
-//                    Spacer()
-//                    Image(systemName: "chevron.forward")
-//                }
-//                .onTapGesture {
-//                    actionSheet()
-//                }
+                //                HStack(spacing: 0) {
+                //                    Text("친구에게 공유하기")
+                //                    Spacer()
+                //                    Image(systemName: "chevron.forward")
+                //                }
+                //                .onTapGesture {
+                //                    actionSheet()
+                //                }
                 
-                HStack(spacing: 0) {
-                    Text("라이센스")
-                    Spacer()
-                    Image(systemName: "chevron.forward")
+                NavigationLink {
+                    LicenseView(isShowTabbar: $isShowTabbar)
+                } label: {
+                    HStack(spacing: 0) {
+                        Text("오픈 소스 라이센스")
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                    }
                 }
                 Spacer()
             }
@@ -61,17 +65,17 @@ struct SettingView: View {
             .foregroundColor(.gray23)
         }
     }
-//    func actionSheet() {
-//        guard let urlShare = URL(string: "https://developer.apple.com/xcode/swiftui/") else { return }
-//        let text = "cherish - 나를 들여다보는 시간 🫧"
-//        let activityVC = UIActivityViewController(activityItems: [urlShare, text], applicationActivities: nil)
-//        let allScenes = UIApplication.shared.connectedScenes
-//        let scene = allScenes.first { $0.activationState == .foregroundActive }
-//
-//        if let windowScene = scene as? UIWindowScene {
-//            windowScene.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
-//        }
-//    }
+    //    func actionSheet() {
+    //        guard let urlShare = URL(string: "https://developer.apple.com/xcode/swiftui/") else { return }
+    //        let text = "cherish - 나를 들여다보는 시간 🫧"
+    //        let activityVC = UIActivityViewController(activityItems: [urlShare, text], applicationActivities: nil)
+    //        let allScenes = UIApplication.shared.connectedScenes
+    //        let scene = allScenes.first { $0.activationState == .foregroundActive }
+    //
+    //        if let windowScene = scene as? UIWindowScene {
+    //            windowScene.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+    //        }
+    //    }
 }
 
 extension SettingView {
@@ -95,5 +99,8 @@ extension SettingView {
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
         SettingView(isShowTabbar: .constant(true))
+            .environmentObject(TimeLineViewModel())
+            .environmentObject(SoundViewModel())
+            .environmentObject(DarkModeViewModel())
     }
 }

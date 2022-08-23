@@ -66,7 +66,7 @@ struct QuestionView: View {
         .textInputAutocapitalization(.never)
         .tint(Color.gray23)
         .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-            #warning("왜 context가 내용으로 인식되는 거지 ? help")
+#warning("왜 context가 내용으로 인식되는 거지 ? help")
             print(context)
             if (value.startLocation.x < 30 && value.translation.width > 100) {
                 if context == "내용" || context == "" {
@@ -116,5 +116,6 @@ struct QuestionView_Previews: PreviewProvider {
         QuestionView(title: "질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다", isModalShow: .constant(false))
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
+            .environmentObject(DarkModeViewModel())
     }
 }

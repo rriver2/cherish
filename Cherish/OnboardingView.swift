@@ -1,0 +1,112 @@
+//
+//  OnboardingView.swift
+//  Cherish
+//
+//  Created by 이가은 on 2022/08/23.
+//
+
+import SwiftUI
+
+struct OnboardingView: View {
+    @Binding var isShowOnboarding: Bool
+    @State var onBoardingNumber: Int = 0
+    @EnvironmentObject var soundViewModel: SoundViewModel
+    
+    var body: some View {
+        VStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center, spacing: 7) {
+                Text("Skip")
+                    .foregroundColor(.clear)
+                Spacer()
+                let array = Array(0..<6)
+                ForEach(array, id: \.self) { index in
+                    Circle()
+                        .foregroundColor(index == onBoardingNumber ? Color.gray23 : Color(hex: "D2D2D2"))
+                        .frame(width: 8, height: 8)
+                }
+                Spacer()
+                if onBoardingNumber != 5 {
+                Button {
+                    endOnboarding()
+                } label: {
+                    Text("Skip")
+                        .foregroundColor(.grayA7)
+                }
+                } else {
+                    Text("Skip")
+                        .foregroundColor(.clear)
+                }
+            }
+            .padding(.top, 37)
+            .padding(.bottom, 37)
+            
+            VStack(alignment: .center, spacing: 0) {
+                let imageName = "Onboarding" + String(onBoardingNumber+1)
+                ZStack(alignment: .bottom) {
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxWidth: UIScreen.main.bounds.width)
+                    
+                    if onBoardingNumber == 5 {
+                        VStack(spacing: 0) {
+                            Button {
+                                endOnboarding()
+                                soundViewModel.isMusicOn = true
+                            } label: {
+                                Text("음악과 함께 시작하기")
+                                    .font(.bodySemibold)
+                                    .foregroundColor(.grayF5)
+                                    .frame(height: 56)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.gray23)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal, 27)
+                                    .padding(.bottom, 13)
+                            }
+                            
+                            
+                            Button {
+                                endOnboarding()
+                                soundViewModel.isMusicOn = false
+                            } label: {
+                                Text("음악 없이 시작하기")
+                                    .font(.miniSemibold)
+                                    .foregroundColor(.gray23)
+                                    .padding(.horizontal, 27)
+                                    .padding(.bottom, 30)
+                            }
+                        }
+                    } else {
+                        Button {
+                            onBoardingNumber += 1
+                        } label: {
+                            Text("다음으로")
+                                .font(.bodySemibold)
+                                .foregroundColor(.grayF5)
+                                .frame(height: 56)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.gray23)
+                                .cornerRadius(10)
+                                .padding(.horizontal, 27)
+                                .padding(.bottom, 58)
+                        }
+                    }
+                }
+            }
+        }
+        .padding(.horizontal, 27)
+    }
+    
+    func endOnboarding() {
+        let key = UserDefaultKey.isShowOnboarding.string
+        UserDefaults.standard.set(false, forKey: key)
+        isShowOnboarding = false
+    }
+}
+
+struct OnboardingView_Previews: PreviewProvider {
+    static var previews: some View {
+        OnboardingView(isShowOnboarding: .constant(false))
+    }
+}

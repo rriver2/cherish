@@ -11,8 +11,13 @@ struct ContentView: View {
     @State private var tabbarCategory: TabbarCategory = .writing
     @State var isShowTabbar = true
     @EnvironmentObject var darkModeViewModel: DarkModeViewModel
+    @State var isShowOnboarding = (UserDefaults.standard.object(forKey: UserDefaultKey.isShowOnboarding.string) as? Bool ?? true)
     
     var body: some View {
+        if isShowOnboarding {
+            OnboardingView(isShowOnboarding: $isShowOnboarding)
+                .preferredColorScheme(darkModeViewModel.mode)
+        } else {
         VStack {
             ZStack {
                 switch tabbarCategory {
@@ -57,7 +62,8 @@ struct ContentView: View {
             }
             }
         }
-        .preferredColorScheme(darkModeViewModel.mode)
+            .preferredColorScheme(darkModeViewModel.mode)
+        }
     }
 }
 

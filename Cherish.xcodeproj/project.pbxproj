@@ -39,6 +39,8 @@
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
 		CC9B2DB728A9DA0C001BF29B /* RecommandedQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */; };
 		CCB1C1CC28B4784C0006D4DA /* DarkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */; };
+		CCB1C1D628B4B6780006D4DA /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1D528B4B6780006D4DA /* LicenseView.swift */; };
+		CCB1C1D828B4C1430006D4DA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */; };
 		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
 		CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */; };
 		CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */; };
@@ -80,6 +82,8 @@
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandedQuestionView.swift; sourceTree = "<group>"; };
 		CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewModel.swift; sourceTree = "<group>"; };
+		CCB1C1D528B4B6780006D4DA /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
+		CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
 		CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimelineContainer.xcdatamodel; sourceTree = "<group>"; };
 		CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 				CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */,
 				CC0F9CFE28B3B443005D94F7 /* DarkModeView.swift */,
 				CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */,
+				CCB1C1D528B4B6780006D4DA /* LicenseView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 			children = (
 				CC818CD92899ED8C003B8753 /* SaveOnApp.swift */,
 				CC95F32B289A77F9008C3EEF /* ContentView.swift */,
+				CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */,
 				CC95F3242899FA34008C3EEF /* Utility */,
 				CC95F339289AB183008C3EEF /* Data */,
 				CC95F31F2899F7D6008C3EEF /* Model */,
@@ -336,6 +342,7 @@
 				CC835A7A28AA824A004B987F /* EmotionViewModel.swift in Sources */,
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
+				CCB1C1D628B4B6780006D4DA /* LicenseView.swift in Sources */,
 				CC0F9D0328B3B4EB005D94F7 /* Tabbar.swift in Sources */,
 				CC95F3212899F7F8008C3EEF /* Recode.swift in Sources */,
 				CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */,
@@ -353,6 +360,7 @@
 				CC95F331289A7B36008C3EEF /* Date.swift in Sources */,
 				CC95F3282899FCEC008C3EEF /* extention.swift in Sources */,
 				CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */,
+				CCB1C1D828B4C1430006D4DA /* OnboardingView.swift in Sources */,
 				CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */,
 				CC95F32A289A03A4008C3EEF /* Font.swift in Sources */,
 				CC95F32E289A78B3008C3EEF /* TimelineView.swift in Sources */,

@@ -29,8 +29,8 @@ class SoundViewModel: ObservableObject {
         if let isMusicOn = UserDefaults.standard.object(forKey: key) as? Bool {
             self.isMusicOn = isMusicOn
         } else {
-            UserDefaults.standard.set(true, forKey: key)
-            self.isMusicOn = true
+            UserDefaults.standard.set(false, forKey: key)
+            self.isMusicOn = false
         }
         
         do {

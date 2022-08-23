@@ -13,6 +13,7 @@ enum UserDefaultKey: CaseIterable {
     case oneSentence
     case selectedEmotion
     case darkMode
+    case isShowOnboarding
     
     var string: String {
         switch self {
@@ -24,6 +25,8 @@ enum UserDefaultKey: CaseIterable {
                 return "selectedEmotion"
             case .darkMode:
                 return "darkMode"
+            case .isShowOnboarding:
+                return "isShowOnboarding"
         }
     }
 }

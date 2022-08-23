@@ -54,5 +54,8 @@ struct WritingView_Previews: PreviewProvider {
     static var previews: some View {
         WritingView(context: .constant("내용"))
             .preferredColorScheme(.dark)
+            .environmentObject(TimeLineViewModel())
+            .environmentObject(SoundViewModel())
+            .environmentObject(DarkModeViewModel())
     }
 }

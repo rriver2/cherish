@@ -135,8 +135,8 @@ extension WritingMainView {
                         }
                         .frame(width: width, height: width*1.5)
                         .cornerRadius(10)
+                        .offset(x: width/4, y: 50)
                         .rotation3DEffect(.degrees(Double(geomitry.frame(in: .global).minX / -8)), axis: (x: 0.0, y: 0.0, z: 2.0))
-                        .offset(x: 0, y: 50)
                         .onTapGesture {
                             switch record {
                                 case .free:
@@ -151,9 +151,9 @@ extension WritingMainView {
                     .frame(width: width/2.2)
                     .shadow(color: (colorScheme == .light ? .gray.opacity(0.5) : .clear ), radius: 7, x: 10, y:10)
                 }
-                .padding(.leading, 30)
                 .padding(.trailing, 200)
             }
+            .padding(.trailing, 100)
         }
     }
 }
@@ -162,6 +162,8 @@ struct WritingMainView_Previews: PreviewProvider {
     static var previews: some View {
         WritingMainView(isShowTabbar: .constant(false))
             .preferredColorScheme(.dark)
+            .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
+            .environmentObject(DarkModeViewModel())
     }
 }

@@ -133,7 +133,8 @@ struct TimelineView_Previews: PreviewProvider {
     static var previews: some View {
         TimelineView()
             .preferredColorScheme(.dark)
-            .environmentObject(SoundViewModel())
             .environmentObject(TimeLineViewModel())
+            .environmentObject(SoundViewModel())
+            .environmentObject(DarkModeViewModel())
     }
 }

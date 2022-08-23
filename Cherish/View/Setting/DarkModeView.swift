@@ -68,6 +68,8 @@ extension DarkModeView {
 struct DarkModeView_Previews: PreviewProvider {
     static var previews: some View {
         DarkModeView(isShowTabbar: .constant(false))
+            .environmentObject(TimeLineViewModel())
+            .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())
     }
 }

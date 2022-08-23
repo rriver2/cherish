@@ -137,5 +137,6 @@ struct EmotionView_Previews: PreviewProvider {
         EmotionView(isModalShow: .constant(false), emotionViewModel: EmotionViewModel())
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
+            .environmentObject(DarkModeViewModel())
     }
 }

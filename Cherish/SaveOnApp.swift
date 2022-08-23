@@ -23,9 +23,9 @@ struct CherishApp: App {
                     }
             } else {
                 ContentView()
-                .environmentObject(TimeLineViewModel())
-                .environmentObject(SoundViewModel())
-                .environmentObject(DarkModeViewModel())
+                    .environmentObject(SoundViewModel())
+                    .environmentObject(TimeLineViewModel())
+                    .environmentObject(DarkModeViewModel())
             }
         }
     }

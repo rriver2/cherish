@@ -134,7 +134,8 @@ struct FreeView_Previews: PreviewProvider {
     static var previews: some View {
         FreeView()
         //            .preferredColorScheme(.dark)
-            .environmentObject(SoundViewModel())
             .environmentObject(TimeLineViewModel())
+            .environmentObject(SoundViewModel())
+            .environmentObject(DarkModeViewModel())
     }
 }
