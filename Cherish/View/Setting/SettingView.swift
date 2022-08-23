@@ -41,11 +41,14 @@ struct SettingView: View {
                     Image(systemName: "chevron.forward")
                 }
                 
-                HStack(spacing: 0) {
-                    Text("친구에게 공유하기")
-                    Spacer()
-                    Image(systemName: "chevron.forward")
-                }
+//                HStack(spacing: 0) {
+//                    Text("친구에게 공유하기")
+//                    Spacer()
+//                    Image(systemName: "chevron.forward")
+//                }
+//                .onTapGesture {
+//                    actionSheet()
+//                }
                 
                 HStack(spacing: 0) {
                     Text("라이센스")
@@ -58,6 +61,17 @@ struct SettingView: View {
             .foregroundColor(.gray23)
         }
     }
+//    func actionSheet() {
+//        guard let urlShare = URL(string: "https://developer.apple.com/xcode/swiftui/") else { return }
+//        let text = "cherish - 나를 들여다보는 시간 🫧"
+//        let activityVC = UIActivityViewController(activityItems: [urlShare, text], applicationActivities: nil)
+//        let allScenes = UIApplication.shared.connectedScenes
+//        let scene = allScenes.first { $0.activationState == .foregroundActive }
+//
+//        if let windowScene = scene as? UIWindowScene {
+//            windowScene.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+//        }
+//    }
 }
 
 extension SettingView {
