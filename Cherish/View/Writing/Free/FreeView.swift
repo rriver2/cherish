@@ -14,6 +14,7 @@ struct FreeView: View {
     @State private var context = "내용"
     @State private var isShowAlert = false
     @State private var alertCategory: AlertCategory = .leave
+    @EnvironmentObject var addWritingPopupViewModel: AddWritingPopupViewModel
     
     init() {
         UIToolbar.appearance().barTintColor = UIColor.systemGray5
@@ -65,6 +66,7 @@ struct FreeView: View {
                             alertCategory = .save
                         } else {
                             timeLineViewModel.addRecord(date: Date(), title: title == "제목" ? "" : title, context: context, kind: Record.free)
+                            addWritingPopupViewModel.isShowAddWritingPopup = true
                             dismiss()
                         }
                     } label: {

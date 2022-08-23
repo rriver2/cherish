@@ -26,6 +26,7 @@ struct CherishApp: App {
                     .environmentObject(SoundViewModel())
                     .environmentObject(TimeLineViewModel())
                     .environmentObject(DarkModeViewModel())
+                    .environmentObject(AddWritingPopupViewModel())
             }
         }
     }

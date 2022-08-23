@@ -16,6 +16,7 @@ struct QuestionView: View {
     @State private var alertCategory: AlertCategory = .leave
     @State var isShowAlert = false
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
+    @EnvironmentObject var addWritingPopupViewModel: AddWritingPopupViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -53,6 +54,7 @@ struct QuestionView: View {
                         isShowAlert = true
                     } else {
                         timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.question)
+                        addWritingPopupViewModel.isShowAddWritingPopup = true
                         dismiss()
                         isModalShow = false
                     }
@@ -66,16 +68,16 @@ struct QuestionView: View {
         .textInputAutocapitalization(.never)
         .tint(Color.gray23)
         .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-#warning("왜 context가 내용으로 인식되는 거지 ? help")
-            print(context)
-            if (value.startLocation.x < 30 && value.translation.width > 100) {
-                if context == "내용" || context == "" {
-                    dismiss()
-                } else {
-                    alertCategory = .leave
-                    isShowAlert = true
-                }
-            }
+//#warning("왜 context가 내용으로 인식되는 거지 ? help")
+//            print(context)
+//            if (value.startLocation.x < 30 && value.translation.width > 100) {
+//                if context == "내용" || context == "" {
+//                    dismiss()
+//                } else {
+//                    alertCategory = .leave
+//                    isShowAlert = true
+//                }
+//            }
         })
     }
 }

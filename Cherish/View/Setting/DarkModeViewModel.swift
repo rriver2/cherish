@@ -27,6 +27,17 @@ class DarkModeViewModel: ObservableObject {
         }
     }
     
+    static func colorSchemeString(mode: ColorScheme) -> String {
+        switch mode {
+            case .light:
+                return "Light"
+            case .dark:
+                return "Dark"
+            @unknown default:
+                return "Light"
+        }
+    }
+    
     func setMode(categoryMode: Category) {
         let key = UserDefaultKey.darkMode.string
         switch categoryMode {

@@ -11,6 +11,7 @@ struct OnboardingView: View {
     @Binding var isShowOnboarding: Bool
     @State var onBoardingNumber: Int = 0
     @EnvironmentObject var soundViewModel: SoundViewModel
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -41,7 +42,8 @@ struct OnboardingView: View {
             .padding(.bottom, 37)
             
             VStack(alignment: .center, spacing: 0) {
-                let imageName = "Onboarding" + String(onBoardingNumber+1)
+                let colorSchemeString = DarkModeViewModel.colorSchemeString(mode: colorScheme)
+                let imageName = "Onboarding" + colorSchemeString + String(onBoardingNumber+1)
                 ZStack(alignment: .bottom) {
                     Image(imageName)
                         .resizable()
@@ -56,10 +58,10 @@ struct OnboardingView: View {
                             } label: {
                                 Text("음악과 함께 시작하기")
                                     .font(.bodySemibold)
-                                    .foregroundColor(.grayF5)
+                                    .foregroundColor(Color(hex: "F5F5F5"))
                                     .frame(height: 56)
                                     .frame(maxWidth: .infinity)
-                                    .background(Color.gray23)
+                                    .background(Color(hex: "232323"))
                                     .cornerRadius(10)
                                     .padding(.horizontal, 27)
                                     .padding(.bottom, 13)
@@ -72,7 +74,7 @@ struct OnboardingView: View {
                             } label: {
                                 Text("음악 없이 시작하기")
                                     .font(.miniSemibold)
-                                    .foregroundColor(.gray23)
+                                    .foregroundColor(Color(hex: "232323"))
                                     .padding(.horizontal, 27)
                                     .padding(.bottom, 30)
                             }
@@ -83,10 +85,10 @@ struct OnboardingView: View {
                         } label: {
                             Text("다음으로")
                                 .font(.bodySemibold)
-                                .foregroundColor(.grayF5)
+                                .foregroundColor(Color(hex: "F5F5F5"))
                                 .frame(height: 56)
                                 .frame(maxWidth: .infinity)
-                                .background(Color.gray23)
+                                .background(Color(hex: "232323"))
                                 .cornerRadius(10)
                                 .padding(.horizontal, 27)
                                 .padding(.bottom, 58)

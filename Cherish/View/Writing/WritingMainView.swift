@@ -7,8 +7,13 @@
 
 import SwiftUI
 
+class AddWritingPopupViewModel: ObservableObject {
+    @Published var isShowAddWritingPopup = false
+}
+
 struct WritingMainView: View {
     @Environment(\.colorScheme) private var colorScheme
+    @EnvironmentObject var addWritingPopupViewModel: AddWritingPopupViewModel
     @Binding var isShowTabbar: Bool
     @State private var showFreeView = false
     @State private var showQuestionView = false
@@ -18,14 +23,25 @@ struct WritingMainView: View {
     @FocusState private var isFocusedKeyboard: Bool
     @State var recordType = Record.free
     @State private var oneSentence: String = (UserDefaults.standard.object(forKey: UserDefaultKey.oneSentence.string) as? String ?? "")
+    @Binding var tabbarCategory: TabbarCategory
     
     var body: some View {
         NavigationView {
             ZStack{
                 VStack(spacing: 0) {
                     Title()
-                    OneSentence()
-                        .padding(.horizontal, 27)
+                    if addWritingPopupViewModel.isShowAddWritingPopup {
+                        AddWritingPopup()
+                            .padding(.horizontal, 27)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                                    addWritingPopupViewModel.isShowAddWritingPopup = false
+                                }
+                            }
+                    } else {
+                        OneSentence()
+                            .padding(.horizontal, 27)
+                    }
                     if showCards {
                         WritingBoxes()
                     } else {
@@ -39,6 +55,7 @@ struct WritingMainView: View {
                     }
                     Spacer()
                 }
+                .animation(Animation.easeInOut(duration: 1), value: addWritingPopupViewModel.isShowAddWritingPopup)
                 .animation(Animation.easeOut, value: showCards)
             }
             .navigationBarTitle("", displayMode: .automatic)
@@ -77,6 +94,32 @@ extension WritingMainView {
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)
+    }
+    @ViewBuilder
+    private func AddWritingPopup() -> some View {
+        HStack(alignment: .center, spacing: 0) {
+            Image("Logo")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 39, height: 39)
+            Text("새로운 일기가 등록되었어요!")
+                .font(.bodyRegular)
+                .foregroundColor(.gray23)
+            Spacer()
+            Button {
+                tabbarCategory = .timeline
+            } label: {
+                Text("보러가기")
+                    .font(.timelineDate)
+                    .foregroundColor(.gray8A)
+            }
+        }
+            .frame(maxWidth: .infinity, minHeight: 52)
+            .padding(.horizontal, 17)
+            .background(Color.grayF5)
+            .font(.bodyRegular)
+            .cornerRadius(10)
+            .padding(.bottom, 25)
     }
     @ViewBuilder
     private func OneSentence() -> some View {
@@ -160,7 +203,7 @@ extension WritingMainView {
 
 struct WritingMainView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingMainView(isShowTabbar: .constant(false))
+        WritingMainView(isShowTabbar: .constant(false), tabbarCategory: .constant(.writing))
             .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())

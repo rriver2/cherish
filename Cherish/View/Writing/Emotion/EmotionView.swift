@@ -14,6 +14,7 @@ struct EmotionView: View {
     @ObservedObject var emotionViewModel: EmotionViewModel
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     @State var isShowAlert = false
+    @EnvironmentObject var addWritingPopupViewModel: AddWritingPopupViewModel
     
     private let columns = [
         GridItem(.flexible(), spacing: nil, alignment: .leading),
@@ -26,10 +27,10 @@ struct EmotionView: View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
             ScrollView (showsIndicators : false) {
-                    EmotionGroups()
-                        .padding(.top, 2)
-                    WritingView(context: $emotionViewModel.context)
-                        .padding(.top, 25)
+                EmotionGroups()
+                    .padding(.top, 2)
+                WritingView(context: $emotionViewModel.context)
+                    .padding(.top, 25)
             }
             .padding(.horizontal, 27)
         }
@@ -48,6 +49,7 @@ struct EmotionView: View {
                     } else {
                         let emotionListString = emotionViewModel.selectedEmotionList.joined(separator: "    ")
                         timeLineViewModel.addRecord(date: Date(), title: emotionListString, context: emotionViewModel.context, kind: Record.emotion)
+                        addWritingPopupViewModel.isShowAddWritingPopup = true
                         dismiss()
                         isModalShow = false
                     }
