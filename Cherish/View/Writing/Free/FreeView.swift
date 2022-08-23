@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-enum AlertCategory {
-    case leave
-    case save
-}
-
 struct FreeView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel

@@ -7,26 +7,10 @@
 
 import SwiftUI
 
-enum TabbarCategory: String, CaseIterable{
-    case writing = "writing"
-    case timeline = "timeline"
-    case setting = "setting"
-    
-    var imageName: String {
-        switch self {
-            case .writing:
-                return "square.and.pencil"
-            case .timeline:
-                return "book"
-            case .setting:
-                return "gearshape"
-        }
-    }
-}
-
 struct ContentView: View {
     @State private var tabbarCategory: TabbarCategory = .writing
     @State var isShowTabbar = true
+    @EnvironmentObject var darkModeViewModel: DarkModeViewModel
     
     var body: some View {
         VStack {
@@ -37,7 +21,7 @@ struct ContentView: View {
                     case .timeline:
                         TimelineView()
                     case .setting:
-                        SettingView()
+                        SettingView(isShowTabbar: $isShowTabbar)
                 }
             }
             .accentColor(Color.gray23)
@@ -60,7 +44,7 @@ struct ContentView: View {
                     }
                     .padding(.top, 10)
                     .padding(.bottom, 15)
-                    .foregroundColor(tabbarCategory == tabbarItem ? Color.gray23 : Color.gray8A)
+                    .foregroundColor(tabbarCategory == tabbarItem ? Color.gray23 : Color.grayA7)
                     .gesture(
                         TapGesture()
                             .onEnded { _ in
@@ -73,6 +57,7 @@ struct ContentView: View {
             }
             }
         }
+        .preferredColorScheme(darkModeViewModel.mode)
     }
 }
 

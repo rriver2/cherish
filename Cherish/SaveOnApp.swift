@@ -25,6 +25,7 @@ struct CherishApp: App {
                 ContentView()
                 .environmentObject(TimeLineViewModel())
                 .environmentObject(SoundViewModel())
+                .environmentObject(DarkModeViewModel())
             }
         }
     }

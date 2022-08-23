@@ -12,6 +12,7 @@ enum UserDefaultKey: CaseIterable {
     case isMusicOn
     case oneSentence
     case selectedEmotion
+    case darkMode
     
     var string: String {
         switch self {
@@ -21,6 +22,8 @@ enum UserDefaultKey: CaseIterable {
                 return "oneSentence"
             case .selectedEmotion:
                 return "selectedEmotion"
+            case .darkMode:
+                return "darkMode"
         }
     }
 }

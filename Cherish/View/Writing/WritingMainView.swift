@@ -19,10 +19,6 @@ struct WritingMainView: View {
     @State var recordType = Record.free
     @State private var oneSentence: String = (UserDefaults.standard.object(forKey: UserDefaultKey.oneSentence.string) as? String ?? "")
     
-    init(isShowTabbar: Binding<Bool>) {
-        self._isShowTabbar = isShowTabbar
-    }
-    
     var body: some View {
         NavigationView {
             ZStack{

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		CC0F9CF828ABB545005D94F7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC0F9CF728ABB545005D94F7 /* Launch Screen.storyboard */; };
 		CC0F9CFD28B3AF59005D94F7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */; };
+		CC0F9CFF28B3B443005D94F7 /* DarkModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9CFE28B3B443005D94F7 /* DarkModeView.swift */; };
+		CC0F9D0128B3B4DA005D94F7 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9D0028B3B4DA005D94F7 /* Alert.swift */; };
+		CC0F9D0328B3B4EB005D94F7 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */; };
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
 		CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC818CD92899ED8C003B8753 /* SaveOnApp.swift */; };
@@ -35,6 +38,7 @@
 		CC95F335289A8A1E008C3EEF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F334289A8A1E008C3EEF /* Question.swift */; };
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
 		CC9B2DB728A9DA0C001BF29B /* RecommandedQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */; };
+		CCB1C1CC28B4784C0006D4DA /* DarkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */; };
 		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
 		CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */; };
 		CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */; };
@@ -45,6 +49,9 @@
 /* Begin PBXFileReference section */
 		CC0F9CF728ABB545005D94F7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		CC0F9CFE28B3B443005D94F7 /* DarkModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeView.swift; sourceTree = "<group>"; };
+		CC0F9D0028B3B4DA005D94F7 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		CC818CD62899ED8C003B8753 /* Cherish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cherish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +79,7 @@
 		CC95F334289A8A1E008C3EEF /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandedQuestionView.swift; sourceTree = "<group>"; };
+		CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewModel.swift; sourceTree = "<group>"; };
 		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
 		CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimelineContainer.xcdatamodel; sourceTree = "<group>"; };
 		CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
@@ -94,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */,
+				CC0F9CFE28B3B443005D94F7 /* DarkModeView.swift */,
+				CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -235,6 +245,8 @@
 				CC95F3202899F7F8008C3EEF /* Recode.swift */,
 				CC1FBB7128A0024D006085D7 /* Emotion.swift */,
 				CCF3931C28A7FDF2008F506C /* UserDefaultKey.swift */,
+				CC0F9D0028B3B4DA005D94F7 /* Alert.swift */,
+				CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -324,9 +336,11 @@
 				CC835A7A28AA824A004B987F /* EmotionViewModel.swift in Sources */,
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
+				CC0F9D0328B3B4EB005D94F7 /* Tabbar.swift in Sources */,
 				CC95F3212899F7F8008C3EEF /* Recode.swift in Sources */,
 				CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */,
 				CC95F3172899F6C8008C3EEF /* SelectQuestionView.swift in Sources */,
+				CC0F9CFF28B3B443005D94F7 /* DarkModeView.swift in Sources */,
 				CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */,
 				CC95F3262899FA3E008C3EEF /* Color.swift in Sources */,
 				CC95F335289A8A1E008C3EEF /* Question.swift in Sources */,
@@ -346,10 +360,12 @@
 				CC95F31B2899F743008C3EEF /* SelectingEmotionView.swift in Sources */,
 				CC95F32C289A77F9008C3EEF /* ContentView.swift in Sources */,
 				CCF3931F28A881F0008F506C /* SearchEmotionView.swift in Sources */,
+				CCB1C1CC28B4784C0006D4DA /* DarkModeViewModel.swift in Sources */,
 				CC95F30B2899F657008C3EEF /* FreeView.swift in Sources */,
 				CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */,
 				CC95F3232899F8FD008C3EEF /* Recordable.swift in Sources */,
 				CC9B2DB728A9DA0C001BF29B /* RecommandedQuestionView.swift in Sources */,
+				CC0F9D0128B3B4DA005D94F7 /* Alert.swift in Sources */,
 				CC95F3052899F5D6008C3EEF /* SoundView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
