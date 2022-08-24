@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC0F338328B5B565000E360F /* AddWritingPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F338228B5B565000E360F /* AddWritingPopupViewModel.swift */; };
 		CC0F9CF828ABB545005D94F7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC0F9CF728ABB545005D94F7 /* Launch Screen.storyboard */; };
 		CC0F9CFD28B3AF59005D94F7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */; };
 		CC0F9CFF28B3B443005D94F7 /* DarkModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9CFE28B3B443005D94F7 /* DarkModeView.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC0F338228B5B565000E360F /* AddWritingPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWritingPopupViewModel.swift; sourceTree = "<group>"; };
 		CC0F9CF728ABB545005D94F7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CC0F9CFE28B3B443005D94F7 /* DarkModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			children = (
 				CC95F3062899F5DE008C3EEF /* WritingMainView.swift */,
 				CC95F3182899F734008C3EEF /* WritingView.swift */,
+				CC0F338228B5B565000E360F /* AddWritingPopupViewModel.swift */,
 				CC95F3122899F681008C3EEF /* Free */,
 				CC95F3142899F690008C3EEF /* Emotion */,
 				CC95F3132899F68A008C3EEF /* Question */,
@@ -359,6 +362,7 @@
 				CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */,
 				CC95F331289A7B36008C3EEF /* Date.swift in Sources */,
 				CC95F3282899FCEC008C3EEF /* extention.swift in Sources */,
+				CC0F338328B5B565000E360F /* AddWritingPopupViewModel.swift in Sources */,
 				CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */,
 				CCB1C1D828B4C1430006D4DA /* OnboardingView.swift in Sources */,
 				CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */,

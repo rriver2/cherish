@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-class AddWritingPopupViewModel: ObservableObject {
-    @Published var isShowAddWritingPopup = false
-}
-
 struct WritingMainView: View {
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var addWritingPopupViewModel: AddWritingPopupViewModel
@@ -34,7 +30,7 @@ struct WritingMainView: View {
                         AddWritingPopup()
                             .padding(.horizontal, 27)
                             .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
                                     addWritingPopupViewModel.isShowAddWritingPopup = false
                                 }
                             }
@@ -55,7 +51,7 @@ struct WritingMainView: View {
                     }
                     Spacer()
                 }
-                .animation(Animation.easeInOut(duration: 1), value: addWritingPopupViewModel.isShowAddWritingPopup)
+                .animation(Animation.easeInOut(duration: 0.8), value: addWritingPopupViewModel.isShowAddWritingPopup)
                 .animation(Animation.easeOut, value: showCards)
             }
             .navigationBarTitle("", displayMode: .automatic)
@@ -97,29 +93,30 @@ extension WritingMainView {
     }
     @ViewBuilder
     private func AddWritingPopup() -> some View {
-        HStack(alignment: .center, spacing: 0) {
-            Image("Logo")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 39, height: 39)
-            Text("새로운 일기가 등록되었어요!")
-                .font(.bodyRegular)
-                .foregroundColor(.gray23)
-            Spacer()
-            Button {
-                tabbarCategory = .timeline
-            } label: {
+        Button {
+            tabbarCategory = .timeline
+            addWritingPopupViewModel.isShowAddWritingPopup = false
+        } label: {
+            HStack(alignment: .center, spacing: 0) {
+                Image("Logo")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 39, height: 39)
+                Text("새로운 일기가 등록되었어요!")
+                    .font(.bodyRegular)
+                    .foregroundColor(.gray23)
+                Spacer()
                 Text("보러가기")
                     .font(.timelineDate)
                     .foregroundColor(.gray8A)
             }
         }
-            .frame(maxWidth: .infinity, minHeight: 52)
-            .padding(.horizontal, 17)
-            .background(Color.grayF5)
-            .font(.bodyRegular)
-            .cornerRadius(10)
-            .padding(.bottom, 25)
+        .frame(maxWidth: .infinity, minHeight: 52)
+        .padding(.horizontal, 17)
+        .background(addWritingPopupViewModel.writingCategory.popupColor)
+        .font(.bodyRegular)
+        .cornerRadius(10)
+        .padding(.bottom, 25)
     }
     @ViewBuilder
     private func OneSentence() -> some View {

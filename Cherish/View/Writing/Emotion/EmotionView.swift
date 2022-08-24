@@ -50,6 +50,7 @@ struct EmotionView: View {
                         let emotionListString = emotionViewModel.selectedEmotionList.joined(separator: "    ")
                         timeLineViewModel.addRecord(date: Date(), title: emotionListString, context: emotionViewModel.context, kind: Record.emotion)
                         addWritingPopupViewModel.isShowAddWritingPopup = true
+                        addWritingPopupViewModel.writingCategory = .emotion
                         dismiss()
                         isModalShow = false
                     }

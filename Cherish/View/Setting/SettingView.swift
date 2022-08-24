@@ -42,7 +42,7 @@ struct SettingView: View {
                 //                }
                 
                 HStack(spacing: 0) {
-                    Text("친구에게 공유하기")
+                    Text("친구에게 앱 공유하기")
                     Spacer()
                     Image(systemName: "chevron.forward")
                 }

@@ -67,6 +67,7 @@ struct FreeView: View {
                         } else {
                             timeLineViewModel.addRecord(date: Date(), title: title == "제목" ? "" : title, context: context, kind: Record.free)
                             addWritingPopupViewModel.isShowAddWritingPopup = true
+                            addWritingPopupViewModel.writingCategory = .free
                             dismiss()
                         }
                     } label: {

@@ -33,6 +33,9 @@ struct LicenseView: View {
         .onAppear {
             isShowTabbar = false
         }
+        .onDisappear {
+            isShowTabbar = true
+        }
     }
 }
 
@@ -42,7 +45,6 @@ extension LicenseView {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
                 dismiss()
-                isShowTabbar = true
             }) {
                 Image(systemName: "chevron.left")
                     .font(.bodyRegular)

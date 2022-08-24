@@ -19,15 +19,16 @@ struct DarkModeView: View {
             let darkModeCategoryAll = DarkModeViewModel.Category.allCases
             
             ForEach(darkModeCategoryAll, id: \.self) { darkModeCategory in
-                HStack(spacing: 0) {
-                    Text(darkModeCategory.rawValue)
-                        .font(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .bodySemibold : .bodyRegular)
-                    Spacer()
-                    Image(systemName: "checkmark")
-                        .foregroundColor(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .gray23 : .clear)
-                }
-                .onTapGesture {
+                Button {
                     darkModeViewModel.setMode(categoryMode: darkModeCategory)
+                } label: {
+                    HStack(spacing: 0) {
+                        Text(darkModeCategory.rawValue)
+                            .font(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .bodySemibold : .bodyRegular)
+                        Spacer()
+                        Image(systemName: "checkmark")
+                            .foregroundColor(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .gray23 : .clear)
+                    }
                 }
             }
             Spacer()
@@ -36,6 +37,9 @@ struct DarkModeView: View {
         .padding(.horizontal, 27)
         .onAppear {
             isShowTabbar = false
+        }
+        .onDisappear {
+            isShowTabbar = true
         }
     }
 }
@@ -46,7 +50,6 @@ extension DarkModeView {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
                 dismiss()
-                isShowTabbar = true
             }) {
                 Image(systemName: "chevron.left")
                     .font(.bodyRegular)

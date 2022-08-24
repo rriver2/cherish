@@ -55,6 +55,7 @@ struct QuestionView: View {
                     } else {
                         timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.question)
                         addWritingPopupViewModel.isShowAddWritingPopup = true
+                        addWritingPopupViewModel.writingCategory = .question
                         dismiss()
                         isModalShow = false
                     }
@@ -119,5 +120,6 @@ struct QuestionView_Previews: PreviewProvider {
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())
+            .environmentObject(AddWritingPopupViewModel())
     }
 }

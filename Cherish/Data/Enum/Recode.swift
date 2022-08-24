@@ -38,6 +38,17 @@ enum Record: String, CaseIterable {
         }
     }
     
+    var popupColor: Color {
+        switch self {
+            case .free:
+                return Color(hex: "EBF4E5") ?? .clear
+            case .emotion:
+                return Color(hex: "E9F4FB") ?? .clear
+            case .question:
+                return Color(hex: "F0EDFF") ?? .clear
+        }
+    }
+    
     var imageName: String {
         switch self {
             case .free:
