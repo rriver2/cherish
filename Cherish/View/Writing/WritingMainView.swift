@@ -104,11 +104,11 @@ extension WritingMainView {
                     .frame(width: 39, height: 39)
                 Text("새로운 일기가 등록되었어요!")
                     .font(.bodyRegular)
-                    .foregroundColor(.gray23)
+                    .foregroundColor(Color(hex: "232323"))
                 Spacer()
                 Text("보러가기")
                     .font(.timelineDate)
-                    .foregroundColor(.gray8A)
+                    .foregroundColor(Color(hex: "8A8A8A"))
             }
         }
         .frame(maxWidth: .infinity, minHeight: 52)

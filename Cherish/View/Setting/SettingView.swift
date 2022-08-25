@@ -66,7 +66,7 @@ struct SettingView: View {
         }
     }
     func actionSheet() {
-        guard let urlShare = URL(string: "https://apps.apple.com/us/app/cherish-%EB%82%98%EB%A5%BC-%EB%93%A4%EC%97%AC%EB%8B%A4%EB%B3%B4%EB%8A%94-%EC%8B%9C%EA%B0%84/id1639908764") else { return }
+        guard let urlShare = URL(string:"https://apps.apple.com/us/app/cherish/id1639908764") else { return }
         let text = "cherish - 나를 들여다보는 시간 🫧"
         let activityVC = UIActivityViewController(activityItems: [urlShare, text], applicationActivities: nil)
         let allScenes = UIApplication.shared.connectedScenes

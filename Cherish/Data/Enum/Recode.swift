@@ -12,7 +12,7 @@ enum Record: String, CaseIterable {
     case free = "자유형식"
     case emotion = "감정형식"
     case question = "질문형식"
-//    case inspiration = "영감형식"
+    //    case inspiration = "영감형식"
     
     var writingMainText: String {
         switch self {
@@ -22,8 +22,8 @@ enum Record: String, CaseIterable {
                 return "질문에 답하기"
             case .emotion:
                 return "나의 감정"
-//            case .inspiration:
-//                return "영감 찾기"
+                //            case .inspiration:
+                //                return "영감 찾기"
         }
     }
     
@@ -57,8 +57,8 @@ enum Record: String, CaseIterable {
                 return "Question"
             case .emotion:
                 return "Emotion"
-//            case .inspiration:
-//                return "Sky"
+                //            case .inspiration:
+                //                return "Sky"
         }
     }
     
@@ -70,8 +70,8 @@ enum Record: String, CaseIterable {
                 return .question
             case Record.emotion.rawValue:
                 return .emotion
-//            case Record.inspiration.rawValue:
-//                return .inspiration
+                //            case Record.inspiration.rawValue:
+                //                return .inspiration
             default:
                 return .free
         }
