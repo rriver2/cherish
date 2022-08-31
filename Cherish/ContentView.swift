@@ -49,7 +49,7 @@ struct ContentView: View {
                     }
                     .padding(.top, 10)
                     .padding(.bottom, 15)
-                    .foregroundColor(tabbarCategory == tabbarItem ? Color.gray23 : Color.grayA7)
+                    .foregroundColor(tabbarCategory == tabbarItem ? Color.gray23 : (darkModeViewModel.mode == .light ? Color.grayA7 : Color.grayE8))
                     .gesture(
                         TapGesture()
                             .onEnded { _ in
