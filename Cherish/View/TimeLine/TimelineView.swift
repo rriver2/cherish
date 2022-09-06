@@ -25,13 +25,13 @@ struct TimelineView: View {
                     .cornerRadius(10)
                     .padding(.bottom, 25)
                     .cornerRadius(10)
-                .padding(.horizontal, 27)
+                    .padding(.horizontal, 27)
                 Spacer()
             }
         } else {
-        ScrollView(showsIndicators : false) {
-            LazyVStack(alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
-                Section(header: Title().background(Color.white)) {
+            ScrollView(showsIndicators : false) {
+                LazyVStack(alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
+                    Section(header: Title().background(Color.white)) {
                         let recordsEntity = timeLineViewModel.recordsEntity.sorted(by: {
                             if $0.date == nil || $1.date == nil {
                                 return false
@@ -44,7 +44,6 @@ struct TimelineView: View {
                             VStack(alignment: .leading, spacing: 0) {
                                 if index == 0, let date = record.date?.dateToString_MY() {
                                     Date(date: date)
-//                                        .padding(.top, 35)
                                 } else if let date = record.date?.dateToString_MY(),
                                           let preDate = recordsEntity[index - 1].date?.dateToString_MY(),
                                           date != preDate
@@ -59,7 +58,7 @@ struct TimelineView: View {
                     }
                 }
             }
-        .clipped()
+            .clipped()
         }
     }
 }
@@ -73,7 +72,7 @@ extension TimelineView {
                 .foregroundColor(Color.gray23)
                 .padding(.leading, 3)
             Spacer()
-                SoundView()
+            SoundView()
         }
         .frame(height: 20)
         .padding(.horizontal, 27)
@@ -86,7 +85,7 @@ extension TimelineView {
     @ViewBuilder
     private func Date(date: String) -> some View {
         Text(date)
-            .font(.bodySemibold)
+            .font(.miniSemibold)
             .foregroundColor(Color.grayA7)
             .padding(.leading, 5)
             .frame(maxWidth: .infinity, alignment: .leading)

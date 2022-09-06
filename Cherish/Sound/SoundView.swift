@@ -16,8 +16,10 @@ struct SoundView: View {
         Button {
             soundViewModel.isMusicOn.toggle()
         } label: {
-            Image(systemName: soundViewModel.isMusicOn ? "speaker.wave.2.fill" : "speaker.slash")
-                .foregroundColor(.gray23)
+            Image(soundViewModel.isMusicOn ? "SoundOn" : "SoundOff")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30, height: 22)
         }
     }
 }

@@ -13,7 +13,7 @@ class DarkModeViewModel: ObservableObject {
     enum Category: String, CaseIterable {
         case dark = "다크모드"
         case light = "라이트모드"
-        case none = "사용자 지정"
+        case none = "디바이스 환경설정 모드"
     }
     
     func isSameMode(categoryMode: Category) -> Bool {

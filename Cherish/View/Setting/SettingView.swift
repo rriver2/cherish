@@ -11,6 +11,8 @@ struct SettingView: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var isLockScreen = false
     @Binding var isShowTabbar: Bool
+    @EnvironmentObject var timeLineViewModel: TimeLineViewModel
+    @State private var isShowAlertDelectAll = false
     
     var body: some View {
         NavigationView {
@@ -29,7 +31,7 @@ struct SettingView: View {
                     DarkModeView(isShowTabbar: $isShowTabbar)
                 } label: {
                     HStack(spacing: 0) {
-                        Text("다크모드")
+                        Text("다크모드/라이트모드")
                         Spacer()
                         Image(systemName: "chevron.forward")
                     }
@@ -59,10 +61,24 @@ struct SettingView: View {
                         Image(systemName: "chevron.forward")
                     }
                 }
+                
+                HStack(spacing: 0) {
+                    Text("모든 기록 삭제하기")
+                    Spacer()
+                }
+                .onTapGesture {
+                    isShowAlertDelectAll = true
+                }
+                
                 Spacer()
             }
             .padding(.horizontal, 27)
             .foregroundColor(.gray23)
+            .alert(isPresented: $isShowAlertDelectAll) {
+                Alert(title: Text("정말로 모든 기록을 삭제할까요?"), message: Text("삭제하신 이후에는 복원할 수 없습니다."), primaryButton: .destructive(Text("삭제"), action: {
+                    timeLineViewModel.removeAll()
+                }), secondaryButton: .cancel(Text("취소")))
+            }
         }
     }
     func actionSheet() {

@@ -8,9 +8,9 @@
 import Foundation
 
 enum TabbarCategory: String, CaseIterable{
-    case writing = "writing"
-    case timeline = "timeline"
-    case setting = "setting"
+    case writing = "기록하기"
+    case timeline = "나의 기록"
+    case setting = "설정"
     
     var imageName: String {
         switch self {

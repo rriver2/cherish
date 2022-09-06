@@ -120,34 +120,49 @@ extension WritingMainView {
     }
     @ViewBuilder
     private func OneSentence() -> some View {
-        TextField("요즘 나의 한마디", text: $oneSentence)
-            .frame(maxWidth: .infinity, minHeight: 52)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 17)
-            .background(Color.grayF5)
-            .font(oneSentence.count > 20 ? .miniRegular : .bodyRegular)
-            .foregroundColor(Color.gray23)
-            .cornerRadius(10)
-            .padding(.bottom, 25)
-            .onChange(of: oneSentence) { newValue in
-                let key = UserDefaultKey.oneSentence.string
-                UserDefaults.standard.set(newValue, forKey: key)
-                let maxCharacterLength = 30
-                if maxCharacterLength < newValue.count {
-                    oneSentence = String(oneSentence.prefix(maxCharacterLength))
+        HStack(spacing: 0) {
+            TextField("요즘 나의 한마디", text: $oneSentence)
+                .multilineTextAlignment(.center)
+                .padding(.leading, 17)
+                .font(oneSentence.count > 20 ? .miniRegular : .bodyRegular)
+                .foregroundColor(Color.gray23)
+                .focused($isFocusedKeyboard)
+                .onSubmit {
+                    showCards = true
+                    isShowTabbar = true
+                }
+                .submitLabel(.done)
+            if oneSentence != "" && showCards == false {
+                Button(action: {
+                    oneSentence = ""
+                    showCards = true
+                    isShowTabbar = true
+                }) {
+                    Image(systemName: "multiply.circle.fill")
+                        .foregroundColor(Color.gray23.opacity(0.5))
+                        .frame(width: 18, height: 18)
+                        .padding(.trailing, 17)
+                        .background(Color.grayF5)
                 }
             }
-            .focused($isFocusedKeyboard)
-            .onTapGesture {
-                showCards = false
-                isShowTabbar = false
-                isFocusedKeyboard = true
+        }
+        .frame(maxWidth: .infinity, minHeight: 52)
+        .background(Color.grayF5)
+        .cornerRadius(10)
+        .padding(.bottom, 25)
+        .onChange(of: oneSentence) { newValue in
+            let key = UserDefaultKey.oneSentence.string
+            UserDefaults.standard.set(newValue, forKey: key)
+            let maxCharacterLength = 25
+            if maxCharacterLength < newValue.count {
+                oneSentence = String(oneSentence.prefix(maxCharacterLength))
             }
-            .onSubmit {
-                showCards = true
-                isShowTabbar = true
-            }
-            .submitLabel(.done)
+        }
+        .onTapGesture {
+            showCards = false
+            isShowTabbar = false
+            isFocusedKeyboard = true
+        }
     }
     @ViewBuilder
     private func WritingBoxes() -> some View {
@@ -205,5 +220,6 @@ struct WritingMainView_Previews: PreviewProvider {
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())
+            .environmentObject(AddWritingPopupViewModel())
     }
 }

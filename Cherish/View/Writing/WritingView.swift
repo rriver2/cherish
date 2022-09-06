@@ -26,9 +26,9 @@ struct WritingView: View {
             TextEditor(text: $context)
                 .padding(.vertical, 23)
                 .padding(.horizontal, 20)
-                .foregroundColor(self.context == "내용" ? Color.grayA7 : Color.gray23)
+                .foregroundColor(self.context == "당신의 이야기를 기록해보세요." ? Color.grayA7 : Color.gray23)
                 .onTapGesture {
-                    if self.context == "내용"{
+                    if self.context == "당신의 이야기를 기록해보세요."{
                         self.context = ""
                     }
                 }

@@ -49,7 +49,7 @@ struct ContentView: View {
                     }
                     .padding(.top, 10)
                     .padding(.bottom, 15)
-                    .foregroundColor(tabbarCategory == tabbarItem ? Color.gray23 : (darkModeViewModel.mode == .light ? Color.grayA7 : Color.grayE8))
+                    .foregroundColor(tabbarCategory == tabbarItem ? Color.gray23 : (darkModeViewModel.mode != .dark ? Color.grayA7 : Color.grayE8))
                     .gesture(
                         TapGesture()
                             .onEnded { _ in
@@ -69,8 +69,10 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
+        
         ContentView()
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
+            .environmentObject(DarkModeViewModel())
     }
 }
