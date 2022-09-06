@@ -24,6 +24,8 @@ class SoundViewModel: ObservableObject {
     
     @Published var audio : AVAudioPlayer?
     
+    @Published var soundCategory: SoundCategory = .brightNightCity
+    
     init() {
         let key = UserDefaultKey.isMusicOn.string
         if let isMusicOn = UserDefaults.standard.object(forKey: key) as? Bool {

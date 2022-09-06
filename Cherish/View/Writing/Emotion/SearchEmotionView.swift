@@ -164,7 +164,10 @@ extension SearchEmotionView {
                 .foregroundColor(Color.gray23)
             Spacer()
             if emotionViewModel.selectedEmotionList == [] {
-                Image(systemName: "checkmark")
+                Image("check")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 13, height: 9)
                     .font(.bodyRegular)
                     .onTapGesture {
                         isShowAlert = true
@@ -173,7 +176,10 @@ extension SearchEmotionView {
                 NavigationLink {
                     EmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel)
                 } label: {
-                    Image(systemName: "checkmark")
+                    Image("check")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 13, height: 9)
                         .font(.bodyRegular)
                 }
             }

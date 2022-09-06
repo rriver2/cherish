@@ -26,7 +26,10 @@ struct DarkModeView: View {
                         Text(darkModeCategory.rawValue)
                             .font(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .bodySemibold : .bodyRegular)
                         Spacer()
-                        Image(systemName: "checkmark")
+                        Image("check")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 13, height: 9)
                             .foregroundColor(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .gray23 : .clear)
                     }
                 }
@@ -59,7 +62,10 @@ extension DarkModeView {
                 .font(.bodySemibold)
                 .foregroundColor(Color.gray23)
             Spacer()
-            Image(systemName: "checkmark")
+            Image("check")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 13, height: 9)
                 .font(.bodyRegular)
                 .foregroundColor(.clear)
         }

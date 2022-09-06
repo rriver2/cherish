@@ -22,12 +22,12 @@ struct SearchQuestionView: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 0) {
                     if searchText == "" {
-                            Text("오늘의 추천 질문")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .font(.miniSemibold)
-                                .foregroundColor(.gray8A)
-                                .padding(.horizontal, 38)
-                                .padding(.top, 20)
+                        Text("오늘의 추천 질문")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.miniSemibold)
+                            .foregroundColor(.gray8A)
+                            .padding(.horizontal, 38)
+                            .padding(.top, 20)
                     }
                     QuestionList()
                         .padding(.top, searchText == "" ? 0 : 11)
@@ -53,7 +53,7 @@ struct SearchQuestionView: View {
     }
 }
 extension SearchQuestionView {
-@ViewBuilder
+    @ViewBuilder
     private func NavigationBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
@@ -67,9 +67,12 @@ extension SearchQuestionView {
                 .font(.bodySemibold)
                 .foregroundColor(Color.gray23)
             Spacer()
-                Image(systemName: "checkmark")
-                    .font(.bodyRegular)
-                    .foregroundColor(.clear)
+            Image("check")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 13, height: 9)
+                .font(.bodyRegular)
+                .foregroundColor(.clear)
         }
         .foregroundColor(.gray23)
         .padding(.top, 25)

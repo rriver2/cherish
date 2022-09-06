@@ -72,7 +72,7 @@ extension TimelineView {
                 .foregroundColor(Color.gray23)
                 .padding(.leading, 3)
             Spacer()
-            SoundView()
+            SoundView(popCategory: .fullModal)
         }
         .frame(height: 20)
         .padding(.horizontal, 27)

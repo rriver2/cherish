@@ -42,6 +42,8 @@
 		CCB1C1CC28B4784C0006D4DA /* DarkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */; };
 		CCB1C1D628B4B6780006D4DA /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1D528B4B6780006D4DA /* LicenseView.swift */; };
 		CCB1C1D828B4C1430006D4DA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */; };
+		CCB7566D28C76A3D006C58EC /* SelectSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB7566C28C76A3D006C58EC /* SelectSoundView.swift */; };
+		CCB7566F28C76E3B006C58EC /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB7566E28C76E3B006C58EC /* Sound.swift */; };
 		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
 		CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */; };
 		CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */; };
@@ -86,6 +88,8 @@
 		CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewModel.swift; sourceTree = "<group>"; };
 		CCB1C1D528B4B6780006D4DA /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		CCB7566C28C76A3D006C58EC /* SelectSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSoundView.swift; sourceTree = "<group>"; };
+		CCB7566E28C76E3B006C58EC /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
 		CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimelineContainer.xcdatamodel; sourceTree = "<group>"; };
 		CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 			children = (
 				CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */,
 				CC95F3042899F5D6008C3EEF /* SoundView.swift */,
+				CCB7566C28C76A3D006C58EC /* SelectSoundView.swift */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				CCF3931C28A7FDF2008F506C /* UserDefaultKey.swift */,
 				CC0F9D0028B3B4DA005D94F7 /* Alert.swift */,
 				CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */,
+				CCB7566E28C76E3B006C58EC /* Sound.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -355,6 +361,7 @@
 				CC95F3262899FA3E008C3EEF /* Color.swift in Sources */,
 				CC95F335289A8A1E008C3EEF /* Question.swift in Sources */,
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
+				CCB7566F28C76E3B006C58EC /* Sound.swift in Sources */,
 				CCF3931D28A7FDF2008F506C /* UserDefaultKey.swift in Sources */,
 				CC835A8028AB7966004B987F /* SearchQuestionView.swift in Sources */,
 				CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */,
@@ -364,6 +371,7 @@
 				CC95F3282899FCEC008C3EEF /* extention.swift in Sources */,
 				CC0F338328B5B565000E360F /* AddWritingPopupViewModel.swift in Sources */,
 				CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */,
+				CCB7566D28C76A3D006C58EC /* SelectSoundView.swift in Sources */,
 				CCB1C1D828B4C1430006D4DA /* OnboardingView.swift in Sources */,
 				CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */,
 				CC95F32A289A03A4008C3EEF /* Font.swift in Sources */,

@@ -136,7 +136,11 @@ extension SelectingEmotionView {
                         .font(.bodyRegular)
                         .padding(.trailing, 18)
                 }
-                Image(systemName: "checkmark")
+                
+                Image("check")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 13, height: 9)
                     .font(.bodyRegular)
                     .onTapGesture {
                         if emotionViewModel.selectedEmotionList.isEmpty {

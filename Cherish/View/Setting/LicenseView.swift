@@ -54,7 +54,10 @@ extension LicenseView {
                 .font(.bodySemibold)
                 .foregroundColor(Color.gray23)
             Spacer()
-            Image(systemName: "checkmark")
+            Image("check")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 13, height: 9)
                 .font(.bodyRegular)
                 .foregroundColor(.clear)
         }

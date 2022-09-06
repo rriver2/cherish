@@ -39,7 +39,7 @@ extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate 
 extension View {
     var dividerGrayE8 : some View {
         Rectangle()
-            .frame(height: 1) 
+            .frame(height: 1)
             .foregroundColor(Color.grayE8)
     }
     var dividerThickGrayE8 : some View {
@@ -60,5 +60,14 @@ extension View {
     func lineSpacing() -> some View {
         self
             .lineSpacing(8.0)
+    }
+}
+
+extension String {
+    var convertUppercaseFirstChar: String {
+        var string = self
+        string.removeFirst()
+        let firstChar = self.first?.uppercased() ?? ""
+        return firstChar + string
     }
 }

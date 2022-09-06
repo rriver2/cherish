@@ -39,7 +39,7 @@ struct EmotionView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
-                SoundView()
+                SoundView(popCategory: .popUp)
                     .font(.bodyRegular)
                 Spacer()
                 Button {
@@ -55,7 +55,10 @@ struct EmotionView: View {
                         isModalShow = false
                     }
                 } label: {
-                    Image(systemName: "checkmark")
+                    Image("check")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 13, height: 9)
                         .foregroundColor(.gray23)
                         .font(.bodyRegular)
                 }
