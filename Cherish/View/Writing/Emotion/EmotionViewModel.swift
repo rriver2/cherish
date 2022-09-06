@@ -66,7 +66,7 @@ class EmotionViewModel: ObservableObject {
             case .leave:
                 return Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
                     dismiss()
-                }), secondaryButton: .cancel(Text("취소")))
+                }), secondaryButton: .cancel(Text("머무르기")))
             case .save:
                 if selectedEmotionList.isEmpty {
                     return Alert(title: Text("감정을 한 개 이상 선택해주세요"), message: nil, dismissButton: .cancel(Text("네")))
@@ -79,11 +79,11 @@ class EmotionViewModel: ObservableObject {
     func showEmotionViewAlert(dismiss: DismissAction) -> Alert {
             switch alertCategory {
                 case .leave:
-                    let firstButton = Alert.Button.cancel(Text("네")) {
+                    let firstButton = Alert.Button.cancel(Text("감정 다시 선택하기")) {
                         self.selectedEmotionList = []
                         dismiss()
                     }
-                    let secondButton = Alert.Button.default(Text("취소").foregroundColor(.red))
+                    let secondButton = Alert.Button.default(Text("머무르기").foregroundColor(.red))
                     return Alert(title: Text("감정을 다시 선택하시겠습니까?"),
                                  message: Text("작성한 내용은 사라지지 않습니다."),
                                  primaryButton: firstButton, secondaryButton: secondButton)
