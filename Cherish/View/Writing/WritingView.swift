@@ -10,10 +10,12 @@ import SwiftUI
 struct WritingView: View {
     @Binding var context : String
     let date = Date().dateToString_MDY()
+    let contextPlaceholder: String
     
-    init(context: Binding<String>) {
+    init(context: Binding<String>, contextPlaceholder: String = "내용") {
         self._context = context
         UITextView.appearance().backgroundColor = .clear
+        self.contextPlaceholder = contextPlaceholder
     }
     
     var body: some View {
@@ -26,12 +28,15 @@ struct WritingView: View {
             TextEditor(text: $context)
                 .padding(.vertical, 23)
                 .padding(.horizontal, 20)
-                .foregroundColor(self.context == "당신의 이야기를 기록해보세요." ? Color.grayA7 : Color.gray23)
                 .onTapGesture {
-                    if self.context == "당신의 이야기를 기록해보세요."{
+                    if self.context == contextPlaceholder{
                         self.context = ""
                     }
                 }
+                .onChange(of: context, perform: { newValue in
+                    print(self.context == contextPlaceholder)
+                })
+                .foregroundColor(self.context == contextPlaceholder ? Color.grayA7 : Color.gray23)
                 .lineSpacing()
                 .frame(height:500)
                 .background(Color.grayF5)
@@ -52,7 +57,7 @@ struct WritingView: View {
 
 struct WritingView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingView(context: .constant("내용"))
+        WritingView(context: .constant("내용"), contextPlaceholder: "내용")
             .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())

@@ -11,7 +11,7 @@ struct FreeView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     @State private var title = "제목"
-    @State private var context = "당신의 이야기를 기록해보세요."
+    @State private var context = "오늘의 이야기를 기록해보세요."
     @State private var isShowAlert = false
     @State private var alertCategory: AlertCategory = .leave
     @EnvironmentObject var addWritingPopupViewModel: AddWritingPopupViewModel
@@ -37,7 +37,7 @@ struct FreeView: View {
                         .foregroundColor(self.title == "제목" ? Color.grayA7 : Color.gray23)
                         .accentColor(Color.gray23)
                     
-                    WritingView(context: $context)
+                    WritingView(context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.")
                         .padding(.top, 25)
                         .padding(.horizontal, 27)
                     Spacer()
@@ -61,7 +61,7 @@ struct FreeView: View {
                     //                    }
                     
                     Button {
-                        if context == "당신의 이야기를 기록해보세요." || context == "" {
+                        if context == "오늘의 이야기를 기록해보세요." || context == "" {
                             isShowAlert = true
                             alertCategory = .save
                         } else {
@@ -128,8 +128,8 @@ extension FreeView {
         }
     }
     private func checkShouldShowAlert() -> Bool {
-        if ( context == "당신의 이야기를 기록해보세요." && title == "제목") { return false }
-        else if  ( context == "당신의 이야기를 기록해보세요." && title == "") { return false }
+        if ( context == "오늘의 이야기를 기록해보세요." && title == "제목") { return false }
+        else if  ( context == "오늘의 이야기를 기록해보세요." && title == "") { return false }
         else if  ( context == "" && title == "제목") { return false }
         else if  ( context == "" && title == "") { return false }
         else { return true }
