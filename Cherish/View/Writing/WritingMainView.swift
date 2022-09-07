@@ -20,6 +20,17 @@ struct WritingMainView: View {
     @State var recordType = Record.free
     @State private var oneSentence: String = (UserDefaults.standard.object(forKey: UserDefaultKey.oneSentence.rawValue) as? String ?? "")
     @Binding var tabbarCategory: TabbarCategory
+    @State var cardSequence: [Record]
+    
+    init(isShowTabbar: Binding<Bool>, tabbarCategory: Binding<TabbarCategory>) {
+        self._isShowTabbar = isShowTabbar
+        self._tabbarCategory = tabbarCategory
+        if let cardSequenceString = UserDefaults.standard.object(forKey: UserDefaultKey.cardSequence.rawValue) as? [String] {
+            self._cardSequence = State(initialValue: cardSequenceString.map{Record(rawValue: $0) ?? Record.emotion})
+        } else {
+            self._cardSequence = State(initialValue: Record.allCases)
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -168,10 +179,9 @@ extension WritingMainView {
     private func WritingBoxes() -> some View {
         ScrollView(.horizontal, showsIndicators : false){
             HStack(spacing: 0) {
-                let records = Record.allCases
                 let width = (UIScreen.main.bounds.height > 750) ? UIScreen.main.bounds.width/1.5 : UIScreen.main.bounds.width/1.8
-                ForEach(records.indices, id: \.self){ index in
-                    let record = records[index]
+                ForEach(cardSequence.indices, id: \.self){ index in
+                    let record = cardSequence[index]
                     GeometryReader { geomitry in
                         ZStack(alignment: .center) {
                             Image(record.imageName)
@@ -181,7 +191,7 @@ extension WritingMainView {
                                 .frame(width: width, height: width*1.5)
                             Text("\(record.writingMainText)")
                                 .font(.bodySemibold)
-                                .foregroundColor(colorScheme == .light ? .gray23 : .grayF5)
+                                .foregroundColor(colorScheme == .light ? Color(hex: "4A4A4A") : .grayF5)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 13)
                                 .background(.white.opacity(0.7))

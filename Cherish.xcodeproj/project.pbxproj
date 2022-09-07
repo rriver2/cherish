@@ -44,6 +44,7 @@
 		CCB1C1D828B4C1430006D4DA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */; };
 		CCB7566D28C76A3D006C58EC /* SelectSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB7566C28C76A3D006C58EC /* SelectSoundView.swift */; };
 		CCB7566F28C76E3B006C58EC /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB7566E28C76E3B006C58EC /* Sound.swift */; };
+		CCB7567328C8428E006C58EC /* WritingSequenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB7567228C8428E006C58EC /* WritingSequenceView.swift */; };
 		CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */; };
 		CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477528A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld */; };
 		CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */; };
@@ -90,6 +91,7 @@
 		CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		CCB7566C28C76A3D006C58EC /* SelectSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSoundView.swift; sourceTree = "<group>"; };
 		CCB7566E28C76E3B006C58EC /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		CCB7567228C8428E006C58EC /* WritingSequenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSequenceView.swift; sourceTree = "<group>"; };
 		CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
 		CCDE477628A7AEEC00BADBE3 /* TimelineContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimelineContainer.xcdatamodel; sourceTree = "<group>"; };
 		CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				CC0F9CFE28B3B443005D94F7 /* DarkModeView.swift */,
 				CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */,
 				CCB1C1D528B4B6780006D4DA /* LicenseView.swift */,
+				CCB7567228C8428E006C58EC /* WritingSequenceView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
 				CCB1C1D628B4B6780006D4DA /* LicenseView.swift in Sources */,
+				CCB7567328C8428E006C58EC /* WritingSequenceView.swift in Sources */,
 				CC0F9D0328B3B4EB005D94F7 /* Tabbar.swift in Sources */,
 				CC95F3212899F7F8008C3EEF /* Recode.swift in Sources */,
 				CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */,

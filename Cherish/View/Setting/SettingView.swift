@@ -62,6 +62,16 @@ struct SettingView: View {
                     }
                 }
                 
+                NavigationLink {
+                    WritingSequenceView(isShowTabbar: $isShowTabbar)
+                } label: {
+                    HStack(spacing: 0) {
+                        Text("일기 형식 순서")
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                    }
+                }
+                
                 HStack(spacing: 0) {
                     Text("모든 기록 삭제하기")
                     Spacer()

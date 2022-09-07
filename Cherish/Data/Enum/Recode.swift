@@ -9,21 +9,18 @@ import Foundation
 import SwiftUI
 
 enum Record: String, CaseIterable {
-    case free = "자유형식"
     case emotion = "감정형식"
     case question = "질문형식"
-    //    case inspiration = "영감형식"
+    case free = "자유형식"
     
     var writingMainText: String {
         switch self {
-            case .free:
-                return "머릿속 이야기"
-            case .question:
-                return "질문에 답하기"
             case .emotion:
                 return "나의 감정"
-                //            case .inspiration:
-                //                return "영감 찾기"
+            case .question:
+                return "질문에 답하기"
+            case .free:
+                return "머릿속 이야기"
         }
     }
     

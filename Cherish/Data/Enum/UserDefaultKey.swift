@@ -15,4 +15,5 @@ enum UserDefaultKey: String, CaseIterable {
     case darkMode
     case isShowOnboarding
     case soundCategory
+    case cardSequence
 }
