@@ -9,36 +9,48 @@ import SwiftUI
 
 struct OnboardingView: View {
     @Binding var isShowOnboarding: Bool
-    @State var onBoardingNumber: Int = 0
+    @State var onBoardingNumber = 0
     @EnvironmentObject var soundViewModel: SoundViewModel
     @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            HStack(alignment: .center, spacing: 7) {
-                Text("Skip")
-                    .foregroundColor(.clear)
-                Spacer()
-                Circles()
-                Spacer()
-                SkipButton()
-            }
-            .padding(.top, 37)
-            .padding(.bottom, 37)
-            
-            VStack(alignment: .center, spacing: 0) {
-                let colorSchemeString = DarkModeViewModel.colorSchemeString(mode: colorScheme)
-                let imageName = "Onboarding" + colorSchemeString + String(onBoardingNumber+1)
-                ZStack(alignment: .bottom) {
-                    Image(imageName)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: UIScreen.main.bounds.width)
-                    NextButton()
+        
+        ZStack(alignment: .topTrailing) {
+            TabView(selection: $onBoardingNumber) {
+                let array = Array(0..<6)
+                ForEach(array, id: \.self) { index in
+                    VStack(alignment: .center, spacing: 0) {
+                        let colorSchemeString = DarkModeViewModel.colorSchemeString(mode: colorScheme)
+                        let imageName = "Onboarding" + colorSchemeString + String(index+1)
+                        ZStack(alignment: .bottom) {
+                            Image(imageName)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(maxWidth: UIScreen.main.bounds.width)
+                        }
+                    }
+                    .padding(.top, 97)
+                    .padding(.horizontal, 27)
+                    .tag(index)
                 }
             }
+            .tabViewStyle(.page(indexDisplayMode: .always))
+            
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Text("Skip")
+                        .foregroundColor(.clear)
+                    Spacer()
+                    Circles()
+                    Spacer()
+                    SkipButton()
+                }
+                .padding(.top, 37)
+                .padding(.horizontal, 27)
+                Spacer()
+                NextButton()
+            }
         }
-        .padding(.horizontal, 27)
     }
     
     func endOnboarding() {
@@ -52,12 +64,12 @@ extension OnboardingView {
     @ViewBuilder
     func SkipButton() -> some View {
         if onBoardingNumber != 5 {
-        Button {
-            endOnboarding()
-        } label: {
-            Text("Skip")
-                .foregroundColor(.grayA7)
-        }
+            Button {
+                endOnboarding()
+            } label: {
+                Text("Skip")
+                    .foregroundColor(.grayA7)
+            }
         } else {
             Text("Skip")
                 .foregroundColor(.clear)
@@ -70,6 +82,7 @@ extension OnboardingView {
             Circle()
                 .foregroundColor(index == onBoardingNumber ? Color.gray23 : Color(hex: "D2D2D2"))
                 .frame(width: 8, height: 8)
+                .padding(.horizontal, 3)
         }
     }
     @ViewBuilder
@@ -91,7 +104,6 @@ extension OnboardingView {
                         .padding(.bottom, 13)
                 }
                 
-                
                 Button {
                     endOnboarding()
                     soundViewModel.pressSound(isSoundOn: false)
@@ -102,20 +114,6 @@ extension OnboardingView {
                         .padding(.horizontal, 27)
                         .padding(.bottom, 30)
                 }
-            }
-        } else {
-            Button {
-                onBoardingNumber += 1
-            } label: {
-                Text("다음으로")
-                    .font(.bodySemibold)
-                    .foregroundColor(Color(hex: "F5F5F5"))
-                    .frame(height: 56)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(hex: "232323"))
-                    .cornerRadius(10)
-                    .padding(.horizontal, 27)
-                    .padding(.bottom, 58)
             }
         }
     }
