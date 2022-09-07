@@ -8,25 +8,11 @@
 import Foundation
 
 
-enum UserDefaultKey: CaseIterable {
-    case isMusicOn
+enum UserDefaultKey: String, CaseIterable {
+    case isSoundOn
     case oneSentence
     case selectedEmotion
     case darkMode
     case isShowOnboarding
-    
-    var string: String {
-        switch self {
-            case .isMusicOn:
-                return "isMusicOn"
-            case .oneSentence:
-                return "oneSentence"
-            case .selectedEmotion:
-                return "selectedEmotion"
-            case .darkMode:
-                return "darkMode"
-            case .isShowOnboarding:
-                return "isShowOnboarding"
-        }
-    }
+    case soundCategory
 }

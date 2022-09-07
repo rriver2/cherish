@@ -42,7 +42,7 @@ struct OnboardingView: View {
     }
     
     func endOnboarding() {
-        let key = UserDefaultKey.isShowOnboarding.string
+        let key = UserDefaultKey.isShowOnboarding.rawValue
         UserDefaults.standard.set(false, forKey: key)
         isShowOnboarding = false
     }
@@ -78,7 +78,7 @@ extension OnboardingView {
             VStack(spacing: 0) {
                 Button {
                     endOnboarding()
-                    soundViewModel.isMusicOn = true
+                    soundViewModel.pressSound(isSoundOn: true)
                 } label: {
                     Text("음악과 함께 시작하기")
                         .font(.bodySemibold)
@@ -94,7 +94,7 @@ extension OnboardingView {
                 
                 Button {
                     endOnboarding()
-                    soundViewModel.isMusicOn = false
+                    soundViewModel.pressSound(isSoundOn: false)
                 } label: {
                     Text("음악 없이 시작하기")
                         .font(.miniSemibold)

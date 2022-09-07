@@ -37,6 +37,7 @@ struct SelectSoundView: View {
                 .background(.white)
                 .onTapGesture {
                     selectedSound = sound
+                    soundViewModel.pressTempSound(sound: sound)
                 }
             }
             Spacer()
@@ -56,6 +57,9 @@ extension SelectSoundView {
                 .font(.system(size: 17, weight: .regular))
                 .foregroundColor(.gray23)
                 .onTapGesture {
+                    if let selectedSound = selectedSound {
+                    soundViewModel.cancelSoundFullscreen(sound: selectedSound)
+                    }
                     dismiss()
                 }
             Spacer()
@@ -67,7 +71,10 @@ extension SelectSoundView {
                 .font(.system(size: 17, weight: .regular))
                 .foregroundColor(.gray23)
                 .onTapGesture {
-                    soundViewModel.soundCategory = selectedSound ?? .brightNightCity
+                    if let selectedSound = selectedSound {
+                        soundViewModel.soundCategory = selectedSound
+                        soundViewModel.confirmSoundFullscreen(sound: selectedSound)
+                    }
                     dismiss()
                 }
         }

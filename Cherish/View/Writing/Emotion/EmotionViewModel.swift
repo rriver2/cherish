@@ -22,13 +22,13 @@ class EmotionViewModel: ObservableObject {
         context = "내용"
         emotionType = EmotionCategory.allCases[0]
         selectedEmotionList = []
-        let key = UserDefaultKey.selectedEmotion.string
+        let key = UserDefaultKey.selectedEmotion.rawValue
         userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
         searchedEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
     }
     
     func getPreSelectedEmotion() -> [String] {
-        let key = UserDefaultKey.selectedEmotion.string
+        let key = UserDefaultKey.selectedEmotion.rawValue
         return UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
     }
     
@@ -44,7 +44,7 @@ class EmotionViewModel: ObservableObject {
     }
     
     func deleteEmotionsOnDevice() {
-        let key = UserDefaultKey.selectedEmotion.string
+        let key = UserDefaultKey.selectedEmotion.rawValue
         UserDefaults.standard.set([], forKey: key)
         userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
     }
@@ -56,7 +56,7 @@ class EmotionViewModel: ObservableObject {
             userDefaultEmotionList.removeLast()
         }
         userDefaultEmotionList.insert(emotion, at: 0)
-        let key = UserDefaultKey.selectedEmotion.string
+        let key = UserDefaultKey.selectedEmotion.rawValue
         UserDefaults.standard.set(userDefaultEmotionList, forKey: key)
         userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
     }

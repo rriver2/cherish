@@ -39,7 +39,7 @@ class DarkModeViewModel: ObservableObject {
     }
     
     func setMode(categoryMode: Category) {
-        let key = UserDefaultKey.darkMode.string
+        let key = UserDefaultKey.darkMode.rawValue
         switch categoryMode {
             case .light:
                 UserDefaults.standard.set(categoryMode.rawValue, forKey: key)
@@ -68,7 +68,7 @@ class DarkModeViewModel: ObservableObject {
     }
     
     init(mode: ColorScheme? = nil) {
-        let key = UserDefaultKey.darkMode.string
+        let key = UserDefaultKey.darkMode.rawValue
         let darkModeCategory = UserDefaults.standard.object(forKey: key) as? String ?? ""
         self.mode = geColorScheme(mode: darkModeCategory)
     }

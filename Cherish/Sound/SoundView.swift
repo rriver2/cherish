@@ -29,12 +29,12 @@ struct SoundView: View {
     }
     
     var body: some View {
-            Image(soundViewModel.isMusicOn ? "SoundOn" : "SoundOff")
+            Image(soundViewModel.isSoundOn ? "SoundOn" : "SoundOff")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 30, height: 22)
+                .frame(width: 25, height: 22)
                 .onTapGesture {
-                    soundViewModel.isMusicOn.toggle()
+                    soundViewModel.pressSound()
                 }
                 .gesture(longPress)
                 .fullScreenCover(isPresented: $isShowChangeMusicFullScreen) {

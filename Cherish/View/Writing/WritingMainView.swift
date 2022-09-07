@@ -18,7 +18,7 @@ struct WritingMainView: View {
     @State private var showCards = true
     @FocusState private var isFocusedKeyboard: Bool
     @State var recordType = Record.free
-    @State private var oneSentence: String = (UserDefaults.standard.object(forKey: UserDefaultKey.oneSentence.string) as? String ?? "")
+    @State private var oneSentence: String = (UserDefaults.standard.object(forKey: UserDefaultKey.oneSentence.rawValue) as? String ?? "")
     @Binding var tabbarCategory: TabbarCategory
     
     var body: some View {
@@ -151,7 +151,7 @@ extension WritingMainView {
         .cornerRadius(10)
         .padding(.bottom, 25)
         .onChange(of: oneSentence) { newValue in
-            let key = UserDefaultKey.oneSentence.string
+            let key = UserDefaultKey.oneSentence.rawValue
             UserDefaults.standard.set(newValue, forKey: key)
             let maxCharacterLength = 25
             if maxCharacterLength < newValue.count {

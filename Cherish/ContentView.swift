@@ -11,7 +11,7 @@ struct ContentView: View {
     @State var tabbarCategory: TabbarCategory = .writing
     @State var isShowTabbar = true
     @EnvironmentObject var darkModeViewModel: DarkModeViewModel
-    @State var isShowOnboarding = (UserDefaults.standard.object(forKey: UserDefaultKey.isShowOnboarding.string) as? Bool ?? true)
+    @State var isShowOnboarding = (UserDefaults.standard.object(forKey: UserDefaultKey.isShowOnboarding.rawValue) as? Bool ?? true)
     
     var body: some View {
         if isShowOnboarding {
