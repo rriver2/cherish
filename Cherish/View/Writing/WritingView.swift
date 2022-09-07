@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WritingView: View {
     @Binding var context : String
+    @FocusState var isTextFieldsFocused: Bool
     let date = Date().dateToString_MDY()
     let contextPlaceholder: String
     
@@ -25,29 +26,36 @@ struct WritingView: View {
                 .foregroundColor(Color.gray8A)
                 .padding(.bottom, 8)
                 .padding(.leading, 5)
-            TextEditor(text: $context)
-                .padding(.vertical, 23)
-                .padding(.horizontal, 20)
-                .onTapGesture {
-                    if self.context == contextPlaceholder{
-                        self.context = ""
-                    }
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundColor(Color.grayF5)
+                .overlay {
+                    TextEditor(text: $context)
+                        .foregroundColor(self.context == contextPlaceholder ? Color.grayA7 : Color.gray23)
+                        .font(.bodyRegular)
+                        .focused($isTextFieldsFocused)
+                        .background(Color.grayF5)
+                        .lineSpacing()
+                        .padding(.vertical, 23)
+                        .padding(.horizontal, 20)
+                        .textSelection(.disabled)
+                        .onTapGesture {
+                            if self.context == contextPlaceholder{
+                                self.context = ""
+                            }
+                        }
                 }
-                .onChange(of: context, perform: { newValue in
-                    print(self.context == contextPlaceholder)
-                })
-                .foregroundColor(self.context == contextPlaceholder ? Color.grayA7 : Color.gray23)
-                .lineSpacing()
-                .frame(height:500)
-                .background(Color.grayF5)
-                .cornerRadius(10)
-                .font(.bodyRegular)
+            
+            Spacer()
+            
         }
         .onTapGesture {
             endEditing()
         }
         .tint(Color.gray23)
         .accentColor(Color.gray23)
+        
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear { UITextView.appearance().backgroundColor = .clear }
     }
     
     private func endEditing() {
@@ -58,7 +66,7 @@ struct WritingView: View {
 struct WritingView_Previews: PreviewProvider {
     static var previews: some View {
         WritingView(context: .constant("내용"), contextPlaceholder: "내용")
-            .preferredColorScheme(.dark)
+        //            .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())

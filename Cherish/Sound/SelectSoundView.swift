@@ -16,6 +16,7 @@ struct SelectSoundView: View {
     var body: some View {
         VStack(spacing: 0) {
             title()
+                .padding(.bottom, 70)
             ForEach(SoundCategory.allCases, id: \.self) { sound in
                 let soundName = sound.displayName
                 HStack(alignment: .center, spacing: 0) {
@@ -33,7 +34,7 @@ struct SelectSoundView: View {
                     }
                     #warning("background -> white 없애기")
                 }
-                .padding(.bottom, 25)
+                .padding(.bottom, 27)
                 .background(.white)
                 .onTapGesture {
                     selectedSound = sound
@@ -79,7 +80,6 @@ extension SelectSoundView {
                 }
         }
         .frame(height: 20)
-        .padding(.bottom, 49)
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)

@@ -26,14 +26,13 @@ struct EmotionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
-            ScrollView (showsIndicators : false) {
-                EmotionGroups()
-                    .padding(.top, 2)
-                WritingView(context: $emotionViewModel.context)
-                    .padding(.top, 25)
-            }
-            .padding(.horizontal, 27)
+            EmotionGroups()
+                .padding(.top, 2)
+                .padding(.leading, 5)
+            WritingView(context: $emotionViewModel.context)
+                .padding(.top, 25)
         }
+        .padding(.horizontal, 27)
         .alert(isPresented: $isShowAlert) {
             emotionViewModel.showEmotionViewAlert(dismiss: dismiss)
         }
@@ -134,7 +133,6 @@ extension EmotionView {
         }
         .padding(.bottom, 28)
         .padding(.top, 25)
-        .padding(.horizontal, 27)
     }
 }
 

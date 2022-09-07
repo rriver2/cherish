@@ -21,18 +21,17 @@ struct QuestionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
-            ScrollView(showsIndicators : false) {
                 Text(title)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.bodyRegular)
                     .lineSpacing()
                     .foregroundColor(Color.gray23)
                     .padding(.top, 2)
+                    .padding(.leading, 5)
                 WritingView(context: $context)
                     .padding(.top, 25)
-            }
-            .padding(.horizontal, 27)
         }
+        .padding(.horizontal, 27)
         .alert(isPresented: $isShowAlert) {
             switch alertCategory {
                 case .leave:
@@ -113,7 +112,6 @@ extension QuestionView {
         }
         .padding(.top, 25)
         .padding(.bottom, 28)
-        .padding(.horizontal, 27)
     }
 }
 

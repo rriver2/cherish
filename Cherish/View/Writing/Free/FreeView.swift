@@ -10,7 +10,7 @@ import SwiftUI
 struct FreeView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
-    @State private var title = "제목"
+    @State private var title = ""
     @State private var context = "오늘의 이야기를 기록해보세요."
     @State private var isShowAlert = false
     @State private var alertCategory: AlertCategory = .leave
@@ -24,25 +24,17 @@ struct FreeView: View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
                 NavigationBar()
-                ScrollView(showsIndicators : false) {
-                    TextEditor(text: $title)
-                        .onTapGesture {
-                            if self.title == "제목"{
-                                self.title = ""
-                            }
-                        }
-                        .font(.bodyRegular)
-                        .padding(.horizontal, 27)
-                        .padding(.top, 2)
-                        .foregroundColor(self.title == "제목" ? Color.grayA7 : Color.gray23)
-                        .accentColor(Color.gray23)
-                    
-                    WritingView(context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.")
-                        .padding(.top, 25)
-                        .padding(.horizontal, 27)
-                    Spacer()
-                }
+                TextField("제목", text: $title)
+                    .font(.bodyRegular)
+                    .padding(.top, 2)
+                    .foregroundColor(self.title == "제목" ? Color.grayA7 : Color.gray23)
+                    .accentColor(Color.gray23)
+                    .padding(.leading, 5)
+                
+                WritingView(context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.")
+                    .padding(.top, 25)
             }
+            .padding(.horizontal, 27)
             .alert(isPresented: $isShowAlert) {
                 saveAlert()
             }
@@ -115,7 +107,6 @@ extension FreeView {
         }
         .padding(.top, 25)
         .padding(.bottom, 28)
-        .padding(.horizontal, 27)
     }
     private func saveAlert() -> Alert {
         switch alertCategory {

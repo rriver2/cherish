@@ -69,6 +69,7 @@ struct WritingMainView: View {
             .navigationBarHidden(true)
             .fullScreenCover(isPresented: $showFreeView) {
                 FreeView()
+//                WritingView(context: .constant("dd"))
             }
             .fullScreenCover(isPresented: $showQuestionView) {
                 RecommandedQuestionView(isModalShow: $showQuestionView)
