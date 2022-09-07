@@ -11,22 +11,14 @@ import AVFoundation
 struct SoundView: View {
     @EnvironmentObject var soundViewModel: SoundViewModel
     @State var audio : AVAudioPlayer?
-    let popCategory: PopCategory
     @State var isShowChangeMusicFullScreen = false
     
     var longPress: some Gesture {
         LongPressGesture(minimumDuration: 0.3)
                .onEnded { _ in
-                   if popCategory == .fullModal {
                        isShowChangeMusicFullScreen = true
-                   }
                }
        }
-    
-    enum PopCategory {
-        case fullModal
-        case popUp
-    }
     
     var body: some View {
             Image(soundViewModel.isSoundOn ? "SoundOn" : "SoundOff")
@@ -45,7 +37,7 @@ struct SoundView: View {
 
 struct SoundView_Previews: PreviewProvider {
     static var previews: some View {
-        SoundView(popCategory: .fullModal)
+        SoundView()
             .preferredColorScheme(.dark)
             .environmentObject(SoundViewModel())
     }

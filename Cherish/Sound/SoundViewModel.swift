@@ -52,7 +52,6 @@ class SoundViewModel: ObservableObject {
             playSound()
         }
     }
-    
     func pressSound(isSoundOn: Bool? = nil) {
         if let isSoundOn = isSoundOn {
             self.isSoundOn = isSoundOn
@@ -72,6 +71,7 @@ class SoundViewModel: ObservableObject {
         }
     }
     
+    /// 소리 변경 관련 함수들
     func pressTempSound(sound: SoundCategory) {
         let song = NSDataAsset (name: sound.fileName)
         if let data = song?.data {

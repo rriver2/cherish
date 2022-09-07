@@ -45,7 +45,7 @@ struct QuestionView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
-                SoundView(popCategory: .popUp)
+                SoundView()
                     .font(.bodyRegular)
                 Spacer()
                 Button {

@@ -92,7 +92,7 @@ extension WritingMainView {
                 .padding(.leading, 3)
             Spacer()
             if showCards {
-                SoundView(popCategory: .fullModal)
+                SoundView()
             }
         }
         .frame(height: 20)

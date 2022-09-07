@@ -48,7 +48,7 @@ struct FreeView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
-                    SoundView(popCategory: .popUp)
+                    SoundView()
                         .font(.bodyRegular)
                     Spacer()
                     
