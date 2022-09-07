@@ -14,22 +14,18 @@ struct LicenseView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
+                .padding(.horizontal, 27)
             dividerThickGrayE8
             VStack(alignment: .leading, spacing: 0) {
-            Text("music")
-                .font(.bodyRegular)
-                .foregroundColor(.gray23)
-                .padding(.bottom, 11)
-            Text("Cozy Place by Keys of Moon | https://soundcloud.com/keysofmoon Music promoted by https://www.chosic.com/free-music/all/   Creative Commons CC BY 4.0m https://creativecommons.org/licenses/by/4.0/")
-                .font(.miniRegular)
-                .tint(.gray8A)
-                .foregroundColor(.gray8A)
+                ForEach(SoundCategory.allCases, id: \.self) { sound in
+                    if let context = sound.license {
+                        LicenseText(title: "music - \(sound.displayName)", context: context)
+                    }
+                }
             }
                 .padding(.vertical, 28)
-            dividerGrayE8
             Spacer()
         }
-        .padding(.horizontal, 27)
         .onAppear {
             isShowTabbar = false
         }
@@ -62,6 +58,21 @@ extension LicenseView {
         .foregroundColor(.gray23)
         .padding(.top, 25)
         .padding(.bottom, 40)
+    }
+    @ViewBuilder
+    private func LicenseText(title: String, context: String) -> some View {
+        Text(title)
+            .font(.bodyRegular)
+            .foregroundColor(.gray23)
+            .padding(.bottom, 11)
+            .padding(.horizontal, 27)
+        Text(context)
+            .font(.miniRegular)
+            .tint(.gray8A)
+            .foregroundColor(.gray8A)
+            .padding(.horizontal, 27)
+        dividerGrayE8
+            .padding(.vertical, 24)
     }
 }
 
