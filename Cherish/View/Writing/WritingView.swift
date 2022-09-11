@@ -10,8 +10,9 @@ import SwiftUI
 struct WritingView: View {
     @Binding var context : String
     @FocusState var isTextFieldsFocused: Bool
-    let date = Date().dateToString_MDY()
+    @State var date: Date = Date()
     let contextPlaceholder: String
+    @State private var isShowCalendar = false
     
     init(context: Binding<String>, contextPlaceholder: String = "내용") {
         self._context = context
@@ -21,11 +22,16 @@ struct WritingView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(date)
-                .font(.miniRegular)
-                .foregroundColor(Color.gray8A)
-                .padding(.bottom, 8)
-                .padding(.leading, 5)
+            NavigationLink {
+                DateView(date: date, writingDate: $date)
+            } label: {
+                Text(date.dateToString_MDY())
+                    .font(.miniRegular)
+                    .foregroundColor(Color.gray8A)
+                    .padding(.bottom, 8)
+                    .padding(.leading, 5)
+            }
+            
             RoundedRectangle(cornerRadius: 10)
                 .foregroundColor(Color.grayF5)
                 .overlay {
@@ -44,16 +50,13 @@ struct WritingView: View {
                             }
                         }
                 }
-            
             Spacer()
-            
         }
         .onTapGesture {
             endEditing()
         }
         .tint(Color.gray23)
         .accentColor(Color.gray23)
-        
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear { UITextView.appearance().backgroundColor = .clear }
     }

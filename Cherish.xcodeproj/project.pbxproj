@@ -39,6 +39,7 @@
 		CC95F335289A8A1E008C3EEF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F334289A8A1E008C3EEF /* Question.swift */; };
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
 		CC9B2DB728A9DA0C001BF29B /* RecommandedQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */; };
+		CC9FC39028CE6864009CFB33 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9FC38F28CE6864009CFB33 /* DateView.swift */; };
 		CCB1C1CC28B4784C0006D4DA /* DarkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */; };
 		CCB1C1D628B4B6780006D4DA /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1D528B4B6780006D4DA /* LicenseView.swift */; };
 		CCB1C1D828B4C1430006D4DA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */; };
@@ -86,6 +87,7 @@
 		CC95F334289A8A1E008C3EEF /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandedQuestionView.swift; sourceTree = "<group>"; };
+		CC9FC38F28CE6864009CFB33 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewModel.swift; sourceTree = "<group>"; };
 		CCB1C1D528B4B6780006D4DA /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				CC95F3062899F5DE008C3EEF /* WritingMainView.swift */,
 				CC95F3182899F734008C3EEF /* WritingView.swift */,
 				CC0F338228B5B565000E360F /* AddWritingPopupViewModel.swift */,
+				CC9FC38F28CE6864009CFB33 /* DateView.swift */,
 				CC95F3122899F681008C3EEF /* Free */,
 				CC95F3142899F690008C3EEF /* Emotion */,
 				CC95F3132899F68A008C3EEF /* Question */,
@@ -361,6 +364,7 @@
 				CC95F30F2899F667008C3EEF /* EmotionView.swift in Sources */,
 				CC95F3172899F6C8008C3EEF /* SelectQuestionView.swift in Sources */,
 				CC0F9CFF28B3B443005D94F7 /* DarkModeView.swift in Sources */,
+				CC9FC39028CE6864009CFB33 /* DateView.swift in Sources */,
 				CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */,
 				CC95F3262899FA3E008C3EEF /* Color.swift in Sources */,
 				CC95F335289A8A1E008C3EEF /* Question.swift in Sources */,
