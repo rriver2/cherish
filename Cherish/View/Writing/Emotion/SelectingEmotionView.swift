@@ -13,6 +13,7 @@ struct SelectingEmotionView: View {
     @StateObject var emotionViewModel = EmotionViewModel()
     @Binding var isModalShow: Bool
     @State private var isShowNextView = false
+    @State private var isScrollUp = false
     
     @FocusState private var isKeyboardOpen: Bool
     
@@ -24,10 +25,19 @@ struct SelectingEmotionView: View {
                     SelectEmotionType()
                         .padding(.top, 50)
                 }
+                
                 ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 0) {
-                        EmotionList()
-                            .padding(.top, 13)
+                    ScrollViewReader { scrollViewProxy in
+                        VStack(alignment: .leading, spacing: 0) {
+                            EmotionList()
+                                .padding(.top, 13)
+                        }
+                        .onChange(of: isScrollUp) { newValue in
+                            if isScrollUp {
+                                scrollViewProxy.scrollTo(0)
+                            }
+                            isScrollUp = false
+                        }
                     }
                 }
             }
@@ -53,6 +63,7 @@ extension SelectingEmotionView {
                     let emotion = emotionList[index]
                     Button(action: {
                         emotionViewModel.emotionType = emotion
+                        isScrollUp = true
                     }) {
                         if(emotionViewModel.emotionType != emotion){
                             Text(emotion.string)
@@ -103,6 +114,7 @@ extension SelectingEmotionView {
                     .cornerRadius(15)
                     .padding(.top, 18)
                     .padding(.leading, 27)
+                    .id(index)
                     Spacer()
                 }
                 .background(colorScheme == .light ? .white: .black)

@@ -12,6 +12,7 @@ struct SelectQuestionView: View {
     @State private var questionType: Question = .life
     @Binding var isModalShow: Bool
     @GestureState private var dragOffset = CGSize.zero
+    @State private var isScrollUp = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -19,8 +20,16 @@ struct SelectQuestionView: View {
             SelectQuestionType()
                 .padding(.top, 40)
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 0) {
-                    QuestionList()
+                ScrollViewReader { scrollViewProxy in
+                    VStack(alignment: .leading, spacing: 0) {
+                        QuestionList()
+                    }
+                    .onChange(of: isScrollUp) { newValue in
+                        if isScrollUp {
+                            scrollViewProxy.scrollTo(0)
+                        }
+                        isScrollUp = false
+                    }
                 }
             }
             Spacer()
@@ -45,6 +54,7 @@ extension SelectQuestionView {
                     let type = questionTypes[index]
                     Button(action: {
                         questionType = type
+                        isScrollUp = true
                     }) {
                         if(questionType != type){
                             Text(type.string)
@@ -71,7 +81,7 @@ extension SelectQuestionView {
             ForEach(questionList.indices, id : \.self){ index in
                 let question = questionList[index]
                 NavigationLink {
-                    QuestionView(title: question, isModalShow: $isModalShow )
+                    QuestionView(title: question, isModalShow: $isModalShow)
                 } label: {
                     VStack(alignment: .leading, spacing: 0){
                         Text(question)
@@ -83,6 +93,7 @@ extension SelectQuestionView {
                             .padding(.horizontal, 27)
                         dividerGrayE8
                     }
+                    .id(index)
                 }
             }
         }
