@@ -57,6 +57,11 @@ extension View {
             .frame(height: 4)
             .foregroundColor(Color.gray8A)
     }
+    var dividerThickClear : some View {
+        Rectangle()
+            .frame(height: 4)
+            .foregroundColor(Color.clear)
+    }
     func lineSpacing() -> some View {
         self
             .lineSpacing(8.0)

@@ -45,8 +45,8 @@ struct SelectingEmotionView: View {
 extension SelectingEmotionView {
     @ViewBuilder
     private func SelectEmotionType() -> some View {
-        ZStack(alignment: .bottom){
-            dividerThickGrayE8
+        ZStack(alignment: .bottom) {
+            dividerGrayE8
             HStack(alignment: .top, spacing: 0) {
                 let emotionList = EmotionCategory.allCases
                 ForEach(emotionList.indices, id: \.self) { index in
@@ -58,20 +58,26 @@ extension SelectingEmotionView {
                             Text(emotion.string)
                                 .font(.bodyRegular)
                                 .foregroundColor(Color.grayA7)
-                                .frame(width: UIScreen.main.bounds.width / 4.2 - 20)
+                                .padding(.horizontal, 15)
+                                .padding(.bottom, 10)
+                                .overlay(alignment: .bottom) {
+                                    dividerThickClear
+                                }
                         } else {
-                            VStack(spacing: 8) {
-                                Text(emotion.string)
-                                    .font(.bodySemibold)
-                                    .foregroundColor(Color.gray23)
-                                dividerThickGray8A
-                            }
-                            .frame(width: UIScreen.main.bounds.width / 4.2 - 20)
+                            Text(emotion.string)
+                                .font(.bodySemibold)
+                                .foregroundColor(Color.gray23)
+                                .padding(.horizontal, 15)
+                                .padding(.bottom, 10)
+                                .overlay(alignment: .bottom) {
+                                    dividerThickGray8A
+                                }
                         }
                     }
                 }
             }
         }
+        
     }
     @ViewBuilder
     private func EmotionList() -> some View {
@@ -164,7 +170,7 @@ extension SelectingEmotionView {
 struct SelectingEmotionView_Previews: PreviewProvider {
     static var previews: some View {
         SelectingEmotionView(isModalShow: .constant(false))
-            .preferredColorScheme(.dark)
+        //            .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())
