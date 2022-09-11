@@ -11,14 +11,6 @@ import AVFoundation
 struct SoundView: View {
     @EnvironmentObject var soundViewModel: SoundViewModel
     @State var audio : AVAudioPlayer?
-    @State var isShowChangeMusicFullScreen = false
-    
-    var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.3)
-               .onEnded { _ in
-                       isShowChangeMusicFullScreen = true
-               }
-       }
     
     var body: some View {
             Image(soundViewModel.isSoundOn ? "SoundOn" : "SoundOff")
@@ -27,10 +19,6 @@ struct SoundView: View {
                 .frame(width: 25, height: 22)
                 .onTapGesture {
                     soundViewModel.pressSound()
-                }
-                .gesture(longPress)
-                .fullScreenCover(isPresented: $isShowChangeMusicFullScreen) {
-                    SelectSoundView()
                 }
     }
 }

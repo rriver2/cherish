@@ -12,6 +12,7 @@ struct SelectSoundView: View {
     #warning("environment init되고 값을 넣고 싶은데.. 오또케 하냐 !!")
     @State var selectedSound: SoundCategory?
     @Environment(\.dismiss) private var dismiss
+    @Binding var isShowTabbar: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -46,6 +47,10 @@ struct SelectSoundView: View {
         .padding(.horizontal, 27)
         .onAppear {
             selectedSound = soundViewModel.soundCategory
+            isShowTabbar = false
+        }
+        .onDisappear {
+            isShowTabbar = true
         }
     }
 }
@@ -88,7 +93,7 @@ extension SelectSoundView {
 
 struct SelectSoundView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectSoundView()
+        SelectSoundView(isShowTabbar: .constant(false))
             .environmentObject(SoundViewModel())
     }
 }

@@ -37,6 +37,16 @@ struct SettingView: View {
                     }
                 }
                 
+                NavigationLink {
+                    SelectSoundView(isShowTabbar: $isShowTabbar)
+                } label: {
+                    HStack(spacing: 0) {
+                        Text("Sound 변경")
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                    }
+                }
+                
                 //                HStack(spacing: 0) {
                 //                    Text("의견 남기기")
                 //                    Spacer()

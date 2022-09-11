@@ -118,6 +118,7 @@
 				CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */,
 				CCB1C1D528B4B6780006D4DA /* LicenseView.swift */,
 				CCB7567228C8428E006C58EC /* WritingSequenceView.swift */,
+				CCB7566C28C76A3D006C58EC /* SelectSoundView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -190,7 +191,6 @@
 			children = (
 				CCD0F41A28A3BBD8003774F0 /* SoundViewModel.swift */,
 				CC95F3042899F5D6008C3EEF /* SoundView.swift */,
-				CCB7566C28C76A3D006C58EC /* SelectSoundView.swift */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
