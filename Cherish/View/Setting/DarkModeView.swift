@@ -26,11 +26,12 @@ struct DarkModeView: View {
                         Text(darkModeCategory.rawValue)
                             .font(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .bodySemibold : .bodyRegular)
                         Spacer()
-                        Image("check")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 13, height: 9)
-                            .foregroundColor(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .gray23 : .clear)
+                        if darkModeViewModel.isSameMode(categoryMode: darkModeCategory) {
+                            Image("check")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 13, height: 9)
+                        }
                     }
                 }
             }

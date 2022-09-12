@@ -40,6 +40,9 @@ struct SelectingEmotionView: View {
                         }
                     }
                 }
+//                VStack(spacing: 0) {
+//
+//                }
             }
         }
         .alert(isPresented: $emotionViewModel.isShowAlert) {
