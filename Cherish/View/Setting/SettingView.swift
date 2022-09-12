@@ -17,7 +17,7 @@ struct SettingView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 48) {
+            VStack(spacing: 30) {
                 Title()
                 //                HStack(spacing: 0) {
                 //                    Text("화면 잠금")
@@ -48,31 +48,6 @@ struct SettingView: View {
                     }
                 }
                 
-                //                HStack(spacing: 0) {
-                //                    Text("의견 남기기")
-                //                    Spacer()
-                //                    Image(systemName: "chevron.forward")
-                //                }
-                
-                HStack(spacing: 0) {
-                    Text("친구에게 앱 공유하기")
-                    Spacer()
-                    Image(systemName: "chevron.forward")
-                }
-                .onTapGesture {
-                    actionSheet()
-                }
-                
-                NavigationLink {
-                    LicenseView(isShowTabbar: $isShowTabbar)
-                } label: {
-                    HStack(spacing: 0) {
-                        Text("오픈 소스 라이센스")
-                        Spacer()
-                        Image(systemName: "chevron.forward")
-                    }
-                }
-                
                 NavigationLink {
                     WritingSequenceView(isShowTabbar: $isShowTabbar)
                 } label: {
@@ -90,6 +65,36 @@ struct SettingView: View {
                 .onTapGesture {
                     isShowAlertDelectAll = true
                 }
+                .padding(.bottom, 60)
+                
+                
+                HStack(spacing: 0) {
+                    Text("의견 남기기")
+                    Spacer()
+                    Image(systemName: "chevron.forward")
+                }
+                .onTapGesture {
+                    moveToCherishAppstoreComment()
+                }
+                
+                HStack(spacing: 0) {
+                    Text("친구에게 앱 공유하기")
+                    Spacer()
+                    Image(systemName: "chevron.forward")
+                }
+                .onTapGesture {
+                    moveToCherishAppStore()
+                }
+                
+                NavigationLink {
+                    LicenseView(isShowTabbar: $isShowTabbar)
+                } label: {
+                    HStack(spacing: 0) {
+                        Text("오픈 소스 라이센스")
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                    }
+                }
                 
                 Spacer()
             }
@@ -106,8 +111,8 @@ struct SettingView: View {
             }
         }
     }
-    func actionSheet() {
-        guard let urlShare = URL(string:"https://apps.apple.com/us/app/cherish/id1639908764") else { return }
+    func moveToCherishAppStore() {
+        if let  urlShare = URL(string:"https://apps.apple.com/us/app/cherish/id1639908764") {
         let text = "cherish - 나를 들여다보는 시간 🫧"
         let activityVC = UIActivityViewController(activityItems: [urlShare, text], applicationActivities: nil)
         let allScenes = UIApplication.shared.connectedScenes
@@ -115,6 +120,20 @@ struct SettingView: View {
         
         if let windowScene = scene as? UIWindowScene {
             windowScene.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+        }
+        }
+    }
+    
+    func moveToCherishAppstoreComment() {
+        if let appstoreUrl = URL(string: "https://apps.apple.com/us/app/cherish/id1639908764") {
+            var urlComp = URLComponents(url: appstoreUrl, resolvingAgainstBaseURL: false)
+            urlComp?.queryItems = [
+                URLQueryItem(name: "action", value: "write-review")
+            ]
+            guard let reviewUrl = urlComp?.url else {
+                return
+            }
+            UIApplication.shared.open(reviewUrl, options: [:], completionHandler: nil)
         }
     }
 }
@@ -129,7 +148,7 @@ extension SettingView {
             Spacer()
         }
         .frame(height: 20)
-        .padding(.bottom, 31)
+        .padding(.bottom, 40)
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)
