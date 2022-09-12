@@ -16,6 +16,7 @@ struct SearchEmotionView: View {
     @GestureState private var dragOffset = CGSize.zero
     @FocusState private var isKeyboardOpen: Bool
     @State private var searchText: String = ""
+    @Binding var isShowSelectedEmotion: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -28,6 +29,7 @@ struct SearchEmotionView: View {
             } else {
                 EmtionGroups(emotionList: emotionViewModel.searchedEmotionList, addEmotionToDevice: true)
             }
+            SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
         }
         .onChange(of: searchText) { newValue in
             if newValue == "" {
@@ -192,7 +194,7 @@ extension SearchEmotionView {
 
 struct SearchEmotionView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchEmotionView(isModalShow: .constant(false), emotionViewModel: EmotionViewModel())
+        SearchEmotionView(isModalShow: .constant(false), emotionViewModel: EmotionViewModel(), isShowSelectedEmotion: .constant(true))
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())

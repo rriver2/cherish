@@ -153,8 +153,40 @@ extension WritingEditView {
                     .padding(.leading, 5)
                     .padding(.bottom, 22)
             }
-            WritingView(context: $context, date: date)
-                .disabled(!isEditMode)
+            
+//                WritingView(context: $context, date: date)
+//                               .disabled(!isEditMode)
+            #warning("이 부분 ... ^^")
+            if isEditMode {
+                WritingView(context: $context, date: date)
+            } else {
+            VStack(alignment: .leading, spacing: 0) {
+                NavigationLink {
+                    DateView(date: date, writingDate: $date)
+                } label: {
+                    Text(date.dateToString_MDY())
+                        .font(.miniRegular)
+                        .foregroundColor(Color.gray8A)
+                        .padding(.bottom, 8)
+                        .padding(.leading, 5)
+                }
+                
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(Color.grayF5)
+                    .overlay(alignment: .topLeading) {
+                        Text(context)
+                            .foregroundColor(Color.gray23)
+                            .font(.bodyRegular)
+                            .background(Color.grayF5)
+                            .lineSpacing()
+                            .padding(.vertical, 23)
+                            .padding(.horizontal, 20)
+                            .textSelection(.disabled)
+                        
+                    }
+                Spacer()
+            }
+            }
         }
     }
 }

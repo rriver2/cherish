@@ -15,6 +15,7 @@
 		CC0F9D0328B3B4EB005D94F7 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */; };
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
+		CC6B46B828CF51B300CD039D /* SelectedEmotionPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */; };
 		CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC818CD92899ED8C003B8753 /* SaveOnApp.swift */; };
 		CC818CDE2899ED8C003B8753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC818CDD2899ED8C003B8753 /* Assets.xcassets */; };
 		CC818CE12899ED8C003B8753 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC818CE02899ED8C003B8753 /* Preview Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
+		CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmotionPopUpView.swift; sourceTree = "<group>"; };
 		CC818CD62899ED8C003B8753 /* Cherish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cherish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC818CD92899ED8C003B8753 /* SaveOnApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOnApp.swift; sourceTree = "<group>"; };
 		CC818CDD2899ED8C003B8753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				CCF3931E28A881F0008F506C /* SearchEmotionView.swift */,
 				CC95F30E2899F667008C3EEF /* EmotionView.swift */,
 				CC835A7928AA824A004B987F /* EmotionViewModel.swift */,
+				CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */,
 			);
 			path = Emotion;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */,
 				CC95F32A289A03A4008C3EEF /* Font.swift in Sources */,
 				CC95F32E289A78B3008C3EEF /* TimelineView.swift in Sources */,
+				CC6B46B828CF51B300CD039D /* SelectedEmotionPopUpView.swift in Sources */,
 				CC0F9CFD28B3AF59005D94F7 /* SettingView.swift in Sources */,
 				CC95F31B2899F743008C3EEF /* SelectingEmotionView.swift in Sources */,
 				CC95F32C289A77F9008C3EEF /* ContentView.swift in Sources */,
