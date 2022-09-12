@@ -66,6 +66,9 @@ extension View {
         self
             .lineSpacing(8.0)
     }
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
 }
 
 extension String {
@@ -77,18 +80,13 @@ extension String {
     }
 }
 
+struct RoundedCorner: Shape {
 
-struct OverlayModifier<OverlayView: View>: ViewModifier {
-    
-    @Binding var isPresented: Bool
-    let overlayView: OverlayView
-    
-    init(isPresented: Binding<Bool>, @ViewBuilder overlayView: @escaping () -> OverlayView) {
-        self._isPresented = isPresented
-        self.overlayView = overlayView()
-    }
-    
-    func body(content: Content) -> some View {
-        content.overlay(isPresented ? overlayView : nil)
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
     }
 }
