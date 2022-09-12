@@ -10,14 +10,15 @@ import SwiftUI
 struct WritingView: View {
     @Binding var context : String
     @FocusState var isTextFieldsFocused: Bool
-    @State var date: Date = Date()
+    @State var date: Date
     let contextPlaceholder: String
     @State private var isShowCalendar = false
     
-    init(context: Binding<String>, contextPlaceholder: String = "내용") {
+    init(context: Binding<String>, contextPlaceholder: String = "내용", date: Date = Date()) {
         self._context = context
         UITextView.appearance().backgroundColor = .clear
         self.contextPlaceholder = contextPlaceholder
+        self._date = State(initialValue: date)
     }
     
     var body: some View {

@@ -10,6 +10,8 @@ import SwiftUI
 struct TimelineView: View {
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
+    @State var selectedRecord: RecordEntity?
+    @State var isShowAlert = false
     
     var body: some View {
         if timeLineViewModel.recordsEntity.isEmpty {
@@ -49,6 +51,15 @@ struct TimelineView: View {
                         }
                         .padding(.horizontal, 27)
                     }
+                    .fullScreenCover(item: $selectedRecord) { record in
+                        if let selectedRecord = record,
+                           let title = selectedRecord.title,
+                           let context = selectedRecord.context,
+                           let date = selectedRecord.date,
+                        let recordMode = Record.getCatagory(record: selectedRecord.kind ?? "") {
+                            WritingEditView(title: title, date: date, context: context, recordMode: recordMode)
+                        }
+                    }
                 }
             }
             .clipped()
@@ -61,7 +72,7 @@ extension TimelineView {
     @ViewBuilder
     private func Title() -> some View {
         HStack(spacing: 0) {
-            Text("나의 기록")
+            Text(TabbarCategory.timeline.rawValue)
                 .foregroundColor(Color.gray23)
                 .padding(.leading, 3)
             Spacer()
@@ -98,7 +109,7 @@ extension TimelineView {
                     .foregroundColor(Color.grayA7)
             }
             .padding(.trailing, 16)
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(spacing: 0) {
                 if record.title != "" {
                     Text(record.title ?? "")
                         .font(.timelineSemibold)
@@ -114,17 +125,21 @@ extension TimelineView {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
+        .frame(maxHeight: 135)
         .padding(15)
         .background(Color.grayF5)
         .cornerRadius(10)
-        .padding(.bottom, 20)
+        .padding(.bottom, 18)
+        .onTapGesture {
+            self.selectedRecord = record
+        }
     }
 }
 
 struct TimelineView_Previews: PreviewProvider {
     static var previews: some View {
         TimelineView()
-//            .preferredColorScheme(.dark)
+        //            .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())

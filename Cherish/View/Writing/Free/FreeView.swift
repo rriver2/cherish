@@ -43,15 +43,6 @@ struct FreeView: View {
                     SoundView()
                         .font(.bodyRegular)
                     Spacer()
-                    
-                    //                    #warning("삭제하기")
-                    //                    Button {
-                    //                        timeLineViewModel.removeAll()
-                    //                        dismiss()
-                    //                    } label: {
-                    //                        Text("삭제")
-                    //                    }
-                    
                     Button {
                         if context == "오늘의 이야기를 기록해보세요." || context == "" {
                             isShowAlert = true

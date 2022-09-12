@@ -29,12 +29,12 @@ struct DateView: View {
             .padding(.horizontal, 20)
             
             HStack(spacing: 0) {
-                Spacer()
                 Text("오늘")
                     .foregroundColor(.gray23)
                     .onTapGesture {
                         date = Date()
                     }
+                Spacer()
             }
             .padding(.horizontal, 27)
             .font(.miniRegular)
@@ -64,12 +64,9 @@ extension DateView {
                 writingDate = date
                 dismiss()
             }) {
-                Image("check")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 13, height: 9)
+                Text("완료")
+                    .font(.system(size: 17, weight: .regular))
                     .foregroundColor(.gray23)
-                    .font(.bodyRegular)
             }
         }
         .padding(.horizontal, 27)

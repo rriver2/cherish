@@ -12,6 +12,9 @@ class TimeLineViewModel: ObservableObject {
     let container: NSPersistentContainer
     @Published var recordsEntity: [RecordEntity] = []
     
+    var context: NSManagedObjectContext {
+        return container.viewContext
+    }
     
     init() {
         container = NSPersistentContainer(name: "TimelineContainer")
@@ -70,5 +73,21 @@ class TimeLineViewModel: ObservableObject {
             print("ERROR removeAll", error)
         }
         saveData()
+    }
+    
+    func updateRecord(date: Date, title: String, context: String) {
+        for result in recordsEntity where result.date == date {
+            result.title = title
+            result.date = date
+            result.context = context
+        }
+        saveData()
+    }
+    
+    func removeRecord(id: Date) {
+        if let removeRecord = recordsEntity.first(where: { $0.date == id }) {
+            context.delete(removeRecord)
+            saveData()
+        }
     }
 }

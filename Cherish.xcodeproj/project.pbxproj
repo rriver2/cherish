@@ -40,6 +40,7 @@
 		CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F337289AB179008C3EEF /* QuestionData.swift */; };
 		CC9B2DB728A9DA0C001BF29B /* RecommandedQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */; };
 		CC9FC39028CE6864009CFB33 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9FC38F28CE6864009CFB33 /* DateView.swift */; };
+		CC9FC39628CEDEE6009CFB33 /* WritingEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9FC39528CEDEE6009CFB33 /* WritingEditView.swift */; };
 		CCB1C1CC28B4784C0006D4DA /* DarkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */; };
 		CCB1C1D628B4B6780006D4DA /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1D528B4B6780006D4DA /* LicenseView.swift */; };
 		CCB1C1D828B4C1430006D4DA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */; };
@@ -88,6 +89,7 @@
 		CC95F337289AB179008C3EEF /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		CC9B2DB628A9DA0C001BF29B /* RecommandedQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandedQuestionView.swift; sourceTree = "<group>"; };
 		CC9FC38F28CE6864009CFB33 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		CC9FC39528CEDEE6009CFB33 /* WritingEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingEditView.swift; sourceTree = "<group>"; };
 		CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewModel.swift; sourceTree = "<group>"; };
 		CCB1C1D528B4B6780006D4DA /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				CC95F32D289A78B3008C3EEF /* TimelineView.swift */,
+				CC9FC39528CEDEE6009CFB33 /* WritingEditView.swift */,
 				CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */,
 			);
 			path = TimeLine;
@@ -389,6 +392,7 @@
 				CC95F32C289A77F9008C3EEF /* ContentView.swift in Sources */,
 				CCF3931F28A881F0008F506C /* SearchEmotionView.swift in Sources */,
 				CCB1C1CC28B4784C0006D4DA /* DarkModeViewModel.swift in Sources */,
+				CC9FC39628CEDEE6009CFB33 /* WritingEditView.swift in Sources */,
 				CC95F30B2899F657008C3EEF /* FreeView.swift in Sources */,
 				CCD0F41B28A3BBD8003774F0 /* SoundViewModel.swift in Sources */,
 				CC95F3232899F8FD008C3EEF /* Recordable.swift in Sources */,
