@@ -39,7 +39,7 @@ struct QuestionView: View {
                         dismiss()
                     }), secondaryButton: .cancel(Text("머무르기")))
                 case .save:
-                    return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
+                    return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
             }
         }
         .toolbar {

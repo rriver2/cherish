@@ -133,7 +133,7 @@ extension WritingMainView {
     @ViewBuilder
     private func OneSentence() -> some View {
         HStack(spacing: 0) {
-            TextField("요즘 나의 한마디", text: $oneSentence)
+            TextField("나의 다짐", text: $oneSentence)
                 .multilineTextAlignment(.center)
                 .padding(.leading, 17)
                 .font(oneSentence.count > 20 ? .miniRegular : .bodyRegular)

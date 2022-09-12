@@ -69,9 +69,9 @@ class EmotionViewModel: ObservableObject {
                 }), secondaryButton: .cancel(Text("머무르기")))
             case .save:
                 if selectedEmotionList.isEmpty {
-                    return Alert(title: Text("감정을 한 개 이상 선택해주세요"), message: nil, dismissButton: .cancel(Text("네")))
+                    return Alert(title: Text("감정을 한 개 이상 선택해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
                 } else {
-                    return Alert(title: Text("6개 이하로 선택해주세요"), message: nil, dismissButton: .cancel(Text("네")))
+                    return Alert(title: Text("6개 이하로 선택해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
                 }
         }
     }
@@ -88,7 +88,7 @@ class EmotionViewModel: ObservableObject {
                                  message: Text("작성한 내용은 사라지지 않습니다."),
                                  primaryButton: firstButton, secondaryButton: secondButton)
                 case .save:
-                    return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("네")))
+                    return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
             }
     }
 }

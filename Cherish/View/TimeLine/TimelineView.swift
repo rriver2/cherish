@@ -15,17 +15,10 @@ struct TimelineView: View {
         if timeLineViewModel.recordsEntity.isEmpty {
             VStack(spacing: 0) {
                 Title()
-                Text("아직 기록한 내용이 없습니다")
-                    .frame(maxWidth: .infinity)
-                    .multilineTextAlignment(.center)
-                    .padding(19)
-                    .background(Color.grayF5)
+                Spacer()
+                Text("새로운 기록을 남겨보세요")
                     .font(.miniRegular)
-                    .foregroundColor(Color.gray8A)
-                    .cornerRadius(10)
-                    .padding(.bottom, 25)
-                    .cornerRadius(10)
-                    .padding(.horizontal, 27)
+                    .foregroundColor(.gray8A)
                 Spacer()
             }
         } else {
@@ -131,7 +124,7 @@ extension TimelineView {
 struct TimelineView_Previews: PreviewProvider {
     static var previews: some View {
         TimelineView()
-            .preferredColorScheme(.dark)
+//            .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())

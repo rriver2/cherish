@@ -13,6 +13,7 @@ struct SettingView: View {
     @Binding var isShowTabbar: Bool
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     @State private var isShowAlertDelectAll = false
+    @State private var isShowAlertConfirmDelectAll = false
     
     var body: some View {
         NavigationView {
@@ -97,7 +98,11 @@ struct SettingView: View {
             .alert(isPresented: $isShowAlertDelectAll) {
                 Alert(title: Text("정말로 모든 기록을 삭제할까요?"), message: Text("삭제하신 이후에는 복원할 수 없습니다."), primaryButton: .destructive(Text("삭제"), action: {
                     timeLineViewModel.removeAll()
+                    isShowAlertConfirmDelectAll = true
                 }), secondaryButton: .cancel(Text("취소")))
+            }
+            .alert(isPresented: $isShowAlertConfirmDelectAll) {
+                return Alert(title: Text("모든 기록이 삭제되었습니다."), message: nil, dismissButton: .cancel(Text("확인")))
             }
         }
     }
