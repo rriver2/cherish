@@ -64,7 +64,7 @@ class EmotionViewModel: ObservableObject {
     func showSelectingEmotionViewAlert(dismiss: DismissAction) -> Alert{
         switch alertCategory {
             case .leave:
-                return Alert(title: Text("기록한 내용은 저장되지 않습니다. 그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                return Alert(title: Text("기록한 내용은 저장되지 않습니다."), message: Text("그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
                     dismiss()
                 }), secondaryButton: .cancel(Text("머무르기")))
             case .save:

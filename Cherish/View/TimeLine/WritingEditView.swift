@@ -16,15 +16,16 @@ struct WritingEditView: View {
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     let recordMode: Record
     @State var isShowAlert = false
-    @State var removeRecordAlertCategory: RemoveRecordAlertCategory = .confirm
+    @State var alertCategory: AlertCategory = .remove
     
     let originTitle: String
     let originDate: Date
     let originContext: String
     
-    enum RemoveRecordAlertCategory {
-        case confirm
-        case after
+    enum AlertCategory {
+        case remove
+        case afterRemove
+        case leave
     }
     
     init(title: String, date: Date, context: String, recordMode: Record) {
@@ -70,15 +71,20 @@ struct WritingEditView: View {
     }
     
     private func showAlert() -> Alert {
-        switch removeRecordAlertCategory {
-            case .confirm:
-                return  Alert(title: Text("정말로 기록을 삭제하시겠습니까? 삭제하신 이후에는 복원할 수 없습니다."), primaryButton: .destructive(Text("삭제"), action: {
+        switch alertCategory {
+            case .remove:
+                return Alert(title: Text("정말로 기록을 삭제하시겠습니까?"), message: Text("삭제 후에는 복원할 수 없습니다."), primaryButton: .destructive(Text("삭제"), action: {
                     timeLineViewModel.removeRecord(id: date)
                     dismiss()
                 }), secondaryButton: .cancel(Text("취소")))
-            case .after:
+            case .afterRemove:
                 // 수정해야함
                 return Alert(title: Text("기록이 삭제되었습니다."), message: nil, dismissButton: .cancel(Text("확인")))
+            case .leave:
+                return Alert(title: Text("기록한 내용은 저장되지 않습니다."), message: Text("그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                    timeLineViewModel.removeRecord(id: date)
+                    dismiss()
+                }), secondaryButton: .cancel(Text("머무르기")))
         }
     }
 }
@@ -96,7 +102,12 @@ extension WritingEditView {
             }
             HStack(alignment: .center, spacing: 0) {
                 Button(action: {
-                    dismiss()
+                    if originTitle == title && originDate == date && originContext == context {
+                        dismiss()
+                    } else {
+                        alertCategory = .leave
+                        isShowAlert = true
+                    }
                 }) {
                     Image(systemName: "xmark")
                         .foregroundColor(.gray23)
@@ -116,17 +127,8 @@ extension WritingEditView {
                         .font(.bodyRegular)
                         .foregroundColor(.gray23)
                         .onTapGesture {
+                            alertCategory = .remove
                             isShowAlert = true
-                        }
-                } else {
-                    Text("수정 취소")
-                        .font(.miniRegular)
-                        .foregroundColor(.gray23)
-                        .onTapGesture {
-                            isEditMode = false
-                            title = originTitle
-                            context = originContext
-                            date = originDate
                         }
                 }
             }
@@ -137,7 +139,7 @@ extension WritingEditView {
     @ViewBuilder
     private func FullRecordView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            if recordMode == .free {
+            if recordMode == .free && isEditMode {
                 TextField("제목", text: $title)
                     .font(.bodyRegular)
                     .padding(.top, 2)
@@ -146,46 +148,44 @@ extension WritingEditView {
                     .padding(.leading, 5)
                     .padding(.bottom, 22)
                     .disabled(!isEditMode)
-            } else {
+            } else if title != "" {
                 Text(title)
                     .font(.bodyRegular)
                     .foregroundColor(.gray23)
                     .padding(.leading, 5)
                     .padding(.bottom, 22)
             }
-            
-//                WritingView(context: $context, date: date)
-//                               .disabled(!isEditMode)
-            #warning("이 부분 ... ^^")
+            //
+            //                WritingView(context: $context, date: date)
+            //                               .disabled(!isEditMode)
+#warning("이 부분 ... ^^")
             if isEditMode {
                 WritingView(context: $context, date: date)
             } else {
-            VStack(alignment: .leading, spacing: 0) {
-                NavigationLink {
-                    DateView(date: date, writingDate: $date)
-                } label: {
+                VStack(alignment: .leading, spacing: 0) {
                     Text(date.dateToString_MDY())
                         .font(.miniRegular)
                         .foregroundColor(Color.gray8A)
                         .padding(.bottom, 8)
                         .padding(.leading, 5)
-                }
-                
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color.grayF5)
-                    .overlay(alignment: .topLeading) {
-                        Text(context)
-                            .foregroundColor(Color.gray23)
-                            .font(.bodyRegular)
-                            .background(Color.grayF5)
-                            .lineSpacing()
+                    
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color.grayF5)
+                        .overlay(alignment: .topLeading) {
+                            ScrollView {
+                                Text(context)
+                                    .foregroundColor(Color.gray23)
+                                    .font(.bodyRegular)
+                                    .background(Color.grayF5)
+                                    .lineSpacing()
+                                    .padding(.horizontal, 10)
+                            }
                             .padding(.vertical, 23)
                             .padding(.horizontal, 20)
-                            .textSelection(.disabled)
-                        
-                    }
-                Spacer()
-            }
+                            .cornerRadius(10)
+                        }
+                    Spacer()
+                }
             }
         }
     }
@@ -193,6 +193,7 @@ extension WritingEditView {
 
 struct WritingEditView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingEditView(title: "단 한 가지 것에 집중한다면 무엇을 선택하고 싶나요?", date: Date(), context: "소중한 것은 글자가 뜻하는 것처럼 힘을 들여 지켜야 하는 것임에도, 우리는 종종 말로만 그것을 소중하다 칭한 채, 방치한다. 그래서인지 가사 속에서 ‘소중하다’는 말은 주로 과거형으로 쓰이는 경우가 많다. 소 잃고 외양간 고치는 말 같기도 하지만, 세상의 모든 소중한 것들은 것을 소중하다 칭한 채, 방치한다.  ", recordMode: Record.question)
+        WritingEditView(title: "단 한 가지 것에 집중한다면 무엇을 선택하고 싶나요?", date: Date(), context: "소중한 것은 글자가 뜻하는 것처럼 힘을 들여 지켜야 하는 것임에도, 우리는 종종 말로만 그것을 소중하다 칭한 채, 방치한다. 그래서인지 가사 속에서 ‘소중하다’는 말은 주로 과거형으로 쓰이는 경우가 많다. 소 잃고 외양간 고치는 말 같기도 하지만, 세상의 모든 소중한 것들은 것을 소중하다 칭한 채, 방치한다.소중한 것은 글자가 뜻하는 것처럼 힘을 들여 지켜야 하는 것임에도, 우리는 종종 말로만 그것을 소중하다 칭한 채, 방치한다. 그래서인지 가사 속에서 ‘소중하다’는 말은 주로 과거형으로 쓰이는 경우가 많다. 소 잃고 외양간 고치는 말 같기도 하지만, 세상의 모든 소중한 것들은 것을 소중하다 칭한 채, 방치한다.소중한 것은 글자가 뜻하는 것처럼 힘을 들여 지켜야 하는 것임에도, 우리는 종종 말로만 그것을 소중하다 칭한 채, 방치한다. 그래서인지 가사 속에서 ‘소중하다’는 말은 주로 과거형으로 쓰이는 경우가 많다. 소 잃고 외양간 고치는 말 같기도 하지만, 세상의 모든 소중한 것들은 것을 소중하다 칭한 채, 방치한다.소중한 것은 글자가 뜻하는 것처럼 힘을 들여 지켜야 하는 것임에도, 우리는 종종 말로만 그것을 소중하다 칭한 채, 방치한다. 그래서인지 가사 속에서 ‘소중하다’는 말은 주로 과거형으로 쓰이는 경우가 많다. 소 잃고 외양간 고치는 말 같기도 하지만, 세상의 모든 소중한 것들은 것을 소중하다 칭한 채, 방치한다.소중한 것은 글자가 뜻하는 것처럼 힘을 들여 지켜야 하는 것임에도, 우리는 종종 말로만 그것을 소중하다 칭한 채, 방치한다. 그래서인지 가사 속에서 ‘소중하다’는 말은 주로 과거형으로 쓰이는 경우가 많다. 소 잃고 외양간 고치는 말 같기도 하지만, 세상의 모든 소중한 것들은 것을 소중하다 칭한 채, 방치한다.소중한 것은 글자가 뜻하는 것처럼 힘을 들여 지켜야 하는 것임에도, 우리는 종종 말로만 그것을 소중하다 칭한 채, 방치한다. 그래서인지 가사 속에서 ‘소중하다’는 말은 주로 과거형으로 쓰이는 경우가 많다. 소 잃고 외양간 고치는 말 같기도 하지만, 세상의 모든 소중한 것들은 것을 소중하다 칭한 채, 방치한다.", recordMode: Record.question)
+            .environmentObject(SoundViewModel())
     }
 }
