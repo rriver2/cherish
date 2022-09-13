@@ -77,7 +77,6 @@ extension DateView {
 
 struct DateView_Previews: PreviewProvider {
     static var previews: some View {
-        DateView(date:
-                    Date(), writingDate: .constant(Date()))
+        DateView(date: Date(), writingDate: .constant(Date()))
     }
 }

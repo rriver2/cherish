@@ -10,6 +10,7 @@ import SwiftUI
 struct FreeView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
+    @State private var date = Date()
     @State private var title = ""
     @State private var context = "오늘의 이야기를 기록해보세요."
     @State private var isShowAlert = false
@@ -31,7 +32,7 @@ struct FreeView: View {
                     .accentColor(Color.gray23)
                     .padding(.leading, 5)
                 
-                WritingView(context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.")
+                WritingView(date: $date, context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.")
                     .padding(.top, 25)
             }
             .padding(.horizontal, 27)
@@ -48,7 +49,7 @@ struct FreeView: View {
                             isShowAlert = true
                             alertCategory = .save
                         } else {
-                            timeLineViewModel.addRecord(date: Date(), title: title == "제목" ? "" : title, context: context, kind: Record.free)
+                            timeLineViewModel.addRecord(date: date, title: title == "제목" ? "" : title, context: context, kind: Record.free)
                             addWritingPopupViewModel.isShowAddWritingPopup = true
                             addWritingPopupViewModel.writingCategory = .free
                             dismiss()

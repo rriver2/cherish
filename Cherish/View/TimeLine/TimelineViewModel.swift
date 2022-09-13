@@ -38,6 +38,7 @@ class TimeLineViewModel: ObservableObject {
     
     func addRecord(date: Date, title: String, context: String, kind: Record) {
         let newRecord = RecordEntity(context: container.viewContext)
+        print("date", date)
         newRecord.date = date
         newRecord.title = title
         newRecord.context = context
@@ -75,8 +76,10 @@ class TimeLineViewModel: ObservableObject {
         saveData()
     }
     
-    func updateRecord(date: Date, title: String, context: String) {
-        for result in recordsEntity where result.date == date {
+    func updateRecord(originDate: Date, date: Date, title: String, context: String) {
+        for result in recordsEntity where result.date == originDate {
+            print("date", date)
+            print(#function)
             result.title = title
             result.date = date
             result.context = context

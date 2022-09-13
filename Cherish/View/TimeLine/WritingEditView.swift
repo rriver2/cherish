@@ -52,7 +52,8 @@ struct WritingEditView: View {
                         .font(.bodyRegular)
                     Spacer()
                     Button {
-                        timeLineViewModel.updateRecord(date: date, title: title, context: context)
+                        timeLineViewModel.updateRecord(originDate: originDate, date: date, title: title, context: context)
+                        print("updateRecord")
                         dismiss()
                     } label: {
                         Image("check")
@@ -160,7 +161,7 @@ extension WritingEditView {
             //                               .disabled(!isEditMode)
 #warning("이 부분 ... ^^")
             if isEditMode {
-                WritingView(context: $context, date: date)
+                WritingView(date: $date, context: $context)
             } else {
                 VStack(alignment: .leading, spacing: 0) {
                     Text(date.dateToString_MDY())

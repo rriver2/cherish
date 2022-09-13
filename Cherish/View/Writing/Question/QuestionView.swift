@@ -13,6 +13,7 @@ struct QuestionView: View {
     @GestureState private var dragOffset = CGSize.zero
     @Binding var isModalShow: Bool
     @State var context = "내용"
+    @State var date = Date()
     @State private var alertCategory: AlertCategory = .leave
     @State var isShowAlert = false
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
@@ -28,7 +29,7 @@ struct QuestionView: View {
                     .foregroundColor(Color.gray23)
                     .padding(.top, 2)
                     .padding(.leading, 5)
-                WritingView(context: $context)
+            WritingView(date: $date, context: $context)
                     .padding(.top, 25)
         }
         .padding(.horizontal, 27)
@@ -52,7 +53,7 @@ struct QuestionView: View {
                         alertCategory = .save
                         isShowAlert = true
                     } else {
-                        timeLineViewModel.addRecord(date: Date(), title: title, context: context, kind: Record.question)
+                        timeLineViewModel.addRecord(date: date, title: title, context: context, kind: Record.question)
                         addWritingPopupViewModel.isShowAddWritingPopup = true
                         addWritingPopupViewModel.writingCategory = .question
                         dismiss()

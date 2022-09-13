@@ -11,6 +11,7 @@ import AVFAudio
 class EmotionViewModel: ObservableObject {
     @Published var isShowAlert: Bool
     @Published var context: String
+    @Published var date: Date
     @Published var emotionType: EmotionCategory
     @Published var selectedEmotionList: [String]
     @Published var userDefaultEmotionList: [String]
@@ -20,6 +21,7 @@ class EmotionViewModel: ObservableObject {
     init() {
         isShowAlert = false
         context = "내용"
+        date = Date()
         emotionType = EmotionCategory.allCases[0]
         selectedEmotionList = []
         let key = UserDefaultKey.selectedEmotion.rawValue

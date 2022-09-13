@@ -29,7 +29,7 @@ struct EmotionView: View {
             EmotionGroups()
                 .padding(.top, 2)
                 .padding(.leading, 5)
-            WritingView(context: $emotionViewModel.context)
+            WritingView(date: $emotionViewModel.date, context: $emotionViewModel.context)
                 .padding(.top, 25)
         }
         .padding(.horizontal, 27)
@@ -47,7 +47,7 @@ struct EmotionView: View {
                         emotionViewModel.alertCategory = .save
                     } else {
                         let emotionListString = emotionViewModel.selectedEmotionList.joined(separator: "    ")
-                        timeLineViewModel.addRecord(date: Date(), title: emotionListString, context: emotionViewModel.context, kind: Record.emotion)
+                        timeLineViewModel.addRecord(date: emotionViewModel.date, title: emotionListString, context: emotionViewModel.context, kind: Record.emotion)
                         addWritingPopupViewModel.isShowAddWritingPopup = true
                         addWritingPopupViewModel.writingCategory = .emotion
                         dismiss()
