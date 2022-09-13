@@ -25,11 +25,25 @@ struct SearchEmotionView: View {
             
             if searchText == "" {
                 SearchingEmtionBar()
-                EmtionGroups(emotionList: emotionViewModel.userDefaultEmotionList, addEmotionToDevice: false)
+                ZStack {
+                    EmtionGroups(emotionList: emotionViewModel.userDefaultEmotionList, addEmotionToDevice: false)
+                    VStack {
+                        Spacer()
+                        SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
+                    }
+                    .ignoresSafeArea()
+                }
             } else {
-                EmtionGroups(emotionList: emotionViewModel.searchedEmotionList, addEmotionToDevice: true)
+                ZStack {
+                    EmtionGroups(emotionList: emotionViewModel.searchedEmotionList, addEmotionToDevice: true)
+                    VStack {
+                        Spacer()
+                        SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
+                    }
+                    .ignoresSafeArea()
+                }
             }
-            SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
+            
         }
         .onChange(of: searchText) { newValue in
             if newValue == "" {

@@ -27,21 +27,27 @@ struct SelectingEmotionView: View {
                         .padding(.top, 50)
                 }
                 
-                ScrollView(showsIndicators: false) {
-                    ScrollViewReader { scrollViewProxy in
-                        VStack(alignment: .leading, spacing: 0) {
-                            EmotionList()
-                                .padding(.top, 13)
-                        }
-                        .onChange(of: isScrollUp) { newValue in
-                            if isScrollUp {
-                                scrollViewProxy.scrollTo(0)
+                ZStack {
+                    ScrollView(showsIndicators: false) {
+                        ScrollViewReader { scrollViewProxy in
+                            VStack(alignment: .leading, spacing: 0) {
+                                EmotionList()
+                                    .padding(.top, 13)
                             }
-                            isScrollUp = false
+                            .onChange(of: isScrollUp) { newValue in
+                                if isScrollUp {
+                                    scrollViewProxy.scrollTo(0)
+                                }
+                                isScrollUp = false
+                            }
                         }
                     }
+                    VStack {
+                        Spacer()
+                        SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
+                    }
+                    .ignoresSafeArea()
                 }
-                SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
             }
         }
         .alert(isPresented: $emotionViewModel.isShowAlert) {
