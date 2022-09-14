@@ -162,11 +162,10 @@ extension SelectingEmotionView {
                         .padding(.trailing, 18)
                 }
                 
-                Image("check")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 13, height: 9)
-                    .font(.bodyRegular)
+                
+                Image(systemName: "checkmark")
+                    .font(.system(size: 16))
+                    .foregroundColor(.gray23)
                     .onTapGesture {
                         if emotionViewModel.selectedEmotionList.isEmpty {
                             emotionViewModel.alertCategory = .save

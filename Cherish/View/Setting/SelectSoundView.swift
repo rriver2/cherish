@@ -26,12 +26,9 @@ struct SelectSoundView: View {
                         .foregroundColor(.gray23)
                     Spacer()
                     if sound == selectedSound {
-                        Image("check")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 13, height: 9)
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 16))
                             .foregroundColor(.gray23)
-                            .font(.bodyRegular)
                     }
                     #warning("background -> white 없애기")
                 }

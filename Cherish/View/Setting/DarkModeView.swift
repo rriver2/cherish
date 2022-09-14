@@ -27,10 +27,9 @@ struct DarkModeView: View {
                             .font(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .bodySemibold : .bodyRegular)
                         Spacer()
                         if darkModeViewModel.isSameMode(categoryMode: darkModeCategory) {
-                            Image("check")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 13, height: 9)
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 16))
+                                .foregroundColor(.gray23)
                         }
                     }
                 }

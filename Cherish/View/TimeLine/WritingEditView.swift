@@ -17,6 +17,7 @@ struct WritingEditView: View {
     let recordMode: Record
     @State var isShowAlert = false
     @State var alertCategory: AlertCategory = .remove
+    @FocusState var isTextFieldsFocused: Bool
     
     let originTitle: String
     let originDate: Date
@@ -56,12 +57,9 @@ struct WritingEditView: View {
                         print("updateRecord")
                         dismiss()
                     } label: {
-                        Image("check")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 13, height: 9)
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 16))
                             .foregroundColor(.gray23)
-                            .font(.bodyRegular)
                     }
                 }
             }
@@ -83,7 +81,6 @@ struct WritingEditView: View {
                 return Alert(title: Text("기록이 삭제되었습니다."), message: nil, dismissButton: .cancel(Text("확인")))
             case .leave:
                 return Alert(title: Text("기록한 내용은 저장되지 않습니다."), message: Text("그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
-                    timeLineViewModel.removeRecord(id: date)
                     dismiss()
                 }), secondaryButton: .cancel(Text("머무르기")))
         }
@@ -96,7 +93,7 @@ extension WritingEditView {
         ZStack(alignment: .center) {
             HStack(alignment: .center, spacing: 0) {
                 Spacer()
-                Text(TabbarCategory.timeline.rawValue)
+                Text(recordMode.writingMainText)
                     .font(.bodySemibold)
                     .foregroundColor(Color.gray23)
                 Spacer()
@@ -149,6 +146,13 @@ extension WritingEditView {
                     .padding(.leading, 5)
                     .padding(.bottom, 22)
                     .disabled(!isEditMode)
+                    .focused($isTextFieldsFocused)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6)
+                        {
+                            isTextFieldsFocused = true
+                        }
+                    }
             } else if title != "" {
                 Text(title)
                     .font(.bodyRegular)
@@ -161,7 +165,7 @@ extension WritingEditView {
             //                               .disabled(!isEditMode)
 #warning("이 부분 ... ^^")
             if isEditMode {
-                WritingView(date: $date, context: $context)
+                WritingView(date: $date, context: $context, isKeyBoardOn: recordMode != .free)
             } else {
                 VStack(alignment: .leading, spacing: 0) {
                     Text(date.dateToString_MDY())

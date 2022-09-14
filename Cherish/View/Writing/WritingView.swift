@@ -9,16 +9,18 @@ import SwiftUI
 
 struct WritingView: View {
     @Binding var context : String
-    @FocusState var isTextFieldsFocused: Bool
+    @FocusState var isTextEditorFocused: Bool
     @Binding var date: Date
     let contextPlaceholder: String
     @State private var isShowCalendar = false
+    let isKeyBoardOn: Bool
     
-    init(date: Binding<Date>, context: Binding<String>, contextPlaceholder: String = "내용") {
+    init(date: Binding<Date>, context: Binding<String>, contextPlaceholder: String = "내용", isKeyBoardOn: Bool = true) {
         self._date = date
         self._context = context
         UITextView.appearance().backgroundColor = .clear
         self.contextPlaceholder = contextPlaceholder
+        self.isKeyBoardOn = isKeyBoardOn
     }
     
     var body: some View {
@@ -39,7 +41,7 @@ struct WritingView: View {
                     TextEditor(text: $context)
                         .foregroundColor(self.context == contextPlaceholder ? Color.grayA7 : Color.gray23)
                         .font(.bodyRegular)
-                        .focused($isTextFieldsFocused)
+                        .focused($isTextEditorFocused)
                         .background(Color.grayF5)
                         .lineSpacing()
                         .padding(.vertical, 23)
@@ -53,9 +55,11 @@ struct WritingView: View {
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6)
                             {
-                                isTextFieldsFocused = true
-                                if contextPlaceholder == context {
-                                    self.context = ""
+                                if isKeyBoardOn {
+                                    isTextEditorFocused = true
+                                    if contextPlaceholder == context {
+                                        self.context = ""
+                                    }
                                 }
                             }
                         }

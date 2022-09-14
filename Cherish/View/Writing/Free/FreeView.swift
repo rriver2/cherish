@@ -16,6 +16,7 @@ struct FreeView: View {
     @State private var isShowAlert = false
     @State private var alertCategory: AlertCategory = .leave
     @EnvironmentObject var addWritingPopupViewModel: AddWritingPopupViewModel
+    @FocusState var isTextFieldsFocused: Bool
     
     init() {
         UIToolbar.appearance().barTintColor = UIColor.systemGray5
@@ -31,8 +32,9 @@ struct FreeView: View {
                     .foregroundColor(self.title == "제목" ? Color.grayA7 : Color.gray23)
                     .accentColor(Color.gray23)
                     .padding(.leading, 5)
+                    .focused($isTextFieldsFocused)
                 
-                WritingView(date: $date, context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.")
+                WritingView(date: $date, context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.", isKeyBoardOn: false)
                     .padding(.top, 25)
             }
             .padding(.horizontal, 27)
@@ -42,7 +44,7 @@ struct FreeView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     SoundView()
-                        .font(.bodyRegular)
+                        .font(.system(size: 16))
                     Spacer()
                     Button {
                         if context == "오늘의 이야기를 기록해보세요." || context == "" {
@@ -55,16 +57,19 @@ struct FreeView: View {
                             dismiss()
                         }
                     } label: {
-                        Image("check")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 13, height: 9)
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 16))
                             .foregroundColor(.gray23)
-                            .font(.bodyRegular)
                     }
                 }
             }
             .textInputAutocapitalization(.never)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6)
+                {
+                    isTextFieldsFocused = true
+                }
+            }
         }
         .tint(Color.gray23)
     }

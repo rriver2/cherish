@@ -16,7 +16,7 @@ struct SoundView: View {
             Image(soundViewModel.isSoundOn ? "SoundOn" : "SoundOff")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 25, height: 22)
+                .frame(width: 30, height: 22)
                 .onTapGesture {
                     soundViewModel.pressSound()
                 }

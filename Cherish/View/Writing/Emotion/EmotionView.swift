@@ -54,10 +54,9 @@ struct EmotionView: View {
                         isModalShow = false
                     }
                 } label: {
-                    Image("check")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 13, height: 9)
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 16))
+                        .foregroundColor(.gray23)
                         .foregroundColor(.gray23)
                         .font(.bodyRegular)
                 }

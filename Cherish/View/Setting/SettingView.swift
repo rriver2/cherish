@@ -42,7 +42,7 @@ struct SettingView: View {
                     SelectSoundView(isShowTabbar: $isShowTabbar)
                 } label: {
                     HStack(spacing: 0) {
-                        Text("Sound 변경")
+                        Text("음악 변경")
                         Spacer()
                         Image(systemName: "chevron.forward")
                     }
