@@ -8,19 +8,29 @@
 import SwiftUI
 
 struct WritingView: View {
-    @Binding var context : String
+    @Binding var context : String {
+        didSet {
+            isContextChanged = true
+        }
+    }
     @FocusState var isTextEditorFocused: Bool
     @Binding var date: Date
     let contextPlaceholder: String
     @State private var isShowCalendar = false
     let isKeyBoardOn: Bool
+    @State private var isContextChanged: Bool
     
-    init(date: Binding<Date>, context: Binding<String>, contextPlaceholder: String = "내용", isKeyBoardOn: Bool = true) {
+    init(date: Binding<Date>, context: Binding<String>, contextPlaceholder: String = "내용", isKeyBoardOn: Bool = true, isEditMode: Bool = false) {
         self._date = date
         self._context = context
         UITextView.appearance().backgroundColor = .clear
         self.contextPlaceholder = contextPlaceholder
         self.isKeyBoardOn = isKeyBoardOn
+        if isEditMode {
+            self._isContextChanged = State(initialValue: true)
+        } else {
+            self._isContextChanged = State(initialValue: false)
+        }
     }
     
     var body: some View {
@@ -39,7 +49,7 @@ struct WritingView: View {
                 .foregroundColor(Color.grayF5)
                 .overlay {
                     TextEditor(text: $context)
-                        .foregroundColor(self.context == contextPlaceholder ? Color.grayA7 : Color.gray23)
+                        .foregroundColor(isContextChanged ? Color.gray23 : Color.grayA7)
                         .font(.bodyRegular)
                         .focused($isTextEditorFocused)
                         .background(Color.grayF5)

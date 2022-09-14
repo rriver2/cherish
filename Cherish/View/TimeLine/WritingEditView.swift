@@ -165,7 +165,7 @@ extension WritingEditView {
             //                               .disabled(!isEditMode)
 #warning("이 부분 ... ^^")
             if isEditMode {
-                WritingView(date: $date, context: $context, isKeyBoardOn: recordMode != .free)
+                WritingView(date: $date, context: $context, isKeyBoardOn: recordMode != .free, isEditMode: true)
             } else {
                 VStack(alignment: .leading, spacing: 0) {
                     Text(date.dateToString_MDY())
