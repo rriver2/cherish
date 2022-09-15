@@ -49,6 +49,7 @@ struct SelectSoundView: View {
         .onDisappear {
             isShowTabbar = true
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

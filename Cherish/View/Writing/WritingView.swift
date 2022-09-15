@@ -57,6 +57,7 @@ struct WritingView: View {
                         .padding(.vertical, 23)
                         .padding(.horizontal, 20)
                         .textSelection(.disabled)
+                        .colorMultiply(Color.grayF5)
                         .onTapGesture {
                             if self.context == contextPlaceholder{
                                 self.context = ""
@@ -76,6 +77,7 @@ struct WritingView: View {
                 }
             Spacer()
         }
+        .navigationBarBackButtonHidden(true)
         .onTapGesture {
             endEditing()
         }

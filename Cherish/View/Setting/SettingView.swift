@@ -106,9 +106,6 @@ struct SettingView: View {
                     isShowAlertConfirmDelectAll = true
                 }), secondaryButton: .cancel(Text("취소")))
             }
-            .alert(isPresented: $isShowAlertConfirmDelectAll) {
-                return Alert(title: Text("모든 기록이 삭제되었습니다."), message: nil, dismissButton: .cancel(Text("확인")))
-            }
         }
     }
     func moveToCherishAppStore() {

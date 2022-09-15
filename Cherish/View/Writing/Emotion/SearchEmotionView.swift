@@ -45,6 +45,7 @@ struct SearchEmotionView: View {
             }
             
         }
+        .navigationBarBackButtonHidden(true)
         .onChange(of: searchText) { newValue in
             if newValue == "" {
                 emotionViewModel.searchedEmotionList = emotionViewModel.userDefaultEmotionList

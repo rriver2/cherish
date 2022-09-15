@@ -34,6 +34,7 @@ struct SelectQuestionView: View {
             }
             Spacer()
         }
+        .navigationBarBackButtonHidden(true)
         .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
             if (value.startLocation.x < 30 && value.translation.width > 100) {
                 dismiss()

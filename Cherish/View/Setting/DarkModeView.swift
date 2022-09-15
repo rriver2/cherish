@@ -44,6 +44,7 @@ struct DarkModeView: View {
         .onDisappear {
             isShowTabbar = true
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

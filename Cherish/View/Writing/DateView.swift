@@ -41,6 +41,7 @@ struct DateView: View {
             Spacer()
         }
         .accentColor(Color.gray23)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

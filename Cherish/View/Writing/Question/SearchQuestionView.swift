@@ -34,6 +34,7 @@ struct SearchQuestionView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .onChange(of: searchText) { newValue in
             if newValue == "" {
                 searchedQuestionList = QuestionData.randomQuestion(amount: 3)
