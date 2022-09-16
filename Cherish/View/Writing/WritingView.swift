@@ -74,7 +74,6 @@ struct WritingView: View {
                             .padding(.horizontal, 20)
                             .textSelection(.disabled)
                             .scrollContentBackground(.hidden)
-                            .colorMultiply(colorScheme == .light ? Color.grayF5 : Color.white)
                             .onTapGesture {
                                 if self.context == contextPlaceholder{
                                     self.context = ""

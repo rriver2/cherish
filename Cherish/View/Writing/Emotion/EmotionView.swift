@@ -26,11 +26,10 @@ struct EmotionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
-            EmotionGroups()
-                .padding(.top, 2)
-                .padding(.leading, 5)
+            let emotionListString = emotionViewModel.selectedEmotionList.joined(separator: "    ")
+            titleView(emotionListString)
             WritingView(date: $emotionViewModel.date, context: $emotionViewModel.context)
-                .padding(.top, 25)
+                .padding(.top, 12)
         }
         .paddingHorizontal()
         .alert(isPresented: $isShowAlert) {
@@ -74,44 +73,6 @@ struct EmotionView: View {
 }
 
 extension EmotionView {
-    @ViewBuilder
-    private func EmotionGroups() -> some View {
-        VStack(spacing: 0) {
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(emotionViewModel.selectedEmotionList, id: \.self) { detailEmotion in
-                    HStack(spacing: 0) {
-                        let isSelected = emotionViewModel.selectedEmotionList.contains(detailEmotion)
-                        HStack(spacing: 0) {
-                            Text(detailEmotion)
-                                .frame(alignment: .leading)
-                                .font(.bodyRegular)
-                                .foregroundColor(Color.gray23)
-                            if isSelected {
-                                Image(systemName: "xmark")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color.gray8A)
-                                    .padding(.leading, 7)
-                            }
-                        }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 6)
-                        .background(isSelected ? Color.grayE8 : .clear)
-                        .cornerRadius(15)
-                        Spacer()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        if emotionViewModel.selectedEmotionList.count <= 1 {
-                            isShowAlert = true
-                            emotionViewModel.alertCategory = .leave
-                        } else {
-                            emotionViewModel.tabEmotion(emotion: detailEmotion)
-                        }
-                    }
-                }
-            }
-        }
-    }
     @ViewBuilder
     private func NavigationBar() -> some View {
         HStack(alignment: .center, spacing: 0) {

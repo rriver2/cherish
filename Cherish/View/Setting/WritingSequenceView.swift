@@ -39,7 +39,7 @@ struct WritingSequenceView: View {
                     self.cardSequence.move(fromOffsets: source, toOffset: destination)
                 }
             }
-            .paddingHorizontal()
+            .padding(.leading, 27)
             .padding(.trailing, 10)
             .listStyle(.plain)
             .environment(\.editMode, .constant(.active))

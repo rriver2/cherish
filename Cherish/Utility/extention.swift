@@ -87,6 +87,7 @@ extension View {
             .lineSpacing()
             .foregroundColor(Color.gray23)
             .padding(.leading, 5)
+            .padding(.bottom, 22)
     }
     func lineSpacing() -> some View {
         self

@@ -29,6 +29,7 @@ struct SearchQuestionView: View {
                             .foregroundColor(.gray8A)
                             .padding(.horizontal, 38)
                             .padding(.top, 20)
+                            .padding(.bottom, 15)
                     }
                     QuestionList()
                         .padding(.top, searchText == "" ? 0 : 11)

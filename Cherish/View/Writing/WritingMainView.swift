@@ -135,7 +135,6 @@ extension WritingMainView {
         HStack(spacing: 0) {
             TextField("나의 다짐", text: $oneSentence)
                 .multilineTextAlignment(.center)
-                .padding(.leading, 17)
                 .font(oneSentence.count > 20 ? .miniRegular : .bodyRegular)
                 .foregroundColor(Color.gray23)
                 .focused($isFocusedKeyboard)
@@ -143,8 +142,8 @@ extension WritingMainView {
                     showCards = true
                     isShowTabbar = true
                 }
+                .padding(.leading, (showCards == false) ? 18 : 0 )
                 .submitLabel(.done)
-                .padding(.leading, (oneSentence != "" && showCards == false) ? 18 : 0 )
             if oneSentence != "" && showCards == false {
                 Button(action: {
                     oneSentence = ""
@@ -152,11 +151,11 @@ extension WritingMainView {
                     Image(systemName: "multiply.circle.fill")
                         .foregroundColor(Color.gray23.opacity(0.5))
                         .frame(width: 18, height: 18)
-                        .padding(.trailing, 17)
                         .background(Color.grayF5)
                 }
             }
         }
+        .padding(.horizontal, 17)
         .frame(maxWidth: .infinity, minHeight: 52)
         .background(Color.grayF5)
         .cornerRadius(10)

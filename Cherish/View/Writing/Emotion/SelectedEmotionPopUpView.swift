@@ -36,6 +36,7 @@ struct SelectedEmotionPopUpView: View {
                     Spacer()
                 }
                 .padding(.vertical, 24)
+                .padding(.bottom, 5)
             }
             
             if isShowSelectedEmotion {

@@ -22,10 +22,9 @@ struct QuestionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
-                    titleView(title)
-                    .padding(.top, 2)
+            titleView(title)
             WritingView(date: $date, context: $context)
-                    .padding(.top, 25)
+                .padding(.top, 12)
         }
         .paddingHorizontal()
         .alert(isPresented: $isShowAlert) {
@@ -64,16 +63,16 @@ struct QuestionView: View {
         .textInputAutocapitalization(.never)
         .tint(Color.gray23)
         .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-//#warning("왜 context가 내용으로 인식되는 거지 ? help")
-//            print(context)
-//            if (value.startLocation.x < 30 && value.translation.width > 100) {
-//                if context == "내용" || context == "" {
-//                    dismiss()
-//                } else {
-//                    alertCategory = .leave
-//                    isShowAlert = true
-//                }
-//            }
+            //#warning("왜 context가 내용으로 인식되는 거지 ? help")
+            //            print(context)
+            //            if (value.startLocation.x < 30 && value.translation.width > 100) {
+            //                if context == "내용" || context == "" {
+            //                    dismiss()
+            //                } else {
+            //                    alertCategory = .leave
+            //                    isShowAlert = true
+            //                }
+            //            }
         })
     }
 }

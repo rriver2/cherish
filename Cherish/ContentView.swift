@@ -91,9 +91,10 @@ struct ContentView: View {
                                 Spacer()
                                 Spacer()
                             }
-                            VStack {
+                            VStack(spacing: 0) {
                                 Image(systemName: tabbarItem.imageName)
                                     .font(.system(size: 20, weight: .regular))
+                                    .padding(.bottom, 2)
                                 Text(tabbarItem.rawValue)
                                     .font(.system(size: 10, weight: .regular))
                             }
