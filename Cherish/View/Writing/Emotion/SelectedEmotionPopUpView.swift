@@ -19,31 +19,31 @@ struct SelectedEmotionPopUpView: View {
     ]
     
     var body: some View {
-            VStack(alignment: .leading, spacing: 0) {
-                Button {
-                    isShowSelectedEmotion.toggle()
-                } label: {
-                    HStack(spacing: 10) {
-                        Text("선택한 감정")
-                            .font(.miniSemibold)
-                            .foregroundColor(.gray23)
-                        Image("EmotionSelectButton")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 9, height: 4)
-                            .rotationEffect(isShowSelectedEmotion ? .degrees(0) : .degrees(180))
-                        Spacer()
-                    }
-                    .padding(.vertical, 24)
+        VStack(alignment: .leading, spacing: 0) {
+            Button {
+                isShowSelectedEmotion.toggle()
+            } label: {
+                HStack(spacing: 10) {
+                    Text("선택한 감정")
+                        .font(.miniSemibold)
+                        .foregroundColor(.gray23)
+                    Image("EmotionSelectButton")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 9, height: 4)
+                        .rotationEffect(isShowSelectedEmotion ? .degrees(0) : .degrees(180))
+                    Spacer()
                 }
-                
-                if isShowSelectedEmotion {
+                .padding(.vertical, 24)
+            }
+            
+            if isShowSelectedEmotion {
                 if emotionViewModel.selectedEmotionList.isEmpty {
                     Text("최대 6개의 감정을 선택할 수 있습니다")
                         .font(.miniRegular)
                         .foregroundColor(.gray23)
                 } else {
-                    LazyVGrid(columns: columns, spacing: 10) {
+                    LazyVGrid(columns: columns, spacing: 15) {
                         let emotionList = emotionViewModel.selectedEmotionList
                         ForEach(emotionList.indices, id : \.self){ index in
                             let detailEmotion = emotionList[index]
@@ -65,7 +65,6 @@ struct SelectedEmotionPopUpView: View {
                                 .padding(.vertical, 6)
                                 .background(isSelected ? (colorScheme == .dark ? Color.grayEE : Color.grayE8) : .clear)
                                 .cornerRadius(15)
-                                Spacer()
                             }
                             .onTapGesture {
                                 emotionViewModel.tabEmotion(emotion: detailEmotion)
@@ -73,19 +72,19 @@ struct SelectedEmotionPopUpView: View {
                         }
                     }
                 }
-                }
             }
-            .paddingHorizontal()
-            .padding(.bottom, isShowSelectedEmotion ? 50 : 0)
-            .background(Color.grayF5)
-            .cornerRadius(14, corners: [.topLeft, .topRight])
-            .animation(Animation.easeInOut(duration: 0.3), value: isShowSelectedEmotion)
-            .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
         }
+        .paddingHorizontal()
+        .padding(.bottom, isShowSelectedEmotion ? 50 : 0)
+        .background(Color.grayF5)
+        .cornerRadius(14, corners: [.topLeft, .topRight])
+        .animation(Animation.easeInOut(duration: 0.3), value: isShowSelectedEmotion)
+        .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
+    }
 }
 
 struct SelectedEmotionPopUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectedEmotionPopUpView(isShowSelectedEmotion: .constant(true), emotionViewModel: EmotionViewModel())
+        SelectedEmotionPopUpView(isShowSelectedEmotion: .constant(true), emotionViewModel: EmotionViewModel(isTemp: true))
     }
 }

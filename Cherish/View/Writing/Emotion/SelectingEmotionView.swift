@@ -163,7 +163,6 @@ extension SelectingEmotionView {
                         .padding(.trailing, 18)
                 }
                 
-                
                 Image(systemName: "checkmark")
                     .font(.system(size: 16))
                     .foregroundColor(.gray23)

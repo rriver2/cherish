@@ -29,6 +29,17 @@ class EmotionViewModel: ObservableObject {
         searchedEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
     }
     
+    init(isTemp: Bool) {
+        isShowAlert = false
+        context = "내용"
+        date = Date()
+        emotionType = EmotionCategory.allCases[0]
+        selectedEmotionList = ["화나다", "가슴이 벅차 오르다", "눈물이 난다", "고달프다", "행복하다"]
+        let key = UserDefaultKey.selectedEmotion.rawValue
+        userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
+        searchedEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
+    }
+    
     func getPreSelectedEmotion() -> [String] {
         let key = UserDefaultKey.selectedEmotion.rawValue
         return UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()

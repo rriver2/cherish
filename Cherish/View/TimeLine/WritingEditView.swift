@@ -154,16 +154,9 @@ extension WritingEditView {
                         }
                     }
             } else if title != "" {
-                Text(title)
-                    .font(.bodyRegular)
-                    .foregroundColor(.gray23)
-                    .padding(.leading, 5)
-                    .padding(.bottom, 22)
+                titleView(title)
             }
-            //
-            //                WritingView(context: $context, date: date)
-            //                               .disabled(!isEditMode)
-#warning("이 부분 ... ^^")
+#warning("TextEditor의 padding")
             if isEditMode {
                 WritingView(date: $date, context: $context, isKeyBoardOn: recordMode != .free, isEditMode: true)
             } else {

@@ -70,7 +70,6 @@ struct WritingMainView: View {
             .navigationBarHidden(true)
             .fullScreenCover(isPresented: $showFreeView) {
                 FreeView()
-//                WritingView(context: .constant("dd"))
             }
             .fullScreenCover(isPresented: $showQuestionView) {
                 RecommandedQuestionView(isModalShow: $showQuestionView)
@@ -145,11 +144,10 @@ extension WritingMainView {
                     isShowTabbar = true
                 }
                 .submitLabel(.done)
+                .padding(.leading, (oneSentence != "" && showCards == false) ? 18 : 0 )
             if oneSentence != "" && showCards == false {
                 Button(action: {
                     oneSentence = ""
-                    showCards = true
-                    isShowTabbar = true
                 }) {
                     Image(systemName: "multiply.circle.fill")
                         .foregroundColor(Color.gray23.opacity(0.5))

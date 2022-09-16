@@ -62,6 +62,14 @@ extension View {
             .frame(height: 4)
             .foregroundColor(Color.clear)
     }
+    func titleView(_ title: String) -> some View {
+        Text(title)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .font(.bodyRegular)
+            .lineSpacing()
+            .foregroundColor(Color.gray23)
+            .padding(.leading, 5)
+    }
     func lineSpacing() -> some View {
         self
             .lineSpacing(8.0)

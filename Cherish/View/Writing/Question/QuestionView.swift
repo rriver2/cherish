@@ -22,13 +22,8 @@ struct QuestionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.bodyRegular)
-                    .lineSpacing()
-                    .foregroundColor(Color.gray23)
+                    titleView(title)
                     .padding(.top, 2)
-                    .padding(.leading, 5)
             WritingView(date: $date, context: $context)
                     .padding(.top, 25)
         }
