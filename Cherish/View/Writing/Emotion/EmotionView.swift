@@ -28,7 +28,7 @@ struct EmotionView: View {
             NavigationBar()
             let emotionListString = emotionViewModel.selectedEmotionList.joined(separator: "    ")
             titleView(emotionListString)
-            WritingView(date: $emotionViewModel.date, context: $emotionViewModel.context)
+            WritingView(date: $emotionViewModel.date, context: $emotionViewModel.context, isEditMode: emotionViewModel.context != "내용")
                 .padding(.top, 12)
         }
         .paddingHorizontal()

@@ -34,7 +34,7 @@ struct FreeView: View {
                     .padding(.leading, 5)
                     .focused($isTextFieldsFocused)
                 
-                WritingView(date: $date, context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.", isKeyBoardOn: false)
+                WritingView(date: $date, context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.", isKeyBoardOn: false, isEditMode: context != "오늘의 이야기를 기록해보세요.")
                     .padding(.top, 25)
             }
             .paddingHorizontal()
