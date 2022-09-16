@@ -85,16 +85,17 @@ extension EmotionView {
                             Text(detailEmotion)
                                 .frame(alignment: .leading)
                                 .font(.bodyRegular)
-                                .foregroundColor((colorScheme == .dark && isSelected) ? Color.grayF5: Color.gray23)
+                                .foregroundColor(Color.gray23)
                             if isSelected {
                                 Image(systemName: "xmark")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color.gray8A)
                                     .padding(.leading, 7)
-                                    .foregroundColor(Color(hex: "747474"))
                             }
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(isSelected ? (colorScheme == .dark ? Color.grayEE : Color.grayE8) : .clear)
+                        .background(isSelected ? Color.grayE8 : .clear)
                         .cornerRadius(15)
                         Spacer()
                     }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SelectQuestionView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @State private var questionType: Question = .life
     @Binding var isModalShow: Bool
@@ -48,7 +49,7 @@ extension SelectQuestionView {
     @ViewBuilder
     private func SelectQuestionType() -> some View {
         ZStack(alignment: .bottom){
-            dividerThickGrayE8
+            dividerThick2(colorScheme)
             HStack(alignment: .top, spacing: 0) {
                 let questionTypes = Question.allCases
                 ForEach(questionTypes.indices, id: \.self) { index in
@@ -67,7 +68,7 @@ extension SelectQuestionView {
                                 Text(type.string)
                                     .font(.bodySemibold)
                                     .foregroundColor(Color.gray23)
-                                dividerThickGray8A
+                                dividerThick4
                             }
                             .frame(width: UIScreen.main.bounds.width / CGFloat(questionTypes.count) - 20)
                         }
@@ -92,7 +93,7 @@ extension SelectQuestionView {
                             .lineSpacing()
                             .padding(.vertical, 25)
                             .paddingHorizontal()
-                        dividerGrayE8
+                        divider(colorScheme)
                     }
                     .id(index)
                 }

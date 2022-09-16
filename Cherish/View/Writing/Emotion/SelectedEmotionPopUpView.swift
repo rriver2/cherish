@@ -27,7 +27,8 @@ struct SelectedEmotionPopUpView: View {
                     Text("선택한 감정")
                         .font(.miniSemibold)
                         .foregroundColor(.gray23)
-                    Image("EmotionSelectButton")
+                    let colorMode = colorScheme == .light ? "LightMode" : "DarkMode"
+                    Image("EmotionSelectButton\(colorMode)")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 9, height: 4)
@@ -53,17 +54,17 @@ struct SelectedEmotionPopUpView: View {
                                     Text(detailEmotion)
                                         .frame(alignment: .leading)
                                         .font(.miniRegular)
-                                        .foregroundColor((colorScheme == .dark && isSelected) ? Color.grayF5: Color.gray23)
+                                        .foregroundColor(Color.gray23)
                                     if isSelected {
                                         Image(systemName: "xmark")
-                                            .font(.miniRegular)
+                                            .font(.subheadline)
+                                            .foregroundColor(Color.gray8A)
                                             .padding(.leading, 7)
-                                            .foregroundColor(Color(hex: "747474"))
                                     }
                                 }
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
-                                .background(isSelected ? (colorScheme == .dark ? Color.grayEE : Color.grayE8) : .clear)
+                                .background(isSelected ? Color.grayE8 : .clear)
                                 .cornerRadius(15)
                             }
                             .onTapGesture {

@@ -18,6 +18,17 @@ extension Array {
     }
 }
 
+extension Bool {
+    static var iOS16: Bool {
+        guard #available(iOS 16, *) else {
+            // It's iOS 13 so return true.
+            return true
+        }
+        // It's iOS 14 so return false.
+        return false
+    }
+}
+
 extension UIApplication {
     func endEditing() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -37,25 +48,32 @@ extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate 
 }
 
 extension View {
-    var dividerGrayE8 : some View {
-        Rectangle()
-            .frame(height: 1)
-            .foregroundColor(Color.grayE8)
+    func divider(_ colorScheme: ColorScheme) -> some View {
+        if colorScheme == .light {
+            return Rectangle()
+                .frame(height: 1)
+                .foregroundColor(Color.grayE8)
+        } else {
+            return Rectangle()
+                .frame(height: 1)
+                .foregroundColor(Color.grayF5)
+        }
     }
-    var dividerThickGrayE8 : some View {
-        Rectangle()
-            .frame(height: 2)
-            .foregroundColor(Color.grayE8)
+    func dividerThick2(_ colorScheme: ColorScheme) -> some View {
+        if colorScheme == .light {
+            return Rectangle()
+                .frame(height: 2)
+                .foregroundColor(Color.grayE8)
+        } else {
+            return Rectangle()
+                .frame(height: 2)
+                .foregroundColor(Color.grayF5)
+        }
     }
-    var dividerGray8A : some View {
+    var dividerThick4 : some View {
         Rectangle()
-            .frame(height: 1)
-            .foregroundColor(Color.gray8A)
-    }
-    var dividerThickGray8A : some View {
-        Rectangle()
-            .frame(height: 4)
-            .foregroundColor(Color.gray8A)
+                .frame(height: 4)
+                .foregroundColor(Color.gray8A)
     }
     var dividerThickClear : some View {
         Rectangle()
@@ -93,10 +111,10 @@ extension String {
 }
 
 struct RoundedCorner: Shape {
-
+    
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchQuestionView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
     @GestureState private var dragOffset = CGSize.zero
@@ -126,7 +127,7 @@ extension SearchQuestionView {
                         .lineSpacing()
                         .font(.bodyRegular)
                         .foregroundColor(.gray23)
-                    dividerGrayE8
+                    divider(colorScheme)
                 }
             }
         }

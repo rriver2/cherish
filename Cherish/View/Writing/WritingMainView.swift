@@ -120,7 +120,7 @@ extension WritingMainView {
                 Spacer()
                 Text("보러가기")
                     .font(.timelineDate)
-                    .foregroundColor(Color(hex: "8A8A8A"))
+                    .foregroundColor(Color(hex: "232323"))
             }
         }
         .frame(maxWidth: .infinity, minHeight: 52)
@@ -191,7 +191,8 @@ extension WritingMainView {
                                 .frame(width: width, height: width*1.5)
                             Text("\(record.writingMainText)")
                                 .font(.bodySemibold)
-                                .foregroundColor(colorScheme == .light ? Color(hex: "4A4A4A") : .grayF5)
+                                .foregroundColor(Color(hex: "4A4A4A"))
+                                .foregroundColor(Color.purple)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 13)
                                 .background(.white.opacity(0.7))

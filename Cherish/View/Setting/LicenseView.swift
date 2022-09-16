@@ -10,12 +10,13 @@ import SwiftUI
 struct LicenseView: View {
     @Binding var isShowTabbar: Bool
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
                 .paddingHorizontal()
-            dividerThickGrayE8
+            dividerThick2(colorScheme)
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(SoundCategory.allCases, id: \.self) { sound in
                     if let context = sound.license {
@@ -72,7 +73,7 @@ extension LicenseView {
             .tint(.gray8A)
             .foregroundColor(.gray8A)
             .paddingHorizontal()
-        dividerGrayE8
+        divider(colorScheme)
             .padding(.vertical, 24)
     }
 }

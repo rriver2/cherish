@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RecommandedQuestionView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @State private var questionType: Question = .life
     @Binding var isModalShow: Bool
@@ -17,7 +18,7 @@ struct RecommandedQuestionView: View {
         NavigationView {
             VStack(spacing: 0) {
                 NavigationBar()
-                dividerThickGrayE8
+                dividerThick2(colorScheme)
                     .padding(.top, 40)
                 ForEach(randomQuestion, id: \.self) { question in
                     NavigationLink {
@@ -31,7 +32,7 @@ struct RecommandedQuestionView: View {
                                 .lineSpacing()
                                 .font(.bodyRegular)
                                 .foregroundColor(.gray23)
-                            dividerGrayE8
+                            divider(colorScheme)
                         }
                     }
                 }

@@ -10,10 +10,12 @@ import AVFoundation
 
 struct SoundView: View {
     @EnvironmentObject var soundViewModel: SoundViewModel
+    @Environment(\.colorScheme) private var colorScheme
     @State var audio : AVAudioPlayer?
     
     var body: some View {
-            Image(soundViewModel.isSoundOn ? "SoundOn" : "SoundOff")
+        let colorMode = colorScheme == .light ? "LightMode" : "DarkMode"
+            Image(soundViewModel.isSoundOn ? "SoundOn\(colorMode)" : "SoundOff\(colorMode)")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30, height: 22)

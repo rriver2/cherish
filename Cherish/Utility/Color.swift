@@ -14,7 +14,6 @@ extension Color {
     static let cardBlue = Color("cardBlue")
     // Gray
     static let grayF5 = Color("grayF5")
-    static let grayEE = Color("grayEE")
     static let grayE8 = Color("grayE8")
     static let grayA7 = Color("grayA7")
     static let gray23 = Color("gray23")
