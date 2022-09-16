@@ -26,7 +26,7 @@ struct TimelineView: View {
         } else {
             ScrollView(showsIndicators : false) {
                 LazyVStack(alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
-                    Section(header: Title().background(Color.white)) {
+                    Section(header: Title().background(.clear)) {
                         let recordsEntity = timeLineViewModel.recordsEntity.sorted(by: {
                             if $0.date == nil || $1.date == nil {
                                 return false
@@ -84,7 +84,7 @@ extension TimelineView {
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)
-        .background(colorScheme == .light ? .white: .black)
+        .contentShape(Rectangle())
     }
     @ViewBuilder
     private func Date(date: String) -> some View {

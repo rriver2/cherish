@@ -27,7 +27,7 @@ struct SelectingEmotionView: View {
                         .padding(.top, 50)
                 }
                 
-                ZStack {
+                VStack(spacing: 0) {
                     ScrollView(showsIndicators: false) {
                         ScrollViewReader { scrollViewProxy in
                             VStack(alignment: .leading, spacing: 0) {
@@ -42,12 +42,12 @@ struct SelectingEmotionView: View {
                             }
                         }
                     }
-                    VStack {
-                        Spacer()
+                    .ignoresSafeArea()
+                    VStack(spacing: 0) {
                         SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
                     }
-                    .ignoresSafeArea()
                 }
+                .ignoresSafeArea()
             }
         }
         .alert(isPresented: $emotionViewModel.isShowAlert) {
@@ -124,7 +124,8 @@ extension SelectingEmotionView {
                     .id(index)
                     Spacer()
                 }
-                .background(colorScheme == .light ? .white: .black)
+                .padding(.bottom, index == emotionList.count - 1 ? 30 : 0 )
+                .contentShape(Rectangle())
                 .onTapGesture {
                     emotionViewModel.tabEmotion(emotion: detailEmotion)
                 }

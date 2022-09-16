@@ -80,6 +80,7 @@ struct SelectedEmotionPopUpView: View {
             .background(Color.grayF5)
             .cornerRadius(14, corners: [.topLeft, .topRight])
             .animation(Animation.easeInOut(duration: 0.3), value: isShowSelectedEmotion)
+            .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
         }
 }
 

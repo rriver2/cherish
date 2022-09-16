@@ -62,6 +62,7 @@ struct SettingView: View {
                     Text("모든 기록 삭제하기")
                     Spacer()
                 }
+                .contentShape(Rectangle())
                 .onTapGesture {
                     isShowAlertDelectAll = true
                 }
@@ -73,6 +74,7 @@ struct SettingView: View {
                     Spacer()
                     Image(systemName: "chevron.forward")
                 }
+                .contentShape(Rectangle())
                 .onTapGesture {
                     moveToCherishAppstoreComment()
                 }
@@ -82,6 +84,7 @@ struct SettingView: View {
                     Spacer()
                     Image(systemName: "chevron.forward")
                 }
+                .contentShape(Rectangle())
                 .onTapGesture {
                     moveToCherishAppStore()
                 }
@@ -149,7 +152,7 @@ extension SettingView {
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)
-        .background(colorScheme == .light ? .white: .black)
+        .contentShape(Rectangle())
     }
 }
 

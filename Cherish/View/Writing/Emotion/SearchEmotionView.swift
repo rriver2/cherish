@@ -133,7 +133,7 @@ extension SearchEmotionView {
                         .padding(.leading, 26)
                         Spacer()
                     }
-                    .background(colorScheme == .light ? .white: .black)
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         emotionViewModel.tabEmotion(emotion: emotion)
                         if addEmotionToDevice {

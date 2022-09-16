@@ -30,10 +30,9 @@ struct SelectSoundView: View {
                             .font(.system(size: 16))
                             .foregroundColor(.gray23)
                     }
-                    #warning("background -> white 없애기")
                 }
                 .padding(.bottom, 27)
-                .background(.white)
+                .contentShape(Rectangle())
                 .onTapGesture {
                     selectedSound = sound
                     soundViewModel.pressTempSound(sound: sound)

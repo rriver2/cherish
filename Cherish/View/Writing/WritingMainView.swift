@@ -53,7 +53,8 @@ struct WritingMainView: View {
                         WritingBoxes()
                     } else {
                         Rectangle()
-                            .foregroundColor(colorScheme == .light ? .white : .black)
+                            .contentShape(Rectangle())
+                            .foregroundColor(.clear)
                             .onTapGesture {
                                 showCards = true
                                 isShowTabbar = true
@@ -227,7 +228,7 @@ extension WritingMainView {
 struct WritingMainView_Previews: PreviewProvider {
     static var previews: some View {
         WritingMainView(isShowTabbar: .constant(false), tabbarCategory: .constant(.writing))
-            .preferredColorScheme(.dark)
+//            .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())

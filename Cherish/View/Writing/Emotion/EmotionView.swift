@@ -98,7 +98,7 @@ extension EmotionView {
                         .cornerRadius(15)
                         Spacer()
                     }
-                    .background(colorScheme == .light ? .white: .black)
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         if emotionViewModel.selectedEmotionList.count <= 1 {
                             isShowAlert = true
