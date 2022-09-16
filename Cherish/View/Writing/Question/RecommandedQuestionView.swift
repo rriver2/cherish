@@ -26,7 +26,7 @@ struct RecommandedQuestionView: View {
                         VStack(alignment: .leading, spacing: 0){
                             Text(question)
                                 .padding(.vertical, 25)
-                                .padding(.horizontal, 27)
+                                .paddingHorizontal()
                                 .multilineTextAlignment(.leading)
                                 .lineSpacing()
                                 .font(.bodyRegular)
@@ -75,7 +75,7 @@ extension RecommandedQuestionView {
                 .foregroundColor(.clear)
         }
         .padding(.top, 25)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
     }
 }
 

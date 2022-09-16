@@ -49,7 +49,7 @@ struct TimelineView: View {
                                 RecordBoxesView(record: record)
                             }
                         }
-                        .padding(.horizontal, 27)
+                        .paddingHorizontal()
                     }
                     .fullScreenCover(item: $selectedRecord) { record in
                         if let selectedRecord = record,
@@ -79,7 +79,7 @@ extension TimelineView {
             SoundView()
         }
         .frame(height: 20)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
         .padding(.bottom, 49)
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)

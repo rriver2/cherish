@@ -101,7 +101,7 @@ struct SettingView: View {
                 
                 Spacer()
             }
-            .padding(.horizontal, 27)
+            .paddingHorizontal()
             .foregroundColor(.gray23)
             .alert(isPresented: $isShowAlertDelectAll) {
                 Alert(title: Text("정말로 모든 기록을 삭제할까요?"), message: Text("삭제하신 이후에는 복원할 수 없습니다."), primaryButton: .destructive(Text("삭제"), action: {

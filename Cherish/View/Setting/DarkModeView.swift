@@ -37,7 +37,7 @@ struct DarkModeView: View {
             Spacer()
         }
         .foregroundColor(.gray23)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
         .onAppear {
             isShowTabbar = false
         }

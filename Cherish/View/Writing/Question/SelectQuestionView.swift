@@ -91,7 +91,7 @@ extension SelectQuestionView {
                             .multilineTextAlignment(.leading)
                             .lineSpacing()
                             .padding(.vertical, 25)
-                            .padding(.horizontal, 27)
+                            .paddingHorizontal()
                         dividerGrayE8
                     }
                     .id(index)
@@ -122,7 +122,7 @@ extension SelectQuestionView {
             }
         }
         .padding(.top, 25)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
     }
 }
 

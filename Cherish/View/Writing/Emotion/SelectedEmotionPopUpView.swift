@@ -75,7 +75,7 @@ struct SelectedEmotionPopUpView: View {
                 }
                 }
             }
-            .padding(.horizontal, 27)
+            .paddingHorizontal()
             .padding(.bottom, isShowSelectedEmotion ? 50 : 0)
             .background(Color.grayF5)
             .cornerRadius(14, corners: [.topLeft, .topRight])

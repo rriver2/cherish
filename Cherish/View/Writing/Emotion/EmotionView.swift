@@ -32,7 +32,7 @@ struct EmotionView: View {
             WritingView(date: $emotionViewModel.date, context: $emotionViewModel.context)
                 .padding(.top, 25)
         }
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
         .alert(isPresented: $isShowAlert) {
             emotionViewModel.showEmotionViewAlert(dismiss: dismiss)
         }

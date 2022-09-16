@@ -36,7 +36,7 @@ struct DateView: View {
                     }
                 Spacer()
             }
-            .padding(.horizontal, 27)
+            .paddingHorizontal()
             .font(.miniRegular)
             Spacer()
         }
@@ -70,7 +70,7 @@ extension DateView {
                     .foregroundColor(.gray23)
             }
         }
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
         .padding(.top, 25)
         .padding(.bottom, 28)
     }

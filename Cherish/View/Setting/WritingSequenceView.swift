@@ -24,7 +24,7 @@ struct WritingSequenceView: View {
     var body: some View {
         VStack(spacing: 0) {
             NavigationBar()
-                .padding(.horizontal, 27)
+                .paddingHorizontal()
                 .padding(.bottom, 30)
             List {
                 ForEach(cardSequence, id: \.self) { card in
@@ -39,7 +39,7 @@ struct WritingSequenceView: View {
                     self.cardSequence.move(fromOffsets: source, toOffset: destination)
                 }
             }
-            .padding(.horizontal, 27)
+            .paddingHorizontal()
             .padding(.trailing, 10)
             .listStyle(.plain)
             .environment(\.editMode, .constant(.active))

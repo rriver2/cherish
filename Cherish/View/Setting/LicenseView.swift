@@ -14,7 +14,7 @@ struct LicenseView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
-                .padding(.horizontal, 27)
+                .paddingHorizontal()
             dividerThickGrayE8
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(SoundCategory.allCases, id: \.self) { sound in
@@ -66,12 +66,12 @@ extension LicenseView {
             .font(.bodyRegular)
             .foregroundColor(.gray23)
             .padding(.bottom, 11)
-            .padding(.horizontal, 27)
+            .paddingHorizontal()
         Text(context)
             .font(.miniRegular)
             .tint(.gray8A)
             .foregroundColor(.gray8A)
-            .padding(.horizontal, 27)
+            .paddingHorizontal()
         dividerGrayE8
             .padding(.vertical, 24)
     }

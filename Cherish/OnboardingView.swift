@@ -30,7 +30,7 @@ struct OnboardingView: View {
                         }
                     }
                     .padding(.top, 97)
-                    .padding(.horizontal, 27)
+                    .paddingHorizontal()
                     .tag(index)
                 }
             }
@@ -46,7 +46,8 @@ struct OnboardingView: View {
                     SkipButton()
                 }
                 .padding(.top, 37)
-                .padding(.horizontal, 27)
+                
+                .paddingHorizontal()
                 Spacer()
                 NextButton()
             }
@@ -100,7 +101,8 @@ extension OnboardingView {
                         .frame(maxWidth: .infinity)
                         .background(Color(hex: "232323"))
                         .cornerRadius(10)
-                        .padding(.horizontal, 27)
+                    
+                        .paddingHorizontal()
                         .padding(.bottom, 13)
                 }
                 
@@ -111,7 +113,7 @@ extension OnboardingView {
                     Text("음악 없이 시작하기")
                         .font(.miniSemibold)
                         .foregroundColor(Color(hex: "232323"))
-                        .padding(.horizontal, 27)
+                        .paddingHorizontal()
                         .padding(.bottom, 30)
                 }
             }

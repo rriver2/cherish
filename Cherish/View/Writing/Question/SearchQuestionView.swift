@@ -75,7 +75,7 @@ extension SearchQuestionView {
         }
         .foregroundColor(.gray23)
         .padding(.top, 25)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
     }
     @ViewBuilder
     private func SearchBar() -> some View {
@@ -109,7 +109,7 @@ extension SearchQuestionView {
             .cornerRadius(5)
         }
         .padding(.top, 34)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
     }
     @ViewBuilder
     private func QuestionList() -> some View {
@@ -120,7 +120,7 @@ extension SearchQuestionView {
                 VStack(alignment: .leading, spacing: 0){
                     Text(question)
                         .padding(.vertical, 25)
-                        .padding(.horizontal, 27)
+                        .paddingHorizontal()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .multilineTextAlignment(.leading)
                         .lineSpacing()

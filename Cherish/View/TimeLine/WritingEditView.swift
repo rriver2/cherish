@@ -46,7 +46,7 @@ struct WritingEditView: View {
                 FullRecordView()
                 Spacer()
             }
-            .padding(.horizontal, 27)
+            .paddingHorizontal()
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     SoundView()

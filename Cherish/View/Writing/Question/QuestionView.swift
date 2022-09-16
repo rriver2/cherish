@@ -32,7 +32,7 @@ struct QuestionView: View {
             WritingView(date: $date, context: $context)
                     .padding(.top, 25)
         }
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
         .alert(isPresented: $isShowAlert) {
             switch alertCategory {
                 case .leave:

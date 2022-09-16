@@ -40,7 +40,7 @@ struct SelectSoundView: View {
             }
             Spacer()
         }
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
         .onAppear {
             selectedSound = soundViewModel.soundCategory
             isShowTabbar = false

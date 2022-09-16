@@ -37,7 +37,7 @@ struct FreeView: View {
                 WritingView(date: $date, context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.", isKeyBoardOn: false)
                     .padding(.top, 25)
             }
-            .padding(.horizontal, 27)
+            .paddingHorizontal()
             .alert(isPresented: $isShowAlert) {
                 saveAlert()
             }

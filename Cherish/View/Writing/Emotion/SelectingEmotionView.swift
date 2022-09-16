@@ -182,7 +182,7 @@ extension SelectingEmotionView {
         }
         .foregroundColor(Color.gray23)
         .padding(.top, 25)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
     }
 }
 

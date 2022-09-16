@@ -29,7 +29,6 @@ extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate 
         super.viewDidLoad()
         navigationBar.isHidden = true
         interactivePopGestureRecognizer?.delegate = self
-        print("sdmksdm")
     }
     
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -69,6 +68,10 @@ extension View {
     }
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+    func paddingHorizontal() -> some View {
+        self
+            .padding(.horizontal, 27)
     }
 }
 

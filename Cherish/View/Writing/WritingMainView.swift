@@ -39,7 +39,7 @@ struct WritingMainView: View {
                     Title()
                     if addWritingPopupViewModel.isShowAddWritingPopup {
                         AddWritingPopup()
-                            .padding(.horizontal, 27)
+                            .paddingHorizontal()
                             .onAppear {
                                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
                                     addWritingPopupViewModel.isShowAddWritingPopup = false
@@ -47,7 +47,7 @@ struct WritingMainView: View {
                             }
                     } else {
                         OneSentence()
-                            .padding(.horizontal, 27)
+                            .paddingHorizontal()
                     }
                     if showCards {
                         WritingBoxes()
@@ -98,7 +98,7 @@ extension WritingMainView {
             }
         }
         .frame(height: 20)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
         .padding(.bottom, 49)
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)

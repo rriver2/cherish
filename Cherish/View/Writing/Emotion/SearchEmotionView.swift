@@ -104,7 +104,7 @@ extension SearchEmotionView {
             .cornerRadius(5)
         }
         .padding(.top, 34)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
     }
     @ViewBuilder
     private func EmtionGroups(emotionList: [String], addEmotionToDevice: Bool) -> some View {
@@ -199,7 +199,7 @@ extension SearchEmotionView {
         }
         .foregroundColor(.gray23)
         .padding(.top, 25)
-        .padding(.horizontal, 27)
+        .paddingHorizontal()
     }
 }
 
