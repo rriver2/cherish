@@ -9,19 +9,28 @@ import SwiftUI
 
 struct OnboardingView: View {
     @Binding var isShowOnboarding: Bool
-    @State var onBoardingNumber = 0
+    @State var onBoardingNumber: Int
     @EnvironmentObject var soundViewModel: SoundViewModel
     @Environment(\.colorScheme) private var colorScheme
+    let imageName: String
+    let imageCount: Int
+    
+    init(isShowOnboarding: Binding<Bool>, onBoardingNumber: Int = 0, onBoardingCategory: OnBoardingCategory) {
+        self._isShowOnboarding = isShowOnboarding
+        self._onBoardingNumber = State(initialValue: onBoardingNumber)
+        self.imageName = onBoardingCategory.rawValue
+        self.imageCount = onBoardingCategory.imageCount
+    }
     
     var body: some View {
         
         ZStack(alignment: .topTrailing) {
             TabView(selection: $onBoardingNumber) {
-                let array = Array(0..<6)
+                let array = Array(0..<imageCount)
                 ForEach(array, id: \.self) { index in
                     VStack(alignment: .center, spacing: 0) {
                         let colorSchemeString = DarkModeViewModel.colorSchemeString(mode: colorScheme)
-                        let imageName = "Onboarding" + colorSchemeString + String(index+1)
+                        let imageName = imageName + colorSchemeString + String(index+1)
                         ZStack(alignment: .bottom) {
                             Image(imageName)
                                 .resizable()
@@ -46,7 +55,6 @@ struct OnboardingView: View {
                     SkipButton()
                 }
                 .padding(.top, 37)
-                
                 .paddingHorizontal()
                 Spacer()
                 NextButton()
@@ -55,8 +63,16 @@ struct OnboardingView: View {
     }
     
     func endOnboarding() {
-        let key = UserDefaultKey.isShowOnboarding.rawValue
-        UserDefaults.standard.set(false, forKey: key)
+        var key = ""
+        if imageName == OnBoardingCategory.firstTime.rawValue {
+            key = UserDefaultKey.isShowOnboarding.rawValue
+            UserDefaults.standard.set(false, forKey: key)
+        } else if imageName == OnBoardingCategory.update.rawValue {
+            key = UserDefaultKey.versionRecord.rawValue
+            if let nowVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                UserDefaults.standard.set(nowVersion, forKey: key)
+            }
+        }
         isShowOnboarding = false
     }
 }
@@ -64,7 +80,7 @@ struct OnboardingView: View {
 extension OnboardingView {
     @ViewBuilder
     func SkipButton() -> some View {
-        if onBoardingNumber != 5 {
+        if onBoardingNumber != imageCount-1 {
             Button {
                 endOnboarding()
             } label: {
@@ -78,7 +94,7 @@ extension OnboardingView {
     }
     @ViewBuilder
     func Circles() -> some View {
-        let array = Array(0..<6)
+        let array = Array(0..<imageCount)
         ForEach(array, id: \.self) { index in
             Circle()
                 .foregroundColor(index == onBoardingNumber ? Color.gray23 : Color(hex: "D2D2D2"))
@@ -88,7 +104,7 @@ extension OnboardingView {
     }
     @ViewBuilder
     func NextButton() -> some View {
-        if onBoardingNumber == 5 {
+        if onBoardingNumber == imageCount-1 && imageName == OnBoardingCategory.firstTime.rawValue {
             VStack(spacing: 0) {
                 Button {
                     endOnboarding()
@@ -101,7 +117,6 @@ extension OnboardingView {
                         .frame(maxWidth: .infinity)
                         .background(Color(hex: "232323"))
                         .cornerRadius(10)
-                    
                         .paddingHorizontal()
                         .padding(.bottom, 13)
                 }
@@ -117,12 +132,28 @@ extension OnboardingView {
                         .padding(.bottom, 30)
                 }
             }
+        } else if onBoardingNumber == imageCount-1 && imageName == OnBoardingCategory.update.rawValue {
+            VStack(spacing: 0) {
+                Button {
+                    endOnboarding()
+                } label: {
+                    Text("확인")
+                        .font(.bodySemibold)
+                        .foregroundColor(Color(hex: "F5F5F5"))
+                        .frame(height: 56)
+                        .frame(maxWidth: .infinity)
+                        .background(Color(hex: "232323"))
+                        .cornerRadius(10)
+                        .paddingHorizontal()
+                        .padding(.bottom, 13)
+                }
+            }
         }
     }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(isShowOnboarding: .constant(false))
+        OnboardingView(isShowOnboarding: .constant(false), onBoardingCategory: OnBoardingCategory.update)
     }
 }
