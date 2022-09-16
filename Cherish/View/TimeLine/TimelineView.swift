@@ -27,13 +27,7 @@ struct TimelineView: View {
             ScrollView(showsIndicators : false) {
                 LazyVStack(alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
                     Section(header: Title().background(.clear)) {
-                        let recordsEntity = timeLineViewModel.recordsEntity.sorted(by: {
-                            if $0.date == nil || $1.date == nil {
-                                return false
-                            } else {
-                                return $0.date! > $1.date!
-                            }
-                        })
+                        let recordsEntity = timeLineViewModel.recordsEntity
                         ForEach(recordsEntity.indices, id: \.self) { index in
                             let record = recordsEntity[index]
                             VStack(alignment: .leading, spacing: 0) {
@@ -53,13 +47,20 @@ struct TimelineView: View {
                     }
                     .fullScreenCover(item: $selectedRecord) { record in
                         if let selectedRecord = record,
-                           let title = selectedRecord.title,
-                           let context = selectedRecord.context,
-                           let date = selectedRecord.date,
-                        let recordMode = Record.getCatagory(record: selectedRecord.kind ?? "") {
-                            WritingEditView(title: title, date: date, context: context, recordMode: recordMode)
+                           let index = timeLineViewModel.recordsEntity.firstIndex { $0.date == selectedRecord.date } {
+                            WritingTabView(writingIndex: index)
                         }
                     }
+//                    .fullScreenCover(item: $selectedRecord) { record in
+//                        if let selectedRecord = record,
+//                           let title = selectedRecord.title,
+//                           let context = selectedRecord.context,
+//                           let date = selectedRecord.date,
+//                        let recordMode = Record.getCatagory(record: selectedRecord.kind ?? "") {
+////                            WritingEditView(title: title, date: date, context: context, recordMode: recordMode)
+//                            WritingTabView()
+//                        }
+//                    }
                 }
             }
             .clipped()

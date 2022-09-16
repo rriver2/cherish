@@ -16,6 +16,7 @@
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
 		CC6B46B828CF51B300CD039D /* SelectedEmotionPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */; };
+		CC7ECE1928D4C53800E2CEFC /* WritingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7ECE1828D4C53800E2CEFC /* WritingTabView.swift */; };
 		CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC818CD92899ED8C003B8753 /* SaveOnApp.swift */; };
 		CC818CDE2899ED8C003B8753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC818CDD2899ED8C003B8753 /* Assets.xcassets */; };
 		CC818CE12899ED8C003B8753 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC818CE02899ED8C003B8753 /* Preview Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmotionPopUpView.swift; sourceTree = "<group>"; };
+		CC7ECE1828D4C53800E2CEFC /* WritingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTabView.swift; sourceTree = "<group>"; };
 		CC818CD62899ED8C003B8753 /* Cherish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cherish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC818CD92899ED8C003B8753 /* SaveOnApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOnApp.swift; sourceTree = "<group>"; };
 		CC818CDD2899ED8C003B8753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				CC95F32D289A78B3008C3EEF /* TimelineView.swift */,
+				CC7ECE1828D4C53800E2CEFC /* WritingTabView.swift */,
 				CC9FC39528CEDEE6009CFB33 /* WritingEditView.swift */,
 				CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */,
 			);
@@ -377,6 +380,7 @@
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
 				CCB7566F28C76E3B006C58EC /* Sound.swift in Sources */,
 				CCF3931D28A7FDF2008F506C /* UserDefaultKey.swift in Sources */,
+				CC7ECE1928D4C53800E2CEFC /* WritingTabView.swift in Sources */,
 				CC835A8028AB7966004B987F /* SearchQuestionView.swift in Sources */,
 				CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */,
 				CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */,

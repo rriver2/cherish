@@ -30,7 +30,13 @@ class TimeLineViewModel: ObservableObject {
         let request = NSFetchRequest<RecordEntity>(entityName: "RecordEntity")
         
         do {
-            recordsEntity = try container.viewContext.fetch(request)
+            recordsEntity = try container.viewContext.fetch(request).sorted(by: {
+                if $0.date == nil || $1.date == nil {
+                    return false
+                } else {
+                    return $0.date! > $1.date!
+                }
+            })
         } catch let error{
             print("ERROR Fetching", error)
         }

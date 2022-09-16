@@ -40,32 +40,30 @@ struct WritingEditView: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading, spacing: 0) {
-                NavigationBar()
-                FullRecordView()
+        VStack(alignment: .leading, spacing: 0) {
+            NavigationBar()
+            FullRecordView()
+            Spacer()
+        }
+        .paddingHorizontal()
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                SoundView()
+                    .font(.bodyRegular)
                 Spacer()
-            }
-            .paddingHorizontal()
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    SoundView()
-                        .font(.bodyRegular)
-                    Spacer()
-                    Button {
-                        timeLineViewModel.updateRecord(originDate: originDate, date: date, title: title, context: context)
-                        print("updateRecord")
-                        dismiss()
-                    } label: {
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 16))
-                            .foregroundColor(.gray23)
-                    }
+                Button {
+                    timeLineViewModel.updateRecord(originDate: originDate, date: date, title: title, context: context)
+                    print("updateRecord")
+                    dismiss()
+                } label: {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 16))
+                        .foregroundColor(.gray23)
                 }
             }
-            .alert(isPresented: $isShowAlert) {
-                showAlert()
-            }
+        }
+        .alert(isPresented: $isShowAlert) {
+            showAlert()
         }
     }
     
