@@ -15,6 +15,7 @@ struct LicenseView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
+                .padding(.bottom, 40)
                 .paddingHorizontal()
             dividerThick2(colorScheme)
             VStack(alignment: .leading, spacing: 0) {
@@ -59,7 +60,6 @@ extension LicenseView {
         }
         .foregroundColor(.gray23)
         .padding(.top, 25)
-        .padding(.bottom, 40)
     }
     @ViewBuilder
     private func LicenseText(title: String, context: String) -> some View {

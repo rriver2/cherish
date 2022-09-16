@@ -13,23 +13,25 @@ struct DarkModeView: View {
     @Binding var isShowTabbar: Bool
     
     var body: some View {
-        VStack(spacing: 48) {
+        VStack(spacing: 0) {
             NavigationBar()
-                .padding(.bottom, 28)
+                .padding(.bottom, 70)
             let darkModeCategoryAll = DarkModeViewModel.Category.allCases
             
-            ForEach(darkModeCategoryAll, id: \.self) { darkModeCategory in
-                Button {
-                    darkModeViewModel.setMode(categoryMode: darkModeCategory)
-                } label: {
-                    HStack(spacing: 0) {
-                        Text(darkModeCategory.rawValue)
-                            .font(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .bodySemibold : .bodyRegular)
-                        Spacer()
-                        if darkModeViewModel.isSameMode(categoryMode: darkModeCategory) {
-                            Image(systemName: "checkmark")
-                                .font(.system(size: 16))
-                                .foregroundColor(.gray23)
+            VStack(spacing: 40) {
+                ForEach(darkModeCategoryAll, id: \.self) { darkModeCategory in
+                    Button {
+                        darkModeViewModel.setMode(categoryMode: darkModeCategory)
+                    } label: {
+                        HStack(spacing: 0) {
+                            Text(darkModeCategory.rawValue)
+                                .font(darkModeViewModel.isSameMode(categoryMode: darkModeCategory) ? .bodySemibold : .bodyRegular)
+                            Spacer()
+                            if darkModeViewModel.isSameMode(categoryMode: darkModeCategory) {
+                                Image(systemName: "checkmark")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.gray23)
+                            }
                         }
                     }
                 }
@@ -59,7 +61,7 @@ extension DarkModeView {
                     .font(.bodyRegular)
             }
             Spacer()
-            Text("다크모드")
+            Text("다크모드/라이트모드")
                 .font(.bodySemibold)
                 .foregroundColor(Color.gray23)
             Spacer()

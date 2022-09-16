@@ -25,7 +25,7 @@ struct WritingSequenceView: View {
         VStack(spacing: 0) {
             NavigationBar()
                 .paddingHorizontal()
-                .padding(.bottom, 30)
+                .padding(.bottom, 70)
             List {
                 ForEach(cardSequence, id: \.self) { card in
                     let cardTitle = card.writingMainText
@@ -81,7 +81,6 @@ extension WritingSequenceView {
         }
         .foregroundColor(.gray23)
         .padding(.top, 25)
-        .padding(.bottom, 40)
     }
 }
 

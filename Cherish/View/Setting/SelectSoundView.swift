@@ -18,24 +18,25 @@ struct SelectSoundView: View {
         VStack(spacing: 0) {
             title()
                 .padding(.bottom, 70)
-            ForEach(SoundCategory.allCases, id: \.self) { sound in
-                let soundName = sound.displayName
-                HStack(alignment: .center, spacing: 0) {
-                    Text(soundName)
-                        .font(sound == selectedSound ?.bodySemibold : .bodyRegular)
-                        .foregroundColor(.gray23)
-                    Spacer()
-                    if sound == selectedSound {
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 16))
+            VStack(spacing: 40) {
+                ForEach(SoundCategory.allCases, id: \.self) { sound in
+                    let soundName = sound.displayName
+                    HStack(alignment: .center, spacing: 0) {
+                        Text(soundName)
+                            .font(sound == selectedSound ?.bodySemibold : .bodyRegular)
                             .foregroundColor(.gray23)
+                        Spacer()
+                        if sound == selectedSound {
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 16))
+                                .foregroundColor(.gray23)
+                        }
                     }
-                }
-                .padding(.bottom, 27)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    selectedSound = sound
-                    soundViewModel.pressTempSound(sound: sound)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        selectedSound = sound
+                        soundViewModel.pressTempSound(sound: sound)
+                    }
                 }
             }
             Spacer()
