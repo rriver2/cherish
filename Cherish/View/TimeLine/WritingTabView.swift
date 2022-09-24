@@ -23,42 +23,45 @@ struct WritingTabView: View {
 }
     
     var body: some View {
-        let selectedRecord = timeLineViewModel.recordsEntity[writingIndex]
-        let title = selectedRecord.title ?? "tempTitle"
-        let date = selectedRecord.date ?? Date()
-        let context = selectedRecord.context ?? "tempContent"
-        let recordMode = Record.getCatagory(record: selectedRecord.kind ?? "")
-        VStack(spacing: 0) {
-            if isEditMode {
-                NavigationView {
-                    WritingEditView(title: title, date: date, context: context, recordMode: recordMode, isEditMode: $isEditMode)
-                }
-            } else {
-                VStack(spacing: 0) {
-                    NavigationBar(title: recordMode.writingMainText)
-                    TabView(selection: $writingIndex) {
-                        let array = Array(0..<timeLineViewModel.recordsEntity.count)
-                        ForEach(array, id: \.self) { index in
-                            WritingPreview(title: title, date: date, context: context, recordMode: recordMode, isEditMode: $isEditMode)
-                                .tag(index)
-                        }
+        if writingIndex >= 0 {
+            let selectedRecord = timeLineViewModel.recordsEntity[writingIndex]
+            let title = selectedRecord.title ?? "tempTitle"
+            let date = selectedRecord.date ?? Date()
+            let context = selectedRecord.context ?? "tempContent"
+            let recordMode = Record.getCatagory(record: selectedRecord.kind ?? "")
+            VStack(spacing: 0) {
+                if isEditMode {
+                    NavigationView {
+                        WritingEditView(title: title, date: date, context: context, recordMode: recordMode, isEditMode: $isEditMode)
                     }
-                    .tabViewStyle(.page(indexDisplayMode: .always))
-                }
-                .alert(isPresented: $isShowAlert) {
-                    showAlert(date: date)
+                } else {
+                    VStack(spacing: 0) {
+                        NavigationBar(title: recordMode.writingMainText)
+                        TabView(selection: $writingIndex) {
+                            let array = Array(0..<timeLineViewModel.recordsEntity.count)
+                            ForEach(array, id: \.self) { index in
+                                WritingPreview(title: title, date: date, context: context, recordMode: recordMode, isEditMode: $isEditMode)
+                                    .tag(index)
+                            }
+                        }
+                        .tabViewStyle(.page(indexDisplayMode: .always))
+                    }
+                    .alert(isPresented: $isShowAlert) {
+                        showAlert(date: date)
+                    }
                 }
             }
+            .animation(Animation.easeInOut(duration: 0.4), value: isEditMode)
         }
-        .animation(Animation.easeInOut(duration: 0.4), value: isEditMode)
     }
     
     private func showAlert(date: Date) -> Alert {
         switch alertCategory {
             case .remove:
                 return Alert(title: Text("정말로 기록을 삭제하시겠습니까?"), message: Text("삭제 후에는 복원할 수 없습니다."), primaryButton: .destructive(Text("삭제"), action: {
-                    timeLineViewModel.removeRecord(id: date)
                     dismiss()
+                    timeLineViewModel.removeRecord(id: date)
+                    writingIndex -= 1
                 }), secondaryButton: .cancel(Text("취소")))
             case .afterRemove:
                 // 수정해야함
