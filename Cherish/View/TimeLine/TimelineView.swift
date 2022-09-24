@@ -48,15 +48,15 @@ struct TimelineView: View {
                     .fullScreenCover(item: $selectedRecord) { record in
                         if let selectedRecord = record,
                            let index = timeLineViewModel.recordsEntity.firstIndex { $0.date == selectedRecord.date } {
-                            WritingTabView(writingIndex: index)
-                        }
+                               WritingTabView(writingIndex: index)
+                           }
                     }
+                }
+                .clipped()
             }
-            .clipped()
         }
     }
 }
-
 
 extension TimelineView {
     @ViewBuilder
