@@ -10,9 +10,29 @@ import SwiftUI
 struct RecommandedQuestionView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
+    @StateObject var questionViewModel = QuestionViewModel()
     @State private var questionType: Question = .life
+    @State private var isShowWritingView = false
     @Binding var isModalShow: Bool
+    @State var isEditMode = false
+    @State var isShowAlert: Bool
     let randomQuestion = QuestionData.randomQuestion(amount: 3)
+    let tempWritingText: TempWritingText?
+    
+    init(isModalShow: Binding<Bool>) {
+        self._isModalShow = isModalShow
+        
+        let key = UserDefaultKey.tempWritingQuestion.rawValue
+        if let savedTempWritingText = UserDefaults.standard.object(forKey: key) as? Data,
+           let loadedTempWritingText = try? JSONDecoder().decode(TempWritingText.self, from: savedTempWritingText),
+           loadedTempWritingText.kind == Record.free.rawValue {
+            self.tempWritingText = TempWritingText(title: loadedTempWritingText.title, context: loadedTempWritingText.context, date: loadedTempWritingText.date, kind: loadedTempWritingText.kind)
+            self._isShowAlert = State(initialValue: true)
+        } else {
+            self.tempWritingText = nil
+            self._isShowAlert = State(initialValue: false)
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -21,9 +41,6 @@ struct RecommandedQuestionView: View {
                 dividerThick2(colorScheme)
                     .padding(.top, 40)
                 ForEach(randomQuestion, id: \.self) { question in
-                    NavigationLink {
-                        QuestionView(title: question, isModalShow: $isModalShow )
-                    } label: {
                         VStack(alignment: .leading, spacing: 0){
                             Text(question)
                                 .padding(.vertical, 25)
@@ -32,12 +49,19 @@ struct RecommandedQuestionView: View {
                                 .lineSpacing()
                                 .font(.bodyRegular)
                                 .foregroundColor(.gray23)
+                                .onTapGesture {
+                                    questionViewModel.title = question
+                                    isShowWritingView = true
+                                }
                             divider(colorScheme)
                         }
+                    
+                    NavigationLink("", isActive: $isShowWritingView) {
+                        QuestionView(questionViewModel: questionViewModel, isModalShow: $isModalShow, isEditMode: $isEditMode)
                     }
                 }
                 NavigationLink {
-                    SelectQuestionView(isModalShow: $isModalShow)
+                    SelectQuestionView(isModalShow: $isModalShow, questionViewModel: questionViewModel)
                 } label: {
                     Text("다른 질문 더보기")
                         .font(.miniRegular)
@@ -52,6 +76,21 @@ struct RecommandedQuestionView: View {
         .accentColor(Color.gray23)
         .tint(Color.gray23)
         .animation(Animation.easeInOut(duration: 0.4), value: questionType)
+        .alert(isPresented: $isShowAlert) {
+            let newWritingButton = Alert.Button.cancel(Text("새 글 작성")) {
+                let key = UserDefaultKey.tempWritingQuestion.rawValue
+                UserDefaults.standard.removeObject(forKey: key)
+            }
+            return Alert(title: Text("작성 중인 글이 있습니다. 불러오시겠습니까?"), primaryButton: .destructive(Text("불러오기"), action: {
+                if let tempWritingText = tempWritingText {
+                    self.questionViewModel.title = tempWritingText.title
+                    self.questionViewModel.context = tempWritingText.context
+                    self.questionViewModel.date = tempWritingText.date
+                    self.isShowWritingView = true
+                    self.isEditMode = true
+                }
+            }), secondaryButton: newWritingButton)
+        }
     }
 }
 

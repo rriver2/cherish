@@ -11,10 +11,11 @@ struct SearchQuestionView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @Binding var isModalShow: Bool
-    @GestureState private var dragOffset = CGSize.zero
     @FocusState private var isKeyboardOpen: Bool
     @State private var searchText: String = ""
+    @State var isEditMode = false
     @State private var searchedQuestionList: [String] = QuestionData.randomQuestion(amount: 3)
+    @ObservedObject var questionViewModel: QuestionViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -47,11 +48,6 @@ struct SearchQuestionView: View {
             }
         }
         .tint(Color.gray23)
-        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-            if (value.startLocation.x < 30 && value.translation.width > 100) {
-                dismiss()
-            }
-        })
         .animation(Animation.easeInOut(duration: 0.2), value: searchText)
     }
 }
@@ -117,7 +113,10 @@ extension SearchQuestionView {
     private func QuestionList() -> some View {
         ForEach(searchedQuestionList, id: \.self) { question in
             NavigationLink {
-                QuestionView(title: question, isModalShow: $isModalShow )
+                QuestionView(questionViewModel: questionViewModel, isModalShow: $isModalShow, isEditMode: $isEditMode )
+                    .onAppear {
+                        questionViewModel.title = question
+                    }
             } label: {
                 VStack(alignment: .leading, spacing: 0){
                     Text(question)
@@ -137,7 +136,7 @@ extension SearchQuestionView {
 
 struct SearchQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchQuestionView(isModalShow: .constant(false))
+        SearchQuestionView(isModalShow: .constant(false), questionViewModel: QuestionViewModel())
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())

@@ -12,8 +12,9 @@ struct SelectQuestionView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var questionType: Question = .life
     @Binding var isModalShow: Bool
-    @GestureState private var dragOffset = CGSize.zero
     @State private var isScrollUp = false
+    @State var isEditMode = false
+    @ObservedObject var questionViewModel: QuestionViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -36,11 +37,6 @@ struct SelectQuestionView: View {
             Spacer()
         }
         .navigationBarBackButtonHidden(true)
-        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-            if (value.startLocation.x < 30 && value.translation.width > 100) {
-                dismiss()
-            }
-        })
         .animation(Animation.easeInOut(duration: 0.4), value: questionType)
     }
 }
@@ -83,7 +79,10 @@ extension SelectQuestionView {
             ForEach(questionList.indices, id : \.self){ index in
                 let question = questionList[index]
                 NavigationLink {
-                    QuestionView(title: question, isModalShow: $isModalShow)
+                    QuestionView(questionViewModel: questionViewModel, isModalShow: $isModalShow, isEditMode: $isEditMode)
+                        .onAppear {
+                            questionViewModel.title = question
+                        }
                 } label: {
                     VStack(alignment: .leading, spacing: 0){
                         Text(question)
@@ -116,7 +115,7 @@ extension SelectQuestionView {
                 .foregroundColor(Color.gray23)
             Spacer()
             NavigationLink {
-                SearchQuestionView(isModalShow: $isModalShow)
+                SearchQuestionView(isModalShow: $isModalShow, questionViewModel: questionViewModel)
             } label: {
                 Image(systemName: "magnifyingglass")
                     .font(.bodyRegular)
@@ -129,7 +128,7 @@ extension SelectQuestionView {
 
 struct SelectQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectQuestionView(isModalShow: .constant(false))
+        SelectQuestionView(isModalShow: .constant(false), questionViewModel: QuestionViewModel())
             .preferredColorScheme(.dark)
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())

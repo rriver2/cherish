@@ -21,8 +21,6 @@ struct EmotionView: View {
         GridItem(.flexible(), spacing: nil, alignment: .leading)
     ]
     
-    @GestureState private var dragOffset = CGSize.zero
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
@@ -64,11 +62,6 @@ struct EmotionView: View {
         .textInputAutocapitalization(.never)
         .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
         .tint(Color.gray23)
-        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-            if (value.startLocation.x < 30 && value.translation.width > 100) {
-                dismiss()
-            }
-        })
     }
 }
 

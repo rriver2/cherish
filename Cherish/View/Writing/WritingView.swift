@@ -26,11 +26,11 @@ struct WritingView: View {
         self._context = context
         self.contextPlaceholder = contextPlaceholder
         self.isKeyBoardOn = isKeyBoardOn
-            if isEditMode {
-                self._isContextChanged = State(initialValue: true)
-            } else {
-                self._isContextChanged = State(initialValue: false)
-            }
+        if isEditMode {
+            self._isContextChanged = State(initialValue: true)
+        } else {
+            self._isContextChanged = State(initialValue: false)
+        }
     }
     
     var body: some View {

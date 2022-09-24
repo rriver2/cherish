@@ -11,12 +11,25 @@ struct SelectingEmotionView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @StateObject var emotionViewModel = EmotionViewModel()
+    
     @Binding var isModalShow: Bool
-    @State private var isShowNextView = false
     @State private var isScrollUp = false
     @State var isShowSelectedEmotion = true
-    
     @FocusState private var isKeyboardOpen: Bool
+    let tempWritingText: TempWritingText?
+    
+    init(isModalShow: Binding<Bool>) {
+        self._isModalShow = isModalShow
+        
+        let key = UserDefaultKey.tempWritingEmotion.rawValue
+        if let savedTempWritingText = UserDefaults.standard.object(forKey: key) as? Data,
+           let loadedTempWritingText = try? JSONDecoder().decode(TempWritingText.self, from: savedTempWritingText),
+           loadedTempWritingText.kind == Record.free.rawValue {
+            self.tempWritingText = TempWritingText(title: loadedTempWritingText.title, context: loadedTempWritingText.context, date: loadedTempWritingText.date, kind: loadedTempWritingText.kind)
+        } else {
+            self.tempWritingText = nil
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -50,8 +63,14 @@ struct SelectingEmotionView: View {
                 .ignoresSafeArea()
             }
         }
+        .onAppear {
+            if tempWritingText != nil {
+                emotionViewModel.alertCategory = .tempWritingExistence
+                emotionViewModel.isShowAlert = true
+            }
+        }
         .alert(isPresented: $emotionViewModel.isShowAlert) {
-            emotionViewModel.showSelectingEmotionViewAlert(dismiss: dismiss)
+            emotionViewModel.showSelectingEmotionViewAlert(dismiss: dismiss, tempWritingText: tempWritingText)
         }
         .accentColor(Color.gray23)
         .tint(Color.gray23)
@@ -61,6 +80,57 @@ struct SelectingEmotionView: View {
 }
 
 extension SelectingEmotionView {
+    @ViewBuilder
+    private func NavigationBar() -> some View {
+        HStack(alignment: .center, spacing: 0) {
+            Button(action: {
+                if emotionViewModel.selectedEmotionList.isEmpty {
+                    dismiss()
+                } else {
+                    emotionViewModel.alertCategory = .leave
+                    emotionViewModel.isShowAlert = true
+                }
+            }) {
+                Image(systemName: "xmark")
+                    .font(.bodyRegular)
+            }
+            Image(systemName: "xmark")
+                .font(.bodyRegular)
+                .foregroundColor(.clear)
+                .padding(.trailing, 18)
+            Spacer()
+            Text(Record.emotion.writingMainText)
+                .font(.bodySemibold)
+            Spacer()
+            HStack(spacing: 0) {
+                NavigationLink {
+                    SearchEmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel, isShowSelectedEmotion: $isShowSelectedEmotion)
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                        .font(.bodyRegular)
+                        .padding(.trailing, 18)
+                }
+                
+                Image(systemName: "checkmark")
+                    .font(.system(size: 16))
+                    .foregroundColor(.gray23)
+                    .onTapGesture {
+                        if emotionViewModel.selectedEmotionList.isEmpty {
+                            emotionViewModel.alertCategory = .save
+                            emotionViewModel.isShowAlert = true
+                        } else {
+                            emotionViewModel.isShowWritingView = true
+                        }
+                    }
+                NavigationLink("", isActive: $emotionViewModel.isShowWritingView) {
+                    EmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel)
+                }
+            }
+        }
+        .foregroundColor(Color.gray23)
+        .padding(.top, 25)
+        .paddingHorizontal()
+    }
     @ViewBuilder
     private func SelectEmotionType() -> some View {
         ZStack(alignment: .bottom) {
@@ -132,57 +202,6 @@ extension SelectingEmotionView {
                 }
             }
         }
-    }
-    @ViewBuilder
-    private func NavigationBar() -> some View {
-        HStack(alignment: .center, spacing: 0) {
-            Button(action: {
-                if emotionViewModel.selectedEmotionList.isEmpty {
-                    dismiss()
-                } else {
-                    emotionViewModel.alertCategory = .leave
-                    emotionViewModel.isShowAlert = true
-                }
-            }) {
-                Image(systemName: "xmark")
-                    .font(.bodyRegular)
-            }
-            Image(systemName: "xmark")
-                .font(.bodyRegular)
-                .foregroundColor(.clear)
-                .padding(.trailing, 18)
-            Spacer()
-            Text(Record.emotion.writingMainText)
-                .font(.bodySemibold)
-            Spacer()
-            HStack(spacing: 0) {
-                NavigationLink {
-                    SearchEmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel, isShowSelectedEmotion: $isShowSelectedEmotion)
-                } label: {
-                    Image(systemName: "magnifyingglass")
-                        .font(.bodyRegular)
-                        .padding(.trailing, 18)
-                }
-                
-                Image(systemName: "checkmark")
-                    .font(.system(size: 16))
-                    .foregroundColor(.gray23)
-                    .onTapGesture {
-                        if emotionViewModel.selectedEmotionList.isEmpty {
-                            emotionViewModel.alertCategory = .save
-                            emotionViewModel.isShowAlert = true
-                        } else {
-                            isShowNextView = true
-                        }
-                    }
-                NavigationLink("", isActive: $isShowNextView) {
-                    EmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel)
-                }
-            }
-        }
-        .foregroundColor(Color.gray23)
-        .padding(.top, 25)
-        .paddingHorizontal()
     }
 }
 

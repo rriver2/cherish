@@ -109,9 +109,15 @@ struct FreeView: View {
     private func saveAlert() -> Alert {
         switch alertCategory {
             case .leave:
-                return Alert(title: Text("기록한 내용은 저장되지 않습니다."), message: Text("그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                let leaveButton = Alert.Button.cancel(Text("아니오")) {
+                    let key = UserDefaultKey.tempWritingFree.rawValue
+                    UserDefaults.standard.removeObject(forKey: key)
                     dismiss()
-                }), secondaryButton: .cancel(Text("머무르기")))
+                }
+                return Alert(title: Text("임시저장하시겠습니까?"), primaryButton: .destructive(Text("네"), action: {
+                    freeViewModel.initTempWritingFree()
+                    dismiss()
+                }), secondaryButton: leaveButton)
             case .save:
                 return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
             case .tempWritingExistence:
@@ -130,7 +136,6 @@ struct FreeView: View {
                         self.isEditMode = true
                     }
                 }), secondaryButton: newWritingButton)
-                
         }
     }
     private func checkShouldShowAlert() -> Bool {

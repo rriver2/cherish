@@ -8,31 +8,40 @@
 import SwiftUI
 
 struct QuestionView: View {
-    let title: String
     @Environment(\.dismiss) private var dismiss
-    @GestureState private var dragOffset = CGSize.zero
+    @ObservedObject var questionViewModel: QuestionViewModel
     @Binding var isModalShow: Bool
-    @State var context = "내용"
-    @State var date = Date()
     @State private var alertCategory: AlertCategory = .leave
     @State var isShowAlert = false
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     @EnvironmentObject var addWritingPopupViewModel: AddWritingPopupViewModel
+    @Binding var isEditMode: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
-            titleView(title)
-            WritingView(date: $date, context: $context)
+            titleView(questionViewModel.title)
+            WritingView(date: $questionViewModel.date, context: $questionViewModel.context, isEditMode: isEditMode)
                 .padding(.top, 12)
         }
         .paddingHorizontal()
         .alert(isPresented: $isShowAlert) {
+            #warning("손 슬라이드로 삭제될 때도 임시저장 문구 띄우기...")
             switch alertCategory {
                 case .leave:
-                    return Alert(title: Text("기록한 내용은 저장되지 않습니다."), message: Text("그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                    let leaveButton = Alert.Button.cancel(Text("아니오")) {
+                        let key = UserDefaultKey.tempWritingQuestion.rawValue
+                        UserDefaults.standard.removeObject(forKey: key)
                         dismiss()
-                    }), secondaryButton: .cancel(Text("머무르기")))
+                        isModalShow = false
+                    }
+                    return Alert(title: Text("임시저장하시겠습니까?"), primaryButton: .destructive(Text("네"), action: {
+                        questionViewModel.initTempWritingQuestion()
+                        questionViewModel.context = "내용"
+                        isEditMode = false
+                        dismiss()
+                        isModalShow = false
+                    }), secondaryButton: leaveButton)
                 case .save:
                     return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
             }
@@ -43,11 +52,11 @@ struct QuestionView: View {
                     .font(.bodyRegular)
                 Spacer()
                 Button {
-                    if context == "내용" || context == "" {
+                    if questionViewModel.context == "내용" || questionViewModel.context == "" {
                         alertCategory = .save
                         isShowAlert = true
                     } else {
-                        timeLineViewModel.addRecord(date: date, title: title, context: context, kind: Record.question)
+                        timeLineViewModel.addRecord(date: questionViewModel.date, title: questionViewModel.title, context: questionViewModel.context, kind: Record.question)
                         addWritingPopupViewModel.isShowAddWritingPopup = true
                         addWritingPopupViewModel.writingCategory = .question
                         dismiss()
@@ -62,18 +71,10 @@ struct QuestionView: View {
         }
         .textInputAutocapitalization(.never)
         .tint(Color.gray23)
-        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-            //#warning("왜 context가 내용으로 인식되는 거지 ? help")
-            //            print(context)
-            //            if (value.startLocation.x < 30 && value.translation.width > 100) {
-            //                if context == "내용" || context == "" {
-            //                    dismiss()
-            //                } else {
-            //                    alertCategory = .leave
-            //                    isShowAlert = true
-            //                }
-            //            }
-        })
+        .onDisappear {
+            questionViewModel.context = "내용"
+            isEditMode = false
+        }
     }
 }
 
@@ -82,7 +83,7 @@ extension QuestionView {
     private func NavigationBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             Button(action: {
-                if context == "내용" || context == "" {
+                if questionViewModel.context == "내용" || questionViewModel.context == "" {
                     dismiss()
                 } else {
                     alertCategory = .leave
@@ -109,7 +110,7 @@ extension QuestionView {
 
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionView(title: "질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다질문입니다", isModalShow: .constant(false))
+        QuestionView(questionViewModel: QuestionViewModel(), isModalShow: .constant(false), isEditMode: .constant(false))
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())

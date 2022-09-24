@@ -13,7 +13,6 @@ struct SearchEmotionView: View {
     @Binding var isModalShow: Bool
     @ObservedObject var emotionViewModel: EmotionViewModel
     @State private var isShowAlert = false
-    @GestureState private var dragOffset = CGSize.zero
     @FocusState private var isKeyboardOpen: Bool
     @State private var searchText: String = ""
     @Binding var isShowSelectedEmotion: Bool
@@ -58,11 +57,6 @@ struct SearchEmotionView: View {
             Button("확인", role: .cancel) { }
         }
         .tint(Color.gray23)
-        .gesture(DragGesture().updating($dragOffset) { (value, state, transaction) in
-            if (value.startLocation.x < 30 && value.translation.width > 100) {
-                dismiss()
-            }
-        })
         .onAppear {
             emotionViewModel.searchedEmotionList = emotionViewModel.userDefaultEmotionList
         }

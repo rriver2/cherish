@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import AVFAudio
 
 class EmotionViewModel: ObservableObject {
     @Published var isShowAlert: Bool
@@ -14,9 +13,16 @@ class EmotionViewModel: ObservableObject {
     @Published var date: Date
     @Published var emotionType: EmotionCategory
     @Published var selectedEmotionList: [String]
-    @Published var userDefaultEmotionList: [String]
+    @Published var userDefaultEmotionList: [String] // for searchEmotion
     @Published var searchedEmotionList: [String]
-    @Published var alertCategory: AlertCategory = .leave
+    @Published var alertCategory: AlertCategory = .tempWritingExistence
+    @Published var isShowWritingView = false
+    
+    enum AlertCategory {
+        case leave
+        case save
+        case tempWritingExistence
+    }
     
     init() {
         isShowAlert = false
@@ -27,17 +33,32 @@ class EmotionViewModel: ObservableObject {
         let key = UserDefaultKey.selectedEmotion.rawValue
         userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
         searchedEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillTerminate),
+            name: UIApplication.willTerminateNotification,
+            object: nil
+        )
     }
     
-    init(isTemp: Bool) {
-        isShowAlert = false
-        context = "내용"
-        date = Date()
-        emotionType = EmotionCategory.allCases[0]
-        selectedEmotionList = ["화나다", "가슴이 벅차 오르다", "눈물이 난다", "고달프다", "행복하다"]
-        let key = UserDefaultKey.selectedEmotion.rawValue
-        userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
-        searchedEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
+    @objc func appWillTerminate() {
+        #warning("안되는 이유 찾기")
+        print("안 저장됨")
+        if !(selectedEmotionList.isEmpty && (context == "내용" || context == "")) {
+            initTempWritingEmotion()
+        }
+    }
+    
+    func initTempWritingEmotion() {
+        print("저장됨")
+        let key = UserDefaultKey.tempWritingEmotion.rawValue
+        let emotionListString = selectedEmotionList.joined(separator: "    ")
+        let tempWritingText = TempWritingText(title: emotionListString, context: context, date: date, kind: Record.free.rawValue)
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(tempWritingText) {
+            UserDefaults.standard.setValue(encoded, forKey: key)
+        }
     }
     
     func getPreSelectedEmotion() -> [String] {
@@ -74,34 +95,45 @@ class EmotionViewModel: ObservableObject {
         userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
     }
     
-    func showSelectingEmotionViewAlert(dismiss: DismissAction) -> Alert{
+    func showSelectingEmotionViewAlert(dismiss: DismissAction, tempWritingText: TempWritingText?) -> Alert{
         switch alertCategory {
             case .leave:
-                return Alert(title: Text("기록한 내용은 저장되지 않습니다."), message: Text("그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                let leaveButton = Alert.Button.cancel(Text("아니오")) {
+                    let key = UserDefaultKey.tempWritingEmotion.rawValue
+                    UserDefaults.standard.removeObject(forKey: key)
                     dismiss()
-                }), secondaryButton: .cancel(Text("머무르기")))
+                }
+                return Alert(title: Text("임시저장하시겠습니까?"), primaryButton: .destructive(Text("네"), action: {
+                    self.initTempWritingEmotion()
+                    dismiss()
+                }), secondaryButton: leaveButton)
             case .save:
                 if selectedEmotionList.isEmpty {
                     return Alert(title: Text("감정을 한 개 이상 선택해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
                 } else {
                     return Alert(title: Text("6개 이하로 선택해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
                 }
+            case .tempWritingExistence:
+                let newWritingButton = Alert.Button.cancel(Text("새 글 작성")) {
+                    let key = UserDefaultKey.tempWritingEmotion.rawValue
+                    UserDefaults.standard.removeObject(forKey: key)
+//                    self.isKeyBoardOn = true
+//                    self.isEditMode = true
+                }
+                return Alert(title: Text("작성 중인 글이 있습니다. 불러오시겠습니까?"), primaryButton: .destructive(Text("불러오기"), action: {
+                    if let tempWritingText = tempWritingText {
+                        self.selectedEmotionList = tempWritingText.title.components(separatedBy: "    ")
+                        self.context = tempWritingText.context
+                        self.date = tempWritingText.date
+                        self.isShowWritingView = true
+//                        self.isKeyBoardOn = true
+//                        self.isEditMode = true
+                    }
+                }), secondaryButton: newWritingButton)
         }
     }
     
     func showEmotionViewAlert(dismiss: DismissAction) -> Alert {
-            switch alertCategory {
-                case .leave:
-                    let firstButton = Alert.Button.cancel(Text("감정 다시 선택하기")) {
-                        self.selectedEmotionList = []
-                        dismiss()
-                    }
-                    let secondButton = Alert.Button.default(Text("머무르기").foregroundColor(.red))
-                    return Alert(title: Text("감정을 다시 선택하시겠습니까?"),
-                                 message: Text("작성한 내용은 사라지지 않습니다."),
-                                 primaryButton: firstButton, secondaryButton: secondButton)
-                case .save:
-                    return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
-            }
+            return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
     }
 }
