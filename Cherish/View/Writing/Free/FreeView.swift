@@ -28,8 +28,8 @@ struct FreeView: View {
     init() {
         UIToolbar.appearance().barTintColor = UIColor.systemGray5
         
-        let key = UserDefaultKey.tempWriting.rawValue
-        if let savedTempWritingText = UserDefaults.standard.object(forKey: key) as? Data ,
+        let key = UserDefaultKey.tempWritingFree.rawValue
+        if let savedTempWritingText = UserDefaults.standard.object(forKey: key) as? Data,
            let loadedTempWritingText = try? JSONDecoder().decode(TempWritingText.self, from: savedTempWritingText),
            loadedTempWritingText.kind == Record.free.rawValue {
             self.tempWritingText = TempWritingText(title: loadedTempWritingText.title, context: loadedTempWritingText.context, date: loadedTempWritingText.date, kind: loadedTempWritingText.kind)
@@ -116,6 +116,8 @@ struct FreeView: View {
                 return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
             case .tempWritingExistence:
                 let newWritingButton = Alert.Button.cancel(Text("새 글 작성")) {
+                    let key = UserDefaultKey.tempWritingFree.rawValue
+                    UserDefaults.standard.removeObject(forKey: key)
                     self.isKeyBoardOn = true
                     self.isEditMode = true
                 }

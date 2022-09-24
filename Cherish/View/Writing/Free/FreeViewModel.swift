@@ -33,12 +33,13 @@ class FreeViewModel: ObservableObject {
     }
     
     @objc func appWillTerminate() {
-        let key = UserDefaultKey.tempWriting.rawValue
-        let tempWritingText = TempWritingText(title: title, context: context, date: date, kind: Record.free.rawValue)
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(tempWritingText) {
-            UserDefaults.standard.setValue(encoded, forKey: key)
+        if !(title == "" && (context == "오늘의 이야기를 기록해보세요." || context == "")) {
+            let key = UserDefaultKey.tempWritingFree.rawValue
+            let tempWritingText = TempWritingText(title: title, context: context, date: date, kind: Record.free.rawValue)
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(tempWritingText) {
+                UserDefaults.standard.setValue(encoded, forKey: key)
+            }
         }
-        print("dmksaksa")
     }
 }
