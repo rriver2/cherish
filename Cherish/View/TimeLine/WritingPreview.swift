@@ -15,12 +15,6 @@ struct WritingPreview: View {
     let date: Date
     let context: String
     @State var isShowAlert = false
-    @State var alertCategory: AlertCategory = .remove
-    
-    enum AlertCategory {
-    case remove
-    case afterRemove
-}
     
     init(title: String, date: Date, context: String, recordMode: Record, isEditMode: Binding<Bool>) {
         self.title = title
@@ -32,69 +26,14 @@ struct WritingPreview: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            NavigationBar()
             FullRecordView()
             Spacer()
         }
         .paddingHorizontal()
-        .alert(isPresented: $isShowAlert) {
-            showAlert()
-        }
-    }
-    
-    private func showAlert() -> Alert {
-        switch alertCategory {
-            case .remove:
-                return Alert(title: Text("정말로 기록을 삭제하시겠습니까?"), message: Text("삭제 후에는 복원할 수 없습니다."), primaryButton: .destructive(Text("삭제"), action: {
-                    timeLineViewModel.removeRecord(id: date)
-                    dismiss()
-                }), secondaryButton: .cancel(Text("취소")))
-            case .afterRemove:
-                // 수정해야함
-                return Alert(title: Text("기록이 삭제되었습니다."), message: nil, dismissButton: .cancel(Text("확인")))
-        }
     }
 }
 
 extension WritingPreview {
-    @ViewBuilder
-    private func NavigationBar() -> some View {
-        ZStack(alignment: .center) {
-            HStack(alignment: .center, spacing: 0) {
-                Spacer()
-                Text(recordMode.writingMainText)
-                    .font(.bodySemibold)
-                    .foregroundColor(Color.gray23)
-                Spacer()
-            }
-            HStack(alignment: .center, spacing: 0) {
-                Image(systemName: "xmark")
-                    .foregroundColor(.gray23)
-                    .font(.bodyRegular)
-                    .padding(.trailing, 18)
-                    .onTapGesture {
-                        dismiss()
-                    }
-                Spacer()
-                Image(systemName: "square.and.pencil")
-                    .font(.bodyRegular)
-                    .foregroundColor(.gray23)
-                    .padding(.trailing, 30)
-                    .onTapGesture {
-                        isEditMode = true
-                    }
-                Image(systemName: "trash")
-                    .font(.bodyRegular)
-                    .foregroundColor(.gray23)
-                    .onTapGesture {
-                        alertCategory = .remove
-                        isShowAlert = true
-                    }
-            }
-        }
-        .padding(.top, 25)
-        .padding(.bottom, 28)
-    }
     @ViewBuilder
     private func FullRecordView() -> some View {
         VStack(alignment: .leading, spacing: 0) {

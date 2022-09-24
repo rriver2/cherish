@@ -13,9 +13,9 @@ struct WritingEditView: View {
     @State var date: Date
     @State var context: String
     @Binding var isEditMode: Bool
+    @State var isShowAlert = false
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
     let recordMode: Record
-    @State var isShowAlert = false
     @FocusState var isTextFieldsFocused: Bool
     
     let originTitle: String
@@ -39,6 +39,9 @@ struct WritingEditView: View {
             FullRecordView()
             Spacer()
         }
+        .alert(isPresented: $isShowAlert) {
+            showAlert(date: date)
+        }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 SoundView()
@@ -46,7 +49,7 @@ struct WritingEditView: View {
                 Spacer()
                 Button {
                     timeLineViewModel.updateRecord(originDate: originDate, date: date, title: title, context: context)
-                    dismiss()
+                    isEditMode = false
                 } label: {
                     Image(systemName: "checkmark")
                         .font(.system(size: 16))
@@ -55,12 +58,9 @@ struct WritingEditView: View {
             }
         }
         .paddingHorizontal()
-        .alert(isPresented: $isShowAlert) {
-            showAlert()
-        }
     }
     
-    private func showAlert() -> Alert {
+    private func showAlert(date: Date) -> Alert {
         return Alert(title: Text("기록한 내용은 저장되지 않습니다."), message: Text("그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
             isEditMode = false
         }), secondaryButton: .cancel(Text("머무르기")))
@@ -79,18 +79,17 @@ extension WritingEditView {
                 Spacer()
             }
             HStack(alignment: .center, spacing: 0) {
-                Button(action: {
-                    if originTitle == title && originDate == date && originContext == context {
-                        isEditMode = false
-                    } else {
-                        isShowAlert = true
+                Image(systemName: "xmark")
+                    .foregroundColor(.gray23)
+                    .font(.bodyRegular)
+                    .padding(.trailing, 18)
+                    .onTapGesture {
+                        if originDate == date && originTitle == title && originContext == context {
+                            isEditMode = false
+                        } else {
+                            isShowAlert = true
+                        }
                     }
-                }) {
-                    Image(systemName: "xmark")
-                        .foregroundColor(.gray23)
-                        .font(.bodyRegular)
-                        .padding(.trailing, 18)
-                }
                 Spacer()
             }
         }
