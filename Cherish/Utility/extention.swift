@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Array {
-    /// Picks `n` random elements (partial Fisher-Yates shuffle approach)
+    /// n 개 를 랜덤으로 추출하는 함수
     subscript (randomPick n: Int) -> [Element] {
         var copy = self
         for i in stride(from: count - 1, to: count - n - 1, by: -1) {
@@ -18,6 +18,7 @@ extension Array {
     }
 }
 
+#warning("수정하기")
 extension Bool {
     static var iOS16: Bool {
         guard #available(iOS 16, *) else {

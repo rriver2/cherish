@@ -85,8 +85,8 @@ struct SelectedEmotionPopUpView: View {
     }
 }
 
-//struct SelectedEmotionPopUpView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SelectedEmotionPopUpView(isShowSelectedEmotion: .constant(true), emotionViewModel: EmotionViewModel(isTemp: true))
-//    }
-//}
+struct SelectedEmotionPopUpView_Previews: PreviewProvider {
+    static var previews: some View {
+        SelectedEmotionPopUpView(isShowSelectedEmotion: .constant(true), emotionViewModel: EmotionViewModel())
+    }
+}

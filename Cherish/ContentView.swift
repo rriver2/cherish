@@ -34,13 +34,11 @@ struct ContentView: View {
         
         if let preVersion = UserDefaults.standard.object(forKey: UserDefaultKey.versionRecord.rawValue) as? String {
             if nowVersion == preVersion {
-                print("same")
                 self.onBoardingCategory = .update
                 self._isShowOnboarding = State(initialValue: false)
             } else {
                 // 기존에 다운 받았지만, 업데이트가 안 된 유저
                 // 다음 스프린트부터 여기
-                print("다음 스프린트부터 여기")
                 self.onBoardingCategory = .update
                 self._isShowOnboarding = State(initialValue: true)
             }
@@ -49,13 +47,11 @@ struct ContentView: View {
             let isShowOnboarding = UserDefaults.standard.object(forKey: UserDefaultKey.isShowOnboarding.rawValue) as? Bool ?? true
             if isShowOnboarding {
                 // 새로 다운 받은 유저
-                print("새로 다운 받은 유저")
                 self.onBoardingCategory = .firstTime
                 self._isShowOnboarding = State(initialValue: true)
                 
             } else {
                 // 기존에 다운 받았지만, 업데이트가 안 된 유저 ( 이번 스프린트만 존재 )
-                print("기존에 다운 받았지만, 업데이트가 안 된 유저 ( 이번 스프린트만 존재 )")
                 self.onBoardingCategory = .update
                 self._isShowOnboarding = State(initialValue: true)
             }
@@ -118,12 +114,3 @@ struct ContentView: View {
     }
 }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        ContentView()
-//            .environmentObject(TimeLineViewModel())
-//            .environmentObject(SoundViewModel())
-//            .environmentObject(DarkModeViewModel())
-//    }
-//}

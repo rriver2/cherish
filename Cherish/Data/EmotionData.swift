@@ -20,7 +20,6 @@ struct EmotionData {
     ]
     
     static func findEmotionCategory(emotion: String) -> EmotionCategory {
-        // TODO: error 처리 해야함
         let filteredList = list.filter { key, value in
             value.contains(emotion)
         }

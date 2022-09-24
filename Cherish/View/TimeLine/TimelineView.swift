@@ -51,17 +51,6 @@ struct TimelineView: View {
                             WritingTabView(writingIndex: index)
                         }
                     }
-//                    .fullScreenCover(item: $selectedRecord) { record in
-//                        if let selectedRecord = record,
-//                           let title = selectedRecord.title,
-//                           let context = selectedRecord.context,
-//                           let date = selectedRecord.date,
-//                        let recordMode = Record.getCatagory(record: selectedRecord.kind ?? "") {
-////                            WritingEditView(title: title, date: date, context: context, recordMode: recordMode)
-//                            WritingTabView()
-//                        }
-//                    }
-                }
             }
             .clipped()
         }

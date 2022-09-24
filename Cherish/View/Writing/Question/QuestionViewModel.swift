@@ -32,7 +32,6 @@ class QuestionViewModel: ObservableObject {
     }
     
     func initTempWritingQuestion() {
-        print("저장됨")
         let key = UserDefaultKey.tempWritingQuestion.rawValue
         let tempWritingText = TempWritingText(title: title, context: context, date: date, kind: Record.free.rawValue)
         let encoder = JSONEncoder()

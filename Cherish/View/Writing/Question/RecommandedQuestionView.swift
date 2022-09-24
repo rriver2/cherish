@@ -40,7 +40,7 @@ struct RecommandedQuestionView: View {
                 NavigationBar()
                 dividerThick2(colorScheme)
                     .padding(.top, 40)
-                ForEach(randomQuestion, id: \.self) { question in
+                    ForEach(randomQuestion, id: \.self) { question in
                         VStack(alignment: .leading, spacing: 0){
                             Text(question)
                                 .padding(.vertical, 25)
@@ -55,11 +55,7 @@ struct RecommandedQuestionView: View {
                                 }
                             divider(colorScheme)
                         }
-                    
-                    NavigationLink("", isActive: $isShowWritingView) {
-                        QuestionView(questionViewModel: questionViewModel, isModalShow: $isModalShow, isEditMode: $isEditMode)
                     }
-                }
                 NavigationLink {
                     SelectQuestionView(isModalShow: $isModalShow, questionViewModel: questionViewModel)
                 } label: {
@@ -69,6 +65,9 @@ struct RecommandedQuestionView: View {
                         .padding(.top, 33)
                         .padding(.trailing, 27)
                         .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                NavigationLink("", isActive: $isShowWritingView) {
+                    QuestionView(questionViewModel: questionViewModel, isModalShow: $isModalShow, isEditMode: $isEditMode)
                 }
                 Spacer()
             }

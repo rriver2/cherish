@@ -54,12 +54,12 @@ extension SelectQuestionView {
                         questionType = type
                         isScrollUp = true
                     }) {
-                        if(questionType != type){
+                        if(questionType != type) {
                             Text(type.string)
                                 .font(.bodyRegular)
                                 .foregroundColor(Color.grayA7)
                                 .frame(width: UIScreen.main.bounds.width / CGFloat(questionTypes.count) - 20)
-                        }else{
+                        } else {
                             VStack(spacing: 8) {
                                 Text(type.string)
                                     .font(.bodySemibold)

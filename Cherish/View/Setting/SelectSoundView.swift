@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SelectSoundView: View {
     @EnvironmentObject var soundViewModel: SoundViewModel
-    #warning("environment init되고 값을 넣고 싶은데.. 오또케 하냐 !!")
     @State var selectedSound: SoundCategory?
     @Environment(\.dismiss) private var dismiss
     @Binding var isShowTabbar: Bool

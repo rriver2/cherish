@@ -54,8 +54,6 @@ enum Record: String, CaseIterable {
                 return "Question"
             case .emotion:
                 return "Emotion"
-                //            case .inspiration:
-                //                return "Sky"
         }
     }
     
@@ -67,8 +65,6 @@ enum Record: String, CaseIterable {
                 return .question
             case Record.emotion.rawValue:
                 return .emotion
-                //            case Record.inspiration.rawValue:
-                //                return .inspiration
             default:
                 return .free
         }

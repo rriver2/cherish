@@ -21,20 +21,19 @@ struct SearchQuestionView: View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar()
             SearchBar()
+                .padding(.bottom, searchText == "" ? 20 : 11)
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 0) {
-                    if searchText == "" {
-                        Text("오늘의 추천 질문")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.miniSemibold)
-                            .foregroundColor(.gray8A)
-                            .padding(.horizontal, 38)
-                            .padding(.top, 20)
-                            .padding(.bottom, 15)
+                    VStack(alignment: .leading, spacing: 0) {
+                        if searchText == "" {
+                            Text("오늘의 추천 질문")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.miniSemibold)
+                                .foregroundColor(.gray8A)
+                                .padding(.horizontal, 38)
+                                .padding(.bottom, 15)
+                        }
+                        QuestionList()
                     }
-                    QuestionList()
-                        .padding(.top, searchText == "" ? 0 : 11)
-                }
             }
         }
         .navigationBarBackButtonHidden(true)
