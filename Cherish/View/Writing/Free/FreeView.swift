@@ -10,32 +10,62 @@ import SwiftUI
 struct FreeView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var timeLineViewModel: TimeLineViewModel
-    @State private var date = Date()
-    @State private var title = ""
-    @State private var context = "오늘의 이야기를 기록해보세요."
-    @State private var isShowAlert = false
-    @State private var alertCategory: AlertCategory = .leave
+    @StateObject private var freeViewModel = FreeViewModel()
+    @State private var isShowAlert: Bool
+    @State private var alertCategory: AlertCategory = .tempWritingExistence
     @EnvironmentObject var addWritingPopupViewModel: AddWritingPopupViewModel
     @FocusState var isTextFieldsFocused: Bool
+    @State var isEditMode = false
+    @State var isKeyBoardOn = false
+    let tempWritingText: TempWritingText?
+    
+    enum AlertCategory {
+        case leave
+        case save
+        case tempWritingExistence
+    }
     
     init() {
         UIToolbar.appearance().barTintColor = UIColor.systemGray5
+        
+        let key = UserDefaultKey.tempWriting.rawValue
+        if let savedTempWritingText = UserDefaults.standard.object(forKey: key) as? Data ,
+           let loadedTempWritingText = try? JSONDecoder().decode(TempWritingText.self, from: savedTempWritingText),
+           loadedTempWritingText.kind == Record.free.rawValue {
+            self.tempWritingText = TempWritingText(title: loadedTempWritingText.title, context: loadedTempWritingText.context, date: loadedTempWritingText.date, kind: loadedTempWritingText.kind)
+            self._isShowAlert = State(initialValue: true)
+        } else {
+            self._isShowAlert = State(initialValue: false)
+            self.tempWritingText = nil
+        }
     }
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
                 NavigationBar()
-                TextField("제목", text: $title)
+                TextField("제목", text: $freeViewModel.title)
                     .font(.bodyRegular)
                     .padding(.top, 2)
-                    .foregroundColor(self.title == "제목" ? Color.grayA7 : Color.gray23)
+                    .foregroundColor(freeViewModel.title == "제목" ? Color.grayA7 : Color.gray23)
                     .accentColor(Color.gray23)
                     .padding(.leading, 5)
                     .focused($isTextFieldsFocused)
+                    .onChange(of: isEditMode) { newValue in
+                        if isEditMode {
+                            isTextFieldsFocused = true
+                        }
+                    }
                 
-                WritingView(date: $date, context: $context, contextPlaceholder: "오늘의 이야기를 기록해보세요.", isKeyBoardOn: false, isEditMode: context != "오늘의 이야기를 기록해보세요.")
-                    .padding(.top, 25)
+#warning("수정해야 함")
+                if isEditMode {
+                    let isContextDiff = freeViewModel.context != "오늘의 이야기를 기록해보세요."
+                    WritingView(date: $freeViewModel.date, context: $freeViewModel.context, contextPlaceholder: "오늘의 이야기를 기록해보세요.", isKeyBoardOn: false, isEditMode: isContextDiff)
+                        .padding(.top, 25)
+                } else {
+                    WritingView(date: $freeViewModel.date, context: $freeViewModel.context, contextPlaceholder: "오늘의 이야기를 기록해보세요.", isKeyBoardOn: false, isEditMode: false)
+                        .padding(.top, 25)
+                }
             }
             .paddingHorizontal()
             .alert(isPresented: $isShowAlert) {
@@ -47,11 +77,11 @@ struct FreeView: View {
                         .font(.system(size: 16))
                     Spacer()
                     Button {
-                        if context == "오늘의 이야기를 기록해보세요." || context == "" {
+                        if freeViewModel.context == "오늘의 이야기를 기록해보세요." || freeViewModel.context == "" {
                             isShowAlert = true
                             alertCategory = .save
                         } else {
-                            timeLineViewModel.addRecord(date: date, title: title == "제목" ? "" : title, context: context, kind: Record.free)
+                            timeLineViewModel.addRecord(date: freeViewModel.date, title: freeViewModel.title == "제목" ? "" : freeViewModel.title, context: freeViewModel.context, kind: Record.free)
                             addWritingPopupViewModel.isShowAddWritingPopup = true
                             addWritingPopupViewModel.writingCategory = .free
                             dismiss()
@@ -65,13 +95,48 @@ struct FreeView: View {
             }
             .textInputAutocapitalization(.never)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6)
-                {
-                    isTextFieldsFocused = true
+                if !isShowAlert{
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6)
+                    {
+                        isTextFieldsFocused = true
+                    }
                 }
             }
         }
         .tint(Color.gray23)
+    }
+    
+    private func saveAlert() -> Alert {
+        switch alertCategory {
+            case .leave:
+                return Alert(title: Text("기록한 내용은 저장되지 않습니다."), message: Text("그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
+                    dismiss()
+                }), secondaryButton: .cancel(Text("머무르기")))
+            case .save:
+                return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
+            case .tempWritingExistence:
+                let newWritingButton = Alert.Button.cancel(Text("새 글 작성")) {
+                    self.isKeyBoardOn = true
+                    self.isEditMode = true
+                }
+                return Alert(title: Text("작성 중인 글이 있습니다. 불러오시겠습니까?"), primaryButton: .destructive(Text("불러오기"), action: {
+                    if let tempWritingText = tempWritingText {
+                        self.freeViewModel.title = tempWritingText.title
+                        self.freeViewModel.context = tempWritingText.context
+                        self.freeViewModel.date = tempWritingText.date
+                        self.isKeyBoardOn = true
+                        self.isEditMode = true
+                    }
+                }), secondaryButton: newWritingButton)
+                
+        }
+    }
+    private func checkShouldShowAlert() -> Bool {
+        if ( freeViewModel.context == "오늘의 이야기를 기록해보세요." && freeViewModel.title == "제목") { return false }
+        else if  ( freeViewModel.context == "오늘의 이야기를 기록해보세요." && freeViewModel.title == "") { return false }
+        else if  ( freeViewModel.context == "" && freeViewModel.title == "제목") { return false }
+        else if  ( freeViewModel.context == "" && freeViewModel.title == "") { return false }
+        else { return true }
     }
 }
 
@@ -104,23 +169,6 @@ extension FreeView {
         }
         .padding(.top, 25)
         .padding(.bottom, 28)
-    }
-    private func saveAlert() -> Alert {
-        switch alertCategory {
-            case .leave:
-                return Alert(title: Text("기록한 내용은 저장되지 않습니다."), message: Text("그래도 나가시겠습니까?"), primaryButton: .destructive(Text("나가기"), action: {
-                    dismiss()
-                }), secondaryButton: .cancel(Text("머무르기")))
-            case .save:
-                return Alert(title: Text("내용을 입력해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
-        }
-    }
-    private func checkShouldShowAlert() -> Bool {
-        if ( context == "오늘의 이야기를 기록해보세요." && title == "제목") { return false }
-        else if  ( context == "오늘의 이야기를 기록해보세요." && title == "") { return false }
-        else if  ( context == "" && title == "제목") { return false }
-        else if  ( context == "" && title == "") { return false }
-        else { return true }
     }
 }
 

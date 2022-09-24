@@ -16,6 +16,7 @@
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
 		CC65777B28DED91200FEA1EA /* WritingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777A28DED91200FEA1EA /* WritingPreview.swift */; };
+		CC65777D28DEF60300FEA1EA /* FreeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777C28DEF60300FEA1EA /* FreeViewModel.swift */; };
 		CC6B46B828CF51B300CD039D /* SelectedEmotionPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */; };
 		CC7ECE1928D4C53800E2CEFC /* WritingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7ECE1828D4C53800E2CEFC /* WritingTabView.swift */; };
 		CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC818CD92899ED8C003B8753 /* SaveOnApp.swift */; };
@@ -67,6 +68,7 @@
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		CC65777A28DED91200FEA1EA /* WritingPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingPreview.swift; sourceTree = "<group>"; };
+		CC65777C28DEF60300FEA1EA /* FreeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeViewModel.swift; sourceTree = "<group>"; };
 		CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmotionPopUpView.swift; sourceTree = "<group>"; };
 		CC7ECE1828D4C53800E2CEFC /* WritingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTabView.swift; sourceTree = "<group>"; };
 		CC818CD62899ED8C003B8753 /* Cherish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cherish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				CC95F30A2899F657008C3EEF /* FreeView.swift */,
+				CC65777C28DEF60300FEA1EA /* FreeViewModel.swift */,
 			);
 			path = Free;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */,
 				CC95F32A289A03A4008C3EEF /* Font.swift in Sources */,
 				CC95F32E289A78B3008C3EEF /* TimelineView.swift in Sources */,
+				CC65777D28DEF60300FEA1EA /* FreeViewModel.swift in Sources */,
 				CC6B46B828CF51B300CD039D /* SelectedEmotionPopUpView.swift in Sources */,
 				CC0F9CFD28B3AF59005D94F7 /* SettingView.swift in Sources */,
 				CC95F31B2899F743008C3EEF /* SelectingEmotionView.swift in Sources */,

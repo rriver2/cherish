@@ -17,4 +17,5 @@ enum UserDefaultKey: String, CaseIterable {
     case soundCategory
     case cardSequence
     case versionRecord
+    case tempWriting
 }
