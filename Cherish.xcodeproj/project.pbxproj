@@ -15,6 +15,7 @@
 		CC0F9D0328B3B4EB005D94F7 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */; };
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
+		CC65777B28DED91200FEA1EA /* WritingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777A28DED91200FEA1EA /* WritingPreview.swift */; };
 		CC6B46B828CF51B300CD039D /* SelectedEmotionPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */; };
 		CC7ECE1928D4C53800E2CEFC /* WritingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7ECE1828D4C53800E2CEFC /* WritingTabView.swift */; };
 		CC818CDA2899ED8C003B8753 /* SaveOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC818CD92899ED8C003B8753 /* SaveOnApp.swift */; };
@@ -65,6 +66,7 @@
 		CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
+		CC65777A28DED91200FEA1EA /* WritingPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingPreview.swift; sourceTree = "<group>"; };
 		CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmotionPopUpView.swift; sourceTree = "<group>"; };
 		CC7ECE1828D4C53800E2CEFC /* WritingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTabView.swift; sourceTree = "<group>"; };
 		CC818CD62899ED8C003B8753 /* Cherish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cherish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 				CC95F32D289A78B3008C3EEF /* TimelineView.swift */,
 				CC7ECE1828D4C53800E2CEFC /* WritingTabView.swift */,
 				CC9FC39528CEDEE6009CFB33 /* WritingEditView.swift */,
+				CC65777A28DED91200FEA1EA /* WritingPreview.swift */,
 				CCDE477C28A7BE1500BADBE3 /* TimelineViewModel.swift */,
 			);
 			path = TimeLine;
@@ -363,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC65777B28DED91200FEA1EA /* WritingPreview.swift in Sources */,
 				CC835A7A28AA824A004B987F /* EmotionViewModel.swift in Sources */,
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
