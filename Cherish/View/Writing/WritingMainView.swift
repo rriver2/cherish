@@ -98,7 +98,7 @@ extension WritingMainView {
         }
         .frame(height: 20)
         .paddingHorizontal()
-        .padding(.bottom, 49)
+        .padding(.bottom, isDeviceUnderiPhone7() ? 26 : 49)
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)
@@ -159,7 +159,7 @@ extension WritingMainView {
         .frame(maxWidth: .infinity, minHeight: 52)
         .background(Color.grayF5)
         .cornerRadius(10)
-        .padding(.bottom, 25)
+        .padding(.bottom, isDeviceUnderiPhone7() ? 0 :25)
         .onChange(of: oneSentence) { newValue in
             let key = UserDefaultKey.oneSentence.rawValue
             UserDefaults.standard.set(newValue, forKey: key)
@@ -200,7 +200,7 @@ extension WritingMainView {
                         }
                         .frame(width: width, height: width*1.5)
                         .cornerRadius(10)
-                        .offset(x: width/4, y: 50)
+                        .offset(x: width/4, y: isDeviceUnderiPhone7() ? 40 : 50)
                         .rotation3DEffect(.degrees(Double(geomitry.frame(in: .global).minX / -8)), axis: (x: 0.0, y: 0.0, z: 2.0))
                         .onTapGesture {
                             switch record {

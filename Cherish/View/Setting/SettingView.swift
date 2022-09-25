@@ -17,89 +17,91 @@ struct SettingView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 30) {
-                Title()
-                //                HStack(spacing: 0) {
-                //                    Text("화면 잠금")
-                //                    Spacer()
-                //                    Image(isLockScreen ? "ToggleOn" : "ToggleOff")
-                //                        .onTapGesture {
-                //                            isLockScreen.toggle()
-                //                        }
-                //                }
-                
-                NavigationLink {
-                    DarkModeView(isShowTabbar: $isShowTabbar)
-                } label: {
-                    HStack(spacing: 0) {
-                        Text("다크모드/라이트모드")
-                        Spacer()
-                        Image(systemName: "chevron.forward")
-                    }
+                VStack(spacing: 0) {
+                    Title()
+                    ScrollView {
+                        VStack(spacing: 30) {
+                            //                HStack(spacing: 0) {
+                            //                    Text("화면 잠금")
+                            //                    Spacer()
+                            //                    Image(isLockScreen ? "ToggleOn" : "ToggleOff")
+                            //                        .onTapGesture {
+                            //                            isLockScreen.toggle()
+                            //                        }
+                            //                }
+                            
+                            NavigationLink {
+                                DarkModeView(isShowTabbar: $isShowTabbar)
+                            } label: {
+                                HStack(spacing: 0) {
+                                    Text("다크모드/라이트모드")
+                                    Spacer()
+                                    Image(systemName: "chevron.forward")
+                                }
+                            }
+                            
+                            NavigationLink {
+                                SelectSoundView(isShowTabbar: $isShowTabbar)
+                            } label: {
+                                HStack(spacing: 0) {
+                                    Text("음악 변경")
+                                    Spacer()
+                                    Image(systemName: "chevron.forward")
+                                }
+                            }
+                            
+                            NavigationLink {
+                                WritingSequenceView(isShowTabbar: $isShowTabbar)
+                            } label: {
+                                HStack(spacing: 0) {
+                                    Text("일기 형식 순서")
+                                    Spacer()
+                                    Image(systemName: "chevron.forward")
+                                }
+                            }
+                            
+                            HStack(spacing: 0) {
+                                Text("모든 기록 삭제하기")
+                                Spacer()
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                isShowAlertDelectAll = true
+                            }
+                            .padding(.bottom, 60)
+                            
+                            
+                            HStack(spacing: 0) {
+                                Text("의견 남기기")
+                                Spacer()
+                                Image(systemName: "chevron.forward")
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                moveToCherishAppstoreComment()
+                            }
+                            
+                            HStack(spacing: 0) {
+                                Text("친구에게 앱 공유하기")
+                                Spacer()
+                                Image(systemName: "chevron.forward")
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                moveToCherishAppStore()
+                            }
+                            
+                            NavigationLink {
+                                LicenseView(isShowTabbar: $isShowTabbar)
+                            } label: {
+                                HStack(spacing: 0) {
+                                    Text("오픈 소스 라이센스")
+                                    Spacer()
+                                    Image(systemName: "chevron.forward")
+                                }
+                            }
+                        }
                 }
-                
-                NavigationLink {
-                    SelectSoundView(isShowTabbar: $isShowTabbar)
-                } label: {
-                    HStack(spacing: 0) {
-                        Text("음악 변경")
-                        Spacer()
-                        Image(systemName: "chevron.forward")
-                    }
-                }
-                
-                NavigationLink {
-                    WritingSequenceView(isShowTabbar: $isShowTabbar)
-                } label: {
-                    HStack(spacing: 0) {
-                        Text("일기 형식 순서")
-                        Spacer()
-                        Image(systemName: "chevron.forward")
-                    }
-                }
-                
-                HStack(spacing: 0) {
-                    Text("모든 기록 삭제하기")
-                    Spacer()
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    isShowAlertDelectAll = true
-                }
-                .padding(.bottom, 60)
-                
-                
-                HStack(spacing: 0) {
-                    Text("의견 남기기")
-                    Spacer()
-                    Image(systemName: "chevron.forward")
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    moveToCherishAppstoreComment()
-                }
-                
-                HStack(spacing: 0) {
-                    Text("친구에게 앱 공유하기")
-                    Spacer()
-                    Image(systemName: "chevron.forward")
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    moveToCherishAppStore()
-                }
-                
-                NavigationLink {
-                    LicenseView(isShowTabbar: $isShowTabbar)
-                } label: {
-                    HStack(spacing: 0) {
-                        Text("오픈 소스 라이센스")
-                        Spacer()
-                        Image(systemName: "chevron.forward")
-                    }
-                }
-                
-                Spacer()
             }
             .paddingHorizontal()
             .foregroundColor(.gray23)
@@ -148,7 +150,7 @@ extension SettingView {
             Spacer()
         }
         .frame(height: 20)
-        .padding(.bottom, 40)
+        .padding(.bottom, isDeviceUnderiPhone7() ? 26 : 40)
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)

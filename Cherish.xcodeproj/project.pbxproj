@@ -15,6 +15,7 @@
 		CC0F9D0328B3B4EB005D94F7 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */; };
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
+		CC59749928E019910033B67C /* IdentifyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59749828E019910033B67C /* IdentifyDevice.swift */; };
 		CC65777B28DED91200FEA1EA /* WritingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777A28DED91200FEA1EA /* WritingPreview.swift */; };
 		CC65777D28DEF60300FEA1EA /* FreeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777C28DEF60300FEA1EA /* FreeViewModel.swift */; };
 		CC6B46B828CF51B300CD039D /* SelectedEmotionPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */; };
@@ -69,6 +70,7 @@
 		CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
+		CC59749828E019910033B67C /* IdentifyDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyDevice.swift; sourceTree = "<group>"; };
 		CC65777A28DED91200FEA1EA /* WritingPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingPreview.swift; sourceTree = "<group>"; };
 		CC65777C28DEF60300FEA1EA /* FreeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeViewModel.swift; sourceTree = "<group>"; };
 		CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmotionPopUpView.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				CC95F3252899FA3E008C3EEF /* Color.swift */,
+				CC59749828E019910033B67C /* IdentifyDevice.swift */,
 				CC95F3272899FCEC008C3EEF /* extention.swift */,
 				CC95F329289A03A4008C3EEF /* Font.swift */,
 				CC95F330289A7B36008C3EEF /* Date.swift */,
@@ -391,6 +394,7 @@
 				CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */,
 				CC95F3262899FA3E008C3EEF /* Color.swift in Sources */,
 				CC95F335289A8A1E008C3EEF /* Question.swift in Sources */,
+				CC59749928E019910033B67C /* IdentifyDevice.swift in Sources */,
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
 				CCB7566F28C76E3B006C58EC /* Sound.swift in Sources */,
 				CCF3931D28A7FDF2008F506C /* UserDefaultKey.swift in Sources */,

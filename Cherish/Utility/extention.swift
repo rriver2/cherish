@@ -18,18 +18,6 @@ extension Array {
     }
 }
 
-#warning("수정하기")
-extension Bool {
-    static var iOS16: Bool {
-        guard #available(iOS 16, *) else {
-            // It's iOS 13 so return true.
-            return true
-        }
-        // It's iOS 14 so return false.
-        return false
-    }
-}
-
 extension UIApplication {
     func endEditing() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
