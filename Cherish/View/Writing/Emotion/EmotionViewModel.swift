@@ -17,6 +17,7 @@ class EmotionViewModel: ObservableObject {
     @Published var searchedEmotionList: [String]
     @Published var alertCategory: AlertCategory = .tempWritingExistence
     @Published var isShowWritingView = false
+    @Published var isShowSelectedEmotion = true
     
     enum AlertCategory {
         case leave
@@ -111,14 +112,13 @@ class EmotionViewModel: ObservableObject {
                 if selectedEmotionList.isEmpty {
                     return Alert(title: Text("감정을 한 개 이상 선택해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
                 } else {
+                    #warning("감정 6개 선택해주세요 후 토글 on")
                     return Alert(title: Text("6개 이하로 선택해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
                 }
             case .tempWritingExistence:
                 let newWritingButton = Alert.Button.cancel(Text("새 글 작성")) {
                     let key = UserDefaultKey.tempWritingEmotion.rawValue
                     UserDefaults.standard.removeObject(forKey: key)
-//                    self.isKeyBoardOn = true
-//                    self.isEditMode = true
                 }
                 return Alert(title: Text("작성 중인 글이 있습니다. 불러오시겠습니까?"), primaryButton: .destructive(Text("불러오기"), action: {
                     if let tempWritingText = tempWritingText {
@@ -126,8 +126,6 @@ class EmotionViewModel: ObservableObject {
                         self.context = tempWritingText.context
                         self.date = tempWritingText.date
                         self.isShowWritingView = true
-//                        self.isKeyBoardOn = true
-//                        self.isEditMode = true
                     }
                 }), secondaryButton: newWritingButton)
         }

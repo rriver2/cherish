@@ -14,7 +14,6 @@ struct SelectingEmotionView: View {
     
     @Binding var isModalShow: Bool
     @State private var isScrollUp = false
-    @State var isShowSelectedEmotion = true
     @FocusState private var isKeyboardOpen: Bool
     let tempWritingText: TempWritingText?
     
@@ -57,7 +56,7 @@ struct SelectingEmotionView: View {
                     }
                     .ignoresSafeArea()
                     VStack(spacing: 0) {
-                        SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
+                        SelectedEmotionPopUpView(isShowSelectedEmotion: $emotionViewModel.isShowSelectedEmotion, emotionViewModel: emotionViewModel)
                     }
                 }
                 .ignoresSafeArea()
@@ -104,7 +103,7 @@ extension SelectingEmotionView {
             Spacer()
             HStack(spacing: 0) {
                 NavigationLink {
-                    SearchEmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel, isShowSelectedEmotion: $isShowSelectedEmotion)
+                    SearchEmotionView(isModalShow: $isModalShow, emotionViewModel: emotionViewModel)
                 } label: {
                     Image(systemName: "magnifyingglass")
                         .font(.bodyRegular)

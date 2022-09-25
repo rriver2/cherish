@@ -16,11 +16,12 @@ struct RecommandedQuestionView: View {
     @Binding var isModalShow: Bool
     @State var isEditMode = false
     @State var isShowAlert: Bool
-    let randomQuestion = QuestionData.randomQuestion(amount: 3)
+    let randomQuestion: [String]
     let tempWritingText: TempWritingText?
     
     init(isModalShow: Binding<Bool>) {
         self._isModalShow = isModalShow
+        self.randomQuestion = QuestionData.randomQuestion(amount: 3)
         
         let key = UserDefaultKey.tempWritingQuestion.rawValue
         if let savedTempWritingText = UserDefaults.standard.object(forKey: key) as? Data,

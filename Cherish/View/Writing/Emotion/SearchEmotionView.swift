@@ -15,7 +15,6 @@ struct SearchEmotionView: View {
     @State private var isShowAlert = false
     @FocusState private var isKeyboardOpen: Bool
     @State private var searchText: String = ""
-    @Binding var isShowSelectedEmotion: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -28,7 +27,7 @@ struct SearchEmotionView: View {
                     EmtionGroups(emotionList: emotionViewModel.userDefaultEmotionList, addEmotionToDevice: false)
                     VStack {
                         Spacer()
-                        SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
+                        SelectedEmotionPopUpView(isShowSelectedEmotion: $emotionViewModel.isShowSelectedEmotion, emotionViewModel: emotionViewModel)
                     }
                     .ignoresSafeArea()
                 }
@@ -37,7 +36,7 @@ struct SearchEmotionView: View {
                     EmtionGroups(emotionList: emotionViewModel.searchedEmotionList, addEmotionToDevice: true)
                     VStack {
                         Spacer()
-                        SelectedEmotionPopUpView(isShowSelectedEmotion: $isShowSelectedEmotion, emotionViewModel: emotionViewModel)
+                        SelectedEmotionPopUpView(isShowSelectedEmotion: $emotionViewModel.isShowSelectedEmotion, emotionViewModel: emotionViewModel)
                     }
                     .ignoresSafeArea()
                 }
@@ -58,6 +57,7 @@ struct SearchEmotionView: View {
         }
         .tint(Color.gray23)
         .onAppear {
+            isKeyboardOpen = true
             emotionViewModel.searchedEmotionList = emotionViewModel.userDefaultEmotionList
         }
         .animation(Animation.easeInOut(duration: 0.2), value: searchText)
@@ -200,7 +200,7 @@ extension SearchEmotionView {
 
 struct SearchEmotionView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchEmotionView(isModalShow: .constant(false), emotionViewModel: EmotionViewModel(), isShowSelectedEmotion: .constant(true))
+        SearchEmotionView(isModalShow: .constant(true), emotionViewModel: EmotionViewModel())
             .environmentObject(TimeLineViewModel())
             .environmentObject(SoundViewModel())
             .environmentObject(DarkModeViewModel())

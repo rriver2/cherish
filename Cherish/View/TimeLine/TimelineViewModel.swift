@@ -48,6 +48,17 @@ class TimeLineViewModel: ObservableObject {
         newRecord.title = title
         newRecord.context = context
         newRecord.kind = kind.rawValue
+        
+        var key: String = ""
+        switch kind {
+            case .free:
+                key = UserDefaultKey.tempWritingFree.rawValue
+            case .emotion:
+                key = UserDefaultKey.tempWritingEmotion.rawValue
+            case .question:
+                key = UserDefaultKey.tempWritingQuestion.rawValue
+        }
+        UserDefaults.standard.removeObject(forKey: key)
         saveData()
     }
     

@@ -23,17 +23,17 @@ struct SearchQuestionView: View {
             SearchBar()
                 .padding(.bottom, searchText == "" ? 20 : 11)
             ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 0) {
-                        if searchText == "" {
-                            Text("오늘의 추천 질문")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .font(.miniSemibold)
-                                .foregroundColor(.gray8A)
-                                .padding(.horizontal, 38)
-                                .padding(.bottom, 15)
-                        }
-                        QuestionList()
+                VStack(alignment: .leading, spacing: 0) {
+                    if searchText == "" {
+                        Text("오늘의 추천 질문")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.miniSemibold)
+                            .foregroundColor(.gray8A)
+                            .padding(.horizontal, 38)
+                            .padding(.bottom, 15)
                     }
+                    QuestionList()
+                }
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -45,6 +45,9 @@ struct SearchQuestionView: View {
                     question.contains(searchText)
                 }
             }
+        }
+        .onAppear {
+            isKeyboardOpen = true
         }
         .tint(Color.gray23)
         .animation(Animation.easeInOut(duration: 0.2), value: searchText)
