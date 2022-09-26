@@ -73,6 +73,9 @@ struct RecommandedQuestionView: View {
                 Spacer()
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification, object: nil)) { _ in
+            self.questionViewModel.appWillTerminate()
+        }
         .accentColor(Color.gray23)
         .tint(Color.gray23)
         .animation(Animation.easeInOut(duration: 0.4), value: questionType)

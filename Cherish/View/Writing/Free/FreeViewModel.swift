@@ -16,16 +16,9 @@ class FreeViewModel: ObservableObject {
         title = ""
         context = "오늘의 이야기를 기록해보세요."
         date = Date()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appWillTerminate),
-            name: UIApplication.willTerminateNotification,
-            object: nil
-        )
     }
     
-    @objc func appWillTerminate() {
+    func appWillTerminate() {
         if !(title == "" && (context == "오늘의 이야기를 기록해보세요." || context == "")) {
             initTempWritingFree()
         }

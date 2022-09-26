@@ -53,7 +53,7 @@ struct SearchEmotionView: View {
             }
         }
         .alert("감정을 한 개 이상 선택해주세요", isPresented: $isShowAlert) {
-            Button("확인", role: .cancel) { }
+            Button("확인", role: .cancel){}
         }
         .tint(Color.gray23)
         .onAppear {

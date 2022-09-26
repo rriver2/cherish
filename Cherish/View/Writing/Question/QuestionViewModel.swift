@@ -16,13 +16,6 @@ class QuestionViewModel: ObservableObject {
         title = ""
         context = "내용"
         date = Date()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appWillTerminate),
-            name: UIApplication.willTerminateNotification,
-            object: nil
-        )
     }
     
     @objc func appWillTerminate() {

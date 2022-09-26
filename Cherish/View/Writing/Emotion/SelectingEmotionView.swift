@@ -62,6 +62,9 @@ struct SelectingEmotionView: View {
                 .ignoresSafeArea()
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification, object: nil)) { _ in
+            emotionViewModel.appWillTerminate()
+        }
         .onAppear {
             if tempWritingText != nil {
                 emotionViewModel.alertCategory = .tempWritingExistence

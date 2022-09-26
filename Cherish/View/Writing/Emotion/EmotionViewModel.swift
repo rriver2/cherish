@@ -15,7 +15,13 @@ class EmotionViewModel: ObservableObject {
     @Published var selectedEmotionList: [String]
     @Published var userDefaultEmotionList: [String] // for searchEmotion
     @Published var searchedEmotionList: [String]
-    @Published var alertCategory: AlertCategory = .tempWritingExistence
+    @Published var alertCategory: AlertCategory {
+        didSet {
+            if alertCategory == .save && isShowAlert == true {
+                isShowSelectedEmotion = true
+            }
+        }
+    }
     @Published var isShowWritingView = false
     @Published var isShowSelectedEmotion = true
     
@@ -34,25 +40,16 @@ class EmotionViewModel: ObservableObject {
         let key = UserDefaultKey.selectedEmotion.rawValue
         userDefaultEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
         searchedEmotionList = UserDefaults.standard.object(forKey: key) as? [String] ?? [String]()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appWillTerminate),
-            name: UIApplication.willTerminateNotification,
-            object: nil
-        )
+        alertCategory = .tempWritingExistence
     }
     
-    @objc func appWillTerminate() {
-        #warning("안되는 이유 찾기")
-        print("안 저장됨")
+    func appWillTerminate() {
         if !(selectedEmotionList.isEmpty && (context == "내용" || context == "")) {
             initTempWritingEmotion()
         }
     }
     
     func initTempWritingEmotion() {
-        print("저장됨")
         let key = UserDefaultKey.tempWritingEmotion.rawValue
         let emotionListString = selectedEmotionList.joined(separator: "    ")
         let tempWritingText = TempWritingText(title: emotionListString, context: context, date: date, kind: Record.free.rawValue)
@@ -71,8 +68,8 @@ class EmotionViewModel: ObservableObject {
         if let index = selectedEmotionList.firstIndex(of: emotion) {
             selectedEmotionList.remove(at: index)
         } else if selectedEmotionList.count >= 6 {
-            alertCategory = .save
             isShowAlert = true
+            alertCategory = .save
         } else {
             selectedEmotionList.append(emotion)
         }

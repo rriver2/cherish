@@ -56,8 +56,7 @@ struct FreeView: View {
                             isTextFieldsFocused = true
                         }
                     }
-                
-#warning("수정해야 함")
+                #warning("수정해야 함")
                 if isEditMode {
                     let isContextDiff = freeViewModel.context != "오늘의 이야기를 기록해보세요."
                     WritingView(date: $freeViewModel.date, context: $freeViewModel.context, contextPlaceholder: "오늘의 이야기를 기록해보세요.", isKeyBoardOn: false, isEditMode: isContextDiff)
@@ -66,6 +65,9 @@ struct FreeView: View {
                     WritingView(date: $freeViewModel.date, context: $freeViewModel.context, contextPlaceholder: "오늘의 이야기를 기록해보세요.", isKeyBoardOn: false, isEditMode: false)
                         .padding(.top, 25)
                 }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification, object: nil)) { _ in
+                freeViewModel.appWillTerminate()
             }
             .paddingHorizontal()
             .alert(isPresented: $isShowAlert) {
