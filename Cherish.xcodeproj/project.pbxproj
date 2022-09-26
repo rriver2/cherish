@@ -16,6 +16,8 @@
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
 		CC59749928E019910033B67C /* IdentifyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59749828E019910033B67C /* IdentifyDevice.swift */; };
+		CC5974A028E1BEAD0033B67C /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59749F28E1BEAD0033B67C /* LocalNotificationManager.swift */; };
+		CC5974A228E1C1F20033B67C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5974A128E1C1F20033B67C /* MainView.swift */; };
 		CC65777B28DED91200FEA1EA /* WritingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777A28DED91200FEA1EA /* WritingPreview.swift */; };
 		CC65777D28DEF60300FEA1EA /* FreeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777C28DEF60300FEA1EA /* FreeViewModel.swift */; };
 		CC6B46B828CF51B300CD039D /* SelectedEmotionPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */; };
@@ -71,6 +73,9 @@
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		CC59749828E019910033B67C /* IdentifyDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyDevice.swift; sourceTree = "<group>"; };
+		CC59749E28E1BDFD0033B67C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CC59749F28E1BEAD0033B67C /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		CC5974A128E1C1F20033B67C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CC65777A28DED91200FEA1EA /* WritingPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingPreview.swift; sourceTree = "<group>"; };
 		CC65777C28DEF60300FEA1EA /* FreeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeViewModel.swift; sourceTree = "<group>"; };
 		CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmotionPopUpView.swift; sourceTree = "<group>"; };
@@ -160,8 +165,11 @@
 		CC818CD82899ED8C003B8753 /* Cherish */ = {
 			isa = PBXGroup;
 			children = (
+				CC59749E28E1BDFD0033B67C /* Info.plist */,
+				CC59749F28E1BEAD0033B67C /* LocalNotificationManager.swift */,
 				CC818CD92899ED8C003B8753 /* SaveOnApp.swift */,
 				CC95F32B289A77F9008C3EEF /* ContentView.swift */,
+				CC5974A128E1C1F20033B67C /* MainView.swift */,
 				CCB1C1D728B4C1430006D4DA /* OnboardingView.swift */,
 				CC95F3242899FA34008C3EEF /* Utility */,
 				CC95F339289AB183008C3EEF /* Data */,
@@ -394,6 +402,7 @@
 				CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */,
 				CC95F3262899FA3E008C3EEF /* Color.swift in Sources */,
 				CC95F335289A8A1E008C3EEF /* Question.swift in Sources */,
+				CC5974A028E1BEAD0033B67C /* LocalNotificationManager.swift in Sources */,
 				CC59749928E019910033B67C /* IdentifyDevice.swift in Sources */,
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
 				CCB7566F28C76E3B006C58EC /* Sound.swift in Sources */,
@@ -405,6 +414,7 @@
 				CCDE477728A7AEEC00BADBE3 /* TimelineContainer.xcdatamodeld in Sources */,
 				CC95F338289AB179008C3EEF /* QuestionData.swift in Sources */,
 				CC95F331289A7B36008C3EEF /* Date.swift in Sources */,
+				CC5974A228E1C1F20033B67C /* MainView.swift in Sources */,
 				CC95F3282899FCEC008C3EEF /* extention.swift in Sources */,
 				CC0F338328B5B565000E360F /* AddWritingPopupViewModel.swift in Sources */,
 				CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */,
@@ -559,7 +569,7 @@
 				DEVELOPMENT_TEAM = J7ZP3WYXRW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Cherish/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -592,7 +602,7 @@
 				DEVELOPMENT_TEAM = J7ZP3WYXRW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Cherish/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

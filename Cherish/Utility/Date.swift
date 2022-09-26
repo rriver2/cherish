@@ -26,4 +26,12 @@ extension Date {
         let koreanDate = formatter.string(from: self)
         return koreanDate
     }
+    func dateToString_HS() -> (hour: Int, minute: Int) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH mm"
+        let hour = formatter.string(from: self).components(separatedBy: " ")[0]
+        let minute = formatter.string(from: self).components(separatedBy: " ")[1]
+        let tupleHS = (hour: Int(hour) ?? 0 , minute: Int(minute) ?? 0)
+        return tupleHS
+    }
 }
