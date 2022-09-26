@@ -27,9 +27,6 @@ struct CherishApp: App {
                     .environmentObject(TimeLineViewModel())
                     .environmentObject(DarkModeViewModel())
                     .environmentObject(AddWritingPopupViewModel())
-                    .onAppear {
-                        print(isDeviceUnderiPhone7())
-                    }
             }
         }
     }

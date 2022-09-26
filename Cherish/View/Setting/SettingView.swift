@@ -150,7 +150,7 @@ extension SettingView {
             Spacer()
         }
         .frame(height: 20)
-        .padding(.bottom, isDeviceUnderiPhone7() ? 26 : 40)
+        .padding(.bottom, getDeviceScreenHeight() == .small ? 26 : 40)
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)

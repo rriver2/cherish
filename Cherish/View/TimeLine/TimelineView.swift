@@ -31,7 +31,7 @@ struct TimelineView: View {
                             VStack(alignment: .leading, spacing: 0) {
                                 if index == 0, let date = record.date?.dateToString_MY() {
                                     Date(date: date)
-                                        .padding(.top, isDeviceUnderiPhone7() ? 0 : 26)
+                                        .padding(.top, getDeviceScreenHeight() == .small ? 0 : 26)
                                 } else if let date = record.date?.dateToString_MY(),
                                           let preDate = recordsEntity[index - 1].date?.dateToString_MY(),
                                           date != preDate

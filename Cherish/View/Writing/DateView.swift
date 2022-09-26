@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DateView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @State var date: Date
     @Binding var writingDate: Date
@@ -40,7 +41,7 @@ struct DateView: View {
             .font(.miniRegular)
             Spacer()
         }
-        .accentColor(Color.gray23)
+        .accentColor(colorScheme == .light ? Color.gray23 : Color(hex: "AFAFAF"))
         .navigationBarBackButtonHidden(true)
     }
 }
