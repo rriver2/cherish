@@ -107,6 +107,7 @@ class LocalNotificationManager {
             let trigger = UNCalendarNotificationTrigger(dateMatching: inputDate, repeats: false)
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
             
+            userNotificationCenter.removeAllDeliveredNotifications()
             userNotificationCenter.add(request) { error in
                 guard error == nil else { return }
             }

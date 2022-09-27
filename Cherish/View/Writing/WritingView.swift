@@ -58,9 +58,8 @@ struct WritingView: View {
                             .padding(.vertical, 23)
                             .padding(.horizontal, 20)
                             .textSelection(.disabled)
-                            .scrollContentBackground(.hidden)
                             .onTapGesture {
-                                if self.context == contextPlaceholder{
+                                if self.context == contextPlaceholder {
                                     self.context = ""
                                 }
                             }
@@ -75,6 +74,7 @@ struct WritingView: View {
                                     }
                                 }
                             }
+                            .scrollContentBackground(.hidden)
                     } else {
                         TextEditor(text: $context)
                             .foregroundColor(isContextChanged ? Color.gray23 : Color.grayA7)
@@ -85,7 +85,6 @@ struct WritingView: View {
                             .padding(.vertical, 23)
                             .padding(.horizontal, 20)
                             .textSelection(.disabled)
-                            .colorMultiply(colorScheme == .light ? Color.grayF5 : Color.white)
                             .onTapGesture {
                                 if self.context == contextPlaceholder{
                                     self.context = ""

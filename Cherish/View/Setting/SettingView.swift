@@ -92,6 +92,7 @@ struct SettingView: View {
                                     if settingViewModel.isExistNotification {
                                         // toggle on -> off
                                         // off 하면 됨
+                                        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                                         settingViewModel.isExistNotification = false
                                     } else {
                                         // toggle off -> on
