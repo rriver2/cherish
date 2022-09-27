@@ -109,7 +109,6 @@ class EmotionViewModel: ObservableObject {
                 if selectedEmotionList.isEmpty {
                     return Alert(title: Text("감정을 한 개 이상 선택해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
                 } else {
-                    #warning("감정 6개 선택해주세요 후 토글 on")
                     return Alert(title: Text("6개 이하로 선택해주세요"), message: nil, dismissButton: .cancel(Text("확인")))
                 }
             case .tempWritingExistence:

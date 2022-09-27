@@ -31,9 +31,6 @@ class LocalNotificationManager {
             .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
                 if granted == true && error == nil {
                     // We have permission!
-                    print("허용 누름")
-                    let key = UserDefaultKey.existNotification.rawValue
-                    UserDefaults.standard.setValue(true, forKey: key)
                 }
         }
     }
@@ -63,6 +60,32 @@ class LocalNotificationManager {
             }
         }
         
+    }
+    
+    static func isAllowedNotificationSetting(completion: @escaping (Bool) -> Void) {
+        
+        var returnValue = false
+        UNUserNotificationCenter.current()
+            .getNotificationSettings { notificationSettings in
+            switch notificationSettings.authorizationStatus  {
+                case .authorized: // 푸시 수신 동의
+                    returnValue = true
+                    print("returnValue", returnValue)
+                case .denied: // 푸시 수신 거부
+                    returnValue = false
+                case .notDetermined: // 한 번 허용 누른 경우
+                    returnValue = false
+                case .provisional: // 푸시 수신 임시 중단
+                    returnValue = false
+                case .ephemeral: // @available(iOS 14.0, *) 푸시 설정이 App Clip에 대해서만 부분적으로 동의한 경우
+                    returnValue = false
+                @unknown default: // Unknow Status
+                    returnValue = false
+            }
+            // call the completion and pass the result as parameter
+            completion(returnValue)
+        }
+
     }
         
     
