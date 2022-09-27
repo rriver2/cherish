@@ -32,7 +32,7 @@ class SettingViewModel: ObservableObject {
     }
     
     func setNotification() {
-            LocalNotificationManager.isAllowedNotificationSetting { [weak self] isNotDetermined in
+        LocalNotificationManager.isAllowedNotificationSetting { isNotDetermined in
                 DispatchQueue.main.async { [weak self] in
                     self?.isExistNotification = isNotDetermined
                 }
@@ -101,30 +101,21 @@ struct SettingView: View {
                                             if isNotDetermined {
                                                 // 가능할 시 노티 설정하기
                                                 // 시간 저장
-                                                var key = UserDefaultKey.alertTime.rawValue
-                                                UserDefaults.standard.setValue(settingViewModel.alertTime, forKey: key)
-                                                settingViewModel.setNotification()
+                                                DispatchQueue.main.async {
+                                                    let key = UserDefaultKey.alertTime.rawValue
+                                                    UserDefaults.standard.setValue(settingViewModel.alertTime, forKey: key)
+                                                    settingViewModel.isExistNotification = true
+                                                    LocalNotificationManager.setNotification()
+                                                }
                                             } else {
                                                 // 불가능 할 시 alert
-                                                settingViewModel.alertCategory = .notificationPermissions
-                                                settingViewModel.isShowAlert = true
-                                                settingViewModel.isExistNotification = false
+                                                DispatchQueue.main.async {
+                                                    settingViewModel.alertCategory = .notificationPermissions
+                                                    settingViewModel.isShowAlert = true
+                                                    settingViewModel.isExistNotification = false
+                                                }
                                             }
                                         }
-//                                        if SettingViewModel.isAllowedNotificationSetting() {
-//                                            // 가능할 시 노티 설정하기
-//                                            // 시간 저장
-//                                            var key = UserDefaultKey.alertTime.rawValue
-//                                            UserDefaults.standard.setValue(settingViewModel.alertTime, forKey: key)
-//
-//                                            LocalNotificationManager.setNotification()
-//                                            settingViewModel.isExistNotification = true
-//                                        } else {
-//                                            // 불가능 할 시 alert
-//                                            settingViewModel.alertCategory = .notificationPermissions
-//                                            settingViewModel.isShowAlert = true
-//                                            settingViewModel.isExistNotification = false
-//                                        }
                                     }
                                 }
                                 .padding(.bottom, settingViewModel.isExistNotification ? 0 : 15)
