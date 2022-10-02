@@ -11,6 +11,7 @@ struct SelectedEmotionPopUpView: View {
     @Binding var isShowSelectedEmotion: Bool
     @ObservedObject var emotionViewModel: EmotionViewModel
     @Environment(\.colorScheme) private var colorScheme
+    @State var isShowInfoView = false
     
     private let columns = [
         GridItem(.flexible(), spacing: 0, alignment: .leading),
@@ -20,9 +21,7 @@ struct SelectedEmotionPopUpView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Button {
-                isShowSelectedEmotion.toggle()
-            } label: {
+            HStack(spacing: 0) {
                 HStack(spacing: 10) {
                     Text("선택한 감정")
                         .font(.miniSemibold)
@@ -35,9 +34,19 @@ struct SelectedEmotionPopUpView: View {
                         .rotationEffect(isShowSelectedEmotion ? .degrees(0) : .degrees(180))
                     Spacer()
                 }
-                .padding(.vertical, 24)
-                .padding(.bottom, 5)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    isShowSelectedEmotion.toggle()
+                }
+                Image(systemName: "info.circle")
+                    .font(.system(size: 15))
+                    .foregroundColor(.gray8A)
+                    .onTapGesture {
+                        isShowInfoView = true
+                    }
             }
+            .padding(.vertical, 24)
+            .padding(.bottom, 5)
             
             if isShowSelectedEmotion {
                 if emotionViewModel.selectedEmotionList.isEmpty {
@@ -56,6 +65,7 @@ struct SelectedEmotionPopUpView: View {
                                         .frame(alignment: .leading)
                                         .font(.miniRegular)
                                         .foregroundColor(Color.gray23)
+                                    Spacer()
                                     if isSelected {
                                         Image(systemName: "xmark")
                                             .font(.subheadline)
@@ -67,6 +77,7 @@ struct SelectedEmotionPopUpView: View {
                                 .padding(.vertical, 6)
                                 .background(isSelected ? Color.grayE8 : .clear)
                                 .cornerRadius(15)
+                                .padding(.horizontal, 5)
                             }
                             .onTapGesture {
                                 emotionViewModel.tabEmotion(emotion: detailEmotion)
@@ -80,6 +91,9 @@ struct SelectedEmotionPopUpView: View {
         .padding(.bottom, isShowSelectedEmotion ? 50 : 0)
         .background(Color.grayF5)
         .cornerRadius(14, corners: [.topLeft, .topRight])
+        .sheet(isPresented: $isShowInfoView) {
+            EmotionInfoView()
+        }
         .animation(Animation.easeInOut(duration: 0.3), value: isShowSelectedEmotion)
         .animation(Animation.easeInOut(duration: 0.2), value: emotionViewModel.selectedEmotionList)
     }

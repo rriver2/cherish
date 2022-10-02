@@ -7,39 +7,6 @@
 
 import SwiftUI
 
-class SettingViewModel: ObservableObject {
-    @Published var isLockScreen = false
-    @Published var isShowAlertConfirmDelectAll = false
-    @Published var alertTime: Date
-    @Published var alertCategory: AlertCategory = .remove
-    @Published var isShowAlert = false
-    @Published var isExistNotification: Bool = false
-    
-    enum AlertCategory {
-        case remove
-        case notificationPermissions
-    }
-    
-    init() {
-        let key = UserDefaultKey.alertTime.rawValue
-        if let date = UserDefaults.standard.object(forKey: key) as? Date {
-            self.alertTime = date
-        } else {
-            let date = Date()
-            UserDefaults.standard.setValue(date, forKey: key)
-            self.alertTime = date
-        }
-    }
-    
-    func setNotification() {
-        LocalNotificationManager.isAllowedNotificationSetting { isNotDetermined in
-                DispatchQueue.main.async { [weak self] in
-                    self?.isExistNotification = isNotDetermined
-                }
-        }
-    }
-}
-
 struct SettingView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Binding var isShowTabbar: Bool
@@ -85,59 +52,59 @@ struct SettingView: View {
                             .padding(.bottom, 15)
                         }
                         
-                        HStack(spacing: 0) {
-                            Toggle("알림", isOn: $settingViewModel.isExistNotification)
-                                .toggleStyle(SwitchToggleStyle(tint: Color.yellow))
-                                .onChange(of: settingViewModel.isExistNotification) { newValue in
-                                    if settingViewModel.isExistNotification {
-                                        // toggle on -> off
-                                        // off 하면 됨
-                                        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-                                        settingViewModel.isExistNotification = false
-                                    } else {
-                                        // toggle off -> on
-                                        // notification 가능한지 확인
-                                        
-                                        LocalNotificationManager.isAllowedNotificationSetting { isNotDetermined in
-                                            if isNotDetermined {
-                                                // 가능할 시 노티 설정하기
-                                                // 시간 저장
-                                                DispatchQueue.main.async {
-                                                    let key = UserDefaultKey.alertTime.rawValue
-                                                    UserDefaults.standard.setValue(settingViewModel.alertTime, forKey: key)
-                                                    settingViewModel.isExistNotification = true
-                                                    LocalNotificationManager.setNotification()
-                                                }
-                                            } else {
-                                                // 불가능 할 시 alert
-                                                DispatchQueue.main.async {
-                                                    settingViewModel.alertCategory = .notificationPermissions
-                                                    settingViewModel.isShowAlert = true
-                                                    settingViewModel.isExistNotification = false
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                .padding(.bottom, settingViewModel.isExistNotification ? 0 : 15)
-                                .padding(.trailing, 5)
-
-                        }
-                        if settingViewModel.isExistNotification {
-                            HStack(spacing: 0) {
-                                Text("알림 시간")
-                                Spacer()
-                                DatePicker("", selection: $settingViewModel.alertTime, displayedComponents: .hourAndMinute)
-                                    .datePickerStyle(GraphicalDatePickerStyle())
-                                    .offset(x: 10)
-                                    .onChange(of: settingViewModel.alertTime) { newValue in
-                                        // 시간 설정하기
-                                        let key = UserDefaultKey.alertTime.rawValue
-                                        UserDefaults.standard.setValue(settingViewModel.alertTime, forKey: key)
-                                        LocalNotificationManager.setNotification()
-                                    }
-                            }
-                        }
+//                        HStack(spacing: 0) {
+//                            Toggle("알림", isOn: $settingViewModel.isExistNotification)
+//                                .toggleStyle(SwitchToggleStyle(tint: Color.yellow))
+//                                .onChange(of: settingViewModel.isExistNotification) { newValue in
+//                                    if settingViewModel.isExistNotification {
+//                                        // toggle on -> off
+//                                        // off 하면 됨
+//                                        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+//                                        settingViewModel.isExistNotification = false
+//                                    } else {
+//                                        // toggle off -> on
+//                                        // notification 가능한지 확인
+//
+//                                        LocalNotificationManager.isAllowedNotificationSetting { isNotDetermined in
+//                                            if isNotDetermined {
+//                                                // 가능할 시 노티 설정하기
+//                                                // 시간 저장
+//                                                DispatchQueue.main.async {
+//                                                    let key = UserDefaultKey.alertTime.rawValue
+//                                                    UserDefaults.standard.setValue(settingViewModel.alertTime, forKey: key)
+//                                                    settingViewModel.isExistNotification = true
+//                                                    LocalNotificationManager.setNotification()
+//                                                }
+//                                            } else {
+//                                                // 불가능 할 시 alert
+//                                                DispatchQueue.main.async {
+//                                                    settingViewModel.alertCategory = .notificationPermissions
+//                                                    settingViewModel.isShowAlert = true
+//                                                    settingViewModel.isExistNotification = false
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                                .padding(.bottom, settingViewModel.isExistNotification ? 0 : 15)
+//                                .padding(.trailing, 5)
+//
+//                        }
+//                        if settingViewModel.isExistNotification {
+//                            HStack(spacing: 0) {
+//                                Text("알림 시간")
+//                                Spacer()
+//                                DatePicker("", selection: $settingViewModel.alertTime, displayedComponents: .hourAndMinute)
+//                                    .datePickerStyle(GraphicalDatePickerStyle())
+//                                    .offset(x: 10)
+//                                    .onChange(of: settingViewModel.alertTime) { newValue in
+//                                        // 시간 설정하기
+//                                        let key = UserDefaultKey.alertTime.rawValue
+//                                        UserDefaults.standard.setValue(settingViewModel.alertTime, forKey: key)
+//                                        LocalNotificationManager.setNotification()
+//                                    }
+//                            }
+//                        }
                         
                         HStack(spacing: 0) {
                             Text("모든 기록 삭제하기")
@@ -209,9 +176,9 @@ struct SettingView: View {
                 }
             }
         }
-        .onAppear {
-            settingViewModel.setNotification()
-        }
+//        .onAppear {
+//            settingViewModel.setNotification()
+//        }
     }
     func moveToCherishAppStore() {
         if let  urlShare = URL(string:"https://apps.apple.com/us/app/cherish/id1639908764") {
@@ -250,7 +217,7 @@ extension SettingView {
             Spacer()
         }
         .frame(height: 20)
-        .padding(.bottom, getDeviceScreenHeight() == .small ? 26 : 40)
+        .padding(.bottom, getDeviceScreenHeight() == .small ? 26 : 72)
         .foregroundColor(Color.gray23)
         .font(.timeLineTitle)
         .padding(.top, 26)

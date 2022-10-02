@@ -15,9 +15,11 @@
 		CC0F9D0328B3B4EB005D94F7 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */; };
 		CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */; };
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
+		CC45EF0F28E8917600D75552 /* EmotionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45EF0E28E8917600D75552 /* EmotionInfoView.swift */; };
 		CC59749928E019910033B67C /* IdentifyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59749828E019910033B67C /* IdentifyDevice.swift */; };
 		CC5974A028E1BEAD0033B67C /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59749F28E1BEAD0033B67C /* LocalNotificationManager.swift */; };
 		CC5974A228E1C1F20033B67C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5974A128E1C1F20033B67C /* MainView.swift */; };
+		CC5974A428E3BE2F0033B67C /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5974A328E3BE2F0033B67C /* SettingViewModel.swift */; };
 		CC65777B28DED91200FEA1EA /* WritingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777A28DED91200FEA1EA /* WritingPreview.swift */; };
 		CC65777D28DEF60300FEA1EA /* FreeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777C28DEF60300FEA1EA /* FreeViewModel.swift */; };
 		CC6B46B828CF51B300CD039D /* SelectedEmotionPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */; };
@@ -72,10 +74,12 @@
 		CC0F9D0228B3B4EB005D94F7 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		CC1FBB6F289FFF1D006085D7 /* EmotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionData.swift; sourceTree = "<group>"; };
 		CC1FBB7128A0024D006085D7 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
+		CC45EF0E28E8917600D75552 /* EmotionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionInfoView.swift; sourceTree = "<group>"; };
 		CC59749828E019910033B67C /* IdentifyDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyDevice.swift; sourceTree = "<group>"; };
 		CC59749E28E1BDFD0033B67C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CC59749F28E1BEAD0033B67C /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		CC5974A128E1C1F20033B67C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		CC5974A328E3BE2F0033B67C /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		CC65777A28DED91200FEA1EA /* WritingPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingPreview.swift; sourceTree = "<group>"; };
 		CC65777C28DEF60300FEA1EA /* FreeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeViewModel.swift; sourceTree = "<group>"; };
 		CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmotionPopUpView.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				CC0F9CFC28B3AF59005D94F7 /* SettingView.swift */,
+				CC5974A328E3BE2F0033B67C /* SettingViewModel.swift */,
 				CC0F9CFE28B3B443005D94F7 /* DarkModeView.swift */,
 				CCB1C1CB28B4784C0006D4DA /* DarkModeViewModel.swift */,
 				CCB1C1D528B4B6780006D4DA /* LicenseView.swift */,
@@ -144,6 +149,15 @@
 				CCB7566C28C76A3D006C58EC /* SelectSoundView.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		CC45EF1028E8921400D75552 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				CC45EF0E28E8917600D75552 /* EmotionInfoView.swift */,
+				CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */,
+			);
+			path = Popup;
 			sourceTree = "<group>";
 		};
 		CC818CCD2899ED8B003B8753 = {
@@ -252,8 +266,8 @@
 				CC95F31A2899F743008C3EEF /* SelectingEmotionView.swift */,
 				CCF3931E28A881F0008F506C /* SearchEmotionView.swift */,
 				CC95F30E2899F667008C3EEF /* EmotionView.swift */,
-				CC6B46B728CF51B300CD039D /* SelectedEmotionPopUpView.swift */,
 				CC835A7928AA824A004B987F /* EmotionViewModel.swift */,
+				CC45EF1028E8921400D75552 /* Popup */,
 			);
 			path = Emotion;
 			sourceTree = "<group>";
@@ -389,6 +403,7 @@
 				CC65777B28DED91200FEA1EA /* WritingPreview.swift in Sources */,
 				CC835A7A28AA824A004B987F /* EmotionViewModel.swift in Sources */,
 				CC95F3072899F5DE008C3EEF /* WritingMainView.swift in Sources */,
+				CC5974A428E3BE2F0033B67C /* SettingViewModel.swift in Sources */,
 				CC95F3192899F734008C3EEF /* WritingView.swift in Sources */,
 				CCB1C1D628B4B6780006D4DA /* LicenseView.swift in Sources */,
 				CC8D9E9028DF464600AADDA0 /* TempWritingText.swift in Sources */,
@@ -418,6 +433,7 @@
 				CC95F3282899FCEC008C3EEF /* extention.swift in Sources */,
 				CC0F338328B5B565000E360F /* AddWritingPopupViewModel.swift in Sources */,
 				CCDE477D28A7BE1500BADBE3 /* TimelineViewModel.swift in Sources */,
+				CC45EF0F28E8917600D75552 /* EmotionInfoView.swift in Sources */,
 				CCB7566D28C76A3D006C58EC /* SelectSoundView.swift in Sources */,
 				CCB1C1D828B4C1430006D4DA /* OnboardingView.swift in Sources */,
 				CC1FBB70289FFF1D006085D7 /* EmotionData.swift in Sources */,

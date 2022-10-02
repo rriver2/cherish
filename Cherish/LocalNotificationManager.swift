@@ -45,16 +45,16 @@ class LocalNotificationManager {
               case .notDetermined:
                   self.requestPermission()
               case .authorized, .provisional:
-                      let inputDate: Date
-                      let key = UserDefaultKey.alertTime.rawValue
-                      if let date = UserDefaults.standard.object(forKey: key) as? Date {
-                          inputDate = date
-                      } else {
-                          let date = Date()
-                          UserDefaults.standard.setValue(date, forKey: key)
-                          inputDate = date
-                      }
-                  self.scheduleNotifications(date: inputDate)
+//                      let inputDate: Date
+//                      let key = UserDefaultKey.alertTime.rawValue
+//                      if let date = UserDefaults.standard.object(forKey: key) as? Date {
+//                          inputDate = date
+//                      } else {
+//                          let date = Date()
+//                          UserDefaults.standard.setValue(date, forKey: key)
+//                          inputDate = date
+//                      }
+                  self.scheduleNotifications()
               default:
                   break
             }
@@ -89,7 +89,7 @@ class LocalNotificationManager {
     }
         
     
-    private func scheduleNotifications(date: Date) -> Void {
+    private func scheduleNotifications(date: Date? = nil) -> Void {
         for notification in notifications {
             let content = UNMutableNotificationContent()
             content.title = notification.title
@@ -99,10 +99,14 @@ class LocalNotificationManager {
             
             var inputDate = DateComponents()
             
-            inputDate.hour = date.dateToString_HS().hour
-            inputDate.minute = date.dateToString_HS().minute
-            
-            print(inputDate.hour, inputDate.minute, "로 알림 설정")
+            if let date = date {
+                inputDate.hour = date.dateToString_HS().hour
+                inputDate.minute = date.dateToString_HS().minute
+            } else {
+                inputDate.hour = 18
+                inputDate.minute = 30
+            }
+//            print(inputDate.hour, inputDate.minute, "로 알림 설정")
             
             let trigger = UNCalendarNotificationTrigger(dateMatching: inputDate, repeats: false)
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
