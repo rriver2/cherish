@@ -106,7 +106,7 @@ extension TimelineView {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, 20)
                         .lineSpacing()
-                        .lineLimit(1)
+                        .lineLimit(2)
                 }
                 Text(record.context ?? "")
                     .font(.timelineRegular)

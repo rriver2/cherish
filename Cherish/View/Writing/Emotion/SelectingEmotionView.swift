@@ -11,7 +11,6 @@ struct SelectingEmotionView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @StateObject var emotionViewModel = EmotionViewModel()
-    
     @Binding var isModalShow: Bool
     @State private var isScrollUp = false
     @FocusState private var isKeyboardOpen: Bool

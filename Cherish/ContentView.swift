@@ -21,6 +21,18 @@ enum OnBoardingCategory: String {
     }
 }
 
+//enum UpdateCase {
+//    case firstDownload
+//    case Newfunction
+//
+//    var isNeededToUpdate: UpdateCase {
+//        if 1 {
+//            return .firstDownload
+//        }
+//    }
+//}
+
+
 struct ContentView: View {
     @EnvironmentObject var darkModeViewModel: DarkModeViewModel
     @State var isShowOnboarding: Bool
@@ -30,29 +42,24 @@ struct ContentView: View {
         self._isShowOnboarding = State(initialValue: true)
         let nowVersion: String? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? nil
         
-        if let preVersion = UserDefaults.standard.object(forKey: UserDefaultKey.versionRecord.rawValue) as? String {
-            if nowVersion == preVersion {
-                self.onBoardingCategory = .update
-                self._isShowOnboarding = State(initialValue: false)
+        if let _ = UserDefaults.standard.object(forKey: UserDefaultKey.isShowOnboarding.rawValue) as? Bool {
+            self.onBoardingCategory = .update
+            if let preVersion = UserDefaults.standard.object(forKey: UserDefaultKey.versionRecord.rawValue) as? String {
+                if nowVersion == preVersion {
+                    // 제일 최신 버전인 유저
+                    self._isShowOnboarding = State(initialValue: false)
+                } else {
+                    // 최근 업데이트를 한 유저 -> onBoarding 나와야함
+                    self._isShowOnboarding = State(initialValue: true)
+                }
             } else {
-                // 기존에 다운 받았지만, 업데이트가 안 된 유저
-                // 다음 스프린트부터 여기
-                self.onBoardingCategory = .update
+                // 첫 다운로드가 마지막인 유저
                 self._isShowOnboarding = State(initialValue: true)
             }
         } else {
-            // sprint 3 부터는 새로 다운 받은 유저로 처리 (else 이후 모두 삭제 후 새로 다운 받은 유저 처리)
-            let isShowOnboarding = UserDefaults.standard.object(forKey: UserDefaultKey.isShowOnboarding.rawValue) as? Bool ?? true
-            if isShowOnboarding {
-                // 새로 다운 받은 유저
-                self.onBoardingCategory = .firstTime
-                self._isShowOnboarding = State(initialValue: true)
-                
-            } else {
-                // 기존에 다운 받았지만, 업데이트가 안 된 유저 ( 이번 스프린트만 존재 )
-                self.onBoardingCategory = .update
-                self._isShowOnboarding = State(initialValue: true)
-            }
+            // 처음 앱을 다운 받은 유저
+            self.onBoardingCategory = .firstTime
+            self._isShowOnboarding = State(initialValue: true)
         }
         UserDefaults.standard.set(nowVersion, forKey: UserDefaultKey.versionRecord.rawValue)
     }

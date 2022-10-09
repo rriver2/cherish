@@ -85,7 +85,7 @@ extension OnboardingView {
                 endOnboarding()
             } label: {
                 Text("Skip")
-                    .foregroundColor(.grayA7)
+                    .foregroundColor(.grayEE)
             }
         } else {
             Text("Skip")

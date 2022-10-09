@@ -91,7 +91,7 @@ struct WritingView: View {
                                 }
                             }
                             .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.001)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
                                 {
                                     if isKeyBoardOn {
                                         isTextEditorFocused = true

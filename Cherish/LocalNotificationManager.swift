@@ -19,6 +19,9 @@ class LocalNotificationManager {
     let userNotificationCenter = UNUserNotificationCenter.current()
     
     static func setNotification() -> Void {
+        let key = UserDefaultKey.isAlertSetted.rawValue
+        guard let _ = UserDefaults.standard.object(forKey: key) as? Bool else { return }
+        
         let manager = LocalNotificationManager()
         manager.requestPermission()
         manager.addNotification(title: "Cherish 🫧")
@@ -26,11 +29,11 @@ class LocalNotificationManager {
     }
     
     private func requestPermission() -> Void {
-        
         userNotificationCenter
             .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
                 if granted == true && error == nil {
                     // We have permission!
+                    print("dkmdks")
                 }
         }
     }
@@ -45,15 +48,6 @@ class LocalNotificationManager {
               case .notDetermined:
                   self.requestPermission()
               case .authorized, .provisional:
-//                      let inputDate: Date
-//                      let key = UserDefaultKey.alertTime.rawValue
-//                      if let date = UserDefaults.standard.object(forKey: key) as? Date {
-//                          inputDate = date
-//                      } else {
-//                          let date = Date()
-//                          UserDefaults.standard.setValue(date, forKey: key)
-//                          inputDate = date
-//                      }
                   self.scheduleNotifications()
               default:
                   break
@@ -61,33 +55,6 @@ class LocalNotificationManager {
         }
         
     }
-    
-    static func isAllowedNotificationSetting(completion: @escaping (Bool) -> Void) {
-        
-        var returnValue = false
-        UNUserNotificationCenter.current()
-            .getNotificationSettings { notificationSettings in
-            switch notificationSettings.authorizationStatus  {
-                case .authorized: // 푸시 수신 동의
-                    returnValue = true
-                    print("returnValue", returnValue)
-                case .denied: // 푸시 수신 거부
-                    returnValue = false
-                case .notDetermined: // 한 번 허용 누른 경우
-                    returnValue = false
-                case .provisional: // 푸시 수신 임시 중단
-                    returnValue = false
-                case .ephemeral: // @available(iOS 14.0, *) 푸시 설정이 App Clip에 대해서만 부분적으로 동의한 경우
-                    returnValue = false
-                @unknown default: // Unknow Status
-                    returnValue = false
-            }
-            // call the completion and pass the result as parameter
-            completion(returnValue)
-        }
-
-    }
-        
     
     private func scheduleNotifications(date: Date? = nil) -> Void {
         for notification in notifications {
@@ -111,9 +78,10 @@ class LocalNotificationManager {
             let trigger = UNCalendarNotificationTrigger(dateMatching: inputDate, repeats: false)
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
             
-            userNotificationCenter.removeAllDeliveredNotifications()
             userNotificationCenter.add(request) { error in
                 guard error == nil else { return }
+                let key = UserDefaultKey.isAlertSetted.rawValue
+                UserDefaults.standard.setValue(true, forKey: key)
             }
         }
     }
