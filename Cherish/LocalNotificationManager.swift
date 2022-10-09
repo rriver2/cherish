@@ -20,20 +20,21 @@ class LocalNotificationManager {
     
     static func setNotification() -> Void {
         let key = UserDefaultKey.isAlertSetted.rawValue
-        guard let _ = UserDefaults.standard.object(forKey: key) as? Bool else { return }
-        
-        let manager = LocalNotificationManager()
-        manager.requestPermission()
-        manager.addNotification(title: "Cherish 🫧")
-        manager.schedule()
+        if UserDefaults.standard.object(forKey: key) as? Bool == nil {
+            let manager = LocalNotificationManager()
+            manager.requestPermission()
+            manager.addNotification(title: "Cherish 🫧")
+            manager.schedule()
+        }
     }
     
     private func requestPermission() -> Void {
+        let key = UserDefaultKey.isAlertSetted.rawValue
+        UserDefaults.standard.setValue(true, forKey: key)
         userNotificationCenter
             .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
                 if granted == true && error == nil {
                     // We have permission!
-                    print("dkmdks")
                 }
         }
     }
@@ -80,8 +81,6 @@ class LocalNotificationManager {
             
             userNotificationCenter.add(request) { error in
                 guard error == nil else { return }
-                let key = UserDefaultKey.isAlertSetted.rawValue
-                UserDefaults.standard.setValue(true, forKey: key)
             }
         }
     }

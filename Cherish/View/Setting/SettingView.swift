@@ -176,9 +176,6 @@ struct SettingView: View {
                 }
             }
         }
-//        .onAppear {
-//            settingViewModel.setNotification()
-//        }
     }
     func moveToCherishAppStore() {
         if let  urlShare = URL(string:"https://apps.apple.com/us/app/cherish/id1639908764") {
