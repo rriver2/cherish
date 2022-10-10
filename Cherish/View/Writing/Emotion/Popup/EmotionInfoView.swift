@@ -12,9 +12,16 @@ struct EmotionInfoView: View {
     var body: some View {
         VStack (spacing: 0) {
             NavigationBar()
-            Content(title: "오늘 내가 느끼고 있는 감정을 골라보세요.", content: "처음에는 세밀한 감정들을 찾아내는 게 힘들 수도 있지만, 이 과정을 반복하다 보면 내 안의 목소리를 들을 수 있을 거예요. 왜 이런 감정들을 느꼈는지 이 감정들을 통해서 나는 어떤 생각들을 하게 되었는지 적어보세요.")
-            Content(title: "내가 느끼고 싶은 감정을 골라보세요.", content: "나의 감정을 마주하고 싶지 않거나, 어떤 감정을 느끼고 있는지 잘 모르겠는 날에는 이렇게 내가 느끼고 싶은 감정들을 찾아보는 게 도움이 될 수 있답니다. 이 감정들을 느끼고 싶은 이유가 무엇인지, 어떻게 하면 이런 감정을 느낄 수 있을지 작성해보세요.")
-            Spacer()
+                .padding(.bottom, 50)
+            ScrollView {
+                Content(title: nil, content: "\" 모호했던 감정에 적절한 이름을 붙이기 위해 고민하다 보면 그 과정에서 나의 마음을 들여다보고 챙길 수 있게 될 거예요. \"")
+                    .padding(.bottom, 50)
+                Content(title: "내가 느끼고 \"있는\" 감정을 골라보세요.", content: "처음에는 감정을 단어로 표현하는 게 힘들 수도 있지만, 이 과정을 반복하다 보면 내 안의 목소리를 들을 수 있을 거예요. 이 감정들을 통해서 나는 어떤 생각들을 하게 되었는지를 감정을 느끼게 된 상황과 함께 적어보세요. 모호했던 감정들이 좀 더 분명해지고 한결 기분이 개운해질 거예요.")
+                    .padding(.bottom, 60)
+                Content(title: "내가 느끼고 \"싶은\" 감정을 골라보세요.", content: "어떤 감정을 느끼고 있는지 모르겠는 날에는 내가 느끼고 싶은 감정들을 찾아보세요. 그리고 그 감정을 오늘 하루 느껴보기 위해 어떤 일들을 할 수 있을지에 대해 적어보세요. 이렇게 느끼고 싶은 감정에 초점을 맞추다 보면 자연스럽게 오늘의 나, 본연의 나를 마주할 수 있을 거예요.")
+                    .padding(.bottom, 60)
+                Spacer()
+            }
         }
         .background(Color.grayF5)
     }
@@ -45,18 +52,19 @@ extension EmotionInfoView {
         .padding(.bottom, 3)
     }
     @ViewBuilder
-    private func Content(title: String, content: String) -> some View {//
+    private func Content(title: String?, content: String) -> some View {//
         VStack(alignment: .leading, spacing: 0) {
-            Text(title)
-                .font(.bodySemibold)
-                .foregroundColor(.gray23)
-                .padding(.bottom, 28)
+            if let title {
+                Text(title)
+                    .font(.bodySemibold)
+                    .foregroundColor(.gray23)
+                    .padding(.bottom, 28)
+            }
             Text(content)
                 .font(.bodyRegularSmall)
                 .foregroundColor(.gray23)
-                .lineSpacing(12)
+                .lineSpacing(10)
         }
-        .padding(.top, 60)
         .paddingHorizontal()
     }
 }

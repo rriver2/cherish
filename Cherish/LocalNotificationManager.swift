@@ -7,6 +7,7 @@
 
 import Foundation
 import UserNotifications
+import StoreKit
 
 struct Notification {
     var id: String
@@ -26,6 +27,25 @@ class LocalNotificationManager {
             manager.addNotification(title: "Cherish 🫧")
             manager.schedule()
         }
+    }
+    
+    static func requestReview() {
+        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+            DispatchQueue.main.async {
+                SKStoreReviewController.requestReview(in: scene)
+            }
+        }
+    }
+    
+    static func shouldRequestReview() {
+        let key = UserDefaultKey.requestReviewCount.rawValue
+        
+        var requestReviewCount = UserDefaults.standard.object(forKey: key) as? Int ?? 0
+        if requestReviewCount == 10 {
+            LocalNotificationManager.requestReview()
+        }
+        requestReviewCount += 1
+        UserDefaults.standard.setValue(requestReviewCount, forKey: key)
     }
     
     private func requestPermission() -> Void {

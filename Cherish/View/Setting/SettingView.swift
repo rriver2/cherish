@@ -45,66 +45,12 @@ struct SettingView: View {
                             WritingSequenceView(isShowTabbar: $isShowTabbar)
                         } label: {
                             HStack(spacing: 0) {
-                                Text("일기 형식 순서")
+                                Text("일기 형식 순서 변경")
                                 Spacer()
                                 Image(systemName: "chevron.forward")
                             }
                             .padding(.bottom, 15)
                         }
-                        
-//                        HStack(spacing: 0) {
-//                            Toggle("알림", isOn: $settingViewModel.isExistNotification)
-//                                .toggleStyle(SwitchToggleStyle(tint: Color.yellow))
-//                                .onChange(of: settingViewModel.isExistNotification) { newValue in
-//                                    if settingViewModel.isExistNotification {
-//                                        // toggle on -> off
-//                                        // off 하면 됨
-//                                        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-//                                        settingViewModel.isExistNotification = false
-//                                    } else {
-//                                        // toggle off -> on
-//                                        // notification 가능한지 확인
-//
-//                                        LocalNotificationManager.isAllowedNotificationSetting { isNotDetermined in
-//                                            if isNotDetermined {
-//                                                // 가능할 시 노티 설정하기
-//                                                // 시간 저장
-//                                                DispatchQueue.main.async {
-//                                                    let key = UserDefaultKey.alertTime.rawValue
-//                                                    UserDefaults.standard.setValue(settingViewModel.alertTime, forKey: key)
-//                                                    settingViewModel.isExistNotification = true
-//                                                    LocalNotificationManager.setNotification()
-//                                                }
-//                                            } else {
-//                                                // 불가능 할 시 alert
-//                                                DispatchQueue.main.async {
-//                                                    settingViewModel.alertCategory = .notificationPermissions
-//                                                    settingViewModel.isShowAlert = true
-//                                                    settingViewModel.isExistNotification = false
-//                                                }
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                                .padding(.bottom, settingViewModel.isExistNotification ? 0 : 15)
-//                                .padding(.trailing, 5)
-//
-//                        }
-//                        if settingViewModel.isExistNotification {
-//                            HStack(spacing: 0) {
-//                                Text("알림 시간")
-//                                Spacer()
-//                                DatePicker("", selection: $settingViewModel.alertTime, displayedComponents: .hourAndMinute)
-//                                    .datePickerStyle(GraphicalDatePickerStyle())
-//                                    .offset(x: 10)
-//                                    .onChange(of: settingViewModel.alertTime) { newValue in
-//                                        // 시간 설정하기
-//                                        let key = UserDefaultKey.alertTime.rawValue
-//                                        UserDefaults.standard.setValue(settingViewModel.alertTime, forKey: key)
-//                                        LocalNotificationManager.setNotification()
-//                                    }
-//                            }
-//                        }
                         
                         HStack(spacing: 0) {
                             Text("모든 기록 삭제하기")
@@ -119,7 +65,18 @@ struct SettingView: View {
                         
                         
                         HStack(spacing: 0) {
-                            Text("의견 남기기")
+                            Text("앱 별점 남기기")
+                            Spacer()
+                            Image(systemName: "chevron.forward")
+                        }
+                        .padding(.bottom, 15)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            LocalNotificationManager.requestReview()
+                        }
+                        
+                        HStack(spacing: 0) {
+                            Text("의견 및 피드백 남기기")
                             Spacer()
                             Image(systemName: "chevron.forward")
                         }
@@ -138,6 +95,17 @@ struct SettingView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                             moveToCherishAppStore()
+                        }
+                        
+                        HStack(spacing: 0) {
+                            Text("공식 인스타그램")
+                            Spacer()
+                            Image(systemName: "chevron.forward")
+                        }
+                        .padding(.bottom, 15)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            openInstargram()
                         }
                         
                         NavigationLink {
@@ -169,7 +137,7 @@ struct SettingView: View {
             .onChange(of: settingViewModel.isShowAlert) { newValue in
                 if settingViewModel.isShowAlert == false && settingViewModel.alertCategory == .notificationPermissions {
                     guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-
+                    
                     if UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url)
                     }
@@ -177,7 +145,7 @@ struct SettingView: View {
             }
         }
     }
-    func moveToCherishAppStore() {
+    private func moveToCherishAppStore() {
         if let  urlShare = URL(string:"https://apps.apple.com/us/app/cherish/id1639908764") {
             let text = "cherish - 나를 들여다보는 시간 🫧"
             let activityVC = UIActivityViewController(activityItems: [urlShare, text], applicationActivities: nil)
@@ -190,7 +158,7 @@ struct SettingView: View {
         }
     }
     
-    func moveToCherishAppstoreComment() {
+    private func moveToCherishAppstoreComment() {
         if let appstoreUrl = URL(string: "https://apps.apple.com/us/app/cherish/id1639908764") {
             var urlComp = URLComponents(url: appstoreUrl, resolvingAgainstBaseURL: false)
             urlComp?.queryItems = [
@@ -200,6 +168,28 @@ struct SettingView: View {
                 return
             }
             UIApplication.shared.open(reviewUrl, options: [:], completionHandler: nil)
+        }
+    }
+    
+    private func openInstargram() {
+        let screenName =  "ch._.erish_official"
+        
+        let appURL = URL(string:  "instagram://user?username=\(screenName)")
+        let webURL = URL(string:  "https://instagram.com/\(screenName)")
+        
+        if let appURL, UIApplication.shared.canOpenURL(appURL) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(appURL)
+            }
+        } else if let webURL{
+            // redirect to safari because the user doesn't have Instagram
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(webURL, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(webURL)
+            }
         }
     }
 }

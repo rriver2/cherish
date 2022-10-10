@@ -21,4 +21,5 @@ enum UserDefaultKey: String, CaseIterable {
     case tempWritingEmotion
     case tempWritingQuestion
     case isAlertSetted
+    case requestReviewCount
 }
