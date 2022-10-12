@@ -26,6 +26,5 @@ body:
       description: 해야 하는 디자인 사안을 나열하세요
       placeholder: ex. - tableView 구현
       value: |
-        
     validations:
       required: true
