@@ -33,11 +33,4 @@ body:
     validations:
       required: true
      
-   - type: input
-    id: related-bug
-    attributes:
-      label: Related Bug(Optaional)
-      description: 관련된 버그 이슈
-      placeholder: "ex. #32, #23"
-    validations:
-      required: false
+
