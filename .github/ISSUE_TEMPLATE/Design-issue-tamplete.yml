@@ -1,29 +1,43 @@
-name: Design Template
-description: UI 디자인 추가 및 변경
-title: "[Design]: Design 이슈 제목"
-labels: ["design"]
+name: Bug Template
+description: Bug 사항이 있을 때 사용하는 템플릿
+title: "[Bug]: Bug 이슈 제목"
+labels: ["bug"]
 
 body:
-  - type: textarea
-    id: design-title
+  - type: dropdown
+    id: target
     attributes:
-      label: Design
-      description: 구현할 기능이나 UI 에 대한 설명을 적습니다.
-      placeholder: ex. Figma나 기타 디자인 툴의 스크린샷을 첨부합니다.
-      value: |
-        <table> 
-                <tr>
-                   <td><img src="링크" width="350" ></td>
-                   <td><img src="링크" width="350" ></td>
-                </tr>
+      label: Target Device
+      description: 버그가 발생된 앱이 실행된 곳
+      options:
+        - Simulator
+        - Device
     validations:
       required: true
-      
+ 
   - type: textarea
-    id: todo
+    id: what-bug
     attributes:
-      label: What to do
-      description: 해야 하는 디자인 사안을 나열하세요
-      placeholder: ex. - tableView 구현
+      label: Bug Report
+      description: 어떤 버그인지 설명해주세요.
+      placeholder: ex. 이메일 입력 케이스 처리를 안 해서 앱이 꺼지는 버그
     validations:
       required: true
+ 
+  - type: textarea
+    id: bug-flow
+    attributes:
+      label: Bug Flow(Optional)
+      description: 버그가 발생하게 된 Flow를 알려주세요.
+      placeholder: ex. MainView에서 이메일을 잘못 입력하면 앱이 종료된다.
+    validations:
+      required: true
+     
+   - type: input
+    id: related-bug
+    attributes:
+      label: Related Bug(Optaional)
+      description: 관련된 버그 이슈
+      placeholder: "ex. #32, #23"
+    validations:
+      required: false
