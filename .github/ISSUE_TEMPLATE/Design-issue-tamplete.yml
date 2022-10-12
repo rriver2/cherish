@@ -11,11 +11,11 @@ body:
       description: 구현할 기능이나 UI 에 대한 설명을 적습니다.
       placeholder: ex. Figma나 기타 디자인 툴의 스크린샷을 첨부합니다.
       value: |
-    <table> 
-    <tr>
-       <td><img src="링크" width="350" ></td>
-       <td><img src="링크" width="350" ></td>
-    </tr>
+        <table> 
+                <tr>
+                   <td><img src="링크" width="350" ></td>
+                   <td><img src="링크" width="350" ></td>
+                </tr>
     validations:
       required: true
       
