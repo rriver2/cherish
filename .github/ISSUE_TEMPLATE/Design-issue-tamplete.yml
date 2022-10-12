@@ -15,7 +15,7 @@ body:
     validations:
       required: true
  
-  - type: textarea
+   - type: textarea
     id: what-bug
     attributes:
       label: Bug Report
@@ -23,7 +23,7 @@ body:
       placeholder: ex. 이메일 입력 케이스 처리를 안 해서 앱이 꺼지는 버그
     validations:
       required: true
- 
+
   - type: textarea
     id: bug-flow
     attributes:
