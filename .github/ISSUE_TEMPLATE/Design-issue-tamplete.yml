@@ -11,32 +11,21 @@ body:
       description: 구현할 기능이나 UI 에 대한 설명을 적습니다.
       placeholder: ex. Figma나 기타 디자인 툴의 스크린샷을 첨부합니다.
       value: |
-        <table> 
-                <tr>
-                   <td><img src="링크" width="350" ></td>
-                   <td><img src="링크" width="350" ></td>
-                </tr>
+              <table> 
+              <tr>
+                 <td><img src="링크" width="350" ></td>
+                 <td><img src="링크" width="350" ></td>
+              </tr>
     validations:
       required: true
       
   - type: textarea
-    id: prepare-reference
+    id: toDo-reference
     attributes:
-      label: Reference
-      description: 어떤 내용들을 참고했나요? (지속적으로 추가)
-      placeholder: ex. Stackoverflow
+      label: What to do
+      description: 해야 하는 디자인 사안을 나열하세요
+      placeholder: ex. - tableView 구현
       value: |
-        ## 참고 사이트
-        - https://developer.apple.com/kr/
-        - 
-    validations:
-      required: false
-
-  - type: input
-    id: prepare-period
-    attributes:
-      label: Period
-      description: 예상 기간
-      placeholder: ~ MM/DD(E) ex. ~ 07/12(화)
+        
     validations:
       required: true
