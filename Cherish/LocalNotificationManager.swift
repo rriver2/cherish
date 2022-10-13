@@ -55,6 +55,7 @@ class LocalNotificationManager {
             .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
                 if granted == true && error == nil {
                     // We have permission!
+                    self.scheduleNotifications()
                 }
         }
     }
@@ -91,10 +92,9 @@ class LocalNotificationManager {
                 inputDate.hour = date.dateToString_HS().hour
                 inputDate.minute = date.dateToString_HS().minute
             } else {
-                inputDate.hour = 18
-                inputDate.minute = 30
+                inputDate.hour = 19
+                inputDate.minute = 00
             }
-//            print(inputDate.hour, inputDate.minute, "로 알림 설정")
             
             let trigger = UNCalendarNotificationTrigger(dateMatching: inputDate, repeats: false)
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
