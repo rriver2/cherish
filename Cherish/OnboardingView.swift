@@ -39,27 +39,27 @@ struct OnboardingView: View {
                         }
                     }
                     .padding(.top, 97)
-                    .paddingHorizontal()
                     .tag(index)
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: .always))
+            .tabViewStyle(.page(indexDisplayMode: .never))
             
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    Text("Skip")
-                        .foregroundColor(.clear)
+                    Text("NEW")
+                        .foregroundColor(imageName == OnBoardingCategory.update.rawValue ? .gray23 : .clear)
                     Spacer()
                     Circles()
                     Spacer()
                     SkipButton()
                 }
-                .padding(.top, 37)
-                .paddingHorizontal()
+                .padding(.horizontal, 39)
+                .padding(.top, 25)
                 Spacer()
                 NextButton()
             }
         }
+        .ignoresSafeArea(.all, edges: .bottom)
     }
     
     func endOnboarding() {
@@ -97,7 +97,7 @@ extension OnboardingView {
         let array = Array(0..<imageCount)
         ForEach(array, id: \.self) { index in
             Circle()
-                .foregroundColor(index == onBoardingNumber ? Color.gray23 : Color(hex: "D2D2D2"))
+                .foregroundColor(index == onBoardingNumber ? Color.gray23 : Color.grayE8)
                 .frame(width: 8, height: 8)
                 .padding(.horizontal, 3)
         }

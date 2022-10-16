@@ -16,7 +16,7 @@ enum OnBoardingCategory: String {
             case .firstTime:
                 return 6
             case .update:
-                return 1
+                return 4
         }
     }
 }
