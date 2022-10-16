@@ -35,7 +35,6 @@ struct OnboardingView: View {
                             Image(imageName)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(maxWidth: UIScreen.main.bounds.width)
                         }
                     }
                     .padding(.top, 97)
@@ -137,7 +136,7 @@ extension OnboardingView {
                 Button {
                     endOnboarding()
                 } label: {
-                    Text("확인")
+                    Text("시작하기")
                         .font(.bodySemibold)
                         .foregroundColor(Color(hex: "F5F5F5"))
                         .frame(height: 56)
@@ -145,7 +144,7 @@ extension OnboardingView {
                         .background(Color(hex: "232323"))
                         .cornerRadius(10)
                         .paddingHorizontal()
-                        .padding(.bottom, 13)
+                        .padding(.bottom, 35)
                 }
             }
         }
