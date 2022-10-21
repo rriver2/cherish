@@ -72,7 +72,7 @@ struct SettingView: View {
                         .padding(.bottom, 15)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            LocalNotificationManager.requestReview()
+                            ReviewManager.requestReview()
                         }
                         
                         HStack(spacing: 0) {

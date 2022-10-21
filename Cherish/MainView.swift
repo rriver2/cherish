@@ -60,8 +60,7 @@ struct MainView: View {
         }
         .preferredColorScheme(darkModeViewModel.mode)
         .onAppear {
-            LocalNotificationManager.setNotification()
-            LocalNotificationManager.shouldRequestReview()
+            ReviewManager.shouldRequestReview()
         }
     }
 }

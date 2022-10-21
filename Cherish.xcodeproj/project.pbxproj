@@ -17,7 +17,7 @@
 		CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FBB7128A0024D006085D7 /* Emotion.swift */; };
 		CC45EF0F28E8917600D75552 /* EmotionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45EF0E28E8917600D75552 /* EmotionInfoView.swift */; };
 		CC59749928E019910033B67C /* IdentifyDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59749828E019910033B67C /* IdentifyDevice.swift */; };
-		CC5974A028E1BEAD0033B67C /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59749F28E1BEAD0033B67C /* LocalNotificationManager.swift */; };
+		CC5974A028E1BEAD0033B67C /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59749F28E1BEAD0033B67C /* ReviewManager.swift */; };
 		CC5974A228E1C1F20033B67C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5974A128E1C1F20033B67C /* MainView.swift */; };
 		CC5974A428E3BE2F0033B67C /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5974A328E3BE2F0033B67C /* SettingViewModel.swift */; };
 		CC65777B28DED91200FEA1EA /* WritingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC65777A28DED91200FEA1EA /* WritingPreview.swift */; };
@@ -77,7 +77,7 @@
 		CC45EF0E28E8917600D75552 /* EmotionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionInfoView.swift; sourceTree = "<group>"; };
 		CC59749828E019910033B67C /* IdentifyDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyDevice.swift; sourceTree = "<group>"; };
 		CC59749E28E1BDFD0033B67C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		CC59749F28E1BEAD0033B67C /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		CC59749F28E1BEAD0033B67C /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		CC5974A128E1C1F20033B67C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CC5974A328E3BE2F0033B67C /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		CC65777A28DED91200FEA1EA /* WritingPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingPreview.swift; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				CC59749E28E1BDFD0033B67C /* Info.plist */,
-				CC59749F28E1BEAD0033B67C /* LocalNotificationManager.swift */,
+				CC59749F28E1BEAD0033B67C /* ReviewManager.swift */,
 				CC818CD92899ED8C003B8753 /* SaveOnApp.swift */,
 				CC95F32B289A77F9008C3EEF /* ContentView.swift */,
 				CC5974A128E1C1F20033B67C /* MainView.swift */,
@@ -417,7 +417,7 @@
 				CC95F30D2899F65F008C3EEF /* QuestionView.swift in Sources */,
 				CC95F3262899FA3E008C3EEF /* Color.swift in Sources */,
 				CC95F335289A8A1E008C3EEF /* Question.swift in Sources */,
-				CC5974A028E1BEAD0033B67C /* LocalNotificationManager.swift in Sources */,
+				CC5974A028E1BEAD0033B67C /* ReviewManager.swift in Sources */,
 				CC59749928E019910033B67C /* IdentifyDevice.swift in Sources */,
 				CC1FBB7228A0024D006085D7 /* Emotion.swift in Sources */,
 				CCB7566F28C76E3B006C58EC /* Sound.swift in Sources */,
