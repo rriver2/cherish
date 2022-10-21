@@ -12,6 +12,7 @@ struct SelectSoundView: View {
     @State var selectedSound: SoundCategory?
     @Environment(\.dismiss) private var dismiss
     @Binding var isShowTabbar: Bool
+    @State var isCheckButton = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -47,6 +48,11 @@ struct SelectSoundView: View {
         }
         .onDisappear {
             isShowTabbar = true
+            if !isCheckButton {
+                if let selectedSound = selectedSound {
+                soundViewModel.cancelSoundFullscreen(sound: selectedSound)
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -63,6 +69,7 @@ extension SelectSoundView {
                     if let selectedSound = selectedSound {
                     soundViewModel.cancelSoundFullscreen(sound: selectedSound)
                     }
+                    isCheckButton = true
                     dismiss()
                 }
             Spacer()
@@ -78,6 +85,7 @@ extension SelectSoundView {
                         soundViewModel.soundCategory = selectedSound
                         soundViewModel.confirmSoundFullscreen(sound: selectedSound)
                     }
+                    isCheckButton = true
                     dismiss()
                 }
         }
